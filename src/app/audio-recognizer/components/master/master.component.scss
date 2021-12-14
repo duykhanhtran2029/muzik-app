@@ -1,0 +1,105 @@
+main {
+    margin-top: 56px;
+    height: 1000px;
+    padding: 8px;
+    text-align: center;
+    //background-color: #707070;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr repeat(12, 100px) 1fr;
+    grid-template-rows: auto;
+    padding-left: 0;
+    padding-right: 0;
+    @at-root .grid__content {
+        grid-column: 2/14;
+        grid-row: 1;
+    }
+}
+
+@at-root .header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: transparent;
+    transition: all ease-out .5s;
+}
+
+@at-root .footer {
+    height: 267px;
+    //background-image: url('./../../assets/image/footer/bg.jpg');
+    background-size: cover;
+    color: white;
+    font: normal 18px/22px Roboto;
+    @at-root #{&}__background {
+        background: #000000 0% 0% no-repeat padding-box;
+        opacity: 0.5;
+        height: 267px;
+        width: 100%;
+        grid-row: 1;
+        grid-column: 1/15;
+    }
+    @at-root #{&}__content {
+        padding: 72px 0;
+        z-index: 99;
+        display: grid;
+        grid-row: 1;
+        grid-template-columns: repeat(12, 100px);
+        @at-root #{&}__sologan {
+            grid-column: 1/4;
+            @at-root #{&}__logo {
+                display: flex;
+                align-items: center;
+                @at-root #{&}__name {
+                    font: Bold 32px/27px Roboto;
+                    margin-left: 8px;
+                }
+            }
+            @at-root #{&}__des {
+                margin: 8px 0 0 0;
+            }
+        }
+        @at-root #{&}__contactus {
+            grid-column: 5/8;
+            @at-root #{&}__title {
+                font: Bold 24px/29px Roboto;
+                margin-bottom: 16px;
+                height: 48px;
+                align-items: center;
+                display: flex;
+            }
+            @at-root #{&}__phone {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+            @at-root #{&}__email {
+                display: flex;
+                align-items: center;
+            }
+            mat-icon {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+            }
+        }
+        @at-root #{&}__social {
+            grid-column: 9/12;
+            @at-root #{&}__title {
+                font: Bold 24px/29px Roboto;
+                margin-bottom: 8px;
+                height: 48px;
+                align-items: center;
+                display: flex;
+            }
+            @at-root #{&}__items {
+                a:not(:last-child) {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}
