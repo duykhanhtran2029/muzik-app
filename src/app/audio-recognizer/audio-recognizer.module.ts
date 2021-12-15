@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MasterComponent } from './components/master/master.component';
+import { RecorderComponent } from './components/recorder/recorder.component';
 import { SharedModule } from '../shared/shared.module';
 import { AudioRecognizerRoutingModule } from './sub-modules/audio-recognizer.routing';
 import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recognizer-material.module';
@@ -9,7 +10,8 @@ import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recogni
 
 @NgModule({
   declarations: [
-    MasterComponent
+    MasterComponent,
+    RecorderComponent
   ],
   imports: [
     CommonModule,
