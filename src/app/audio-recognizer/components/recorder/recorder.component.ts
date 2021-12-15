@@ -1,57 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioContext } from 'angular-audio-context';
-import * as RecordRTC from "recordrtc";
+import { StereoAudioRecorder } from "recordrtc";
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-recorder',
-  templateUrl: './recorder.component.html',
-  styleUrls: ['./recorder.component.scss']
+    selector: 'app-recorder',
+    templateUrl: './recorder.component.html',
+    styleUrls: ['./recorder.component.scss']
 })
 export class RecorderComponent implements OnInit {
 
-  //Lets initiate Record OBJ
-    public record;
-    //Will use this flag for detect recording
-    public recording = false;
-    //Url of Blob
-    public url;
-    public error;
+    record: StereoAudioRecorder;
+    recording = false;
+    url: string;
+    options = {
+        mimeType: "audio/wav",
+        numberOfAudioChannels: 1,
+        sampleRate: 48000,
+        blockAlign: 4,
+        bitsPerSample: 16
+    };
 
-  constructor(private domSanitizer: DomSanitizer) { }
+    constructor(private domSanitizer: DomSanitizer) { }
 
-  sanitize(url:string){
+    sanitize(url: string) {
         return this.domSanitizer.bypassSecurityTrustUrl(url);
     }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
 
-  }
+    }
 
-
-  initiateRecording() {
-        
+    initiateRecording() {
         this.recording = true;
+
         let mediaConstraints = {
             video: false,
             audio: true
         };
+
         navigator.mediaDevices
             .getUserMedia(mediaConstraints)
             .then(this.successCallback.bind(this), this.errorCallback.bind(this));
     }
 
-     successCallback(stream) {
-        var options = {
-            mimeType: "audio/wav",
-            numberOfAudioChannels: 2,
-            sampleRate:48000,
-            blockAlign:4,
-            bitsPerSample:16
-        };
-        //Start Actuall Recording
-        var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
-        this.record = new StereoAudioRecorder(stream, options);
+    successCallback(stream) {
+        this.record = new StereoAudioRecorder(stream, this.options);
         this.record.record();
     }
 
@@ -59,14 +53,17 @@ export class RecorderComponent implements OnInit {
         this.recording = false;
         this.record.stop(this.processRecording.bind(this));
     }
- 
-    processRecording(blob) {
+
+    async processRecording(blob) {
         this.url = URL.createObjectURL(blob);
-        RecordRTC.invokeSaveAsDialog(blob);
+        blob.arrayBuffer();
+        const buffer: ArrayBuffer = await blob.arrayBuffer();
+        const result = new Uint8Array(buffer);
+        console.log(result);
     }
-  
+
     errorCallback(error) {
-        this.error = 'Can not play audio in your browser';
+        throw error('Can not play audio in your browser');
     }
 
 }

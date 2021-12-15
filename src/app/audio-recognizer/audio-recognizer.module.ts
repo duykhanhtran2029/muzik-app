@@ -8,8 +8,6 @@ import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recogni
 import { ManagerComponent } from './components/manager/manager.component';
 import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 
-
-
 @NgModule({
   declarations: [
     MasterComponent,
@@ -21,7 +19,7 @@ import { LayoutControllerComponent } from './components/layout-controller/layout
     CommonModule,
     SharedModule,
     AudioRecognizerRoutingModule,
-    AudioRecognizerSharedMaterialModule
+    AudioRecognizerSharedMaterialModule,
   ]
 })
 export class AudioRecognizerModule { }
