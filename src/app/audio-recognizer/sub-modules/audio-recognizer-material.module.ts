@@ -9,7 +9,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import  {MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
     declarations: [],
@@ -24,7 +28,11 @@ import  {MatCardModule } from '@angular/material/card';
         MatProgressSpinnerModule,
         MatDialogModule,
         MatCheckboxModule,
-        MatCardModule
+        MatCardModule,
+        MatTableModule ,
+        MatFormFieldModule,
+        MatPaginatorModule,
+        MatSortModule
     ]
 })
 export class AudioRecognizerSharedMaterialModule { }

@@ -1,4 +1,5 @@
 @import '../../../../assets/theme/variable';
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 .spacer {
     flex: 1;
 }
@@ -8,17 +9,17 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 56px;
     display: flex;
     align-items: center;
     background-color: $primary;
     color: white;
-    font-weight: 600;
     img {
         margin: 0 16px;
     }
-    #twitter-logo {
-        height: 40px;
-        margin: 0 8px;
+    span {
+        margin-left: 16px;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 28px;
     }
 }

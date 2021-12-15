@@ -15,6 +15,7 @@
     "downlevelIteration": true,
     "noImplicitAny":false,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
