@@ -4,12 +4,18 @@ import { MasterComponent } from './components/master/master.component';
 import { SharedModule } from '../shared/shared.module';
 import { AudioRecognizerRoutingModule } from './sub-modules/audio-recognizer.routing';
 import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recognizer-material.module';
+import { RecorderComponent } from './components/recorder/recorder.component';
+import { ManagerComponent } from './components/manager/manager.component';
+import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 
 
 
 @NgModule({
   declarations: [
-    MasterComponent
+    MasterComponent,
+    RecorderComponent,
+    ManagerComponent,
+    LayoutControllerComponent
   ],
   imports: [
     CommonModule,

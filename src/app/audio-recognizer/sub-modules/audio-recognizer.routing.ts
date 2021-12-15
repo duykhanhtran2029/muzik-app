@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutControllerComponent } from '../components/layout-controller/layout-controller.component';
+import { ManagerComponent } from '../components/manager/manager.component';
 import { MasterComponent } from '../components/master/master.component';
 
 const routes: Routes = [
     {
         path: '', component: MasterComponent,
         children: [
-            { path: '', redirectTo: 'audio-regconizer', pathMatch: 'full' },
-            { path: 'audio-regconizer', component: MasterComponent }
+            { path: '', redirectTo: 'audio-recognizer', pathMatch: 'full' },
+            { path: 'audio-recognizer', component: LayoutControllerComponent },
+            { path: 'manager', component: ManagerComponent }
         ]
     }
 ];
