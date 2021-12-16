@@ -3,6 +3,13 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { map, Observable, tap } from 'rxjs';
+import { Song } from 'src/app/interfaces/song.interface';
+import { AppState } from 'src/app/store/reducers';
+import { SongService } from '../../services/songs.service';
+import * as SongAction from '../../store/actions/songs.actions';
+import { getAllSongs } from '../../store/selectors/songs.selector';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -51,25 +58,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ManagerComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  songs$: Observable<Song[]>;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer, 
+    private _songService: SongService,
+    private store: Store<AppState>
+    ) { }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
+    this.store.dispatch(SongAction.getSongs());
+    this.songs$ = this.store.select(getAllSongs).pipe(tap(s => console.log(s)));
   }
 
   /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {

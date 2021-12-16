@@ -44,3 +44,24 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 40]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 </div>
+<div>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of songs$ | async">
+                <td>{{ song.id }}</td>
+                <td>{{ song.name }}</td>
+                <td>
+                    <button  class="btn btn-primary" style="margin: 5px">Update</button>
+                    <button  class="btn btn-danger" style="margin: 5px">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
