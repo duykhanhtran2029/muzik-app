@@ -7,13 +7,15 @@ import { AudioRecognizerRoutingModule } from './sub-modules/audio-recognizer.rou
 import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recognizer-material.module';
 import { ManagerComponent } from './components/manager/manager.component';
 import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
+import { VisualizaionComponent } from './components/visualizaion/visualizaion.component';
 
 @NgModule({
   declarations: [
     MasterComponent,
     RecorderComponent,
     ManagerComponent,
-    LayoutControllerComponent
+    LayoutControllerComponent,
+    VisualizaionComponent
   ],
   imports: [
     CommonModule,

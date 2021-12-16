@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AudioContext } from 'angular-audio-context';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { StereoAudioRecorder } from "recordrtc";
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -8,7 +7,21 @@ import { DomSanitizer } from '@angular/platform-browser';
     templateUrl: './recorder.component.html',
     styleUrls: ['./recorder.component.scss']
 })
-export class RecorderComponent implements OnInit {
+export class RecorderComponent implements OnInit, AfterViewInit {
+
+    @ViewChild("ngVisualizationContainer") ngVisualizationContainer: ElementRef;
+
+    containerWidth: number;
+    containerHeight: number;
+
+    loadVisualization: boolean;
+
+    selectedVisualization: number = 1;
+
+    showControls: boolean = false;
+    timeout: any;
+
+
 
     record: StereoAudioRecorder;
     recording = false;
@@ -28,8 +41,28 @@ export class RecorderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.loadVisualization = false;
     }
+
+    ngAfterViewInit(): void {
+        this.getContainerDimensions();
+        setTimeout(() => {
+            this.initVisualization();
+         }, 100);
+        // this.initVisualization();
+    }
+
+    getContainerDimensions() {
+        this.containerWidth = this.ngVisualizationContainer.nativeElement.clientWidth;
+        this.containerHeight = this.ngVisualizationContainer.nativeElement.clientHeight;
+    }
+
+
+    initVisualization() {
+        this.loadVisualization = true;
+    }
+
+
 
     initiateRecording() {
         this.recording = true;
