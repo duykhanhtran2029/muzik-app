@@ -8,6 +8,12 @@ import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recogni
 import { ManagerComponent } from './components/manager/manager.component';
 import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 import { VisualizaionComponent } from './components/visualizaion/visualizaion.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { songReducer } from './store/reducers/songs.reducer';
+import { SongEffects } from './store/effects/songs.effects';
+import { SongService } from './services/songs.service';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +28,9 @@ import { VisualizaionComponent } from './components/visualizaion/visualizaion.co
     SharedModule,
     AudioRecognizerRoutingModule,
     AudioRecognizerSharedMaterialModule,
-  ]
+    StoreModule.forFeature('songs', songReducer),
+    EffectsModule.forFeature([SongEffects])
+  ],
+  providers: [SongService],
 })
 export class AudioRecognizerModule { }
