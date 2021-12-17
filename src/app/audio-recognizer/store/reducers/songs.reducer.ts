@@ -42,6 +42,20 @@ export const songReducer = createReducer(
             error: action.error
         })
     ),
+    on(
+        actions.fingerPrintingSuccess,
+        (state, action) => ({
+            ...state,
+            songs: action.song
+        })
+    ),
+    on(
+        actions.fingerPrintingFailure,
+        (state, action) => ({
+            ...state,
+            error: action.error
+        })
+    )
 );
 
 export const { selectAll, selectIds } = adapter.getSelectors();

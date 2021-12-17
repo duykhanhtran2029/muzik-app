@@ -15,6 +15,13 @@ export class SongEffects {
             map(songs => actions.getSongsSuccess({ songs }))
         )
     );
+    fingerPrinting$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(actions.fingerPrinting),
+            concatMap((action) => this.songService.fingerPrinting(action.formData)),
+        ),
+        { dispatch: false }
+    );
 
     constructor(private songService: SongService, private actions$: Actions, private router: Router) { }
 }

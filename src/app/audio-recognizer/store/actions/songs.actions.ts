@@ -28,3 +28,18 @@ export const getSongFailure = createAction(
     '[Audio Recognizer API] Get song failure',
     props<{ error: string }>()
 );
+
+export const fingerPrinting = createAction(
+    '[Audio Recognizer API] Fingerprinting',
+    props<{ formData: FormData }>()
+);
+
+export const fingerPrintingSuccess = createAction(
+    '[Audio Recognizer API] Get Fingerprinting success',
+    props<{ song: Song }>()
+);
+
+export const fingerPrintingFailure = createAction(
+    '[Audio Recognizer API] Get Fingerprinting failure',
+    props<{ error: string }>()
+);

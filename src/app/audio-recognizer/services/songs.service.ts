@@ -20,6 +20,10 @@ export class SongService {
         return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
     }
 
+    fingerPrinting(formData: FormData): Observable<any> {
+        return this.http.post<any>(`${this.API_BASE_URL}/api/songs/FingerPrinting`, formData);
+    }
+
     createSong(song: Song): Observable<Song> {
         return this.http.post<Song>(`${this.API_BASE_URL}/api/songs`, song);
     }

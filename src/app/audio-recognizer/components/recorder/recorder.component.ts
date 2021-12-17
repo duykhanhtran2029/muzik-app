@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AudioContext } from 'angular-audio-context';
 import { StereoAudioRecorder } from "recordrtc";
 import { DomSanitizer } from '@angular/platform-browser';
+import { SongService } from '../../services/songs.service';
+import { fingerPrinting } from '../../store/actions/songs.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
 
 @Component({
     selector: 'app-recorder',
@@ -21,7 +25,11 @@ export class RecorderComponent implements OnInit {
         bitsPerSample: 16
     };
 
-    constructor(private domSanitizer: DomSanitizer) { }
+    constructor(
+        private domSanitizer: DomSanitizer,
+        private songsService: SongService,
+        private store: Store<AppState>
+        ) { }
 
     sanitize(url: string) {
         return this.domSanitizer.bypassSecurityTrustUrl(url);
@@ -47,20 +55,19 @@ export class RecorderComponent implements OnInit {
     successCallback(stream) {
         this.record = new StereoAudioRecorder(stream, this.options);
         this.record.record();
+        setTimeout(() => this.stopRecording(),10000)
     }
 
-    stopRecording() {
+    stopRecording(): void {
         this.recording = false;
         this.record.stop(this.processRecording.bind(this));
     }
 
     async processRecording(blob) {
         this.url = URL.createObjectURL(blob);
-        blob.arrayBuffer();
-        const buffer: ArrayBuffer = await blob.arrayBuffer();
-        const result = new Uint8Array(buffer);
-        console.log(result);
-    }
+        const formData = new FormData();
+        formData.append("audio", blob);      
+        this.store.dispatch(fingerPrinting({ formData }));    }
 
     errorCallback(error) {
         throw error('Can not play audio in your browser');
