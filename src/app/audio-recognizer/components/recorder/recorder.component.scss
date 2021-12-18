@@ -1,76 +1,65 @@
 .recorder {
-  width: 90%;
-  overflow: hidden;
-  margin: auto;
-  .recorder__container {
-    margin: auto;
-    width: 50%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+
+  .visualize-container {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    width: 90%;
+    align-items: center;
   }
-  h1 {
-    width: 100%;
-    font-family: sans-serif;
-    position: absolute;
-    text-align: center;
-    color: white;
+  .recorder__container {
+    width: 90%;
+  }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 10%;
+  }
+
+  .wave {
+    margin: auto;
+    min-height: 300px;
+  }
+  #record {
+    height: 15vh;
+  }
+  .recording {
+    background: -webkit-radial-gradient(
+      center,
+      ellipse cover,
+      #ff0000 0%,
+      white 75%,
+      white 100%,
+      #7db9e8 100%
+    );
+  }
+  .save {
+    opacity: 0.25;
+  }
+  .image_import {
+    height: 10vh;
   }
   .visualization-container {
     overflow: hidden;
-    min-height: 500px;
-    width: 50%;
+    min-height: 450px;
+    width: 90%;
     margin: auto;
   }
 
-  .record-button {
-    margin-bottom: 20px;
-  }
-  .main-text {
-    font-size: 40px;
-    top: 40%;
-  }
-  .sub-text {
-    font-size: 30px;
-    font-weight: normal;
-    top: 60%;
-    span {
-      font-size: 35px;
-    }
-  }
   svg {
     display: block;
     width: 100%;
     height: 80%;
     padding: 0;
     margin: 0;
-  }
-
-  button {
-    padding: 13px 28px;
-    width: 200px;
-    text-align: center;
-    font-size: 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: white;
-    transition: background-color 200ms linear;
-    span {
-      display: block;
-      float: left;
-    }
-    &.green-button {
-      background-color: #4caf50;
-      &:hover {
-        background-color: #3e8e41;
-      }
-    }
-    &.red-button {
-      background-color: #db6247;
-      :hover {
-        background-color: #cc5338;
-      }
-    }
   }
 
   path {
@@ -83,5 +72,21 @@
     button {
       font-size: 18px;
     }
+  }
+  @media only screen and (orientation: portrait) {
+    .visualize-container {
+      width: 100%;
+      height: 80%;
+    }
+    .controls {
+      flex-direction: row;
+      height: 20%;
+      width: 100%;
+    }
+  }
+}
+@media only screen and (orientation: portrait) {
+  .recorder {
+    flex-direction: column;
   }
 }

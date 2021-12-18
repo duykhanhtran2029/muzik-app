@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component,ChangeDetectorRef, OnInit, ElementRef, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { StereoAudioRecorder } from "recordrtc";
 import { DomSanitizer } from '@angular/platform-browser';
 import { SongService } from '../../services/songs.service';
 import { fingerPrinting } from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
-
+import WaveSurfer from 'wavesurfer.js';
 @Component({
     selector: 'app-recorder',
     templateUrl: './recorder.component.html',
@@ -24,6 +24,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
     showControls: boolean = false;
     timeout: any;
+    wavesurfer : WaveSurfer = null;
 
 
 
@@ -41,7 +42,8 @@ export class RecorderComponent implements OnInit, AfterViewInit {
     constructor(
         private domSanitizer: DomSanitizer,
         private songsService: SongService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private cdr: ChangeDetectorRef
         ) { }
 
     sanitize(url: string) {
@@ -50,6 +52,39 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.loadVisualization = false;
+       
+    }
+
+    
+    generateWaveForm() : void{
+        Promise.resolve(null).then(()=>{
+             this.wavesurfer = WaveSurfer.create({
+                container: "#waveform",
+                height:300,
+                waveColor:"violet"
+        });
+        });
+    }
+
+
+    importData(event:any): void{
+
+        if (event.target.files && event.target.files[0]) {
+           
+            this.url = URL.createObjectURL(event.target.files[0]);
+            this.onPressReview();
+        }
+
+    }
+
+    onPressReview() : void{
+        if (!this.wavesurfer) {
+            this.generateWaveForm();
+        }
+
+        this.cdr.detectChanges();
+
+        Promise.resolve().then(() => this.wavesurfer.load(this.url));
     }
 
     ngAfterViewInit(): void {
@@ -70,6 +105,14 @@ export class RecorderComponent implements OnInit, AfterViewInit {
         this.loadVisualization = true;
     }
 
+    Record() : void{
+        if(!this.recording){
+            this.initiateRecording();
+        }
+        else{
+            this.stopRecording();
+        }
+    }
 
 
     initiateRecording() {
@@ -98,6 +141,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
     async processRecording(blob) {
         this.url = URL.createObjectURL(blob);
+        this.onPressReview();
         const formData = new FormData();
         formData.append("audio", blob);      
         this.store.dispatch(fingerPrinting({ formData }));    }

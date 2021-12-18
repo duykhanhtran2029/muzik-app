@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 
 
 var drawVisual;
+const TOTAL_BAR : number = 128;
 
 @Component({
   selector: 'app-visualizaion',
@@ -76,9 +77,9 @@ export class VisualizaionComponent implements OnInit {
 
    prepVisualization2() {
     this.getSoundCardData();
-    let barWidth = (this.containerWidth - (64 * 5)) / 64;
+    let barWidth = (this.containerWidth - (TOTAL_BAR * 5)) / TOTAL_BAR;
     let barHeight = this.containerHeight * 0.1;
-    for (let i = 0; i < 64; i++) {
+    for (let i = 0; i < TOTAL_BAR; i++) {
       this.appendRect(this.svg, 'rect-' + i, barHeight, barWidth, "#44CF6C", "#44CF6C", 1, (barWidth * i) + (5 * i), (this.containerHeight / 2) - (barHeight / 2));
     } 
   }
@@ -120,27 +121,29 @@ export class VisualizaionComponent implements OnInit {
 
    visualize(source, stream, analyser) {
      
-    analyser.fftSize = 128;
+    analyser.fftSize = 256;
     let bufferLength = analyser.fftSize;
     let dataArray = new Uint8Array(bufferLength);
    
   
     let containerHeight = d3.select('svg').attr('height');
     let containerWidth = d3.select('svg').attr('width');
-
+    var max = 1.0;
+    var min = -1.0;
 
 
     let draw2 = function () {
       drawVisual = requestAnimationFrame(draw2);
       analyser.getByteFrequencyData(dataArray);
       let baseHeight = containerHeight * 0.1;
-      let barWidth = (containerWidth - (64 * 5)) / 64;
+      let barWidth = (containerWidth - (TOTAL_BAR * 5)) / TOTAL_BAR;
   
 
-      for (let i = 0; i < 64; i++) {
+      for (let i = 0; i < TOTAL_BAR; i++) {
        
         let newColor = 'rgba(' + 255 + ',' + 108 + ',' + 43 + ')';
         let newHeight = baseHeight + ((containerHeight * 0.9) * (dataArray[i] / 256));
+      
         d3.select("#rect-" + i)
           .attr('stroke', newColor)
           .attr('fill', newColor)
