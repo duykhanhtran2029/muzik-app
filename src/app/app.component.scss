@@ -15,21 +15,7 @@
     flex-direction: column;
     align-items: center;
   }
-  
-  .card {
-    width: 600px;
-    height: 600px;
-    -webkit-box-shadow: 10px 10px 20px 5px rgb(0 0 0 / 12%);
-    box-shadow: 10px 10px 20px 5px rgb(0 0 0 / 12%);
-    border-radius: .5rem;
-    border-style: none;
-    border-width: 0;
-    background-color: #fff;
-    -webkit-transition: -webkit-box-shadow .5s;
-    transition: -webkit-box-shadow .5s;
-    transition: box-shadow .5s;
-    transition: box-shadow .5s,-webkit-box-shadow .5s;
-}
+
 
 
 
