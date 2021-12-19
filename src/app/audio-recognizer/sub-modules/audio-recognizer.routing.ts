@@ -4,6 +4,7 @@ import { LayoutControllerComponent } from '../components/layout-controller/layou
 import { ManagerComponent } from '../components/manager/manager.component';
 import { MasterComponent } from '../components/master/master.component';
 import { RecorderComponent } from '../components/recorder/recorder.component';
+import { ResultComponent } from '../components/result/result.component';
 
 const routes: Routes = [
     {
@@ -11,6 +12,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'audio-recognizer', pathMatch: 'full' },
             { path: 'audio-recognizer', component: LayoutControllerComponent },
+            { path: 'result', component: ResultComponent },
             { path: 'manager', component: ManagerComponent }
         ]
     }

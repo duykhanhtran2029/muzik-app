@@ -31,7 +31,6 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     ) { }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-    console.log(this.sort);
   }
 
 
@@ -42,7 +41,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
         this.dataSource = new MatTableDataSource(songs);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.sort);
+        console.log(songs);
       }));
   }
 

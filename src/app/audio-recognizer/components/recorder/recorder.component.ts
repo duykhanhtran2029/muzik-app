@@ -6,6 +6,9 @@ import { SongService } from '../../services/songs.service';
 import { fingerPrinting } from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
+import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
+import { getFingerPrintingResult } from '../../store/selectors/songs.selector';
+import { Observable, tap } from 'rxjs';
 
 @Component({
     selector: 'app-recorder',
@@ -36,7 +39,6 @@ export class RecorderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
     }
 
     initiateRecording() {
@@ -67,7 +69,8 @@ export class RecorderComponent implements OnInit {
         this.url = URL.createObjectURL(blob);
         const formData = new FormData();
         formData.append("audio", blob);      
-        this.store.dispatch(fingerPrinting({ formData }));    }
+        this.store.dispatch(fingerPrinting({ formData }));    
+    }
 
     errorCallback(error) {
         throw error('Can not play audio in your browser');

@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { songReducer } from './store/reducers/songs.reducer';
 import { SongEffects } from './store/effects/songs.effects';
 import { SongService } from './services/songs.service';
+import { ResultComponent } from './components/result/result.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SongService } from './services/songs.service';
     MasterComponent,
     RecorderComponent,
     ManagerComponent,
-    LayoutControllerComponent
+    LayoutControllerComponent,
+    ResultComponent
   ],
   imports: [
     CommonModule,
