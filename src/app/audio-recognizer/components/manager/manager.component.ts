@@ -31,6 +31,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     ) { }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    
   }
 
 
@@ -41,7 +42,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
         this.dataSource = new MatTableDataSource(songs);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(songs);
+        this.setupFilter();
       }));
   }
 
@@ -52,6 +53,18 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  setupFilter() {
+    this.dataSource.filterPredicate = (s: Song, filter: string) => {
+      const searchPattern = (s.title + ' ' + s.artist).toLocaleLowerCase() ;
+      return searchPattern.includes(filter);
+    };
+  }
+
+  doFilter (event: Event) {
+    
+    this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
 
 }

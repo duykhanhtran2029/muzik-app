@@ -21,7 +21,7 @@ import { ResultComponent } from './components/result/result.component';
     RecorderComponent,
     ManagerComponent,
     LayoutControllerComponent,
-    ResultComponent
+    ResultComponent,
   ],
   imports: [
     CommonModule,

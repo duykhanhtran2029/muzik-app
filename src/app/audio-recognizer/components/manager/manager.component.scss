@@ -1,6 +1,6 @@
 @import "../../../../assets/theme/variable";
 .title {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     line-height: 40px;
     font-size: 32px;
     font-weight: 500;
@@ -10,6 +10,29 @@
 .container {
     margin-left: 32px;
     margin-right: 32px;
+    text-align: center;
+    .filter--container {
+        input {
+            padding: 10px 45px; 
+            background: url("https://img.icons8.com/ios-glyphs/50/000000/search--v2.png") no-repeat left; 
+            background-position: 10px 10px;
+            background-size: 20px;
+            max-width: 80%;
+            width: 500px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid $primary;
+            &:focus{
+                outline: none;
+            }
+        }
+        button {
+            margin-left: 24px;
+            mat-icon {
+                margin-right: 10px;
+            }
+        }
+    }
     .table-container {
         height: 70vh;
         overflow-x: auto;
@@ -40,6 +63,9 @@
             .mat-header-cell {
                 background-color: $primary;
                 color: white;
+                ::ng-deep .mat-sort-header-arrow {
+                    color: white;
+                }
             }
         }
         .mat-column-id {
