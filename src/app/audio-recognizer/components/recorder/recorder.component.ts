@@ -17,7 +17,8 @@ import * as WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
 
 const RECORD_TIME: number = 10000;
-const VISUALIZE_WIDTH: number = 450;
+const VISUALIZED_WIDTH: number = 450;
+const VISUALIZED_HEIGHT: number = 240;
 
 @Component({
   selector: 'app-recorder',
@@ -293,7 +294,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
     }
 
     // create Blob
-    return new Blob([buffer], { type: 'audio/mpeg' });
+    return new Blob([buffer], { type: 'audio/wav' });
 
     function setUint16(data) {
       view.setUint16(pos, data, true);
@@ -317,7 +318,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
   saveAsAFile(): void {
     const dlink: HTMLAnchorElement = document.createElement('a');
-    dlink.download = '1.wav';
+    dlink.download = this.imported ? 'cut_audio.wav' : 'record_audio.wav';
     dlink.href = this.imported ? this.newUrl : this.url;
     dlink.click(); // this will trigger the dialog window
     dlink.remove();
@@ -413,8 +414,8 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
     this.timerTick();
 
-    this.containerWidth = 450;
-    this.containerHeight = 240;
+    this.containerWidth = VISUALIZED_WIDTH;
+    this.containerHeight = VISUALIZED_HEIGHT;
     this.initVisualization();
   }
 
