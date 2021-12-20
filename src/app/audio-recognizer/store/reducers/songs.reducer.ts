@@ -1,16 +1,19 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
+import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 import * as actions from '../actions/songs.actions';
 
 export interface SongsState extends EntityState<Song> {
     songsLoaded: boolean;
+    fingerPrintingResult: FingerPrintingResult;
 }
 
 export const adapter: EntityAdapter<Song> = createEntityAdapter<Song>();
 
 export const initialState = adapter.getInitialState({
-    songsLoaded: false
+    songsLoaded: false,
+    fingerPrintingResult: {}
 });
 
 export const songReducer = createReducer(
@@ -46,7 +49,7 @@ export const songReducer = createReducer(
         actions.fingerPrintingSuccess,
         (state, action) => ({
             ...state,
-            songs: action.song
+            fingerPrintingResult: action.fingerPrintingResult
         })
     ),
     on(

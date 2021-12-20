@@ -9,7 +9,7 @@ const routes: Routes = [
       loadChildren: () => import('./audio-recognizer/audio-recognizer.module').then(m => m.AudioRecognizerModule)
   },
   //{ path: 'error', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
-  { path: '**', redirectTo: '/error/404-notfound', pathMatch: 'full' }
+  //{ path: '**', redirectTo: '/error/404-notfound', pathMatch: 'full' }
 ];
 
 @NgModule({

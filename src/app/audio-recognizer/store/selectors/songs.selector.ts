@@ -14,3 +14,8 @@ export const areSongsLoaded = createSelector(
     SongFeatureSelector,
     state => state.songsLoaded
 );
+
+export const getFingerPrintingResult = createSelector(
+    SongFeatureSelector,
+    state => state.fingerPrintingResult
+);

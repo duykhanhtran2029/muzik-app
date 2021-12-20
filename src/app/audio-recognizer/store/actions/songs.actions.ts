@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 
 export const getSongs = createAction(
@@ -36,7 +37,7 @@ export const fingerPrinting = createAction(
 
 export const fingerPrintingSuccess = createAction(
     '[Audio Recognizer API] Get Fingerprinting success',
-    props<{ song: Song }>()
+    props<{ fingerPrintingResult: FingerPrintingResult }>()
 );
 
 export const fingerPrintingFailure = createAction(

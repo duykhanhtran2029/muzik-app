@@ -307,16 +307,18 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   }
 
   download() {
-    var audioBuffer = this.cut();
-    var blob = this.bufferToWave(audioBuffer);
-    this.newUrl = URL.createObjectURL(blob);
+    if (this.imported) {
+      var audioBuffer = this.cut();
+      var blob = this.bufferToWave(audioBuffer);
+      this.newUrl = URL.createObjectURL(blob);
+    }
     this.saveAsAFile();
   }
 
   saveAsAFile(): void {
     const dlink: HTMLAnchorElement = document.createElement('a');
     dlink.download = '1.wav';
-    dlink.href = this.newUrl;
+    dlink.href = this.imported ? this.newUrl : this.url;
     dlink.click(); // this will trigger the dialog window
     dlink.remove();
   }
