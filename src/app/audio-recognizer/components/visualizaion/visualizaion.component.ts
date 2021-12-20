@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 
 
 var drawVisual;
-const TOTAL_BAR : number = 128;
+const TOTAL_BAR : number = 32;
 
 @Component({
   selector: 'app-visualizaion',
@@ -80,7 +80,7 @@ export class VisualizaionComponent implements OnInit {
     let barWidth = (this.containerWidth - (TOTAL_BAR * 5)) / TOTAL_BAR;
     let barHeight = this.containerHeight * 0.1;
     for (let i = 0; i < TOTAL_BAR; i++) {
-      this.appendRect(this.svg, 'rect-' + i, barHeight, barWidth, "#44CF6C", "#44CF6C", 1, (barWidth * i) + (5 * i), (this.containerHeight / 2) - (barHeight / 2));
+      this.appendRect(this.svg, 'rect-' + i, barHeight, barWidth, "#44CF6C", "#44CF6C", 1, (barWidth * i) + (5 * i), (this.containerHeight) - (barHeight / 2));
     } 
   }
 
@@ -141,14 +141,14 @@ export class VisualizaionComponent implements OnInit {
 
       for (let i = 0; i < TOTAL_BAR; i++) {
        
-        let newColor = 'rgba(' + 255 + ',' + 108 + ',' + 43 + ')';
+        let newColor = 'rgba(' + 255 + ',' + 255+ ',' + 255 + ')';
         let newHeight = baseHeight + ((containerHeight * 0.9) * (dataArray[i] / 256));
       
         d3.select("#rect-" + i)
           .attr('stroke', newColor)
           .attr('fill', newColor)
-          .attr('height', newHeight)
-          .attr('transform', 'translate(' + ((barWidth * i) + (5 * i)) + ',' + ((containerHeight / 2) - (newHeight / 2)) + ')');
+          .attr('height', newHeight/2)
+          .attr('transform', 'translate(' + ((barWidth * i) + (5 * i)) + ',' + ((containerHeight ) - (newHeight / 2)) + ')');
       }
     }
     draw2();
