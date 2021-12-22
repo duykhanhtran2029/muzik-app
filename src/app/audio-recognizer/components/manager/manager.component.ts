@@ -10,6 +10,8 @@ import { AppState } from 'src/app/store/reducers';
 import { SongService } from '../../services/songs.service';
 import * as SongAction from '../../store/actions/songs.actions';
 import { getAllSongs } from '../../store/selectors/songs.selector';
+import { SongDetailComponent } from './song-detail/song-detail.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manager',
@@ -20,6 +22,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'thumbnail' ,'title', 'artist', 'actions'];
   dataSource: MatTableDataSource<Song>;
   songs$: Observable<Song[]>;
+  dialogRef: MatDialogRef<SongDetailComponent>;
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -27,13 +30,13 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   constructor(
     private _liveAnnouncer: LiveAnnouncer, 
     private _songService: SongService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private dialog: MatDialog
     ) { }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     
   }
-
 
   ngOnInit(): void {
     this.store.dispatch(SongAction.getSongs());
@@ -67,4 +70,10 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
 
+  openDetail(song: Song)
+  {
+    this.dialogRef = this.dialog.open(SongDetailComponent, {
+      data: song,
+    });
+  }
 }

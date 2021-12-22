@@ -52,7 +52,7 @@
                     <th mat-header-cell *matHeaderCellDef>
                     </th>
                     <td mat-cell *matCellDef="let song">
-                        <button mat-icon-button color="primary">
+                        <button mat-icon-button color="primary" (click)="openDetail(song)">
                             <mat-icon>description</mat-icon>
                         </button>
                         <button mat-icon-button color="primary">

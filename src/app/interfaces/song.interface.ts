@@ -4,6 +4,7 @@ export interface Song {
     title: string,
     artist: string,
     linkZingMp3: string,
-    thumbnail: URL
+    thumbnail: URL,
+    isDeleted: boolean
 }
 

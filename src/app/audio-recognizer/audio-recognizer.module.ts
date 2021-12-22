@@ -13,6 +13,7 @@ import { songReducer } from './store/reducers/songs.reducer';
 import { SongEffects } from './store/effects/songs.effects';
 import { SongService } from './services/songs.service';
 import { ResultComponent } from './components/result/result.component';
+import { SongDetailComponent } from './components/manager/song-detail/song-detail.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ResultComponent } from './components/result/result.component';
     ManagerComponent,
     LayoutControllerComponent,
     ResultComponent,
+    SongDetailComponent,
   ],
   imports: [
     CommonModule,
