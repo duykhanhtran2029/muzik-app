@@ -3,3 +3,7 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.transparent-dialog >  mat-dialog-container {
+  background: transparent;
+  box-shadow: none !important;
+}

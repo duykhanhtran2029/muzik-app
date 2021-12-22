@@ -12,6 +12,7 @@ import * as SongAction from '../../store/actions/songs.actions';
 import { getAllSongs } from '../../store/selectors/songs.selector';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-manager',
@@ -22,8 +23,9 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'thumbnail' ,'title', 'artist', 'actions'];
   dataSource: MatTableDataSource<Song>;
   songs$: Observable<Song[]>;
-  dialogRef: MatDialogRef<SongDetailComponent>;
-  
+  detailDialogRef: MatDialogRef<SongDetailComponent>;
+  deleteDialogRef: MatDialogRef<ConfirmDeleteComponent>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
@@ -72,8 +74,17 @@ export class ManagerComponent implements OnInit, AfterViewInit {
 
   openDetail(song: Song)
   {
-    this.dialogRef = this.dialog.open(SongDetailComponent, {
-      data: song,
-    });
+    this.detailDialogRef = this.dialog.open(SongDetailComponent, 
+      { data: song,
+        panelClass: 'transparent-dialog'
+      });
+  }
+
+  openDelete(id: number)
+  {
+    this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent,
+      {
+        data: id
+      });
   }
 }

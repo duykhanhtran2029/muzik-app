@@ -28,5 +28,21 @@ export class SongEffects {
         )
     );
 
+    deleteSong$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(actions.deleteSong),
+            concatMap((action) => this.songService.deleteSong(action.songId))
+        ),
+        { dispatch: false }
+    );
+
+    updateSong$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(actions.updateSong),
+            concatMap((action) => this.songService.updateSong(action.updateSong.id, action.updateSong.changes))
+        ),
+        { dispatch: false }
+    );
+
     constructor(private songService: SongService, private actions$: Actions, private router: Router) { }
 }
