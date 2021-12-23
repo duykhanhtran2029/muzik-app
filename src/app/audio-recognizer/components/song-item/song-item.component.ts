@@ -49,7 +49,7 @@ export class SongItemComponent implements OnInit, OnChanges {
   download() {
     const dlink: HTMLAnchorElement = document.createElement('a');
     dlink.download = this.song.title + '.mp3';
-    dlink.href = this.song.link;
+    dlink.href = this.song.link.toString();
     dlink.click(); // this will trigger the dialog window
     dlink.remove();
   }

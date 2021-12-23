@@ -33,7 +33,7 @@ export class SongService {
         return this.http.delete(`${this.API_BASE_URL}/api/songs/${songId}`);
     }
 
-    updateSong(songId: number, changes: Partial<Song>): Observable<any> {
+    updateSong(songId: number | string, changes: Partial<Song>): Observable<any> {
         return this.http.put(`${this.API_BASE_URL}/api/songs/${songId}`, changes);
     }
 }

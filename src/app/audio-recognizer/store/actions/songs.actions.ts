@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
@@ -28,6 +29,16 @@ export const getSongSuccess = createAction(
 export const getSongFailure = createAction(
     '[Audio Recognizer API] Get song failure',
     props<{ error: string }>()
+);
+
+export const deleteSong = createAction(
+    '[Audio Recognizer API] Delete song',
+    props<{ songId: number }>()
+);
+
+export const updateSong = createAction(
+    '[Audio Recognizer API] Update song',
+    props<{ updateSong: Update<Song> }>()
 );
 
 export const fingerPrinting = createAction(

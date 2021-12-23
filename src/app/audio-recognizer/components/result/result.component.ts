@@ -83,7 +83,7 @@ export class ResultComponent implements OnInit {
         name: index.name,
         title: index.title,
         artist: index.artist,
-        link: index.link,
+        link: new URL(index.link),
         linkZingMp3: index.linkZingmp3,
         linkMV: index.linkMV,
         thumbnail: new URL(index.thumbnail),

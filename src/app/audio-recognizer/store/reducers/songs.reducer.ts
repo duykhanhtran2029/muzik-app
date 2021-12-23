@@ -26,7 +26,7 @@ export const songReducer = createReducer(
     }),
     on(
         actions.getSongsFailure,
-         (state, action) => ({
+        (state, action) => ({
             ...state,
             error: action.error
         })
@@ -45,6 +45,15 @@ export const songReducer = createReducer(
             error: action.error
         })
     ),
+    on(
+        actions.deleteSong, (state, action) => {
+        return adapter.removeOne(action.songId, state);
+    }),
+
+    on(
+        actions.updateSong, (state, action) => {
+        return adapter.updateOne(action.updateSong, state);
+    }),
     on(
         actions.fingerPrintingSuccess,
         (state, action) => ({

@@ -8,3 +8,7 @@ body {
   --player-text: #32323d;
   --p-color: #009879;
 }
+.transparent-dialog > mat-dialog-container {
+  background: transparent;
+  box-shadow: none !important;
+}
