@@ -1,17 +1,14 @@
-<div id="player">
+<div class="player">
     <img [src]="data.thumbnail" />
     <div class="info">
-        <div class="progress-bar">
-            <div class="time--current">1:25</div>
-            <div class="time--total">-3:15</div>
-            <div class="fill"></div>
-        </div>
         <div class="currently-playing">
             <h2 class="song-name">{{data.title}}</h2>
             <h3 class="artist-name">{{data.artist}}</h3>
         </div>
         <div class="controls">
-            <mat-icon class="play">play_arrow</mat-icon>
+            <audio controls>
+                <source [src] = "data.link" type="audio/ogg">
+            </audio>
         </div>
     </div>
 </div>

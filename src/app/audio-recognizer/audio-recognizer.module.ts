@@ -16,6 +16,7 @@ import { SongService } from './services/songs.service';
 import { ResultComponent } from './components/result/result.component';
 import { SongDetailComponent } from './components/manager/song-detail/song-detail.component';
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
+import { UpdateSongComponent } from './components/manager/update-song/update-song.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ConfirmDeleteComponent } from './components/manager/confirm-delete/conf
     ResultComponent,
     SongDetailComponent,
     ConfirmDeleteComponent,
+    UpdateSongComponent,
   ],
   imports: [
     CommonModule,

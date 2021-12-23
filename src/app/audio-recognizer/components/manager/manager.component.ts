@@ -13,6 +13,7 @@ import { getAllSongs } from '../../store/selectors/songs.selector';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { UpdateSongComponent } from './update-song/update-song.component';
 
 @Component({
   selector: 'app-manager',
@@ -25,6 +26,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   songs$: Observable<Song[]>;
   detailDialogRef: MatDialogRef<SongDetailComponent>;
   deleteDialogRef: MatDialogRef<ConfirmDeleteComponent>;
+  updateDialogRef: MatDialogRef<UpdateSongComponent>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -85,6 +87,14 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent,
       {
         data: id
+      });
+  }
+
+  openUpdate(song: Song)
+  {
+    this.updateDialogRef = this.dialog.open(UpdateSongComponent,
+      {
+        data: song,
       });
   }
 }

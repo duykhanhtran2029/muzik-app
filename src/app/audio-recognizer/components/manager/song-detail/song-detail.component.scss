@@ -1,105 +1,69 @@
-$primary: #49654D;
-$secondary: #8BA989;
-$white: #FFFFFF;
-$light: #C0CFB2;
-$dark: #364F3C;
+$primary: #49654d;
+$secondary: #8ba989;
+$white: #ffffff;
+$light: #c0cfb2;
+$dark: #364f3c;
 
-@import url('https://fonts.googleapis.com/css?family=Questrial');
-$font: 'Questrial', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Questrial");
+$font: "Questrial", sans-serif;
 
-#player {
+.player {
   background: $white;
   position: relative;
+  display: block;
   margin: auto;
   width: 300px;
-  height: 435px;
+  height: auto;
   overflow: hidden;
   border-radius: 5px;
-  box-shadow: 5px 5px 15px rgba($dark, .4);
-  -webkit-transition: all .5s ease-in-out;
-  transition:all .5s ease-in-out;
+  box-shadow: 5px 5px 15px rgba($dark, 0.4);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   &:hover {
     transform: scale(1.05);
   }
-}
-img {
+  img {
     width: 300px;
     height: 300px;
-}
+  }
+  .info {
+    width: 100%;
+    bottom: 0;
+    background: rgba($white, 0.85);
+    .currently-playing {
+      text-align: center;
+      margin-top: -3px;
+      .song-name,
+      .artist-name {
+        font-family: $font;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .song-name {
+        font-size: 16px;
+        font-weight: bolder;
+        letter-spacing: 3px;
+        color: $dark;
+      }
 
-.info {
-  width: 100%;
-  height: 135px;
-  position: absolute;
-  bottom:0;
-  background: rgba($white, .85);
-}
-
-.progress-bar {
-  height: 5px;
-  width: 73%;
-  margin: 6% auto;
-  background: lighten($light, 5%);
-  border-radius: 10px;
-  font-family: $font;
-}
-
-.fill {
-  background-color: $secondary;
-  width: 35%;
-  height: 0.3rem;
-  border-radius: 2px;
-}
-
-.time--current, .time--total {
-  color: $dark;
-  font-size: 10px;
-  position: absolute;
-  margin-top: -2px;
-}
-
-.time--current {
-  left: 15px;
-}
-
-.time--total {
-  right: 15px;
-}
-
-.currently-playing {
-  text-align: center;
-  margin-top: -3px;
-}
-
-.song-name, .artist-name {
-  font-family: $font;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.song-name {
-  font-size: 16px;
-  font-weight: bolder;
-  letter-spacing: 3px;
-  color: $dark;
-}
-
-.artist-name {
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  font-weight: bold;
-  color: lighten($dark, 15%);
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  font-size: .8em;
-  justify-content: center;
-  color: $secondary;
-  .play {
-    margin-bottom: 10px;
-    color: darken($secondary, 10%);
+      .artist-name {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+        color: lighten($dark, 15%);
+      }
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      font-size: 0.8em;
+      justify-content: center;
+      color: $secondary;
+      audio {
+        &::-webkit-media-controls-panel {
+          background: $white;
+        }
+      }
+    }
   }
 }
-
