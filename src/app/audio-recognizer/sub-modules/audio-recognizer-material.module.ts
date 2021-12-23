@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
     declarations: [],
@@ -32,7 +33,8 @@ import { MatSortModule } from '@angular/material/sort';
         MatTableModule ,
         MatFormFieldModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatInputModule
     ]
 })
 export class AudioRecognizerSharedMaterialModule { }
