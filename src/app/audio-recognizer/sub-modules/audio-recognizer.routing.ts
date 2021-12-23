@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: MasterComponent,
     children: [
-      { path: '', redirectTo: 'result', pathMatch: 'full' },
+      { path: '', redirectTo: 'audio-recognizer', pathMatch: 'full' },
       { path: 'audio-recognizer', component: LayoutControllerComponent },
       { path: 'result', component: ResultComponent },
       { path: 'manager', component: ManagerComponent },
