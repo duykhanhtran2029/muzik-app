@@ -14,6 +14,8 @@ import { songReducer } from './store/reducers/songs.reducer';
 import { SongEffects } from './store/effects/songs.effects';
 import { SongService } from './services/songs.service';
 import { ResultComponent } from './components/result/result.component';
+import { SongItemComponent } from './components/song-item/song-item.component';
+import { PlayingBarComponent } from './components/playing-bar/playing-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ResultComponent } from './components/result/result.component';
     LayoutControllerComponent,
     VisualizaionComponent,
     ResultComponent,
+    SongItemComponent,
+    PlayingBarComponent,
   ],
   imports: [
     CommonModule,

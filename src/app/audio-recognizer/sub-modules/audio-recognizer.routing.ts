@@ -7,19 +7,20 @@ import { RecorderComponent } from '../components/recorder/recorder.component';
 import { ResultComponent } from '../components/result/result.component';
 
 const routes: Routes = [
-    {
-        path: '', component: MasterComponent,
-        children: [
-            { path: '', redirectTo: 'audio-recognizer', pathMatch: 'full' },
-            { path: 'audio-recognizer', component: LayoutControllerComponent },
-            { path: 'result', component: ResultComponent },
-            { path: 'manager', component: ManagerComponent }
-        ]
-    }
+  {
+    path: '',
+    component: MasterComponent,
+    children: [
+      { path: '', redirectTo: 'result', pathMatch: 'full' },
+      { path: 'audio-recognizer', component: LayoutControllerComponent },
+      { path: 'result', component: ResultComponent },
+      { path: 'manager', component: ManagerComponent },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class AudioRecognizerRoutingModule { }
+export class AudioRecognizerRoutingModule {}
