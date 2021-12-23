@@ -1,0 +1,137 @@
+.level {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-controls-container {
+  height: 90px;
+  min-width: 768px;
+  padding: 0 20px;
+  background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    word-break: normal;
+    user-select: none;
+  }
+}
+.mgb5 {
+  margin-bottom: 5px !important;
+}
+
+.player-controls-left {
+  position: relative;
+  width: 30%;
+  z-index: 1;
+}
+
+.level-left {
+  align-items: center;
+  justify-content: flex-start;
+}
+.level-right {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.level-left,
+.level-right {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.level .level-left,
+.level .level-right {
+  display: flex;
+}
+
+.level-item {
+  align-items: center;
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.player-controls-player-bar {
+  flex-grow: 1;
+  max-width: 40vw;
+}
+
+.player-controls-player-bar .actions {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+}
+.player-controls-right {
+  width: 30%;
+}
+.btn {
+  font-size: 14px;
+  border-radius: 999px;
+  line-height: normal;
+  border: 0;
+  display: inline-block;
+  font-weight: 400;
+  text-transform: none;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.player-controls-player-bar .btn.button {
+  margin: 0 7px;
+  line-height: 0;
+}
+.tooltip-btn {
+  margin: 0 2px;
+  border: none;
+  color: var(--player-text);
+}
+.icon {
+  font-size: 16;
+  line-height: 66%;
+  display: inline-block;
+}
+.icon.ic-play-circle {
+  font-size: 40px;
+}
+.tooltip-btn .icon {
+  padding: 5px;
+  border-radius: 50%;
+}
+.duration-bar {
+  display: flex;
+  justify-content: center;
+  height: 15px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.slider-bar {
+}
+.slider-handle {
+}
+.level .level-item:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.player-volume {
+  display: flex;
+  align-items: center;
+}
+.player-controls .is-hover-circle {
+  padding: 3px;
+}
+
+.player-volume .duration-bar {
+  width: 70px;
+  height: 15px;
+  cursor: pointer;
+}

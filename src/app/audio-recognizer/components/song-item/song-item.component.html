@@ -1,0 +1,95 @@
+<div class="song-item list-item" [ngClass]="{ active: isActivated }">
+  <div
+    class="media"
+    [ngClass]="{ animate: !hasRightContent && !hasCenterContent }"
+  >
+    <div class="media-left">
+      <div class="song-thumb" *ngIf="hasRightContent && hasCenterContent">
+        <figure>
+          <img [src]="song.thumbnail" alt />
+        </figure>
+        <div class="opacity"></div>
+        <div class="actions-container">
+          <div class="actions">
+            <button (click)="Active()" class="btn" tabindex="0">
+              <i
+                class="icon action-play"
+                [ngClass]="{
+                  'ic-svg-play-circle': !isActivated,
+                  'ic-playing': isActivated
+                }"
+              >
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="thumbnail-wrapper"
+        *ngIf="!hasRightContent && !hasCenterContent"
+      >
+        <div class="thumbnail">
+          <figure class="image is-50x50 is-rounded">
+            <img [src]="song.thumbnail" alt />
+          </figure>
+        </div>
+      </div>
+      <div class="media-content">
+        <div class="title-wrappper">
+          <span class="item-title title">
+            {{ song.title }}
+          </span>
+        </div>
+        <h3 class="subtitle">{{ song.artist }}</h3>
+      </div>
+    </div>
+    <div class="media-content" *ngIf="hasCenterContent">
+      <div class="result">
+        <span>
+          <!-- <span>Sau này em có yêu ai</span> -->
+        </span>
+      </div>
+    </div>
+    <div class="media-right" *ngIf="hasRightContent">
+      <div class="hover-items">
+        <div class="level">
+          <div class="level-item"></div>
+          <div class="level-item">
+            <button
+              (click)="openInNewTab(song.linkMV)"
+              *ngIf="song.linkMV"
+              class="btn tooltip-btn is-hover-circle"
+            >
+              <i class="icon fa fa-file-video-o"></i>
+            </button>
+          </div>
+          <div class="level-item">
+            <button class="btn tooltip-btn is-hover-circle">
+              <!--ZingMp3 Button-->
+              <div
+                (click)="openInNewTab(song.linkZingMp3)"
+                class="icon-img-container"
+              >
+                <img class="icon-img" src="../../../../assets/images/mp3.png" />
+              </div>
+            </button>
+          </div>
+          <div class="level-item">
+            <!--Download Button-->
+            <button
+              (click)="download()"
+              class="btn tooltip-btn is-hover-circle"
+            >
+              <i class="icon fa fa-download"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="action-items">
+        <div class="level">
+          <div class="level-item degree-of-accurency">98%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

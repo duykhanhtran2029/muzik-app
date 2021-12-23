@@ -378,28 +378,35 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   }
 
   replay(): void {
-    this.wavesurfer.regions.list[0].start -= 10;
-    this.wavesurfer.regions.list[0].end -= 10;
+    if (this.wavesurfer.regions.list[0].start >= 10) {
+      this.wavesurfer.regions.list[0].start -= 10;
+      this.wavesurfer.regions.list[0].end -= 10;
 
-    this.startTime = +this.startTime - 10000;
-    this.endTime = +this.endTime - 10000;
+      this.startTime = +this.startTime - 10000;
+      this.endTime = +this.endTime - 10000;
 
-    this.startPosition = this.calculateTimeDuration(this.startTime);
-    this.endPosition = this.calculateTimeDuration(this.endTime);
+      this.startPosition = this.calculateTimeDuration(this.startTime);
+      this.endPosition = this.calculateTimeDuration(this.endTime);
 
-    this.wavesurfer.regions.list[0].updateRender();
+      this.wavesurfer.regions.list[0].updateRender();
+    }
   }
   forward(): void {
-    this.wavesurfer.regions.list[0].start += 10;
-    this.wavesurfer.regions.list[0].end += 10;
+    if (
+      this.wavesurfer.regions.list[0].end <=
+      this.wavesurfer.getDuration() - 10
+    ) {
+      this.wavesurfer.regions.list[0].start += 10;
+      this.wavesurfer.regions.list[0].end += 10;
 
-    this.startTime = +this.startTime + 10000;
-    this.endTime = +this.endTime + 10000;
+      this.startTime = +this.startTime + 10000;
+      this.endTime = +this.endTime + 10000;
 
-    this.startPosition = this.calculateTimeDuration(this.startTime);
-    this.endPosition = this.calculateTimeDuration(this.endTime);
+      this.startPosition = this.calculateTimeDuration(this.startTime);
+      this.endPosition = this.calculateTimeDuration(this.endTime);
 
-    this.wavesurfer.regions.list[0].updateRender();
+      this.wavesurfer.regions.list[0].updateRender();
+    }
   }
   initiateRecording() {
     this.recording = true;

@@ -1,1 +1,44 @@
-<p>result works!</p>
+<div class="root">
+  <div class="container">
+    <nav class="navbar-wrap mgb30">
+      <div class="navbar-container">
+        <h3 class="title">Kết Quả Tìm Kiếm</h3>
+        <ul class="navbar-menu">
+          <li class="navbar-item is-active">
+            <div class="navbar-link"><a>Kết quả</a></div>
+          </li>
+          <li class="navbar-item">
+            <div class="navbar-link"><a>Bài hát</a></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="empty-zone"></div>
+    <div class="container-page-search">
+      <div class="container-page-search mgt20">
+        <h3 class="top-title">Top Kết Quả</h3>
+      </div>
+      <div class="top-item mg30">
+        <div class="top-result-box">
+          <app-song-item [song]="listSong[0]"></app-song-item>
+        </div>
+      </div>
+    </div>
+    <div class="container mgt30">
+      <h3 class="section-title title is-2">Các bài hát tương tự</h3>
+      <div>
+        <app-song-item
+          *ngFor="let song of listSong"
+          [song]="song"
+          (activated)="onActivated($event)"
+          [currentActivateID]="currentActiveSong"
+        ></app-song-item>
+      </div>
+    </div>
+  </div>
+  <div class="playing-bar">
+    <div class="player-controls">
+      <app-playing-bar [song]="currentSong"></app-playing-bar>
+    </div>
+  </div>
+</div>
