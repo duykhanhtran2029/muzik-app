@@ -14,6 +14,7 @@ import { SongDetailComponent } from './song-detail/song-detail.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './update-song/update-song.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manager',
@@ -35,7 +36,8 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer, 
     private _songService: SongService,
     private store: Store<AppState>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
     ) { }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
@@ -95,6 +97,11 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     this.updateDialogRef = this.dialog.open(UpdateSongComponent,
       {
         data: song,
+        disableClose: true
       });
+    this.updateDialogRef.afterClosed().subscribe(updated => {
+      if (updated) 
+        this.toastr.success('Success', 'Song Updated');
+    });
   }
 }

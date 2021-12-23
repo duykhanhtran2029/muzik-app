@@ -52,7 +52,7 @@ export const songReducer = createReducer(
 
     on(
         actions.updateSong, (state, action) => {
-        return adapter.updateOne(action.updateSong, state);
+        return adapter.updateOne(action.update, state);
     }),
     on(
         actions.fingerPrintingSuccess,

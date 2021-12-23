@@ -1,11 +1,25 @@
 <div class="container">
-    <img [src]="data.thumbnail" />
-    <button mat-flat-button color="primary">
+    <img [src]="song.thumbnail" />
+    <button mat-flat-button color="primary" (click)="fileInput.click()">
         <mat-icon>cloud_upload</mat-icon>
         Upload Thumbnail
     </button>
+    <input hidden #fileInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+        (change)="setFilename(fileInput.files)" />
     <mat-form-field appearance="outline">
-        <mat-label>Input</mat-label>
-        <input matInput>
+        <mat-label>Title</mat-label>
+        <input matInput type="text" [(ngModel)]="song.title">
     </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Artist</mat-label>
+        <input matInput type="text" [(ngModel)]="song.artist">
+    </mat-form-field>
+    <div class="controls">
+        <button mat-flat-button (click)="cancel()">
+            Cancel
+        </button>
+        <button mat-flat-button color="primary" (click)="save()">
+            Save
+        </button>
+    </div>
 </div>

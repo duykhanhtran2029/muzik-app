@@ -36,4 +36,8 @@ export class SongService {
     updateSong(songId: number | string, changes: Partial<Song>): Observable<any> {
         return this.http.put(`${this.API_BASE_URL}/api/songs/${songId}`, changes);
     }
+
+    uploadImage(formData: FormData): Observable<any> {
+        return this.http.post<{ path: URL }>(`${this.API_BASE_URL}/api/songs/thumbnail`, formData);
+    }
 }

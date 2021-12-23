@@ -38,7 +38,7 @@ export const deleteSong = createAction(
 
 export const updateSong = createAction(
     '[Audio Recognizer API] Update song',
-    props<{ updateSong: Update<Song> }>()
+    props<{ update: Update<Song> }>()
 );
 
 export const fingerPrinting = createAction(

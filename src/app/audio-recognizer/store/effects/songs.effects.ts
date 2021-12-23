@@ -39,7 +39,7 @@ export class SongEffects {
     updateSong$ = createEffect(() =>
         this.actions$.pipe(
             ofType(actions.updateSong),
-            concatMap((action) => this.songService.updateSong(action.updateSong.id, action.updateSong.changes))
+            concatMap((action) => this.songService.updateSong(action.update.id, action.update.changes))
         ),
         { dispatch: false }
     );

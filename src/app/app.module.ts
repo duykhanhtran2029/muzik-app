@@ -11,7 +11,7 @@ import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { SongService } from './audio-recognizer/services/songs.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { SongService } from './audio-recognizer/services/songs.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     RouterModule,
     StoreModule.forRoot(reducers, { metaReducers }),

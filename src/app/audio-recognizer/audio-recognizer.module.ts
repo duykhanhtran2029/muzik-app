@@ -19,6 +19,7 @@ import { PlayingBarComponent } from './components/playing-bar/playing-bar.compon
 import { SongDetailComponent } from './components/manager/song-detail/song-detail.component';
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './components/manager/update-song/update-song.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { UpdateSongComponent } from './components/manager/update-song/update-son
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     AudioRecognizerRoutingModule,
     AudioRecognizerSharedMaterialModule,
     StoreModule.forFeature('songs', songReducer),
