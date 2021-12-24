@@ -7,6 +7,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { AudioContext } from 'angular-audio-context';
+import {
+  FingerPrintingResult,
+  MatchedSong,
+} from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 @Component({
   selector: 'app-playing-bar',
@@ -14,7 +18,7 @@ import { Song } from 'src/app/interfaces/song.interface';
   styleUrls: ['./playing-bar.component.scss'],
 })
 export class PlayingBarComponent implements OnInit, OnChanges {
-  @Input() song: Song = null;
+  @Input() song: MatchedSong = null;
   audioContext: AudioContext = null;
   arrayBuffer: any = null;
   isPlaying: boolean = false;
@@ -48,7 +52,7 @@ export class PlayingBarComponent implements OnInit, OnChanges {
 
     // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.open('GET', this.song.link, true);
+    xhr.open('GET', this.song.song.link, true);
 
     console.log('fetch');
 

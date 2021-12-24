@@ -16,11 +16,13 @@
     <div class="empty-zone"></div>
     <div class="container-page-search">
       <div class="container-page-search mgt20">
-        <h3 class="top-title">Top Kết Quả</h3>
+        <h3 class="top-title">
+          Thời gian tìm kiếm {{ fingerPrintingResult.time / 1000 }}s
+        </h3>
       </div>
       <div class="top-item mg30">
         <div class="top-result-box">
-          <app-song-item [song]="listSong[0]"></app-song-item>
+          <app-song-item [matchedSong]="listSong[0]"></app-song-item>
         </div>
       </div>
     </div>
@@ -29,16 +31,17 @@
       <div>
         <app-song-item
           *ngFor="let song of listSong"
-          [song]="song"
+          [matchedSong]="song"
           (activated)="onActivated($event)"
+          (click)="openDetail(song.song)"
           [currentActivateID]="currentActiveSong"
         ></app-song-item>
       </div>
     </div>
   </div>
-  <div class="playing-bar">
+  <!-- <div class="playing-bar">
     <div class="player-controls">
       <app-playing-bar [song]="currentSong"></app-playing-bar>
     </div>
-  </div>
+  </div> -->
 </div>

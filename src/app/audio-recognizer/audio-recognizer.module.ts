@@ -20,6 +20,7 @@ import { SongDetailComponent } from './components/manager/song-detail/song-detai
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './components/manager/update-song/update-song.component';
 import { FormsModule } from '@angular/forms';
+import { PlayerComponent } from './components/result/player/player.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     SongDetailComponent,
     ConfirmDeleteComponent,
     UpdateSongComponent,
+    PlayerComponent,
   ],
   imports: [
     CommonModule,
