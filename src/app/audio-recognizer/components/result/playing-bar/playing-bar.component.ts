@@ -12,12 +12,13 @@ import {
   MatchedSong,
 } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
+
 @Component({
   selector: 'app-playing-bar',
   templateUrl: './playing-bar.component.html',
   styleUrls: ['./playing-bar.component.scss'],
 })
-export class PlayingBarComponent implements OnInit, OnChanges {
+export class PlayingBarComponent implements OnInit {
   @Input() song: MatchedSong = null;
   audioContext: AudioContext = null;
   arrayBuffer: any = null;

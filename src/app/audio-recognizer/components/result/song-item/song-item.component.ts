@@ -15,6 +15,7 @@ import {
   MatchedSong,
 } from 'src/app/interfaces/fingerPrintingResult.interface';
 const HOST_ZINGMP3 = 'https://zingmp3.vn';
+
 @Component({
   selector: 'app-song-item',
   templateUrl: './song-item.component.html',
