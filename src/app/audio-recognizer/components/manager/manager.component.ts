@@ -15,6 +15,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './update-song/update-song.component';
 import { ToastrService } from 'ngx-toastr';
+import { AddSongComponent } from './add-song/add-song.component';
 
 @Component({
   selector: 'app-manager',
@@ -28,6 +29,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   detailDialogRef: MatDialogRef<SongDetailComponent>;
   deleteDialogRef: MatDialogRef<ConfirmDeleteComponent>;
   updateDialogRef: MatDialogRef<UpdateSongComponent>;
+  addDialogRef: MatDialogRef<AddSongComponent>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -90,6 +92,10 @@ export class ManagerComponent implements OnInit, AfterViewInit {
       {
         data: id
       });
+    this.deleteDialogRef.afterClosed().subscribe(deleted => {
+      if (deleted)
+        this.toastr.success('Success', 'Song Deleted');
+    });
   }
 
   openUpdate(song: Song)
@@ -102,6 +108,14 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     this.updateDialogRef.afterClosed().subscribe(updated => {
       if (updated) 
         this.toastr.success('Success', 'Song Updated');
+    });
+  }
+  openAdd()
+  {
+    this.addDialogRef = this.dialog.open(AddSongComponent), { disableClose: true};
+    this.addDialogRef.afterClosed().subscribe(created => {
+      if (created)
+        this.toastr.success('Success', 'Song Created');
     });
   }
 }

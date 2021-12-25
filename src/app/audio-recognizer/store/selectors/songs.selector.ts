@@ -1,21 +1,27 @@
 
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { selectAll, SongsState } from '../reducers/songs.reducer';
+import { SongsState } from '../reducers/songs.reducer';
 
 
 export const SongFeatureSelector = createFeatureSelector<SongsState>('songs');
 
 export const getAllSongs = createSelector(
     SongFeatureSelector,
-    selectAll
-);
-
-export const areSongsLoaded = createSelector(
-    SongFeatureSelector,
-    state => state.songsLoaded
+    state => state.songs
 );
 
 export const getFingerPrintingResult = createSelector(
     SongFeatureSelector,
     state => state.fingerPrintingResult
+);
+
+export const getUpdateSongStatus = createSelector(
+    SongFeatureSelector,
+    state => state.updateSongStatus 
+);
+
+
+export const getCreateSongStatus = createSelector(
+    SongFeatureSelector,
+    state => state.createSongStatus
 );

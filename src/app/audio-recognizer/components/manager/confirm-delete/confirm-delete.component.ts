@@ -15,7 +15,6 @@ export class ConfirmDeleteComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) 
     private data: number,
-    private songsSvc: SongService,
     private store: Store<AppState>,
     private dialogRef: MatDialogRef<ConfirmDeleteComponent>) { }
 

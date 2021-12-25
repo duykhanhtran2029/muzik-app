@@ -1,0 +1,36 @@
+<img *ngIf="loading" src = "../../../../../assets/images/loader.gif" />
+<div *ngIf="!loading" class="container">
+    <img [src]="song.thumbnail" />
+    <button mat-flat-button color="primary" (click)="fileInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Thumbnail
+    </button>
+    <input hidden #fileInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+        (change)="setThumbnail($event)" />
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput type="text" [(ngModel)]="song.title" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Artist</mat-label>
+        <input matInput type="text" [(ngModel)]="song.artist" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="audio.name" appearance="outline">
+        <mat-label>File Name</mat-label>
+        <input matInput type="text"  [(ngModel)]="fileName" required readonly>
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="audioInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Audio
+    </button>
+    <input hidden #audioInput type="file" accept=".mp3, .wav |audio/*"
+        (change)="setAudio($event)" />
+    <div class="controls">
+        <button mat-flat-button (click)="cancel()">
+            Cancel
+        </button>
+        <button mat-flat-button color="primary" (click)="save()">
+            Save
+        </button>
+    </div>
+</div>
