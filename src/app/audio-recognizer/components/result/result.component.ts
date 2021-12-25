@@ -8,6 +8,8 @@ import {
 import { Song } from 'src/app/interfaces/song.interface';
 import { AppState } from 'src/app/store/reducers';
 import { getFingerPrintingResult } from '../../store/selectors/songs.selector';
+import { PlayerComponent } from './player/player.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 const songInfo = [
   {
@@ -21,6 +23,7 @@ const songInfo = [
     linkZingmp3:
       '/bai-hat/Everything-Has-Changed-Remix-Taylor-Swift-Ed-Sheeran/ZO9F0I6W.html',
     linkMV: null,
+    score: 0.55,
   },
   {
     id: 2,
@@ -33,6 +36,7 @@ const songInfo = [
     linkZingmp3:
       '/bai-hat/Love-Me-Like-You-Do-From-Fifty-Shades-Of-Grey-Ellie-Goulding/ZWAW0CCO.html',
     linkMV: null,
+    score: 0.4,
   },
   {
     id: 3,
@@ -44,6 +48,7 @@ const songInfo = [
       'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/f/2/5/2/f252f7da121709f0243729efe85ed7d9.jpg',
     linkZingmp3: '/bai-hat/Missing-You-Phuong-Ly-TINLE/ZWC6DUFW.html',
     linkMV: '/video-clip/Missing-You-Phuong-Ly-TINLE/ZWC6DUFW.html',
+    score: 0.6,
   },
   {
     id: 4,
@@ -55,6 +60,7 @@ const songInfo = [
       'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/covers/8/6/8613a14b4d0d152ba9dd445c801b1ea5_1293165362.jpg',
     linkZingmp3: '/bai-hat/Vi-Sao-Khoi-My-Hoang-Rapper/ZWZA9OZ0.html',
     linkMV: null,
+    score: 0.23,
   },
 ];
 
@@ -66,36 +72,68 @@ const songInfo = [
 export class ResultComponent implements OnInit {
   fingerPrintingResult: FingerPrintingResult;
 
-  listSong: Song[] = [];
+  listSong: MatchedSong[] = [];
+  fingerPrintingResult$: Observable<FingerPrintingResult>;
   currentActiveSong: number;
-  currentSong: Song;
-  constructor(private store: Store<AppState>) {}
+  currentSong: MatchedSong;
+  detailDialogRef: MatDialogRef<PlayerComponent>;
+  constructor(private store: Store<AppState>, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.store
       .select(getFingerPrintingResult)
       .subscribe((res) => (this.fingerPrintingResult = res));
-    console.log(this.fingerPrintingResult);
 
-    songInfo.forEach((index) => {
+    console.log(this.fingerPrintingResult);
+    this.fingerPrintingResult.matchedSongs.forEach((index: Object) => {
       const song: Song = {
-        id: index.id,
-        name: index.name,
-        title: index.title,
-        artist: index.artist,
-        link: new URL(index.link),
-        linkZingMp3: index.linkZingmp3,
-        linkMV: index.linkMV,
-        thumbnail: new URL(index.thumbnail),
+        id: index['song'].Id,
+        name: index['song'].Name,
+        title: index['song'].Title,
+        artist: index['song'].Artist,
+        link: index['song'].Link,
+        linkZingMp3: index['song'].LinkZingMp3,
+        linkMV: index['song'].LinkMV,
+        thumbnail: index['song'].Thumbnail,
       };
-      this.listSong.push(song);
+      const matchedSong: MatchedSong = {
+        song: song,
+        score: index['score'],
+      };
+      this.listSong.push(matchedSong);
+      console.log(index);
     });
+
+    // songInfo.forEach((index) => {
+    //   const song: Song = {
+    //     id: index.id,
+    //     name: index.name,
+    //     title: index.title,
+    //     artist: index.artist,
+    //     link: new URL(index.link),
+    //     linkZingMp3: index.linkZingmp3,
+    //     linkMV: index.linkMV,
+    //     thumbnail: new URL(index.thumbnail),
+    //   };
+    //   const matchedSong: MatchedSong = {
+    //     song: song,
+    //     score: Math.floor(index['score'] * 100),
+    //   };
+    //   this.listSong.push(matchedSong);
+    // });
+
     this.currentSong = this.listSong[0];
   }
   onActivated(id: number) {
     this.currentActiveSong = id;
-    this.listSong.forEach((song) => {
-      if (song.id == id) this.currentSong = song;
+    this.listSong.forEach((matchedSong) => {
+      if (matchedSong.song.id == id) this.currentSong = matchedSong;
+    });
+  }
+  openDetail(song: Song) {
+    this.detailDialogRef = this.dialog.open(PlayerComponent, {
+      data: song,
+      panelClass: 'transparent-dialog',
     });
   }
 }

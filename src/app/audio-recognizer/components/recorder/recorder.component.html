@@ -1,69 +1,146 @@
 <div class="recorder">
-     <mat-card class="recorder__container" [ngClass]="{'primamy-background' : recording && !paused, 
-     'tomato-background': recording && paused, 'blue-background' : preview}">
-        <div *ngIf="!recording && !preview">
-            <div id="recorder-ready-img"></div>
-            <div class="black pv3 fw5 f6">the mic is yours... start recording</div>
-            <div class = "controls_container">
-                <button id="button" class="green-button" (click)="initiateRecording()"> Record</button>
-                <button id="button" class="red-button mgl5" (click)="fileInput.click()">Import</button>
-                <input hidden (change)= "importData($event)" #fileInput type="file" id = "file" accept=".mp3,audio/*"/>
-            </div>
+  <mat-card
+    class="recorder__container"
+    [ngClass]="{
+      'primamy-background': recording && !paused,
+      'tomato-background': recording && paused,
+      'blue-background': preview
+    }"
+  >
+    <div *ngIf="!recording && !preview">
+      <div id="recorder-ready-img"></div>
+      <div class="black pv3 fw5 f6">the mic is yours... start recording</div>
+      <div class="controls_container">
+        <button id="button" class="green-button" (click)="initiateRecording()">
+          Record
+        </button>
+        <button id="button" class="red-button mgl5" (click)="fileInput.click()">
+          Import
+        </button>
+        <input
+          hidden
+          (change)="importData($event)"
+          #fileInput
+          type="file"
+          id="file"
+          accept=".mp3,audio/*"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="recording && !paused">
+      <div class="white pv2 fw5 f6">RECORDING</div>
+      <div class="white tracked pv2 fw5 f6" id="counter">{{ counter }}</div>
+      <div
+        #ngVisualizationContainer
+        class="flex-grow-1 visualization-container"
+      >
+        <app-visualization
+          *ngIf="loadVisualization"
+          [containerWidth]="containerWidth"
+          [containerHeight]="containerHeight"
+        ></app-visualization>
+      </div>
+      <div class="controls_container mgt20">
+        <button id="button" class="white-button" (click)="pauseRecording()">
+          Pause
+        </button>
+        <div class="mgl5 icon_container">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Delete"
+            (click)="reset()"
+            class="white"
+            >delete</mat-icon
+          >
         </div>
+      </div>
+    </div>
 
-        <div *ngIf="recording && !paused">
-            <div class="white pv2 fw5 f6">RECORDING</div> 
-            <div class="white tracked pv2 fw5 f6" id="counter">{{counter}}</div>
-                <div #ngVisualizationContainer class="flex-grow-1 visualization-container">
-                    <app-visualizaion  *ngIf="loadVisualization" [containerWidth]="containerWidth" [containerHeight]="containerHeight"></app-visualizaion>
-                </div>
-            <div class="controls_container mgt20">
-                <button id="button" class="white-button" (click)="pauseRecording()"> Pause</button>
-                <div class="mgl5 icon_container">
-                    <mat-icon aria-hidden="false" aria-label="Delete" (click) = "reset()" class="white">delete</mat-icon>
-                </div>
-            </div>
+    <div *ngIf="recording && paused && !preview">
+      <div class="white pv2 fw5 f6">PAUSED</div>
+      <!-- <div id="paused_wave"></div> -->
+      <div id="recorder-ready-img"></div>
+      <div class="white tracked pv2 fw5 f6 mgt20">{{ counter }}</div>
+      <div class="controls_container mgt20">
+        <button id="button" class="tomato-button" (click)="resumeRecording()">
+          Resume
+        </button>
+        <button
+          id="button"
+          class="white-tomato-button mgl5"
+          (click)="stopRecording()"
+        >
+          Preview
+        </button>
+        <div class="mgl5 icon_container">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Delete"
+            (click)="reset()"
+            class="white"
+            >delete</mat-icon
+          >
         </div>
+      </div>
+    </div>
 
-         <div *ngIf="recording && paused && !preview">
-            <div class="white pv2 fw5 f6">PAUSED</div> 
-            <!-- <div id="paused_wave"></div> -->
-             <div id="recorder-ready-img"></div>
-            <div class="white tracked pv2 fw5 f6 mgt20">{{counter}}</div>
-             <div class="controls_container mgt20">
-                <button id="button" class="tomato-button" (click)="resumeRecording()"> Resume</button>
-                <button id="button" class="white-tomato-button mgl5" (click)="stopRecording()"> Preview</button>
-                <div class="mgl5 icon_container">
-                    <mat-icon aria-hidden="false" aria-label="Delete" (click) = "reset()" class="white">delete</mat-icon>
-                </div>
-            </div>
+    <div *ngIf="preview && !recording">
+      <div class="white tracked pv2 fw5 f6">{{ endPosition }}</div>
+      <div id="preview_wave" class="wave"></div>
+      <div class="white tracked pv2 fw5 f6 mgt20">{{ startPosition }}</div>
+      <div class="controls_container mgt20">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Download"
+          *ngIf="imported"
+          (click)="replay()"
+          class="white icon-display"
+          >replay_10</mat-icon
+        >
+        <mat-icon
+          aria-hidden="false"
+          id="toggle"
+          aria-label="Download"
+          (click)="togglePlay()"
+          [ngClass]="{ mgl15: imported }"
+          class="white icon-display"
+          >{{ toggle }}</mat-icon
+        >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Download"
+          *ngIf="imported"
+          (click)="forward()"
+          class="white mgl15 icon-display"
+          >forward_10</mat-icon
+        >
+      </div>
+      <div class="controls_container mgt20">
+        <button id="button" class="white-blue-button" (click)="processAudio()">
+          Recognize
+        </button>
+        <div class="mgl5 icon_container">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Download"
+            (click)="download()"
+            class="white"
+            >download</mat-icon
+          >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Delete"
+            (click)="reset()"
+            class="white mgl5"
+            >delete</mat-icon
+          >
         </div>
+      </div>
+    </div>
+  </mat-card>
 
-
-        <div *ngIf="preview && !recording">
-            <div class="white tracked pv2 fw5 f6">{{endPosition}}</div> 
-            <div id="preview_wave" class="wave"></div>
-            <div class="white tracked pv2 fw5 f6 mgt20">{{startPosition}}</div>
-             <div class="controls_container mgt20">
-                    <mat-icon aria-hidden="false" aria-label="Download" *ngIf="imported" (click)= "replay()" class="white icon-display">replay_10</mat-icon>
-                    <mat-icon aria-hidden="false" id="toggle" aria-label="Download" (click)= "togglePlay()" [ngClass]="{'mgl15': imported}" class="white  icon-display">{{toggle}}</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="Download" *ngIf="imported" (click)= "forward()" class="white mgl15 icon-display">forward_10</mat-icon>
-            </div>
-             <div class="controls_container mgt20">
-                <button id="button" class="white-blue-button" (click)="processAudio()">Recognize</button>
-                <div class="mgl5 icon_container">
-                    <mat-icon aria-hidden="false" aria-label="Download" (click)= "download()"class="white">download</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="Delete" (click) = "reset()" class="white mgl5">delete</mat-icon>
-                </div>
-            </div>
-
-           
-        </div>
-
-
-    </mat-card>
-
-    <!-- <audio controls="" *ngIf="newUrl">
+  <!-- <audio controls="" *ngIf="newUrl">
         <source [src]="sanitize(newUrl)" type="audio/wav">
     </audio> -->
 </div>

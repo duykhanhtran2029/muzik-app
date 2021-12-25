@@ -10,7 +10,12 @@ import {
 } from '@angular/core';
 import { Song } from 'src/app/interfaces/song.interface';
 
+import {
+  FingerPrintingResult,
+  MatchedSong,
+} from 'src/app/interfaces/fingerPrintingResult.interface';
 const HOST_ZINGMP3 = 'https://zingmp3.vn';
+
 @Component({
   selector: 'app-song-item',
   templateUrl: './song-item.component.html',
@@ -20,15 +25,24 @@ export class SongItemComponent implements OnInit, OnChanges {
   @Input() hasRightContent: boolean = true;
   @Input() hasCenterContent: boolean = true;
   @Input() currentActivateID: number;
-  @Input() song: Song;
+  @Input() matchedSong: MatchedSong;
   @Output() activated = new EventEmitter<number>();
   isActivated: boolean = false;
+  textColor: number;
+  score: number;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.matchedSong.score >= 50) this.textColor = 1;
+    else if (this.matchedSong.score < 50 && this.matchedSong.score > 20)
+      this.textColor = 0;
+    else this.textColor = -1;
+
+    this.score = Math.floor(this.matchedSong.score * 100);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentActivateID'].currentValue == this.song.id) {
+    if (changes['currentActivateID'].currentValue == this.matchedSong.song.id) {
       this.isActivated = true;
     } else {
       this.isActivated = false;
@@ -41,15 +55,15 @@ export class SongItemComponent implements OnInit, OnChanges {
 
   Active() {
     if (!this.isActivated) {
-      this.activated.emit(this.song.id);
+      this.activated.emit(this.matchedSong.song.id);
       this.isActivated = true;
     }
   }
 
   download() {
     const dlink: HTMLAnchorElement = document.createElement('a');
-    dlink.download = this.song.title + '.mp3';
-    dlink.href = this.song.link.toString();
+    dlink.download = this.matchedSong.song.title + '.mp3';
+    dlink.href = this.matchedSong.song.link.toString();
     dlink.click(); // this will trigger the dialog window
     dlink.remove();
   }
