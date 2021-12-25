@@ -132,6 +132,38 @@
     box-shadow: 0 2px 10px 0 hsla(0, 0%, 81.2%, 0.4);
     background-color: #fff;
   }
+
+  .no-content {
+    width: 70%;
+    color: rgba(0, 0, 0, 0.6);
+    margin: auto;
+  }
+
+  .no-content-box {
+    width: 100%;
+    padding: 30px 0;
+    min-height: 220px;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .no-content-text {
+    font-size: 16px;
+    line-height: normal;
+  }
+  .main-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+  }
+
+  .ic-disc {
+    width: 90px;
+    height: 90px;
+    background-image: url(https://zjs.zadn.vn/zmp3-desktop/releases/v1.5.0/static/media/dics-music-icon.3925fc01.svg);
+  }
   nav {
     display: block;
   }

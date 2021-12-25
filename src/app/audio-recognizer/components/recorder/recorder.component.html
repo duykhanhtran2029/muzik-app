@@ -1,4 +1,4 @@
-<div class="recorder">
+<div class="recorder" id="above-bg">
   <mat-card
     class="recorder__container"
     [ngClass]="{
@@ -117,8 +117,16 @@
         >
       </div>
       <div class="controls_container mgt20">
-        <button id="button" class="white-blue-button" (click)="processAudio()">
+        <button
+          id="button"
+          *ngIf="!loading"
+          class="white-blue-button"
+          (click)="processAudio()"
+        >
           Recognize
+        </button>
+        <button *ngIf="loading" class="white-blue-button">
+          <i class="fa fa-spinner fa-spin blue-color"></i>Loading
         </button>
         <div class="mgl5 icon_container">
           <mat-icon
@@ -143,4 +151,6 @@
   <!-- <audio controls="" *ngIf="newUrl">
         <source [src]="sanitize(newUrl)" type="audio/wav">
     </audio> -->
+  <div class="f6 fw5 ph5-ns gray pt2">Recommened use file WAV to import</div>
 </div>
+<app-how-to-use></app-how-to-use>

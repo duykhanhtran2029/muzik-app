@@ -1,0 +1,89 @@
+.how-to-use {
+  background-color: #f6f9fa;
+  margin: 0 auto;
+  max-width: 96rem;
+  width: 100%;
+  padding: 4rem 2rem;
+}
+
+.header {
+  font-size: 2rem;
+  color: #232d40;
+  text-align: center;
+  font-weight: 500;
+}
+
+.dark-gray {
+  color: #4a4a4a;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+.mt2 {
+  margin-top: 2rem;
+}
+.column {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.tl {
+  text-align: left;
+}
+.column-title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+.column-text {
+  line-height: 1.5;
+  text-align: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: medium;
+  margin-left: 5px;
+}
+.mgb10 {
+  margin-bottom: 10px;
+}
+.mgb14 {
+  margin-bottom: 14px;
+}
+.mgt2 {
+  margin-top: 5rem;
+}
+.center {
+  text-align: center;
+}
+.red-color {
+  color: red;
+}
+.green-color {
+  color: green;
+}
+
+.blue-color {
+  color: aqua;
+}
+
+.purple-color {
+  color: #8a64c9;
+}
+@media screen and (min-width: 60em) {
+  .w-33-l {
+    width: 33%;
+  }
+}

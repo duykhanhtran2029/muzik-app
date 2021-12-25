@@ -10,8 +10,8 @@
         </ul>
       </div>
     </nav>
-    <div class="empty-zone"></div>
-    <div class="container-page-search">
+    <div *ngIf="loaded" class="empty-zone"></div>
+    <div *ngIf="loaded" class="container-page-search">
       <div class="container-page-search mgt20">
         <h3 class="top-title">
           Thời gian tìm kiếm {{ fingerPrintingResult.time / 1000 }}s
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="container mgt30">
+    <div *ngIf="loaded" class="container mgt30">
       <h3 class="section-title title is-2">Các bài hát tương tự</h3>
       <div>
         <app-song-item
@@ -33,6 +33,12 @@
           (click)="openDetail(song.song)"
           [currentActivateID]="currentActiveSong"
         ></app-song-item>
+      </div>
+    </div>
+    <div *ngIf="!loaded" class="container no-content mgt30">
+      <div class="no-content-box">
+        <i class="icon main-icon ic-disc"></i>
+        <span class="no-content-text">Không có kết quả nào được tìm thấy</span>
       </div>
     </div>
   </div>

@@ -77,6 +77,7 @@ export class ResultComponent implements OnInit {
   currentActiveSong: number;
   currentSong: MatchedSong;
   detailDialogRef: MatDialogRef<PlayerComponent>;
+  loaded: boolean;
   constructor(private store: Store<AppState>, private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -100,10 +101,12 @@ export class ResultComponent implements OnInit {
         song: song,
         score: index['score'],
       };
+
       this.listSong.push(matchedSong);
       console.log(index);
     });
-
+    if (this.listSong.length > 0) this.loaded = true;
+    else this.loaded = false;
     // songInfo.forEach((index) => {
     //   const song: Song = {
     //     id: index.id,

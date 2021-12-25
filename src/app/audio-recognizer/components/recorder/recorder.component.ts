@@ -37,6 +37,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   selectedVisualization: number = 1;
 
   showControls: boolean = false;
+  loading: boolean = false;
   timeout: any;
   wavesurfer: WaveSurfer = null;
   remainTime: number = RECORD_TIME;
@@ -115,6 +116,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
       } else {
         this.remainTime = 0;
         this.counter = this.calculateTimeDuration(this.remainTime);
+        this.stopRecording();
         return;
       }
       setTimeout(() => this.timerTick(), 100);
@@ -185,6 +187,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
     this.startTime = 0;
     this.paused = false;
     this.preview = false;
+    this.record.clearRecordedData();
     this.url = '';
   }
 
@@ -351,6 +354,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
       var audioBuffer = this.cut();
       this.fileBlob = this.bufferToWave(audioBuffer);
     }
+    this.loading = true;
     this.DispatchToServer();
   }
 
