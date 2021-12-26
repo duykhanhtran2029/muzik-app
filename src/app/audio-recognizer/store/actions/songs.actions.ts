@@ -36,9 +36,44 @@ export const deleteSong = createAction(
     props<{ songId: number }>()
 );
 
+export const deleteSongSuccess = createAction(
+    '[Audio Recognizer API] Delete song success',
+    props<{ song: Song }>()
+);
+
+export const deleteSongFailure = createAction(
+    '[Audio Recognizer API] Delete song failure',
+    props<{ error: string }>()
+);
+
 export const updateSong = createAction(
     '[Audio Recognizer API] Update song',
-    props<{ update: Update<Song> }>()
+    props<{ song: Song}>()
+);
+
+export const updateSongSuccess = createAction(
+    '[Audio Recognizer API] Update song success',
+    props<{ song: Song }>()
+);
+
+export const updateSongFailure = createAction(
+    '[Audio Recognizer API] Update song failure',
+    props<{ error: string }>()
+);
+
+export const createSong = createAction(
+    '[Audio Recognizer API] Create song',
+    props<{ song: Song}>()
+);
+
+export const createSongSuccess = createAction(
+    '[Audio Recognizer API] Create song success',
+    props<{ song: Song }>()
+);
+
+export const createSongFailure = createAction(
+    '[Audio Recognizer API] Create song failure',
+    props<{ error: string }>()
 );
 
 export const fingerPrinting = createAction(
@@ -54,4 +89,8 @@ export const fingerPrintingSuccess = createAction(
 export const fingerPrintingFailure = createAction(
     '[Audio Recognizer API] Get Fingerprinting failure',
     props<{ error: string }>()
+);
+
+export const cleanState = createAction(
+    '[Audio Recognizer API] Clean state'
 );

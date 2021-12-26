@@ -17,6 +17,7 @@ import { SongDetailComponent } from './components/manager/song-detail/song-detai
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './components/manager/update-song/update-song.component';
 import { FormsModule } from '@angular/forms';
+import { AddSongComponent } from './components/manager/add-song/add-song.component';
 import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
 import { SongItemComponent } from './components/result/song-item/song-item.component';
@@ -33,6 +34,7 @@ import { LoginComponent } from './components/login/login.component';
     SongDetailComponent,
     ConfirmDeleteComponent,
     UpdateSongComponent,
+    AddSongComponent,
     PlayerComponent,
     VisualizationComponent,
     SongItemComponent,

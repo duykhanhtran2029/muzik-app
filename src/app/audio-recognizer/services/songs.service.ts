@@ -3,14 +3,14 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/interfaces/song.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class SongService {
-    API_BASE_URL = 'https://localhost:5001';
+    API_BASE_URL = environment.apiBaseUrl;
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     getAllSongs(): Observable<Song[]> {
         const url = `${this.API_BASE_URL}/api/songs`
@@ -21,23 +21,19 @@ export class SongService {
         return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
     }
 
-    fingerPrinting(formData: FormData): Observable<FingerPrintingResult> {
-        return this.http.post<FingerPrintingResult>(`${this.API_BASE_URL}/api/songs/FingerPrinting`, formData);
-    }
-
     createSong(song: Song): Observable<Song> {
         return this.http.post<Song>(`${this.API_BASE_URL}/api/songs`, song);
     }
 
-    deleteSong(songId: number): Observable<any> {
-        return this.http.delete(`${this.API_BASE_URL}/api/songs/${songId}`);
+    updateSong(song: Song): Observable<Song> {
+        return this.http.put<Song>(`${this.API_BASE_URL}/api/songs/${song.id}`, song);
     }
 
-    updateSong(songId: number | string, changes: Partial<Song>): Observable<any> {
-        return this.http.put(`${this.API_BASE_URL}/api/songs/${songId}`, changes);
+    deleteSong(songId: number): Observable<Song> {
+        return this.http.delete<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
     }
 
-    uploadImage(formData: FormData): Observable<any> {
-        return this.http.post<{ path: URL }>(`${this.API_BASE_URL}/api/songs/thumbnail`, formData);
+    fingerPrinting(formData: FormData): Observable<FingerPrintingResult> {
+        return this.http.post<FingerPrintingResult>(`${this.API_BASE_URL}/api/songs/FingerPrinting`, formData);
     }
 }

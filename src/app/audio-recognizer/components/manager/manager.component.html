@@ -7,7 +7,7 @@
     <div class="container">
         <div class="filter--container">
             <input (keyup)="doFilter($event)" placeholder="Filter...." />
-            <button mat-flat-button color="primary">
+            <button mat-flat-button color="primary" (click)="openAdd()">
                 <mat-icon>add</mat-icon>
                 Add New Song
             </button>
