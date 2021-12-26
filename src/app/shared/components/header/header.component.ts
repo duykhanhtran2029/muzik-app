@@ -1,17 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { LoginComponent } from 'src/app/audio-recognizer/components/login/login.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router) {}
+  hasLoggedIn: boolean = false;
+  loginDialogRef: MatDialogRef<LoginComponent>;
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   BackToHome() {
     this.router.navigateByUrl('/app/audio-recognizer');
+  }
+  openLoginForm() {
+    this.loginDialogRef = this.dialog.open(LoginComponent, {
+      panelClass: 'transparent-dialog',
+      width: '100%',
+      height: '800px',
+    });
   }
 }

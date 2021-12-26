@@ -8,10 +8,15 @@
   />
   <span (click)="BackToHome()">Replica Shazam</span>
   <div class="spacer"></div>
-  <button mat-icon-button>
-    <mat-icon>settings</mat-icon>
-  </button>
-  <button mat-icon-button>
-    <mat-icon>account_circle</mat-icon>
-  </button>
+  <div *ngIf="hasLoggedIn">
+    <button mat-icon-button>
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!hasLoggedIn">
+    <button class="login-btn" (click)="openLoginForm()">LOG IN</button>
+  </div>
 </mat-toolbar>

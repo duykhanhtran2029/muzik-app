@@ -21,6 +21,7 @@ import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
 import { SongItemComponent } from './components/result/song-item/song-item.component';
 import { PlayingBarComponent } from './components/result/playing-bar/playing-bar.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PlayingBarComponent } from './components/result/playing-bar/playing-bar
     VisualizationComponent,
     SongItemComponent,
     PlayingBarComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
