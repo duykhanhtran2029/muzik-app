@@ -17,11 +17,25 @@ export class HeaderComponent implements OnInit {
   BackToHome() {
     this.router.navigateByUrl('/app/audio-recognizer');
   }
+
+  toAdminPage() {
+    this.router.navigateByUrl('app/manager');
+  }
   openLoginForm() {
     this.loginDialogRef = this.dialog.open(LoginComponent, {
       panelClass: 'transparent-dialog',
       width: '100%',
       height: '800px',
     });
+    this.loginDialogRef.componentInstance.loggedIn.subscribe((result) => {
+      if (result == true) {
+        this.hasLoggedIn = true;
+        this.loginDialogRef.close();
+      }
+    });
+  }
+
+  logout() {
+    this.hasLoggedIn = false;
   }
 }
