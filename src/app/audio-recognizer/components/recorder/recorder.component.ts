@@ -8,14 +8,17 @@ import {
   Input,
 } from '@angular/core';
 import { StereoAudioRecorder } from 'recordrtc';
-import { DomSanitizer } from '@angular/platform-browser';
 import { SongService } from '../../services/songs.service';
-import { fingerPrinting } from '../../store/actions/songs.actions';
+import {
+  fingerPrinting,
+  processRecording,
+} from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import * as WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
-
+import { environment } from 'src/environments/environment';
+import { AzureBlobStorageService } from 'src/app/audio-recognizer/services/azureStorage.service';
 const RECORD_TIME: number = 10000;
 const VISUALIZED_WIDTH: number = 450;
 const VISUALIZED_HEIGHT: number = 240;
@@ -28,31 +31,32 @@ const VISUALIZED_HEIGHT: number = 240;
 export class RecorderComponent implements OnInit, AfterViewInit {
   @ViewChild('ngVisualizationContainer') ngVisualizationContainer: ElementRef;
 
+  // Visualization
   containerWidth: number;
   containerHeight: number;
-
   loadVisualization: boolean;
+  wavesurfer: WaveSurfer = null;
+
+  // Flag
   imported: boolean = false;
-
-  selectedVisualization: number = 1;
-
   showControls: boolean = false;
   loading: boolean = false;
-  timeout: any;
-  wavesurfer: WaveSurfer = null;
+  recording = false;
+  toggle: string = 'play_arrow';
+  paused = false;
+  preview = false;
+
+  // TIME CONST
   remainTime: number = RECORD_TIME;
   startTime: number = 0;
   startPosition: string;
   endTime: number;
   endPosition: string;
   counter: string = '';
-  toggle: string = 'play_arrow';
   fileBlob: Blob;
 
+  //Record & File
   record: StereoAudioRecorder;
-  recording = false;
-  paused = false;
-  preview = false;
   url: string;
   newUrl: string;
   options = {
@@ -63,16 +67,18 @@ export class RecorderComponent implements OnInit, AfterViewInit {
     bitsPerSample: 16,
   };
 
+  //Azure
+  recordsContainer = environment.azureStorage.recordsContainer;
+  recordsSAS = environment.azureStorage.recordsSAS;
+  storageURL = '';
+
   constructor(
-    private domSanitizer: DomSanitizer,
+    private azureStorageService: AzureBlobStorageService,
     private songsService: SongService,
     private store: Store<AppState>,
     private cdr: ChangeDetectorRef
   ) {}
 
-  // sanitize(newUrl: string) {
-  //   return this.domSanitizer.bypassSecurityTrustUrl(newUrl);
-  // }
   ngOnInit(): void {
     this.loadVisualization = false;
   }
@@ -483,9 +489,28 @@ export class RecorderComponent implements OnInit, AfterViewInit {
     this.onPressReview();
   }
   DispatchToServer() {
-    const formData = new FormData();
-    formData.append('audio', this.fileBlob);
-    this.store.dispatch(fingerPrinting({ formData }));
+    this.save();
+    // const formData = new FormData();
+    // formData.append('audio', this.fileBlob);
+  }
+
+  save() {
+    const name = this.newUid();
+    const fileName = name + '.wav';
+    console.log('Upload to azure: ' + fileName);
+    this.azureStorageService.upload(
+      this.recordsContainer,
+      this.recordsSAS,
+      this.fileBlob,
+      fileName,
+      () => {
+        this.store.dispatch(processRecording({ fileName: fileName }));
+      }
+    );
+  }
+
+  newUid() {
+    return Date.now().toString(36) + Math.random().toString(36);
   }
 
   errorCallback(error) {

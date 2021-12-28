@@ -175,3 +175,12 @@
     letter-spacing: normal;
   }
 }
+
+#above-bg {
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  z-index: -1;
+  background-image: url("../../../../assets/images/bg-ovr-home.svg");
+  background-size: 100% auto;
+}
