@@ -99,6 +99,11 @@ export const songReducer = createReducer(
     deleteSongStatus: ApiRequestStatus.Fail,
   })),
 
+  on(actions.fingerPrinting, (state, action) => ({
+    ...state,
+    fingerPrintingStatus: ApiRequestStatus.Requesting,
+  })),
+
   on(actions.fingerPrintingSuccess, (state, action) => ({
     ...state,
     fingerPrintingResult: action.fingerPrintingResult,
@@ -111,17 +116,6 @@ export const songReducer = createReducer(
     fingerPrintingStatus: ApiRequestStatus.Fail,
   })),
 
-  on(actions.processRecordingSuccess, (state, action) => ({
-    ...state,
-    fingerPrintingResult: action.fingerPrintingResult,
-    fingerPrintingStatus: ApiRequestStatus.Success,
-  })),
-
-  on(actions.processRecordingFailure, (state, action) => ({
-    ...state,
-    error: action.error,
-    fingerPrintingStatus: ApiRequestStatus.Fail,
-  })),
 
   on(actions.cleanState, (state) => ({
     ...state,

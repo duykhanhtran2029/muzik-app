@@ -35,15 +35,9 @@ export class SongService {
     return this.http.delete<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
-  fingerPrinting(formData: FormData): Observable<FingerPrintingResult> {
+  fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
     return this.http.post<FingerPrintingResult>(
       `${this.API_BASE_URL}/api/songs/FingerPrinting`,
-      formData
-    );
-  }
-  processRecording(fileName: string): Observable<FingerPrintingResult> {
-    return this.http.post<FingerPrintingResult>(
-      `${this.API_BASE_URL}/api/songs/Records`,
       fileName
     );
   }

@@ -9,10 +9,7 @@ import {
 } from '@angular/core';
 import { StereoAudioRecorder } from 'recordrtc';
 import { SongService } from '../../services/songs.service';
-import {
-  fingerPrinting,
-  processRecording,
-} from '../../store/actions/songs.actions';
+import { fingerPrinting } from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import * as WaveSurfer from 'wavesurfer.js';
@@ -504,7 +501,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
       this.fileBlob,
       fileName,
       () => {
-        this.store.dispatch(processRecording({ fileName: fileName }));
+        this.store.dispatch(fingerPrinting({ fileName: fileName }));
       }
     );
   }

@@ -74,7 +74,7 @@ export const createSongFailure = createAction(
 
 export const fingerPrinting = createAction(
   '[Audio Recognizer API] Fingerprinting',
-  props<{ formData: FormData }>()
+  props<{ fileName: string }>()
 );
 
 export const fingerPrintingSuccess = createAction(
@@ -84,21 +84,6 @@ export const fingerPrintingSuccess = createAction(
 
 export const fingerPrintingFailure = createAction(
   '[Audio Recognizer API] Get Fingerprinting failure',
-  props<{ error: string }>()
-);
-
-export const processRecording = createAction(
-  '[Audio Recognizer API] Processing Recording',
-  props<{ fileName: string }>()
-);
-
-export const processRecordingSuccess = createAction(
-  '[Audio Recognizer API] Processing Recording Success',
-  props<{ fingerPrintingResult: FingerPrintingResult }>()
-);
-
-export const processRecordingFailure = createAction(
-  '[Audio Recognizer API] Processing Recording Failure',
   props<{ error: string }>()
 );
 

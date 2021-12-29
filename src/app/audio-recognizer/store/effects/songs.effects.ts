@@ -54,22 +54,7 @@ export class SongEffects {
     this.actions$.pipe(
       ofType(actions.fingerPrinting),
       concatMap((action) =>
-        this.songService.fingerPrinting(action.formData).pipe(
-          map((fingerPrintingResult) =>
-            actions.fingerPrintingSuccess({ fingerPrintingResult })
-          ),
-          catchError(async (error) => actions.fingerPrintingFailure({ error })),
-          tap(() => this.router.navigateByUrl('app/result'))
-        )
-      )
-    )
-  );
-
-  processRecording$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(actions.processRecording),
-      concatMap((action) =>
-        this.songService.processRecording(action.fileName).pipe(
+        this.songService.fingerPrinting(action.fileName).pipe(
           map((fingerPrintingResult) =>
             actions.fingerPrintingSuccess({ fingerPrintingResult })
           ),
