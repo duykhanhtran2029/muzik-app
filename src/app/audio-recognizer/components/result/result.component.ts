@@ -83,17 +83,18 @@ export class ResultComponent implements OnInit {
     this.store
       .select(getFingerPrintingResult)
       .subscribe((res) => (this.fingerPrintingResult = res));
+    console.log(this.fingerPrintingResult);
 
     this.fingerPrintingResult.matchedSongs.forEach((index: Object) => {
       const song: Song = {
-        id: index['song'].Id,
-        name: index['song'].Name,
-        title: index['song'].Title,
-        artist: index['song'].Artist,
-        link: index['song'].Link,
-        linkZingMp3: index['song'].LinkZingMp3,
-        linkMV: index['song'].LinkMV,
-        thumbnail: index['song'].Thumbnail,
+        id: index['song'].id,
+        name: index['song'].name,
+        title: index['song'].title,
+        artist: index['song'].artist,
+        link: index['song'].link,
+        linkZingMp3: index['song'].linkZingMp3,
+        linkMV: index['song'].linkMV,
+        thumbnail: index['song'].thumbnail,
       };
       const matchedSong: MatchedSong = {
         song: song,
@@ -106,7 +107,6 @@ export class ResultComponent implements OnInit {
     if (this.listSong.length > 0) this.loaded = true;
     else this.loaded = false;
 
-    console.log(this.listSong);
     this.currentSong = this.listSong[0];
   }
   onActivated(id: number) {

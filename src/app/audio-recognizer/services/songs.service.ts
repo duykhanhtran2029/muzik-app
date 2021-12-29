@@ -38,7 +38,7 @@ export class SongService {
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
     return this.http.post<FingerPrintingResult>(
       `${this.API_BASE_URL}/api/songs/FingerPrinting`,
-      fileName
+      { fileName }
     );
   }
 }
