@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./update-song.component.scss']
 })
 export class UpdateSongComponent implements OnInit, OnDestroy {
+  loading = false;
   song: Song;
   formData: FormData;
   imgSrc: string;
@@ -77,6 +78,7 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.loading = true;
     if (this.thumbnail.name) {
       const fileName = `${this.song.name}.${this.thumbnail.name.split('.').pop()}`;
       this.song.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
