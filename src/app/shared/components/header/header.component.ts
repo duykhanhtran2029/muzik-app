@@ -43,5 +43,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.hasLoggedIn = false;
+    this.router.navigateByUrl('/app/audio-recognizer');
   }
 }
