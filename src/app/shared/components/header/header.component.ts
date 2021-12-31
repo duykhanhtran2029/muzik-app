@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/audio-recognizer/components/login/login.component';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +12,11 @@ import { LoginComponent } from 'src/app/audio-recognizer/components/login/login.
 export class HeaderComponent implements OnInit {
   hasLoggedIn: boolean = false;
   loginDialogRef: MatDialogRef<LoginComponent>;
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {}
 

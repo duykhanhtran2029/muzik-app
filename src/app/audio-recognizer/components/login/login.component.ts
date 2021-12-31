@@ -11,6 +11,7 @@ import { User } from 'src/app/interfaces/user.interface';
 })
 export class LoginComponent implements OnInit {
   @Output() loggedIn = new EventEmitter<boolean>();
+  email: string;
   constructor(
     private dialogRef: MatDialogRef<LoginComponent>,
     private store: Store<AppState>
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
     document.getElementById('container').classList.remove('right-panel-active');
   }
   login() {
-    //this.store.dispatch(loginAction({ user: user }));
+    this.store.dispatch(loginAction({ account: this.email }));
     this.loggedIn.emit(true);
   }
 }

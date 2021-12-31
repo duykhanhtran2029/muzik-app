@@ -23,7 +23,7 @@
         <a href="#" class="social fa fa-github"></a>
       </div>
       <span class="subtitle">or use your account</span>
-      <input type="email" placeholder="Email" />
+      <input type="email" placeholder="Email" [(ngModel)]="email" />
       <input type="password" placeholder="Password" />
       <a href="#" class="subtitle">Forgot your password?</a>
       <button (click)="login()">Sign In</button>

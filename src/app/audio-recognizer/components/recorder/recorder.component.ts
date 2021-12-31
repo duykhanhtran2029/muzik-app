@@ -206,6 +206,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
       (end - start) * originalAudioBuffer.sampleRate
     );
 
+    console.log('End: ' + end + ', start: ' + start);
     var offlineAudioContext = this.wavesurfer.backend.ac;
 
     var emptySegment = offlineAudioContext.createBuffer(
