@@ -129,10 +129,12 @@
     opacity: 0;
     transform: translateY(100%);
     transition: .4s ease-in-out;
+    visibility: hidden;
 }
 
 .fadeIn {
     opacity: 1;
     transform: translateY(0);
     transition: .4s ease-in-out;
+    visibility: visible;
 }
