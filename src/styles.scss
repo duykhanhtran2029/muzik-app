@@ -2,13 +2,57 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 @import '~ngx-toastr/toastr';
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   --player-text: #32323d;
   --p-color: #009879;
 }
-.transparent-dialog > mat-dialog-container {
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  /* width of vertical scrollbar */
+  height: 8px;
+  /* height of horizontal scrollbar ← You're missing this */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  opacity: 0.5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.transparent-dialog>mat-dialog-container {
   background: transparent;
   box-shadow: none !important;
+}
+
+.queue--container {
+  .mat-dialog-container {
+      padding: 0px;
+      border-radius: 0px;
+      background: #141414;
+      overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+  }
+}
+
+.cdk-global-scrollblock {
+  overflow-y: hidden;
 }

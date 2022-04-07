@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MasterComponent } from './components/master/master.component';
 import { RecorderComponent } from './components/recorder/recorder.component';
 import { SharedModule } from '../shared/shared.module';
-import { AudioRecognizerRoutingModule } from './sub-modules/audio-recognizer.routing';
-import { AudioRecognizerSharedMaterialModule } from './sub-modules/audio-recognizer-material.module';
+import { MusicPlayerRoutingModule } from './sub-modules/music-player.routing';
+import { MusicPlayerSharedMaterialModule } from './sub-modules/music-player-material.module';
 import { ManagerComponent } from './components/manager/manager.component';
 import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 import { StoreModule } from '@ngrx/store';
@@ -23,6 +23,9 @@ import { VisualizationComponent } from './components/recorder/visualization/visu
 import { SongItemComponent } from './components/result/song-item/song-item.component';
 import { PlayingBarComponent } from './components/result/playing-bar/playing-bar.component';
 import { LoginComponent } from './components/login/login.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
+import { QueueComponent } from './components/queue/queue.component';
 
 @NgModule({
   declarations: [
@@ -40,16 +43,19 @@ import { LoginComponent } from './components/login/login.component';
     SongItemComponent,
     PlayingBarComponent,
     LoginComponent,
+    SideNavComponent,
+    TracksControlComponent,
+    QueueComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
-    AudioRecognizerRoutingModule,
-    AudioRecognizerSharedMaterialModule,
+    MusicPlayerRoutingModule,
+    MusicPlayerSharedMaterialModule,
     StoreModule.forFeature('songs', songReducer),
     EffectsModule.forFeature([SongEffects]),
   ],
   providers: [SongService],
 })
-export class AudioRecognizerModule {}
+export class MusicPlayerModule {}

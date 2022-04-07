@@ -22,21 +22,22 @@
     font-family: "Patrick Hand", cursive;
     font-size: 28px;
   }
+  .login-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: $primary;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .login-btn:hover {
+    background-color: #36ad95;
+    //filter: brightness(60%);
+    transition: color 0.15s ease-in;
+  }
+  
 }
 
-.login-btn {
-  width: 100px;
-  height: 40px;
-  border-radius: 4px;
-  background-color: $primary;
-  border: none;
-  color: #fff;
-  font-size: 1rem;
-  margin-left: 1rem;
-}
-
-.login-btn:hover {
-  background-color: #36ad95;
-  //filter: brightness(60%);
-  transition: color 0.15s ease-in;
-}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { LoginComponent } from 'src/app/audio-recognizer/components/login/login.component';
+import { LoginComponent } from 'src/app/music-player/components/login/login.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 @Component({

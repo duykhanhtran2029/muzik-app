@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { SongService } from 'src/app/audio-recognizer/services/songs.service';
-import { deleteSong } from 'src/app/audio-recognizer/store/actions/songs.actions';
+import { SongService } from 'src/app/music-player/services/songs.service';
+import { deleteSong } from 'src/app/music-player/store/actions/songs.actions';
 import { AppState } from 'src/app/store/reducers';
 
 @Component({

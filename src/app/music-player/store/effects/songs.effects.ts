@@ -3,7 +3,7 @@ import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as actions from '../actions/songs.actions';
-import { SongService } from 'src/app/audio-recognizer/services/songs.service';
+import { SongService } from 'src/app/music-player/services/songs.service';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 
 @Injectable()

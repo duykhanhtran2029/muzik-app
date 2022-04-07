@@ -1,12 +1,4 @@
-<mat-toolbar class="toolbar" color="primary">
-  <img
-    (click)="BackToHome()"
-    width="40px"
-    height="40px"
-    src="../../../../assets/images/shazam.png"
-    alt="MusicRecognizer"
-  />
-  <span (click)="BackToHome()">Replica Shazam</span>
+<mat-toolbar class="toolbar">
   <div class="spacer"></div>
   <div *ngIf="hasLoggedIn">
     <button mat-icon-button>

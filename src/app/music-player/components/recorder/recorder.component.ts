@@ -15,7 +15,7 @@ import { AppState } from 'src/app/store/reducers';
 import * as WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
 import { environment } from 'src/environments/environment';
-import { AzureBlobStorageService } from 'src/app/audio-recognizer/services/azureStorage.service';
+import { AzureBlobStorageService } from 'src/app/music-player/services/azureStorage.service';
 const RECORD_TIME: number = 10000;
 const VISUALIZED_WIDTH: number = 450;
 const VISUALIZED_HEIGHT: number = 240;

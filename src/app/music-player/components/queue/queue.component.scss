@@ -1,0 +1,19 @@
+:host {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    height: 800px;
+    background-color: #141414;
+}
+
+.head {
+    text-align: start;
+    margin-bottom: 4px !important;
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: #2AB758;
+    text-underline-position: under;
+    height: 56px;
+    padding: 12px 20px;
+}

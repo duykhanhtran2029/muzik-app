@@ -1,0 +1,138 @@
+.outer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #171717;
+    color: #fff;
+
+    .track-info {
+        width: 30%;
+        display: flex;
+        align-items: center;
+
+        .album-artwork {
+            height: 60px;
+            min-width: 60px;
+            width: 60px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 5%;
+            margin-right: 10px;
+            background-size: cover;
+        }
+
+        .track-text {
+            width: 100%;
+            cursor: default;
+            overflow: hidden;
+            line-height: normal;
+            padding-right: 10%;
+
+            .track-title {
+                font-size: 14px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .track-artist {
+                font-size: 14px;
+                color: #b3b3b3;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+    }
+
+    .linkable {
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    div.linkable {
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    .playback-controls {
+        width: 40%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .playback-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .scrubber {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            margin-top: -10px;
+            .time {
+                font-size: 11px;
+            }
+
+        }
+
+    }
+
+    .misc-controls {
+        width: 30%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 32px;
+    }
+
+    .active-link {
+        color: #69f0ae;
+    }
+
+    .slider {
+        flex: 1;
+        margin: 0 5px;
+    }
+
+    ::-webkit-media-controls-panel {
+        background: white;
+      }
+    
+    ::ng-deep .mat-accent .mat-slider-thumb {
+        background-color: #50b849;
+    }
+    ::ng-deep .mat-accent .mat-slider-track-background {
+        background-color: gray;
+    }
+
+    ::ng-deep .mat-accent .mat-slider-track-fill {
+        background-color: #50b849;
+    } 
+}
+
+.fadeOut {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: .4s ease-in-out;
+}
+
+.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+    transition: .4s ease-in-out;
+}

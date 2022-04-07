@@ -10,11 +10,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatSliderModule } from '@angular/material/slider';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
     declarations: [],
@@ -30,11 +35,15 @@ import { MatInputModule } from '@angular/material/input';
         MatDialogModule,
         MatCheckboxModule,
         MatCardModule,
-        MatTableModule ,
+        MatTableModule,
         MatFormFieldModule,
         MatPaginatorModule,
         MatSortModule,
-        MatInputModule
+        MatInputModule,
+        MatSidenavModule,
+        MatListModule,
+        MatSliderModule,
+        DragDropModule
     ]
 })
-export class AudioRecognizerSharedMaterialModule { }
+export class MusicPlayerSharedMaterialModule { }

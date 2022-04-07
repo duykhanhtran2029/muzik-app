@@ -1,0 +1,127 @@
+@import "../../../../assets/theme/variable";
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navigation {
+    font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
+    position: fixed;
+    top: 25%;
+    height: fit-content;
+    width: 50px;
+    border-radius: 10px;
+    background: $primary;
+    box-shadow: 5px 0 0 $sub-primary;
+    border-left: 5px solid $primary;
+    overflow-x: hidden;
+    transition: width .5s;
+    padding-bottom: 15px;
+
+    .drawer--head {
+        position: absolute;
+        text-align: left;
+        top: 12px;
+        left: 5px;
+        color: #fff;
+        white-space: nowrap;
+        height: 32px;
+        line-height: 32px;
+
+        span {
+            position: absolute;
+            top: 0px;
+            margin-left: 16px;
+            font-family: "Patrick Hand", cursive;
+            font-size: 24px;
+        }
+    }
+
+    &:hover {
+        width: 150px;
+    }
+
+    ul {
+        width: 100%;
+        padding-top: 56px;
+
+        li {
+            position: relative;
+            list-style: none;
+            width: 100%;
+            border-radius: 10px 0 0 10px;
+            // &:last-child {
+            //     margin-top: 56px;
+            // }
+    
+            &.active {
+                background: $sub-primary;
+
+                a::before {
+                    content: '';
+                    position: absolute;
+                    top: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 10px;
+                    box-shadow: 15px 15px 0px $sub-primary;
+                }
+
+                a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 10px;
+                    box-shadow: 15px -15px 0px $sub-primary;
+                }
+         
+                mat-icon, .title {
+                    color: white !important;
+                }
+
+            }
+
+            a {
+                position: relative;
+                display: flex;
+                text-decoration: none;
+                width: 100%;
+                color: #fff;
+                height: 40px;
+                line-height: 40px;
+
+                .icon {
+                    position: relative;
+                    min-width: 45px;
+                    text-align: center;
+
+                    mat-icon {
+                        position: relative;
+                        z-index: 1;
+                        margin-top: 8px;
+                        color: rgba(255,255,255,.3);
+                    }
+                }
+
+                .title {
+                    position: relative;
+                    display: block;
+                    padding-left: 10px;
+                    white-space: nowrap;
+                    color: rgba(255,255,255,.3);
+                }
+            }
+        }
+    }
+    hr {
+        border: none;
+        height: 1px;
+        margin: 15px 5px 0px 5px;
+        background-color: white;
+    }
+}

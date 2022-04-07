@@ -1,0 +1,61 @@
+<mat-toolbar class="outer-container">
+    <div class="track-info">
+        <div class="album-artwork">
+        </div>
+        <div class="track-text">
+            <div class="track-title">Song title</div>
+            <div class="track-artist">
+                <span>
+                </span>
+                <span class="linkable">
+                    Artist name
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="playback-controls">
+        <div class="playback-buttons">
+
+            <button aria-label="Shuffle" mat-icon-button>
+                <mat-icon>shuffle</mat-icon>
+            </button>
+
+            <button aria-label="Skip previous" mat-icon-button>
+                <mat-icon>skip_previous</mat-icon>
+            </button>
+
+            <button aria-label="Toggle play" mat-icon-button>
+                <mat-icon>pause</mat-icon>
+            </button>
+
+            <button aria-label="Skip next" mat-icon-button>
+                <mat-icon>skip_next</mat-icon>
+            </button>
+
+            <button aria-label="Repeat" mat-icon-button>
+                <mat-icon>repeat</mat-icon>
+            </button>
+
+        </div>
+        <div class="scrubber">
+            <span class="time">1:10</span>
+            <mat-slider #slider class="slider" min="0" max="10" step=".1" value="10">
+            </mat-slider>
+            <span class="time">3:10</span>
+        </div>
+
+    </div>
+    <div class="misc-controls">
+        <button aria-label="Toggle queue" (click) = "toggleQueue()"  mat-icon-button>
+            <mat-icon>queue_music</mat-icon>
+        </button>
+
+        <button aria-label="Toggle mute" mat-icon-button>
+            <mat-icon>volume_up</mat-icon>
+        </button>
+        <mat-slider #volume class="volume-slider" min="0" max="10" step=".1" value="10">
+        </mat-slider>
+    </div>
+</mat-toolbar>
+
+<app-queue [ngClass]="{'fadeIn ': isQueueOpened, 'fadeOut': !isQueueOpened}"></app-queue>

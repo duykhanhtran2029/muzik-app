@@ -54,19 +54,19 @@ button {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
-}
 
-button:active {
-  transform: scale(0.95);
-}
+  &:active {
+    transform: scale(0.95);
+  }
 
-button:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+  }
 
-button.ghost {
-  background-color: transparent;
-  border-color: #ffffff;
+  &.ghost {
+    background-color: transparent;
+    border-color: #ffffff;
+  }
 }
 
 form {
@@ -162,6 +162,7 @@ input {
 
 .overlay {
   background: #ff416c;
+
   // background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
   // background: linear-gradient(to right, #ff4b2b, #ff416c);
   background-repeat: no-repeat;
@@ -175,11 +176,7 @@ input {
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
   background: rgb(0, 136, 152);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 136, 152, 0.8519782913165266) 35%,
-    rgba(0, 152, 121, 1) 100%
-  );
+  background: linear-gradient(90deg, rgba(0, 136, 152, 0.8519782913) 35%, rgba(0, 152, 121, 1) 100%);
 }
 
 .container.right-panel-active .overlay {
@@ -220,17 +217,17 @@ input {
 
 .social-container {
   margin: 20px 0;
-}
 
-.social-container a {
-  border: 1px solid #dddddd;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  height: 50px;
-  width: 50px;
+  a {
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 50px;
+    width: 50px;
+  }
 }
 
 footer {
@@ -243,19 +240,19 @@ footer {
   right: 0;
   text-align: center;
   z-index: 999;
-}
 
-footer p {
-  margin: 10px 0;
-}
+  p {
+    margin: 10px 0;
+  }
 
-footer i {
-  color: red;
-}
+  i {
+    color: red;
+  }
 
-footer a {
-  color: #3c97bf;
-  text-decoration: none;
+  a {
+    color: #3c97bf;
+    text-decoration: none;
+  }
 }
 
 .title {

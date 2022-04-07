@@ -2,18 +2,8 @@ main {
   margin-top: 56px;
   padding: 8px;
   text-align: center;
-  //background-color: #707070;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr repeat(12, 100px) 1fr;
-  grid-template-rows: auto;
-  padding-left: 0;
-  padding-right: 0;
-  @at-root .grid__content {
-    grid-column: 2/14;
-    grid-row: 1;
+  .content {
+    margin-left: 64px;
   }
 }
 
@@ -102,3 +92,4 @@ main {
     }
   }
 }
+
