@@ -26,7 +26,12 @@ import { LoginComponent } from './components/login/login.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
 import { QueueComponent } from './components/queue/queue.component';
-
+import { MiniSongComponent } from './components/mini-song/mini-song.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HomeComponent } from './components/home/home.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NewSongComponent } from './components/news/new-song/new-song.component';
+import { NewsComponent } from './components/news/news.component';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -46,11 +51,17 @@ import { QueueComponent } from './components/queue/queue.component';
     SideNavComponent,
     TracksControlComponent,
     QueueComponent,
+    MiniSongComponent,
+    HomeComponent,
+    NewSongComponent,
+    NewsComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
+    ScrollingModule,
+    DragDropModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,
     StoreModule.forFeature('songs', songReducer),
@@ -58,4 +69,4 @@ import { QueueComponent } from './components/queue/queue.component';
   ],
   providers: [SongService],
 })
-export class MusicPlayerModule {}
+export class MusicPlayerModule { }

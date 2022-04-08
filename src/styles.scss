@@ -2,19 +2,19 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 @import '~ngx-toastr/toastr';
+@import "./assets/theme/_variable";
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  --player-text: #32323d;
-  --p-color: #009879;
+  background-color: $bg-color;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
   /* width of vertical scrollbar */
-  height: 8px;
+  height: 4px;
   /* height of horizontal scrollbar ← You're missing this */
 }
 
@@ -26,7 +26,7 @@ body {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #777;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 /* Handle on hover */

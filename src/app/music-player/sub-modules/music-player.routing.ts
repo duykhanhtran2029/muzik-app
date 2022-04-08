@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from '../components/home/home.component';
 import { LayoutControllerComponent } from '../components/layout-controller/layout-controller.component';
 import { ManagerComponent } from '../components/manager/manager.component';
 import { MasterComponent } from '../components/master/master.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
     path: '',
     component: MasterComponent,
     children: [
-      { path: '', redirectTo: 'audio-recognizer', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'audio-recognizer', component: LayoutControllerComponent },
       { path: 'result', component: ResultComponent },
       { path: 'manager', component: ManagerComponent },

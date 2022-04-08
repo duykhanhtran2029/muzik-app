@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -43,7 +43,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatSidenavModule,
         MatListModule,
         MatSliderModule,
-        DragDropModule
+        MatGridListModule
     ]
 })
 export class MusicPlayerSharedMaterialModule { }

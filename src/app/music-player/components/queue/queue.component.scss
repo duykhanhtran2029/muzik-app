@@ -1,10 +1,11 @@
+@import "../../../../assets/theme/_variable";
 :host {
     position: fixed;
     top: 10px;
     right: 10px;
     width: 300px;
     height: 800px;
-    background-color: #141414;
+    background-color: $dark-primary;
 }
 
 .head {
@@ -14,6 +15,17 @@
     text-decoration: underline;
     text-decoration-color: #2AB758;
     text-underline-position: under;
-    height: 56px;
     padding: 12px 20px;
+    height: fit-content;
+    box-shadow: 0 2px 6px -2px black;
+}
+
+.container {
+    padding: 0px 8px;
+    overflow: scroll;
+    height: calc(100% - 56px - 10px - 4px);
+}
+
+#queue::-webkit-scrollbar {
+    display: none;
 }

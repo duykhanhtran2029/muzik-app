@@ -1,4 +1,4 @@
-@import "../../../../assets/theme/variable";
+@import "../../../../assets/theme/_variable";
 * {
     padding: 0;
     margin: 0;
@@ -15,9 +15,10 @@
     background: $primary;
     box-shadow: 5px 0 0 $sub-primary;
     border-left: 5px solid $primary;
-    overflow-x: hidden;
+    overflow: hidden;
     transition: width .5s;
     padding-bottom: 15px;
+    z-index: 1000;
 
     .drawer--head {
         position: absolute;
@@ -51,11 +52,14 @@
             list-style: none;
             width: 100%;
             border-radius: 10px 0 0 10px;
-            // &:last-child {
-            //     margin-top: 56px;
-            // }
     
-            &.active {
+            &:hover a{
+                .icon mat-icon, .title {
+                    color: white;
+                }
+            }
+
+            &.active{
                 background: $sub-primary;
 
                 a::before {
@@ -121,7 +125,7 @@
     hr {
         border: none;
         height: 1px;
-        margin: 15px 5px 0px 5px;
+        margin: 15px 5px 10px 5px;
         background-color: white;
     }
 }

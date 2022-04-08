@@ -1,0 +1,58 @@
+.outer-container {
+    height: 56px;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    border-bottom: 1px solid #404040;
+    transition: transform .5s, filter 1.5s ease-in-out;
+    &:hover {
+        transform: scale(1.05);
+    }
+    .track-info {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+
+        .album-artwork {
+            height: 48px;
+            min-width: 48px;
+            width: 48px;
+            box-shadow: 0 0 10px rgba(255,255,255, 0.1);
+            border-radius: 5%;
+            margin-right: 10px;
+            background-size: cover;
+        }
+
+        .track-text {
+            width: 100%;
+            cursor: default;
+            overflow: hidden;
+            line-height: normal;
+
+            .track-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .track-artist {
+                color: #b3b3b3;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .option {
+            margin: 10px;
+            mat-icon {
+                transform: scale(0.75);
+            }
+        }
+        .time {
+            margin-right: 10px;
+        }
+
+    }
+}

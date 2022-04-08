@@ -1,0 +1,124 @@
+.container {
+    
+}
+
+.carousel {
+    display: block;
+    width: 100%;
+    padding-top: 56%;
+    background-color: lightgray;
+    position: relative;
+    overflow-x: hidden;
+    text-align: center;
+    word-spacing: 12px;
+    padding-top: 54%;
+    .carousel-image {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: left 0.9s;
+        left: -100%;
+        z-index: 1;
+    }
+    
+    .carousel-indicator {
+        position: relative;
+        bottom: 24px;
+        z-index: 2;
+    
+        &:checked {
+            ~.carousel-image {
+                left: 100%;
+            }
+    
+            +.carousel-image {
+                left: 0;
+            }
+    
+            ~.carousel-button {
+                left: auto;
+                right: 9px;
+    
+                &::before {
+                    content: "\21FE";
+                }
+            }
+    
+            +.carousel-image+.carousel-button {
+                display: none;
+            }
+    
+            ~.carousel-button {
+                &:nth-last-of-type(1) {
+                    z-index: 2;
+                }
+    
+                &:nth-last-of-type(2) {
+                    z-index: 3;
+                }
+    
+                &:nth-last-of-type(3) {
+                    z-index: 4;
+                }
+    
+                &:nth-last-of-type(4) {
+                    z-index: 5;
+                }
+    
+                &:nth-last-of-type(5) {
+                    z-index: 6;
+                }
+    
+                &:nth-last-of-type(6) {
+                    z-index: 7;
+                }
+    
+                &:nth-last-of-type(7) {
+                    z-index: 8;
+                }
+    
+                &:nth-last-of-type(8) {
+                    z-index: 9;
+                }
+    
+                &:nth-last-of-type(9) {
+                    z-index: 10;
+                }
+            }
+        }
+    }
+    
+    .carousel-button {
+        background-color: whitesmoke;
+        border: 1px solid lightgray;
+        border-radius: 50%;
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+    
+    
+    
+        position: absolute;
+        z-index: 2;
+        bottom: 12px;
+        left: 9px;
+        right: auto;
+    
+        &.last {
+            left: auto;
+            right: 9px;
+            content: "\21FE";
+    
+        }
+    
+        &::before {
+            line-height: 42px;
+            content: "\21FD";
+    
+        }
+    }
+}
+
