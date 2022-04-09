@@ -1,19 +1,22 @@
-<div class="container">
-   <div class="title">
-      New
+<div class="outer-container">
+   <h1>New</h1>
+   <div class="inner-container" >
+      <mat-carousel timings="250ms ease-in" [autoplay]="true" [interval]="3000" [proportion]="50" [loop]="true"
+      [hideIndicators]="false" [useKeyboard]="true" [useMouseWheel]="true" orientation="ltr" color="primary">
+      <mat-carousel-slide *ngFor="let slide of slides; let i = index" #matCarouselSlide
+         [image] = "slide.image"
+         [hideOverlay]="true">
+         <div class="info">
+            <div class="title">Red Snapper: Performance Review</div>
+            <div class="artist">Allan Biker</div>
+            <div class="function">
+               <button mat-flat-button>
+                  Play
+                  <mat-icon>play_arrow</mat-icon>
+               </button>
+            </div>
+        </div>
+      </mat-carousel-slide>
+   </mat-carousel>
    </div>
-    <div class="carousel">
-       <input class="carousel-indicator" type="radio" name="indicator" checked>
-       <img class="carousel-image" src="https://bit.ly/34O6BZO">
- 
-       <input class="carousel-indicator" type="radio" name="indicator">
-       <img class="carousel-image" src="https://bit.ly/3ifqrjR">
- 
-       <input class="carousel-indicator" type="radio" name="indicator">
-       <img class="carousel-image" src="https://bit.ly/3wfhy26">
- 
-       <input class="carousel-indicator" type="radio" name="indicator">
-       <img class="carousel-image" src="https://bit.ly/363szIQ">
-    </div><!-- .carousel -->
- 
- </div><!-- .container -->
+</div>

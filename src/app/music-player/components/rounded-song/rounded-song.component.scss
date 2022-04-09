@@ -1,0 +1,24 @@
+img {
+    border-radius: 50%;
+    width: 200px;
+}
+
+.info {
+    width: 200px;
+    color: black;
+    cursor: default;
+    overflow: hidden;
+    line-height: 28px;
+    z-index: 1000;
+    text-align: center;
+    margin-top: 10px;
+    .title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .artist {
+        font-size: 14px;
+        font-weight: 400;
+    }
+}

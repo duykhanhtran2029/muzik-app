@@ -31,6 +31,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './components/home/home.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NewsComponent } from './components/news/news.component';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { MediSongComponent } from './components/medi-song/medi-song.component';
+import { ForYouComponent } from './components/for-you/for-you.component';
+import { RecommendGenresComponent } from './components/recommend-genres/recommend-genres.component';
+import { RoundedSongComponent } from './components/rounded-song/rounded-song.component';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -53,6 +58,10 @@ import { NewsComponent } from './components/news/news.component';
     MiniSongComponent,
     HomeComponent,
     NewsComponent,
+    MediSongComponent,
+    ForYouComponent,
+    RecommendGenresComponent,
+    RoundedSongComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +73,7 @@ import { NewsComponent } from './components/news/news.component';
     MusicPlayerSharedMaterialModule,
     StoreModule.forFeature('songs', songReducer),
     EffectsModule.forFeature([SongEffects]),
+    MatCarouselModule.forRoot(),
   ],
   providers: [SongService],
 })

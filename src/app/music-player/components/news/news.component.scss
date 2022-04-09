@@ -1,45 +1,44 @@
-.container {
-    text-align: left;
-    .title {
-        margin: 10px;
-    }
+::ng-deep .carousel-slide {
+    background-position: left top !important;
+}
+::ng-deep mat-carousel>div {
+    border-radius: 5px;
 }
 
-.carousel {
-    display: block;
-    background-color: lightgray;
-    position: relative;
+h1 {
+    margin-left: 10px;
+    margin-bottom: 10px !important;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.info {
+    margin-top: 10%;
+    margin-left: 10%;
+    color: white;
+    cursor: default;
     overflow: hidden;
-    text-align: center;
-    word-spacing: 12px;
-    border-radius: 10px;
-    width: 100%;
-    padding-top: calc(calc(100vh - 88px - 160px)/2 - 20px);
-    .carousel-image {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: left 0.9s;
-        left: -100%;
-        z-index: 1;
+    line-height: 36px;
+    z-index: 1000;
+
+    .title {
+        font-size: 32px;
+        font-weight: 500;
     }
-    
-    .carousel-indicator {
-        position: relative;
-        bottom: 24px;
-        z-index: 2;
-    
-        &:checked {
-            ~.carousel-image {
-                left: 100%;
-            }
-    
-            +.carousel-image {
-                left: 0;
-            }
+
+    .artist {
+        margin-left: 2%;
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .function button {
+        margin-top: 16px;
+        border: 1px solid #0094B6;
+        color: #0094B6;
+
+        mat-icon {
+            margin-left: 10px;
         }
     }
 }
-

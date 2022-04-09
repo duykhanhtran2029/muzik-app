@@ -1,10 +1,29 @@
 .grid-container {
+    margin-top: 24px;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 10% 15% 15% 20% 20% 20%;
+    grid-template-rows: auto auto;
     height: 100%;
 }
 
 .grid-item {
     padding: 10px;
-    text-align: center;
+    text-align: left;
+    &.col{
+        &1{
+            grid-column: 1 / 4;
+        }
+        &2{
+            grid-column: 4 / 8;
+        }
+        &3{
+            grid-column: 1 / 5;
+        }
+        &4{
+            background-color: rgb(17, 104, 75);
+            grid-column: 5 / 8;
+
+        }
+
+    }
 }

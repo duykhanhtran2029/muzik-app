@@ -19,7 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
     declarations: [],
@@ -43,7 +43,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
         MatSidenavModule,
         MatListModule,
         MatSliderModule,
-        MatGridListModule
+        MatGridListModule,
+        MatChipsModule
     ]
 })
 export class MusicPlayerSharedMaterialModule { }

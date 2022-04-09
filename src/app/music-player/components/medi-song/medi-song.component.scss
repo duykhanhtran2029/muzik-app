@@ -1,0 +1,32 @@
+.outer-container {
+    position: relative;
+    height: 150px;
+    width: 300px;
+    img {
+        object-fit: cover;
+        object-position: right top;
+        border-radius: 5px;
+    }
+    
+    .info {
+        position: absolute;
+        bottom: 10%;
+        left: 10%;
+        color: white;
+        cursor: default;
+        overflow: hidden;
+        line-height: 28px;
+        z-index: 1000;
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .artist {
+            margin-left: 2%;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+}
+
+

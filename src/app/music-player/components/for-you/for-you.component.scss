@@ -1,0 +1,18 @@
+h1 {
+    margin-left: 10px;
+    margin-bottom: 10px !important;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+    app-medi-song {
+        margin-bottom: 10px;
+    }
+}
