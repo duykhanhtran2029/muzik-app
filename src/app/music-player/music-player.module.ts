@@ -30,7 +30,6 @@ import { MiniSongComponent } from './components/mini-song/mini-song.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './components/home/home.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NewSongComponent } from './components/news/new-song/new-song.component';
 import { NewsComponent } from './components/news/news.component';
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { NewsComponent } from './components/news/news.component';
     QueueComponent,
     MiniSongComponent,
     HomeComponent,
-    NewSongComponent,
     NewsComponent,
   ],
   imports: [
