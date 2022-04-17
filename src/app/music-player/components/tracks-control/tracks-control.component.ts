@@ -9,7 +9,7 @@ import { QueueComponent } from '../queue/queue.component';
 })
 export class TracksControlComponent implements OnInit {
   dialogRef: MatDialogRef<QueueComponent>;
-  isQueueOpened = true;
+  isQueueOpened = false;
   constructor(
     private dialog: MatDialog,
   ) { }

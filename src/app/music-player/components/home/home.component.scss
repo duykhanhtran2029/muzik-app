@@ -2,8 +2,7 @@
     margin-top: 24px;
     display: grid;
     grid-template-columns: 10% 15% 15% 20% 20% 20%;
-    grid-template-rows: auto auto;
-    height: 100%;
+    grid-template-rows: 45% 55%;
 }
 
 .grid-item {
@@ -20,9 +19,7 @@
             grid-column: 1 / 5;
         }
         &4{
-            background-color: rgb(17, 104, 75);
             grid-column: 5 / 8;
-
         }
 
     }

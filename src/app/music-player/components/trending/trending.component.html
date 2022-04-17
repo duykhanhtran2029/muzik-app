@@ -1,0 +1,13 @@
+<div class="outer-container">
+    <h1>Top trending</h1>
+    <div class="inner-container" >
+        <img [src]="'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/e/2/f/3/e2f3da512dcd104613f3b4151ce67438.jpg'"/>
+        <div class="right">
+            <ng-container *ngFor="let item of [].constructor(10); let i = index">
+                <div class="top-song-item">
+                    <app-top-song [index] = "i + 1"></app-top-song>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+ </div>

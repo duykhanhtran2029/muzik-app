@@ -36,6 +36,8 @@ import { MediSongComponent } from './components/medi-song/medi-song.component';
 import { ForYouComponent } from './components/for-you/for-you.component';
 import { RecommendGenresComponent } from './components/recommend-genres/recommend-genres.component';
 import { RoundedSongComponent } from './components/rounded-song/rounded-song.component';
+import { TrendingComponent } from './components/trending/trending.component';
+import { TopSongComponent } from './components/trending/top-song/top-song.component';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -62,6 +64,8 @@ import { RoundedSongComponent } from './components/rounded-song/rounded-song.com
     ForYouComponent,
     RecommendGenresComponent,
     RoundedSongComponent,
+    TrendingComponent,
+    TopSongComponent,
   ],
   imports: [
     CommonModule,
