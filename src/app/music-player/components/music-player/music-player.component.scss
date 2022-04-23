@@ -1,0 +1,48 @@
+.outer-container {
+    height: calc(100vh - 88px - 56px);
+    width: calc(100% - 300px - 16px);
+    margin: 24px 0px;
+    .function {
+        button {
+            margin: 0px 24px;
+            width: 200px;
+            border-radius: 10px;
+            background-color: #DADADA;
+            &.selected {
+                background-color: #0094B6;
+                color: white;
+            }
+        }
+    }
+    .inner-container {
+        height: calc(100% - 56px);
+        display: flex;
+        .thumbnail {
+            width: 50%;
+            img {
+                margin-top: 20%;
+                max-width: 400px;
+                border-radius: 15px;
+            }
+            .track-text {
+                font-size: 36px;
+                .title {
+                    font-weight: 600;
+                    margin: 24px;
+                }
+            }
+        }
+        .lyric {
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 50%;
+            margin-top: 24px;
+            white-space: pre-wrap;
+            font-size: 28px;
+            line-height: 40px;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}

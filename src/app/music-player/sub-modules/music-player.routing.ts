@@ -4,6 +4,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { LayoutControllerComponent } from '../components/layout-controller/layout-controller.component';
 import { ManagerComponent } from '../components/manager/manager.component';
 import { MasterComponent } from '../components/master/master.component';
+import { MusicPlayerComponent } from '../components/music-player/music-player.component';
 import { RecorderComponent } from '../components/recorder/recorder.component';
 import { ResultComponent } from '../components/result/result.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'audio-recognizer', component: LayoutControllerComponent },
       { path: 'result', component: ResultComponent },
       { path: 'manager', component: ManagerComponent },
+      { path: 'player', component: MusicPlayerComponent },
     ],
   },
 ];

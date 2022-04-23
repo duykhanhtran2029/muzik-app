@@ -38,6 +38,7 @@ import { RecommendGenresComponent } from './components/recommend-genres/recommen
 import { RoundedSongComponent } from './components/rounded-song/rounded-song.component';
 import { TrendingComponent } from './components/trending/trending.component';
 import { TopSongComponent } from './components/trending/top-song/top-song.component';
+import { MusicPlayerComponent } from './components/music-player/music-player.component';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -66,6 +67,7 @@ import { TopSongComponent } from './components/trending/top-song/top-song.compon
     RoundedSongComponent,
     TrendingComponent,
     TopSongComponent,
+    MusicPlayerComponent,
   ],
   imports: [
     CommonModule,
