@@ -5,9 +5,11 @@ import { Song } from 'src/app/interfaces/song.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SongService {
-  API_BASE_URL = environment.apiBaseUrl;
+  API_BASE_URL = environment.apiRecognizeUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -26,12 +28,12 @@ export class SongService {
 
   updateSong(song: Song): Observable<Song> {
     return this.http.put<Song>(
-      `${this.API_BASE_URL}/api/songs/${song.id}`,
+      `${this.API_BASE_URL}/api/songs/${song.songId}`,
       song
     );
   }
 
-  deleteSong(songId: number): Observable<Song> {
+  deleteSong(songId: string): Observable<Song> {
     return this.http.delete<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 

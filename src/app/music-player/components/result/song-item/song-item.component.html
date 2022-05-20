@@ -10,7 +10,7 @@
     <div class="media-left">
       <div class="song-thumb" *ngIf="hasRightContent && hasCenterContent">
         <figure>
-          <img [src]="matchedSong.song.thumbnail" alt />
+          <img [src]="matchedSong.song.thumbnailS" alt />
         </figure>
         <div class="opacity"></div>
         <div class="actions-container">
@@ -34,17 +34,17 @@
       >
         <div class="thumbnail">
           <figure class="image is-50x50 is-rounded">
-            <img [src]="matchedSong.song.thumbnail" alt />
+            <img [src]="matchedSong.song.thumbnailS" alt />
           </figure>
         </div>
       </div>
       <div class="media-content">
         <div class="title-wrappper">
           <span class="item-title title">
-            {{ matchedSong.song.title }}
+            {{ matchedSong.song.songName }}
           </span>
         </div>
-        <h3 class="subtitle">{{ matchedSong.song.artist }}</h3>
+        <!-- <h3 class="subtitle">{{ matchedSong.song.artist }}</h3> -->
       </div>
     </div>
     <div class="media-content" *ngIf="hasCenterContent">
@@ -59,23 +59,23 @@
         <div class="level">
           <div class="level-item"></div>
           <div class="level-item">
-            <button
+            <!-- <button
               (click)="openInNewTab(matchedSong.song.linkMV)"
               *ngIf="matchedSong.song.linkMV"
               class="btn tooltip-btn is-hover-circle"
             >
               <i class="icon fa fa-file-video-o"></i>
-            </button>
+            </button> -->
           </div>
           <div class="level-item">
             <button class="btn tooltip-btn is-hover-circle">
               <!--ZingMp3 Button-->
-              <div
-                (click)="openInNewTab(matchedSong.song.linkZingMp3)"
+              <!-- <div
+                (click)="openInNewTab(matchedSong.song.link)"
                 class="icon-img-container"
               >
                 <img class="icon-img" src="../../../../assets/images/mp3.png" />
-              </div>
+              </div> -->
             </button>
           </div>
           <div class="level-item">

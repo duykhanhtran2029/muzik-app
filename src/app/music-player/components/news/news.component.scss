@@ -1,25 +1,11 @@
-::ng-deep .carousel-slide {
-    background-position: left top !important;
-}
-::ng-deep mat-carousel>div {
-    border-radius: 5px;
-}
-
-h1 {
-    margin-left: 10px;
-    margin-bottom: 10px !important;
-    font-weight: 500;
-    line-height: 24px;
-}
-
 .info {
-    margin-top: 10%;
-    margin-left: 10%;
+    margin: auto 72px;
     color: white;
     cursor: default;
     overflow: hidden;
-    line-height: 36px;
-    z-index: 1000;
+    z-index: 3;
+    line-height: 48px;
+    text-align: left;
 
     .title {
         font-size: 32px;
@@ -27,7 +13,6 @@ h1 {
     }
 
     .artist {
-        margin-left: 2%;
         font-size: 24px;
         font-weight: 400;
     }

@@ -1,0 +1,33 @@
+.app-carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: auto;
+  border-radius: 5px;
+
+  &:before {
+    width: 100%;
+    height: 100%;
+    background: transparent linear-gradient(258deg, #00458F80 0%, #00458F00 16%, #00458F00 39%, #00458F 100%) 0% 0% no-repeat padding-box;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.8;
+    border-radius: 5px;
+  }
+
+  @at-root #{&}__container {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

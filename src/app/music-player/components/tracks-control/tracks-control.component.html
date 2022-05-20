@@ -25,8 +25,8 @@
                 <mat-icon>skip_previous</mat-icon>
             </button>
 
-            <button aria-label="Toggle play" mat-icon-button>
-                <mat-icon>pause</mat-icon>
+            <button aria-label="Toggle play" (click) = "togglePlay()" mat-icon-button>
+                <mat-icon>{{state?.playing ? 'pause' : 'play_arrow'}}</mat-icon>
             </button>
 
             <button aria-label="Skip next" mat-icon-button>
@@ -39,10 +39,10 @@
 
         </div>
         <div class="scrubber">
-            <span class="time">1:10</span>
-            <mat-slider #slider class="slider" min="0" max="10" step=".1" value="10">
+            <span class="time">{{ state?.readableCurrentTime }}</span>
+            <mat-slider #slider class="slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChange($event)">
             </mat-slider>
-            <span class="time">3:10</span>
+            <span class="time">{{ state?.readableDuration }}</span>
         </div>
 
     </div>
@@ -51,10 +51,10 @@
             <mat-icon>queue_music</mat-icon>
         </button>
 
-        <button aria-label="Toggle mute" mat-icon-button>
-            <mat-icon>volume_up</mat-icon>
+        <button (click) = "toggleMute()" aria-label="Toggle mute" mat-icon-button>
+            <mat-icon>{{state?.muted ? 'volume_off' : 'volume_up'}}</mat-icon>
         </button>
-        <mat-slider #volume class="volume-slider" min="0" max="10" step=".1" value="10">
+        <mat-slider #volume class="volume-slider" min="0" max="1" step=".01" [value]="state?.volume" (input)="onVolumeChange($event)">
         </mat-slider>
     </div>
 </mat-toolbar>

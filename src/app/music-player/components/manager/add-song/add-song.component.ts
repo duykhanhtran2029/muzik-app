@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, Subscription, tap } from 'rxjs';
-import { AzureBlobStorageService } from 'src/app/music-player/services/azureStorage.service';
+import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
 import { SongService } from 'src/app/music-player/services/songs.service';
 import { cleanState, createSong, updateSong, updateSongSuccess } from 'src/app/music-player/store/actions/songs.actions';
 import { getCreateSongStatus, getUpdateSongStatus } from 'src/app/music-player/store/selectors/songs.selector';
@@ -43,7 +43,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storageURL = this.azureStorageService.baseStorageURL();
-    this.song.thumbnail = new URL(`${this.storageURL}/images/placeholder.png`);
+    this.song.thumbnailS = new URL(`${this.storageURL}/images/placeholder.png`);
     this.subcripstion = this.store.select(getCreateSongStatus).subscribe(
       ((status: ApiRequestStatus) => {
         console.log(status)
@@ -69,7 +69,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
       this.thumbnail = files[0];
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = _event => this.song.thumbnail = new URL(reader.result.toString());
+      reader.onload = _event => this.song.thumbnailS = new URL(reader.result.toString());
     } 
   }
 
@@ -86,22 +86,22 @@ export class AddSongComponent implements OnInit, OnDestroy {
 
 
   save() {
-    if (!(this.song.title && this.song.artist && this.audio.name))
-      return;
-    this.loading = true;
-    this.song.name = this.newUid();
-    if(this.thumbnail.name) {
-      const fileName = `${this.song.name}.${this.thumbnail.name.split('.').pop()}`;
-      this.song.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
-      this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, fileName, () => {});
-    }
-    const fileName = `${this.song.name}.${this.audio.name.split('.').pop()}`;
-    this.azureStorageService.upload(
-      this.songsContainer, this.songsSAS, this.audio, fileName,
-      () => {
-        this.song.link = new URL(`${this.storageURL}/${this.songsContainer}/${fileName}`);
-        this.store.dispatch(createSong({ song: this.song }));
-      });
+    // if (!(this.song.songId && this.audio.name))
+    //   return;
+    // this.loading = true;
+    // this.song.songId = this.newUid();
+    // if(this.thumbnail.name) {
+    //   const fileName = `${this.song.name}.${this.thumbnail.name.split('.').pop()}`;
+    //   this.song.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
+    //   this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, fileName, () => {});
+    // }
+    // const fileName = `${this.song.name}.${this.audio.name.split('.').pop()}`;
+    // this.azureStorageService.upload(
+    //   this.songsContainer, this.songsSAS, this.audio, fileName,
+    //   () => {
+    //     this.song.link = new URL(`${this.storageURL}/${this.songsContainer}/${fileName}`);
+    //     this.store.dispatch(createSong({ song: this.song }));
+    //   });
 
     // const tmpName = this.fileName.toLowerCase();
     // if (this.song.title && this.song.artist && (tmpName.endsWith('.mp3'))) {

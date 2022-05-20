@@ -1,13 +1,20 @@
-<div class="outer-container">
-    <h1>Top trending</h1>
-    <div class="inner-container" >
-        <img [src]="'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/e/2/f/3/e2f3da512dcd104613f3b4151ce67438.jpg'"/>
-        <div class="right">
-            <ng-container *ngFor="let item of [].constructor(10); let i = index">
-                <div class="top-song-item">
-                    <app-top-song [index] = "i + 1"></app-top-song>
-                </div>
+<div class="app-trending">
+    <ng-container *ngIf="artists$ | async as artists">
+        <div class="app-trending__artists">
+            <ng-container *ngFor="let artist of artists; let i = index">
+                <app-top-artist [index] = "i + 1" [artist] = "artist"></app-top-artist>
             </ng-container>
         </div>
-    </div>
- </div>
+    </ng-container>
+    <mat-divider [vertical]="true"></mat-divider>
+    <ng-container *ngIf="songs$ | async as songs">
+        <div class="app-trending__songs">
+            <img [src]="selectedSong?.thumbnailL"/>
+            <div class="app-trending__songs__right">
+                <ng-container *ngFor="let song of songs; let i = index">
+                    <app-top-song (click) = "selectedSong = song" [index] = "i + 1" [song]="song"></app-top-song>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</div>

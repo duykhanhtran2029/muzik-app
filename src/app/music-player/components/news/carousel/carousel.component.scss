@@ -1,0 +1,89 @@
+.app-carousel {
+  width: 100%;
+  height: 333px;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+
+  @at-root #{&}__container {
+    width: 100%;
+    height: calc(100% - 40px);
+    border-radius: 8px;
+    overflow: hidden;
+
+    &>button {
+      position: absolute;
+      z-index: 1;
+      top: calc(50% - 16px);
+      transform: translateY(-50%);
+
+      &:first-of-type {
+        left: 16px;
+      }
+
+      &:last-of-type {
+        right: 16px;
+      }
+    }
+
+    @at-root #{&}__list {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      position: relative;
+
+      @at-root #{&}__slide {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-shrink: 0;
+        position: relative;
+
+        &:hover {
+          cursor: grab;
+        }
+      }
+    }
+
+    @at-root #{&}__arrow {
+      color: white;
+      z-index: 2;
+
+      mat-icon {
+        transform: scale(2);
+      }
+    }
+  }
+
+  @at-root #{&}__indicators {
+    z-index: 2;
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &>div {
+      width: 8px;
+      height: 8px;
+      background-color: #98BCF5;
+      border-radius: 4px;
+      margin: 8px;
+      transition: all 0.3s ease-in-out;
+      will-change: width background-color;
+
+      &.selected {
+        width: 24px;
+        background-color: #619bf5;
+      }
+    }
+  }
+}

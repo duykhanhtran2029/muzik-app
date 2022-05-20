@@ -1,0 +1,27 @@
+@use "@material/layout-grid" with (
+    $breakpoints: (
+        desktop: 1280px,
+        tablet: 744px,
+        phone: 360px
+    ),
+    
+    $columns: (
+        desktop: 12,
+        tablet: 9,
+        phone: 4
+    ),
+    
+    $default-margin: (
+        desktop: 24px,
+        tablet: 16px,
+        phone: 16px
+    ),
+    
+    $default-gutter: (
+        desktop: 24px,
+        tablet: 16px,
+        phone: 16px
+    ),
+);
+
+@use "@material/layout-grid/mdc-layout-grid";

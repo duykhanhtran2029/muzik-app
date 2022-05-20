@@ -67,10 +67,10 @@ export class ManagerComponent implements OnInit, AfterViewInit {
   }
 
   setupFilter() {
-    this.dataSource.filterPredicate = (s: Song, filter: string) => {
-      const searchPattern = (s.title + ' ' + s.artist).toLocaleLowerCase() ;
-      return searchPattern.includes(filter);
-    };
+    // this.dataSource.filterPredicate = (s: Song, filter: string) => {
+    //   const searchPattern = (s.title + ' ' + s.artist).toLocaleLowerCase() ;
+    //   return searchPattern.includes(filter);
+    // };
   }
 
   doFilter (event: Event) {

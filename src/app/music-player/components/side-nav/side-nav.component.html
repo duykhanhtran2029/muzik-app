@@ -10,15 +10,15 @@
         <li class="list active">
             <a [routerLink]="['home']">
                 <span class="icon">
-                    <mat-icon>home</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">home</mat-icon>
                 </span>
                 <span class="title">Home</span>
             </a>
         </li>
         <li class="list">
-            <a [routerLink]="['audio-recognizer']">
+            <a (click) = "openSearchDialog()">
                 <span class="icon">
-                    <mat-icon>search</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">search</mat-icon>
                 </span>
                 <span class="title">Search</span>
             </a>
@@ -26,7 +26,7 @@
         <li class="list">
             <a [routerLink]="['player']">
                 <span class="icon">
-                    <mat-icon>music_video</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">music_video</mat-icon>
                 </span>
                 <span class="title">Player</span>
             </a>
@@ -34,7 +34,7 @@
         <li class="list">
             <a href="#">
                 <span class="icon">
-                    <mat-icon>playlist_play</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">playlist_play</mat-icon>
                 </span>
                 <span class="title">Playlist</span>
             </a>
@@ -43,7 +43,7 @@
         <li class="list">
             <a href="#">
                 <span class="icon">
-                    <mat-icon>account_box</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined">account_box</mat-icon>
                 </span>
                 <span class="title">Profile</span>
             </a>

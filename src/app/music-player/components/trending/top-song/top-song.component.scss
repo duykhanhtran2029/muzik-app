@@ -1,58 +1,107 @@
 .outer-container {
-    height: 56px;
-    width: 100%;
-    color: #0F1E36;
+  height: fit-content;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  transition: transform 0.5s, filter 1s ease-in-out;
+  padding: 0px 16px;
+  margin: 5px 0px;
+
+  .track-info {
     display: flex;
     align-items: center;
-    font-size: 14px;
-    transition: transform .5s, filter 1s ease-in-out;
-    padding: 0px 16px;
+    justify-content: space-evenly;
+    align-content: space-between;
+    width: calc(100% - 32px);
+    height: 48px;
+    text-align: left;
+    border-radius: 5px;
 
-    .track-info {
-        display: flex;
-        align-items: center;
-        width: calc(100% - 32px);
-        height: 48px;
-        text-align: left;
-        border-radius: 5px;
+    &:hover {
+      box-shadow: 0 0 5px -3px #000;
+      background-color: #c2daff;
+      color: #000;
 
-        &:hover {
-            transform: scale(1.05);
-            background-color: white;
-            box-shadow: 0 0 5px -3px #000;
-        }
-
-        .index {
-            padding: 0px 24px 0px 12px;
-            font-size: 16px;
-        }
-
-        .track-text {
-            width: 100%;
-            cursor: default;
-            overflow: hidden;
-            line-height: normal;
-
-            .track-title {
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .track-artist {
-                color: #b3b3b3;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        }
-        .option {
-            margin: 10px;
-            mat-icon {
-                transform: scale(0.75);
-            }
-        }
-        .time {
-            margin-right: 30px;
-        }
-
+      .track-artist {
+        color: #2e2d2d;
+      }
     }
+
+    .index {
+      margin: 0px 24px 0px 12px;
+      font-size: 16px;
+      text-align: center;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+
+      &.first {
+        color: white;
+        font-weight: 500;
+        background-image: url("../../../../../assets/images/number-background-1.svg");
+      }
+
+      &.second {
+        color: white;
+        font-weight: 500;
+        background-image: url("../../../../../assets/images/number-background-2.svg");
+      }
+
+      &.third {
+        color: white;
+        font-weight: 500;
+        background-image: url("../../../../../assets/images/number-background-3.svg");
+      }
+    }
+
+    .track-text {
+      width: 50%;
+      cursor: default;
+      overflow: hidden;
+
+      .track-title {
+        font-size: 16px;
+        line-height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .track-artist {
+        margin-top: 4px;
+        font-size: 14px;
+        line-height: 16px;
+        color: #b3b3b3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0px 16px;
+
+      :first-child {
+        margin-right: 10px;
+      }
+    }
+
+    .option {
+      margin: 10px;
+
+      mat-icon {
+        transform: scale(0.75);
+      }
+    }
+
+    .time {
+      margin-right: 30px;
+    }
+  }
 }

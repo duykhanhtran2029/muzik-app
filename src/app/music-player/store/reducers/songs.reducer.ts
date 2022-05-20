@@ -64,7 +64,7 @@ export const songReducer = createReducer(
   })),
 
   on(actions.updateSongSuccess, (state, action) => {
-    const index = state.songs.findIndex((s) => s.id === action.song.id);
+    const index = state.songs.findIndex((s) => s.songId === action.song.songId);
     let tmpSongs = [...state.songs];
     tmpSongs[index] = action.song;
     return {
@@ -88,7 +88,7 @@ export const songReducer = createReducer(
   on(actions.deleteSongSuccess, (state, action) => {
     return {
       ...state,
-      songs: state.songs.filter((s) => s.id !== action.song.id),
+      songs: state.songs.filter((s) => s.songId !== action.song.songId),
       deleteSongStatus: ApiRequestStatus.Success,
     };
   }),

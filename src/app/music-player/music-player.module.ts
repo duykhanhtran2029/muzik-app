@@ -31,7 +31,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './components/home/home.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NewsComponent } from './components/news/news.component';
-import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MediSongComponent } from './components/medi-song/medi-song.component';
 import { ForYouComponent } from './components/for-you/for-you.component';
 import { RecommendGenresComponent } from './components/recommend-genres/recommend-genres.component';
@@ -39,6 +38,12 @@ import { RoundedSongComponent } from './components/rounded-song/rounded-song.com
 import { TrendingComponent } from './components/trending/trending.component';
 import { TopSongComponent } from './components/trending/top-song/top-song.component';
 import { MusicPlayerComponent } from './components/music-player/music-player.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchChipComponent } from './components/search/search-chip/search-chip.component';
+import { CarouselComponent } from './components/news/carousel/carousel.component';
+import { CarouselSlideComponent } from './components/news/carousel/carousel-slide/carousel-slide.component';
+import { TopArtistComponent } from './components/trending/top-artist/top-artist/top-artist.component';
+import { MusicPlayerSongService } from './services/music-player.song.service';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -68,6 +73,11 @@ import { MusicPlayerComponent } from './components/music-player/music-player.com
     TrendingComponent,
     TopSongComponent,
     MusicPlayerComponent,
+    SearchComponent,
+    SearchChipComponent,
+    CarouselComponent,
+    CarouselSlideComponent,
+    TopArtistComponent
   ],
   imports: [
     CommonModule,
@@ -78,9 +88,7 @@ import { MusicPlayerComponent } from './components/music-player/music-player.com
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,
     StoreModule.forFeature('songs', songReducer),
-    EffectsModule.forFeature([SongEffects]),
-    MatCarouselModule.forRoot(),
-  ],
-  providers: [SongService],
+    EffectsModule.forFeature([SongEffects])
+  ]
 })
 export class MusicPlayerModule { }

@@ -1,31 +1,46 @@
-.outer-container {
-    height: calc((100vh - 88px - 24px) * 0.55 - 20px);
-    h1 {
-        margin-left: 10px;
-        margin-bottom: 10px !important;
-        font-weight: 500;
-        line-height: 24px;
+.app-trending {
+    display: flex;
+
+    .mat-divider {
+        border-right-color: white;
+        margin: 0px 32px;
     }
-    
-    .inner-container {
+
+    @at-root #{&}__songs {
         height: calc((100vh - 88px - 24px) * 0.55 - 20px - 34px);
         display: flex;
+        width: 80%;
+
         img {
-            width: 45%;
+            width: 40%;
             height: 100%;
             object-fit: cover;
-            object-position: top left;
+            object-position: center;
             border-radius: 5px;
         }
-        .right {
-            width: 55%;
-            margin-left: 8px;
+
+        @at-root #{&}__right {
+            width: 60%;
+            margin-right: 8px;
             height: 100%;
             overflow-x: hidden;
             overflow-y: auto;
+
             &::-webkit-scrollbar {
                 display: none;
             }
+        }
+    }
+
+    @at-root #{&}__artists {
+        height: calc((100vh - 88px - 24px) * 0.55 - 20px - 34px);
+        width: 20%;
+        text-align: center;
+        overflow-x: hidden;
+        overflow-y: auto;
+        
+        &::-webkit-scrollbar {
+            display: none;
         }
     }
 }

@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription, tap } from 'rxjs';
-import { AzureBlobStorageService } from 'src/app/music-player/services/azureStorage.service';
+import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
 import { cleanState, updateSong } from 'src/app/music-player/store/actions/songs.actions';
 import { getUpdateSongStatus } from 'src/app/music-player/store/selectors/songs.selector';
 import { Song } from 'src/app/interfaces/song.interface';
@@ -48,7 +48,7 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.song = { ...this.data};
-    this.imgSrc = this.song.thumbnail.toString();
+    this.imgSrc = this.song.thumbnailS.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
     this.subcripstion = this.store.select(getUpdateSongStatus).subscribe(
       ((status: ApiRequestStatus) => {
@@ -80,8 +80,8 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
   save() {
     this.loading = true;
     if (this.thumbnail.name) {
-      const fileName = `${this.song.name}.${this.thumbnail.name.split('.').pop()}`;
-      this.song.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
+      const fileName = `${this.song.songName}.${this.thumbnail.name.split('.').pop()}`;
+      this.song.thumbnailS = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
       this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, fileName, () => { });
     }
     this.store.dispatch(updateSong({ song: this.song}));

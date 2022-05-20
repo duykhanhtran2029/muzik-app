@@ -1,0 +1,28 @@
+<div #carouselContainer class="app-carousel" tabindex="0">
+  <div class="app-carousel__container">
+    <ul #carouselList class=" app-carousel__container__list" role="listbox"
+      [style.flex-direction]="orientation === 'rtl' ? 'row-reverse' : 'row'">
+      <li #carouselSlide *ngFor="let slide of slidesList" class="app-carousel__container__list__slide" role="option"
+        (panleft)="onPan($event, carouselSlide)" (panright)="onPan($event, carouselSlide)"
+        (panend)="onPanEnd($event, carouselSlide)" (pancancel)="onPanEnd($event, carouselSlide)">
+        <ng-container [ngTemplateOutlet]="slide.templateRef"></ng-container>
+      </li>
+    </ul>
+    <ng-container *ngIf="!hideArrows">
+      <button class="app-carousel__container__arrow" mat-icon-button type="button" tabindex="-1" [color]="color"
+        [disabled]="!loop && getCurrentIndex() === 0" (click)="previous()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button class="app-carousel__container__arrow" mat-icon-button type="button" tabindex="-1" [color]="color"
+        [disabled]="!loop && getCurrentIndex() === slidesList.length - 1" (click)="next()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <div *ngIf="!hideIndicators" class="app-carousel__indicators" tabindex="-1"
+    [style.flex-direction]="orientation ===  'rtl' ? 'row-reverse' : 'row'">
+    <div *ngFor="let slide of slidesList; index as i" tabindex="-1" [class.selected]="i === getCurrentIndex()"
+      (click)="slideTo(i)" (focus)="carouselContainer.focus()"></div>
+  </div>
+</div>

@@ -1,15 +1,28 @@
-<div class="grid-container">
-    <div class="grid-item col1">
+<div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone  news--container">
         <app-news></app-news>
     </div>
-    <div class="grid-item col2">
+    <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+        <mat-card-header>
+            <mat-card-title>Trending</mat-card-title>
+            <mat-card-subtitle>Top trending songs and artists based on most listens, likes, downloads</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <app-trending></app-trending>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+        <mat-card-header>
+            <mat-card-title>Only for you</mat-card-title>
+            <mat-card-subtitle>Top songs that will fit your favorite</mat-card-subtitle>
+        </mat-card-header>
         <app-for-you></app-for-you>
-    </div>
-    <div class="grid-item col3">
+    </mat-card>
+    <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+        <mat-card-header>
+            <mat-card-title>Recommend genres</mat-card-title>
+            <mat-card-subtitle>Top genres and songs that you may like</mat-card-subtitle>
+        </mat-card-header>
         <app-recommend-genres></app-recommend-genres>
-    </div>
-    <div class="grid-item col4">
-        <app-trending></app-trending>
-    </div>
+    </mat-card>
 </div>
-  

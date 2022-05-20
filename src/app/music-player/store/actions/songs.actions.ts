@@ -29,7 +29,7 @@ export const getSongFailure = createAction(
 
 export const deleteSong = createAction(
   '[Audio Recognizer API] Delete song',
-  props<{ songId: number }>()
+  props<{ songId: string }>()
 );
 
 export const deleteSongSuccess = createAction(

@@ -1,26 +1,30 @@
-.grid-container {
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: 10% 15% 15% 20% 20% 20%;
-    grid-template-rows: 45% 55%;
+@import "../../../../assets/scss/theme/variable";
+.news--container {
+    grid-column-start: 3;
+
+    @media only screen and (max-width: 1279px) and (min-width: 744px) {
+        grid-column-start: 2;
+    }
+
+    @media only screen and (max-width: 743px) {
+        grid-column-start: 1;
+    }
 }
-
-.grid-item {
-    padding: 10px;
+.item {
+    margin-bottom: 24px;
     text-align: left;
-    &.col{
-        &1{
-            grid-column: 1 / 4;
+    background-color: $card-bg-color;
+    mat-card-header {
+        color: white;
+        mat-card-subtitle {
+            color: white;
+            font-size: 16px;
+            line-height: 24px;
         }
-        &2{
-            grid-column: 4 / 8;
+        mat-card-title {
+            color: white;
+            font-size: 20px;
+            line-height: 24px;
         }
-        &3{
-            grid-column: 1 / 5;
-        }
-        &4{
-            grid-column: 5 / 8;
-        }
-
     }
 }

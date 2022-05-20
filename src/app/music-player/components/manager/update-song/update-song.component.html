@@ -9,11 +9,11 @@
         (change)="setFilename(fileInput.files)" />
     <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
-        <input matInput type="text" [(ngModel)]="song.title">
+        <input matInput type="text" [(ngModel)]="song.songName">
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
-        <input matInput type="text" [(ngModel)]="song.artist">
+        <!-- <input matInput type="text" [(ngModel)]="song.artist"> -->
     </mat-form-field>
     <div class="controls">
         <button mat-flat-button (click)="cancel()">

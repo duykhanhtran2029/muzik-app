@@ -1,0 +1,51 @@
+<div mat-dialog-title class="search__title">
+    <mat-form-field class="search__title__box">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput>
+    </mat-form-field>
+    <button color="primary" mat-fab>
+        <mat-icon>mic</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content class="search__content">
+    <div class="search__content__container">
+        <h1>Hot searches</h1>
+        <mat-chip-list>
+            <mat-chip>Search 1</mat-chip>
+            <mat-chip>Search 2</mat-chip>
+            <mat-chip>Search 3</mat-chip>
+            <mat-chip>Search 5</mat-chip>
+            <mat-chip>Search 6</mat-chip>
+            <mat-chip>Search 7 with long name</mat-chip>
+            <mat-chip>Search 8</mat-chip>
+            <mat-chip>Search 9 medium</mat-chip>
+            <mat-chip>Search 10</mat-chip>
+            <mat-chip>Search 11</mat-chip>
+            <mat-chip>Search 12</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div class="search__content__container">
+        <h1>For you</h1>
+        <div class="search__content__container__for-you">
+            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/8/0/6/7/80677a86fdcee35d96f0047c7addcc7c.jpg'"></app-rounded-song>
+            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/2/4/8/6/2486d1faa0e8cfcca01c39b5814113f2.jpg'"></app-rounded-song>
+            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/8/3/2/3/832349ea644eabd742df5d62a913781a.jpg'"></app-rounded-song>
+            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/1/1/8/0/1180ce679c0402b1f800530881d73e2e.jpg'"></app-rounded-song>
+        </div>
+    </div>
+    <div class="search__content__container">
+        <div class="search__content__container__header">
+            <h1>Recently searches</h1>
+            <button mat-flat-button>Clear histories</button>
+        </div>
+        <div class="search__content__container__chips">
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+            <app-search-chip></app-search-chip>
+        </div>
+    </div>
+</div>

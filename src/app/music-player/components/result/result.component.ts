@@ -85,36 +85,36 @@ export class ResultComponent implements OnInit {
       .subscribe((res) => (this.fingerPrintingResult = res));
     console.log(this.fingerPrintingResult);
 
-    if (this.fingerPrintingResult.matchedSongs) {
-      this.fingerPrintingResult.matchedSongs.forEach((index: Object) => {
-        const song: Song = {
-          id: index['song'].id,
-          name: index['song'].name,
-          title: index['song'].title,
-          artist: index['song'].artist,
-          link: index['song'].link,
-          linkZingMp3: index['song'].linkZingMp3,
-          linkMV: index['song'].linkMV,
-          thumbnail: index['song'].thumbnail,
-        };
-        const matchedSong: MatchedSong = {
-          song: song,
-          score: index['score'],
-        };
+    // if (this.fingerPrintingResult.matchedSongs) {
+    //   this.fingerPrintingResult.matchedSongs.forEach((index: Object) => {
+    //     const song: Song = {
+    //       id: index['song'].songId,
+    //       name: index['song'].name,
+    //       title: index['song'].title,
+    //       artist: index['song'].artist,
+    //       link: index['song'].link,
+    //       linkZingMp3: index['song'].linkZingMp3,
+    //       linkMV: index['song'].linkMV,
+    //       thumbnail: index['song'].thumbnail,
+    //     };
+    //     const matchedSong: MatchedSong = {
+    //       song: song,
+    //       score: index['score'],
+    //     };
 
-        this.listSong.push(matchedSong);
-      });
+    //     this.listSong.push(matchedSong);
+    //   });
 
-      if (this.listSong.length > 0) this.loaded = true;
-      else this.loaded = false;
+    //   if (this.listSong.length > 0) this.loaded = true;
+    //   else this.loaded = false;
 
-      this.currentSong = this.listSong[0];
-    }
+    //   this.currentSong = this.listSong[0];
+    // }
   }
   onActivated(id: number) {
     this.currentActiveSong = id;
     this.listSong.forEach((matchedSong) => {
-      if (matchedSong.song.id == id) this.currentSong = matchedSong;
+      //if (matchedSong.song.id == id) this.currentSong = matchedSong;
     });
   }
   openDetail(song: Song) {

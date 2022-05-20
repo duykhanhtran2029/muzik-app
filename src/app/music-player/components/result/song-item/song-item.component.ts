@@ -42,7 +42,7 @@ export class SongItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentActivateID'].currentValue == this.matchedSong.song.id) {
+    if (changes['currentActivateID'].currentValue == this.matchedSong.song.songId) {
       this.isActivated = true;
     } else {
       this.isActivated = false;
@@ -55,14 +55,14 @@ export class SongItemComponent implements OnInit, OnChanges {
 
   Active() {
     if (!this.isActivated) {
-      this.activated.emit(this.matchedSong.song.id);
+      //this.activated.emit(this.matchedSong.song.songId);
       this.isActivated = true;
     }
   }
 
   download() {
     const dlink: HTMLAnchorElement = document.createElement('a');
-    dlink.download = this.matchedSong.song.title + '.mp3';
+    dlink.download = this.matchedSong.song.songId + '.mp3';
     dlink.href = this.matchedSong.song.link.toString();
     dlink.click(); // this will trigger the dialog window
     dlink.remove();
