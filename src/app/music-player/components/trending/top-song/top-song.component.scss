@@ -105,3 +105,15 @@
     }
   }
 }
+
+::ng-deep .mat-menu-panel {
+  background-color: #4186f6;
+  .mat-menu-content:not(:empty) {
+    padding: 0px !important;
+    button.mat-menu-item {
+      color: white;
+      line-height: 36px;
+      height: 36px;
+    }
+  }
+}

@@ -25,9 +25,13 @@
             <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
             <span>{{song.likes}}</span>
         </div>
-        <button mat-icon-button class="option">
+        <button mat-icon-button class="option" [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="play()">Play</button>
+            <button mat-menu-item (click)="addToQueue()">Add to queue</button>
+          </mat-menu>
         <div class="time">
             {{duration ?? '00:00'}}
         </div>

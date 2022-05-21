@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { takeWhile } from 'rxjs';
-import { StreamState } from 'src/app/interfaces/song.interface';
+import { Song, StreamState } from 'src/app/interfaces/song.interface';
 import { AudioPlayerService } from '../../services/audio-player.service';
 
 @Component({
@@ -21,8 +21,6 @@ export class TracksControlComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
-    this.audioService.playStream('https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3').subscribe();
-    this.audioService.pause();
   }
 
   toggleQueue() {

@@ -1,8 +1,13 @@
 
 
-img {
+.thumbnail {
     border-radius: 50%;
     width: 200px;
+    height: 200px;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .info {

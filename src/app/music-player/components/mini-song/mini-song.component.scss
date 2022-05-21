@@ -35,20 +35,19 @@
 
             .track-title {
                 overflow: hidden;
+                white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
             .track-artist {
                 color: #b3b3b3;
                 overflow: hidden;
+                white-space: nowrap;
                 text-overflow: ellipsis;
             }
         }
         .option {
             margin: 10px;
-            mat-icon {
-                transform: scale(0.75);
-            }
         }
         .time {
             margin-right: 10px;

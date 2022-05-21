@@ -1,62 +1,65 @@
-<mat-toolbar class="outer-container">
-    <div class="track-info">
-        <div class="album-artwork">
-            <img width="100%" src="https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/1/1/8/0/1180ce679c0402b1f800530881d73e2e.jpg">
-        </div>
-        <div class="track-text">
-            <div class="track-title">Song title</div>
-            <div class="track-artist">
-                <span>
-                </span>
-                <span class="linkable">
-                    Artist name
-                </span>
+<ng-container *ngIf="state.song">
+    <mat-toolbar class="outer-container">
+        <div class="track-info">
+            <div class="album-artwork">
+                <img width="100%" [src]="state.song.thumbnailS">
+            </div>
+            <div class="track-text">
+                <div class="track-title">{{state.song.songName}}</div>
+                <div class="track-artist">
+                    <span>
+                    </span>
+                    <span class="linkable">
+                        {{state.song.artistsName}}
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="playback-controls">
-        <div class="playback-buttons">
-
-            <button aria-label="Shuffle" mat-icon-button>
-                <mat-icon>shuffle</mat-icon>
-            </button>
-
-            <button aria-label="Skip previous" mat-icon-button>
-                <mat-icon>skip_previous</mat-icon>
-            </button>
-
-            <button aria-label="Toggle play" (click) = "togglePlay()" mat-icon-button>
-                <mat-icon>{{state?.playing ? 'pause' : 'play_arrow'}}</mat-icon>
-            </button>
-
-            <button aria-label="Skip next" mat-icon-button>
-                <mat-icon>skip_next</mat-icon>
-            </button>
-
-            <button aria-label="Repeat" mat-icon-button>
-                <mat-icon>repeat</mat-icon>
-            </button>
-
+        <div class="playback-controls">
+            <div class="playback-buttons">
+    
+                <button aria-label="Shuffle" mat-icon-button>
+                    <mat-icon>shuffle</mat-icon>
+                </button>
+    
+                <button aria-label="Skip previous" mat-icon-button>
+                    <mat-icon>skip_previous</mat-icon>
+                </button>
+    
+                <button aria-label="Toggle play" (click) = "togglePlay()" mat-icon-button>
+                    <mat-icon>{{state?.playing ? 'pause' : 'play_arrow'}}</mat-icon>
+                </button>
+    
+                <button aria-label="Skip next" mat-icon-button>
+                    <mat-icon>skip_next</mat-icon>
+                </button>
+    
+                <button aria-label="Repeat" mat-icon-button>
+                    <mat-icon>repeat</mat-icon>
+                </button>
+    
+            </div>
+            <div class="scrubber">
+                <span class="time">{{ state?.readableCurrentTime }}</span>
+                <mat-slider #slider class="slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChange($event)">
+                </mat-slider>
+                <span class="time">{{ state?.readableDuration }}</span>
+            </div>
+    
         </div>
-        <div class="scrubber">
-            <span class="time">{{ state?.readableCurrentTime }}</span>
-            <mat-slider #slider class="slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChange($event)">
+        <div class="misc-controls">
+            <button aria-label="Toggle queue" (click) = "toggleQueue()"  mat-icon-button>
+                <mat-icon>queue_music</mat-icon>
+            </button>
+    
+            <button (click) = "toggleMute()" aria-label="Toggle mute" mat-icon-button>
+                <mat-icon>{{state?.muted ? 'volume_off' : 'volume_up'}}</mat-icon>
+            </button>
+            <mat-slider #volume class="volume-slider" min="0" max="1" step=".01" [value]="state?.volume" (input)="onVolumeChange($event)">
             </mat-slider>
-            <span class="time">{{ state?.readableDuration }}</span>
         </div>
-
-    </div>
-    <div class="misc-controls">
-        <button aria-label="Toggle queue" (click) = "toggleQueue()"  mat-icon-button>
-            <mat-icon>queue_music</mat-icon>
-        </button>
-
-        <button (click) = "toggleMute()" aria-label="Toggle mute" mat-icon-button>
-            <mat-icon>{{state?.muted ? 'volume_off' : 'volume_up'}}</mat-icon>
-        </button>
-        <mat-slider #volume class="volume-slider" min="0" max="1" step=".01" [value]="state?.volume" (input)="onVolumeChange($event)">
-        </mat-slider>
-    </div>
-</mat-toolbar>
-
-<app-queue [ngClass]="{'fadeIn ': isQueueOpened, 'fadeOut': !isQueueOpened}"></app-queue>
+    </mat-toolbar>
+    
+    <app-queue [ngClass]="{'fadeIn ': isQueueOpened, 'fadeOut': !isQueueOpened}" [queue]="state.queue"></app-queue>
+    
+</ng-container>

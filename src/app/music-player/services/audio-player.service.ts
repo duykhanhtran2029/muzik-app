@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Subject, Observable, takeUntil, BehaviorSubject } from 'rxjs';
-import { AudioEvent, StreamState } from 'src/app/interfaces/song.interface';
+import { AudioEvent, Song, StreamState } from 'src/app/interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,9 @@ export class AudioPlayerService {
     canplay: false,
     error: false,
     volume: 1,
-    muted: false
+    muted: false,
+    song: JSON.parse(localStorage.getItem('music-player__currentSong')),
+    queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
   };
 
   private stop$ = new Subject<void>();
@@ -38,10 +40,9 @@ export class AudioPlayerService {
   private state: StreamState = this.initState;
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
-
-  private streamObservable(url: string) {
+  private streamObservable(url: URL) {
     return new Observable(observer => {
-      this.audioObj.src = url;
+      this.audioObj.src = url.toString();
       this.audioObj.volume = this.state.volume;
       this.audioObj.load();
 
@@ -104,8 +105,10 @@ export class AudioPlayerService {
   private resetState() {
     this.state = this.initState;
   }
-  public playStream(url: string) {
-    return this.streamObservable(url).pipe(takeUntil(this.stop$));
+  public playStream(song: Song) {
+    localStorage.setItem('music-player__currentSong', JSON.stringify(song));
+    this.state.song = song;
+    return this.streamObservable(song.link).pipe(takeUntil(this.stop$));
   }
 
   public play() {
@@ -139,5 +142,10 @@ export class AudioPlayerService {
 
   public getState(): Observable<StreamState> {
     return this.stateChange.asObservable();
+  }
+
+  public addToQueue(song: Song) {
+    this.state.queue.push(song);
+    sessionStorage.setItem('music-player__queue', JSON.stringify(this.state.queue));
   }
 }

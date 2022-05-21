@@ -1,5 +1,5 @@
 
-<img class="hoverable--rotate" [src]="artist.thumbnailM" alt="Avatar">
+<div class="thumbnail hoverable--rotate playable"  [ngStyle]="{'background-image': 'url(' + artist.thumbnailM + ')'}" alt="Avatar"></div>
 <div class="info">
     <div class="index" [ngClass]="{'first': index === 1, 'second': index === 2, 'third': index === 3}" >{{index}}</div>
     <div class="title">{{artist.artistName}}</div>

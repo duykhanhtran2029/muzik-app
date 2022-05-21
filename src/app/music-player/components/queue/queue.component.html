@@ -2,32 +2,5 @@
     Queue
 </div>
 <div id="queue" class="container">
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
-    <app-mini-song></app-mini-song>
+    <app-mini-song *ngFor="let song of queue" [song]="song"></app-mini-song>
 </div>

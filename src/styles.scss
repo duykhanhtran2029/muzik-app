@@ -5,6 +5,23 @@
 @import "./assets/scss/theme/_variable";
 @import "./assets/scss/layout/grid.scss";
 
+@mixin playable {
+  &::before {
+    font-family: "Material Icons";
+    content: "\e039";
+    color: white;
+    z-index: 10;
+    font-size: 72px;
+    margin-top: 90px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.8;
+  }
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -43,14 +60,15 @@ body {
 
 .queue--container {
   .mat-dialog-container {
-      padding: 0px;
-      border-radius: 0px;
-      background: #141414;
-      overflow: hidden;
+    padding: 0px;
+    border-radius: 0px;
+    background: #141414;
+    overflow: hidden;
   }
+
   ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
+    width: 0px;
+    height: 0px;
   }
 }
 
@@ -60,21 +78,34 @@ body {
 
 .hoverable {
   &--rotate {
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     will-change: transform;
+    &::before {
+      content: "";
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      will-change: opacity;
+    }
     &:hover {
       transform: rotate(-22.5deg) scale(1.025);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      @include playable();
     }
   }
+
   &--zoom {
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     will-change: transform;
+    &::before {
+      content: "";
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      will-change: opacity;
+    }
     &:hover {
       transform: scale(1.25);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      @include playable();
     }
   }
-
 }
-

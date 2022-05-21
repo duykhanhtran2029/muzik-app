@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Song } from 'src/app/interfaces/song.interface';
+import { AudioPlayerService } from '../../services/audio-player.service';
 
 
 @Component({
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./queue.component.scss']
 })
 export class QueueComponent implements OnInit {
-
+  @Input() queue: Song[];
   constructor() {
   }
 
   ngOnInit(): void {
+    console.log(this.queue);
   }
 
 }
