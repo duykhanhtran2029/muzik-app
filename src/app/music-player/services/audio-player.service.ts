@@ -145,7 +145,21 @@ export class AudioPlayerService {
   }
 
   public addToQueue(song: Song) {
-    this.state.queue.push(song);
+    const index = this.state.queue.findIndex(s => s.songId === song.songId);
+    if(index === -1) {
+      this.state.queue.push(song)
+    } else {
+      this.state.queue.splice(index, 1);
+      this.state.queue.unshift(song);
+    }
     sessionStorage.setItem('music-player__queue', JSON.stringify(this.state.queue));
+  }
+
+  public isInQueue(song: Song) {
+    return this.state.queue.findIndex(s => s.songId === song.songId) !== -1;
+  }
+
+  public isPlaying(song: Song) {
+    return this.state.playing && this.state.song.songId === song.songId;
   }
 }

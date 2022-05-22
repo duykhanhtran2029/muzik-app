@@ -15,12 +15,13 @@ export class TracksControlComponent implements OnInit, OnDestroy {
   constructor(
     private audioService: AudioPlayerService
   ) { }
-  ngOnDestroy(): void {
-    this.componentActive = false;
-  }
 
   ngOnInit(): void {
     this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
+  }
+
+  ngOnDestroy(): void {
+    this.componentActive = false;
   }
 
   toggleQueue() {

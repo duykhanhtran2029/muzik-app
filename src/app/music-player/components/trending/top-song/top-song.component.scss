@@ -18,7 +18,7 @@
     text-align: left;
     border-radius: 5px;
 
-    &:hover {
+    &.selected, &:hover {
       box-shadow: 0 0 5px -3px #000;
       background-color: #c2daff;
       color: #000;
@@ -94,10 +94,6 @@
 
     .option {
       margin: 10px;
-
-      mat-icon {
-        transform: scale(0.75);
-      }
     }
 
     .time {

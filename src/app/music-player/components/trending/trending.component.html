@@ -12,7 +12,7 @@
             <img [src]="selectedSong?.thumbnailL"/>
             <div class="app-trending__songs__right">
                 <ng-container *ngFor="let song of songs; let i = index">
-                    <app-top-song (click) = "selectedSong = song" [index] = "i + 1" [song]="song"></app-top-song>
+                    <app-top-song (click) = "selectedSong = song" [isSelected]="selectedSong === song" [index] = "i + 1" [song]="song"></app-top-song>
                 </ng-container>
             </div>
         </div>

@@ -13,8 +13,8 @@
                 </span>
             </div>
         </div>
-        <button (click)="play()" mat-icon-button class="option">
-            <mat-icon>play_circle_outlined</mat-icon>
+        <button (click)="togglePlay()" mat-icon-button class="option">
+            <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
         </button>
         <div class="time">
             {{duration ?? '00:00'}}

@@ -43,7 +43,6 @@ import { SearchChipComponent } from './components/search/search-chip/search-chip
 import { CarouselComponent } from './components/news/carousel/carousel.component';
 import { CarouselSlideComponent } from './components/news/carousel/carousel-slide/carousel-slide.component';
 import { TopArtistComponent } from './components/trending/top-artist/top-artist/top-artist.component';
-import { MusicPlayerSongService } from './services/music-player.song.service';
 @NgModule({
   declarations: [
     MasterComponent,
