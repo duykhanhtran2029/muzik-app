@@ -33,7 +33,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
     this.componentActive = false;
   }
   play() {
-    this.audioService.playStream(this.song).pipe(takeWhile(() => this.componentActive)).subscribe();
+    this.audioService.playStream(this.song);
     this.audioService.play();
     this.audioService.addToQueue(this.song);
   }
@@ -41,8 +41,8 @@ export class TopSongComponent implements OnInit, OnDestroy {
     this.audioService.addToQueue(this.song);
   }
   togglePlay() {
-    if(this.state.song !== this.song) {
-      this.audioService.playStream(this.song).pipe(takeWhile(() => this.componentActive)).subscribe();
+    if(this.state.song.songId !== this.song.songId) {
+      this.audioService.playStream(this.song);
       this.audioService.play();
     } else {
       this.state.playing ? this.audioService.pause() : this.audioService.play();

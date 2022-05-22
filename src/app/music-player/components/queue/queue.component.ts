@@ -14,7 +14,6 @@ export class QueueComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.queue);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AudioPlayerService } from '../../services/audio-player.service';
 
 @Component({
   selector: 'app-music-player',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicPlayerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public audioService: AudioPlayerService) { }
 
   lyric = 'Mùi hương hoa diên vĩ \n Hay là hương tóc mềm \n Ngàn vì sao chẳng sáng \n Hơn đôi mắt của em\nThật đẹp đến trăng thẹn thùng\nPhải nấp sau mây\nVậy thì cớ sao\nAnh đây lại nỡ buông tay\nỪ thì anh không muốn\nPhải nấp sau mây\nVậy thì cớ sao\nPhải nấp sau mây\nVậy thì cớ sao Mùi hương hoa diên vĩ Mùi hương hoa diên vĩ Mùi hương hoa diên vĩ Mùi hương hoa diên vĩ \n Hay là hương tóc mềm \n Ngàn vì sao chẳng sáng \n Hơn đôi mắt của em\nThật đẹp đến trăng thẹn thùng\nPhải nấp sau mây\nVậy thì cớ sao\nAnh đây lại nỡ buông tay\nỪ thì anh không muốn\nPhải nấp sau mây\nVậy thì cớ sao\nPhải nấp sau mây\nVậy thì cớ sao';
   ngOnInit(): void {

@@ -8,7 +8,7 @@ import { AudioEvent, Song, StreamState } from 'src/app/interfaces/song.interface
 })
 export class AudioPlayerService {
 
-  constructor() { }
+  constructor() {}
   private audioEvents: AudioEvent[] = [
     AudioEvent.ENDED,
     AudioEvent.ERROR,
@@ -31,12 +31,12 @@ export class AudioPlayerService {
     error: false,
     volume: 1,
     muted: false,
-    song: JSON.parse(localStorage.getItem('music-player__currentSong')),
+    song: JSON.parse(localStorage.getItem('music-player__currentSong')) ?? undefined,
     queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
   };
 
   private stop$ = new Subject<void>();
-  private audioObj = new Audio();
+  private audioObj: HTMLAudioElement = new Audio();
   private state: StreamState = this.initState;
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
@@ -108,7 +108,7 @@ export class AudioPlayerService {
   public playStream(song: Song) {
     localStorage.setItem('music-player__currentSong', JSON.stringify(song));
     this.state.song = song;
-    return this.streamObservable(song.link).pipe(takeUntil(this.stop$));
+    this.streamObservable(song.link).pipe(takeUntil(this.stop$)).subscribe();
   }
 
   public play() {

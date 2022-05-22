@@ -35,7 +35,7 @@ export class MiniSongComponent implements OnInit, OnDestroy {
 
   togglePlay() {
     if(this.state.song !== this.song) {
-      this.audioService.playStream(this.song).pipe(takeWhile(() => this.componentActive)).subscribe();
+      this.audioService.playStream(this.song);
       this.audioService.play();
     } else {
       this.state.playing ? this.audioService.pause() : this.audioService.play();
