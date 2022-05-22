@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Subject, Observable, takeUntil, BehaviorSubject } from 'rxjs';
+import { Subject, Observable, takeUntil, BehaviorSubject, repeat, Subscription } from 'rxjs';
 import { AudioEvent, Song, StreamState } from 'src/app/interfaces/song.interface';
 
 @Injectable({
@@ -33,12 +33,14 @@ export class AudioPlayerService {
     muted: false,
     song: JSON.parse(localStorage.getItem('music-player__currentSong')) ?? undefined,
     queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
+    shuffle: false,
+    repeat: false
   };
 
-  private stop$ = new Subject<void>();
   private audioObj: HTMLAudioElement = new Audio();
   private state: StreamState = this.initState;
   private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
+  private sub: Subscription;
 
   private streamObservable(url: URL) {
     return new Observable(observer => {
@@ -89,6 +91,14 @@ export class AudioPlayerService {
       case 'timeupdate':
         this.state.currentTime = this.audioObj.currentTime;
         this.state.readableCurrentTime = this.formatTime(this.state.currentTime);
+        if(this.state.currentTime === this.state.duration) {
+          if(this.state.repeat) {
+            this.audioObj.currentTime = 0;
+            this.play();
+          } else {
+            this.next();
+          }
+        }
         break;
       case 'volumechange':
         this.state.volume = this.audioObj.volume;
@@ -105,10 +115,16 @@ export class AudioPlayerService {
   private resetState() {
     this.state = this.initState;
   }
+
+  private genRandom(index: number) {
+    var num = Math.floor(Math.random() * (this.state.queue.length - 1 - 0 + 1));
+    return (num === index && this.state.queue.length > 1) ? this.genRandom(index) : num;
+  }
+
   public playStream(song: Song) {
     localStorage.setItem('music-player__currentSong', JSON.stringify(song));
     this.state.song = song;
-    this.streamObservable(song.link).pipe(takeUntil(this.stop$)).subscribe();
+    this.sub = this.streamObservable(song.link).subscribe();
   }
 
   public play() {
@@ -120,7 +136,7 @@ export class AudioPlayerService {
   }
 
   public stop() {
-    this.stop$.next();
+    this.sub.unsubscribe();
   }
 
   public seekTo(seconds: number) {
@@ -152,7 +168,7 @@ export class AudioPlayerService {
       this.state.queue.splice(index, 1);
       this.state.queue.unshift(song);
     }
-    sessionStorage.setItem('music-player__queue', JSON.stringify(this.state.queue));
+    localStorage.setItem('music-player__queue', JSON.stringify(this.state.queue));
   }
 
   public isInQueue(song: Song) {
@@ -161,5 +177,29 @@ export class AudioPlayerService {
 
   public isPlaying(song: Song) {
     return this.state.playing && this.state.song.songId === song.songId;
+  }
+
+  public toggleShuffle() {
+    this.state.shuffle = !this.state.shuffle;
+  }
+
+  public toggleRepeat() {
+    this.state.repeat = !this.state.repeat;
+  }
+
+  public next() {
+    let index = this.state.queue.findIndex(s => s.songId === this.state.song.songId);
+    index = this.state.shuffle ? this.genRandom(index) : index === this.state.queue.length - 1 ? 0 : index + 1;
+    this.stop();
+    this.playStream(this.state.queue[index]);
+    this.play();
+  }
+
+  public prev() {
+    let index = this.state.queue.findIndex(s => s.songId === this.state.song.songId);
+    index = this.state.shuffle ? this.genRandom(index) : index === 0 ? this.state.queue.length - 1 : index - 1;
+    this.stop();
+    this.playStream(this.state.queue[index]);
+    this.play();
   }
 }

@@ -18,11 +18,11 @@
         <div class="playback-controls">
             <div class="playback-buttons">
     
-                <button aria-label="Shuffle" mat-icon-button>
+                <button aria-label="Shuffle" [class.selected]="state.shuffle" (click) = "toggleShuffle()" mat-icon-button>
                     <mat-icon>shuffle</mat-icon>
                 </button>
     
-                <button aria-label="Skip previous" mat-icon-button>
+                <button aria-label="Skip previous" (click)="prev()" mat-icon-button>
                     <mat-icon>skip_previous</mat-icon>
                 </button>
     
@@ -30,12 +30,12 @@
                     <mat-icon>{{state?.playing ? 'pause' : 'play_arrow'}}</mat-icon>
                 </button>
     
-                <button aria-label="Skip next" mat-icon-button>
+                <button aria-label="Skip next" (click)="next()" mat-icon-button>
                     <mat-icon>skip_next</mat-icon>
                 </button>
     
-                <button aria-label="Repeat" mat-icon-button>
-                    <mat-icon>repeat</mat-icon>
+                <button aria-label="Repeat" [class.selected]="state.repeat" (click) = "toggleRepeat()" mat-icon-button>
+                    <mat-icon>repeat_one</mat-icon>
                 </button>
     
             </div>
@@ -48,7 +48,7 @@
     
         </div>
         <div class="misc-controls">
-            <button aria-label="Toggle queue" (click) = "toggleQueue()"  mat-icon-button>
+            <button aria-label="Toggle queue" [class.selected]="isQueueOpened" (click) = "toggleQueue()"  mat-icon-button>
                 <mat-icon>queue_music</mat-icon>
             </button>
     

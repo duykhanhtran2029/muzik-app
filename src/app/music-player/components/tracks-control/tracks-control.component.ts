@@ -18,7 +18,7 @@ export class TracksControlComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => {this.state = state; console.log(this.state)});
+    this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
     if(!this.state.duration && this.state.song) {
       this.audioService.playStream(this.state.song);
     }
@@ -46,6 +46,22 @@ export class TracksControlComponent implements OnInit, OnDestroy {
 
   toggleMute() {
     this.audioService.toggleMute();
+  }
+
+  toggleRepeat() {
+    this.audioService.toggleRepeat();
+  }
+
+  toggleShuffle() {
+    this.audioService.toggleShuffle();
+  }
+
+  next() {
+    this.audioService.next();
+  }
+
+  prev() {
+    this.audioService.prev();
   }
 
 }

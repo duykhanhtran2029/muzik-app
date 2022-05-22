@@ -80,6 +80,12 @@
             display: flex;
             justify-content: center;
             margin-top: 10px;
+            button {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                margin: 5px;
+            }
         }
 
         .scrubber {
@@ -140,4 +146,8 @@
     transform: translateY(0);
     transition: .4s ease-in-out;
     visibility: visible;
+}
+
+.selected {
+    background-color: $sub-primary;
 }

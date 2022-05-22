@@ -32,6 +32,8 @@ export interface StreamState {
   muted: boolean;
   song: Song;
   queue: Song[];
+  shuffle: boolean;
+  repeat: boolean;
 }
 
 export enum AudioEvent {
