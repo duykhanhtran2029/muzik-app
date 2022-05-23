@@ -1,0 +1,44 @@
+<div class="outer-container">
+    <div class="track-info" [class.selected]="isSelected">
+        <img class="thumbnail" [src]="song.thumbnailM"/>
+        <div class="track-text">
+            <div class="track-title">{{song.songName}}</div>
+            <div class="track-artist">
+                <span>
+                </span>
+                <span class="linkable">
+                    {{song.artistsName}}
+                </span>
+            </div>
+        </div>
+        <div class="item">
+            <mat-icon fontSet="material-icons-outlined">file_download</mat-icon>
+            <span>{{song.downloads}}</span>
+        </div>
+        <div class="item">
+            <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
+            <span>{{song.listens}}</span>
+        </div>
+        <div class="item">
+            <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
+            <span>{{song.likes}}</span>
+        </div>
+        <ng-container *ngIf="!audioService.isInQueue(song); else inQueue">
+            <button mat-icon-button class="option" [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="play()">Play</button>
+                <button mat-menu-item (click)="addToQueue()">Add to queue</button>
+            </mat-menu>
+        </ng-container>
+        <ng-template #inQueue>
+            <button (click)="togglePlay()" mat-icon-button class="option">
+                <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
+            </button>
+        </ng-template>
+        <div class="time">
+            {{duration ?? '00:00'}}
+        </div>
+    </div>
+</div>

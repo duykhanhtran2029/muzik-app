@@ -1,0 +1,95 @@
+.outer-container {
+    height: 72px;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s, filter 1s ease-in-out;
+    padding: 0px 16px;
+    margin: 5px 0px;
+
+    .track-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        align-content: space-between;
+        width: calc(100% - 32px);
+        height: 72px;
+        text-align: left;
+        border-radius: 5px;
+
+        &.selected,
+        &:hover {
+            box-shadow: 0 0 5px -3px #000;
+            background-color: #c2daff;
+            color: #000;
+
+            .track-artist {
+                color: #2e2d2d;
+            }
+        }
+
+        .thumbnail {
+            margin: 0px 24px 0px 12px;
+            width: 56px;
+            height: 56px;
+            border-radius: 5px;
+        }
+
+        .track-text {
+            width: 50%;
+            cursor: default;
+            overflow: hidden;
+
+            .track-title {
+                font-size: 16px;
+                line-height: 20px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .track-artist {
+                margin-top: 4px;
+                font-size: 14px;
+                line-height: 16px;
+                color: #b3b3b3;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0px 16px;
+
+            :first-child {
+                margin-right: 10px;
+            }
+        }
+
+        .option {
+            margin: 10px;
+        }
+
+        .time {
+            margin-right: 30px;
+        }
+    }
+}
+
+::ng-deep .mat-menu-panel {
+    background-color: #4186f6;
+
+    .mat-menu-content:not(:empty) {
+        padding: 0px !important;
+
+        button.mat-menu-item {
+            color: white;
+            line-height: 36px;
+            height: 36px;
+        }
+    }
+}

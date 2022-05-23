@@ -1,0 +1,23 @@
+.app-artist {
+    display: flex;
+    flex-wrap: wrap;
+    @at-root #{&}__artist {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        margin-right: 24px;
+        img {
+            border-radius: 10px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-top: 24px;
+        }
+    }
+    @at-root #{&}__songs {
+        height: calc(100vh - 124px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}

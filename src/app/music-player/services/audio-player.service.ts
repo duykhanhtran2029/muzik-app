@@ -32,7 +32,7 @@ export class AudioPlayerService {
     volume: 1,
     muted: false,
     song: JSON.parse(localStorage.getItem('music-player__currentSong')) ?? undefined,
-    queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
+    queue: JSON.parse(localStorage.getItem('music-player__queue')) ?? [],
     shuffle: false,
     repeat: false
   };

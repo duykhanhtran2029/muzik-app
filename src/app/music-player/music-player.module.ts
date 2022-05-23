@@ -43,6 +43,8 @@ import { SearchChipComponent } from './components/search/search-chip/search-chip
 import { CarouselComponent } from './components/news/carousel/carousel.component';
 import { CarouselSlideComponent } from './components/news/carousel/carousel-slide/carousel-slide.component';
 import { TopArtistComponent } from './components/trending/top-artist/top-artist/top-artist.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import { StrictSongComponent } from './components/strict-song/strict-song.component';
 @NgModule({
   declarations: [
     MasterComponent,
@@ -76,7 +78,9 @@ import { TopArtistComponent } from './components/trending/top-artist/top-artist/
     SearchChipComponent,
     CarouselComponent,
     CarouselSlideComponent,
-    TopArtistComponent
+    TopArtistComponent,
+    ArtistComponent,
+    StrictSongComponent
   ],
   imports: [
     CommonModule,

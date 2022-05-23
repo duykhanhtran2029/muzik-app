@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ArtistComponent } from '../components/artist/artist.component';
 import { HomeComponent } from '../components/home/home.component';
 import { LayoutControllerComponent } from '../components/layout-controller/layout-controller.component';
 import { ManagerComponent } from '../components/manager/manager.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'result', component: ResultComponent },
       { path: 'manager', component: ManagerComponent },
       { path: 'player', component: MusicPlayerComponent },
+      { path: 'artist/:id', component: ArtistComponent, pathMatch: 'full' }
     ],
   },
 ];

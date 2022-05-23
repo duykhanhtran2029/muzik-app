@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Artist } from 'src/app/interfaces/artist.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
+import { Song } from 'src/app/interfaces/song.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,11 @@ export class MusicPlayerArtistService {
     return this.http.get<Artist[]>(url);
   }
 
-  getArtist(artistId: number): Observable<Artist> {
+  getArtistSongs(artistId: string): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.API_BASE_URL}/api/artists/${artistId}/songs`);
+  }
+
+  getArtist(artistId: string): Observable<Artist> {
     return this.http.get<Artist>(`${this.API_BASE_URL}/api/artists/${artistId}`);
   }
 
