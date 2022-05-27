@@ -27,10 +27,12 @@ export class TrendingStore extends ComponentStore<SongState> {
   readonly getTrendingSongsStatus$: Observable<ApiRequestStatus> = this.select(
     (state) => state.getTrendingSongsStatus
   );
-  readonly artists$: Observable<Artist[]> = this.select((state) => state.artists);
-  readonly getTrendingArtistsStatus$: Observable<ApiRequestStatus> = this.select(
-    (state) => state.getTrendingArtistsStatus
+
+  readonly artists$: Observable<Artist[]> = this.select(
+    (state) => state.artists
   );
+  readonly getTrendingArtistsStatus$: Observable<ApiRequestStatus> =
+    this.select((state) => state.getTrendingArtistsStatus);
   //#endregion
 
   //#region ***Updaters (Reducers in @ngrx/store term)***
@@ -57,6 +59,7 @@ export class TrendingStore extends ComponentStore<SongState> {
       getTrendingArtistsStatus,
     })
   );
+
   //#endregion
 
   //#region ***Effects***
@@ -79,28 +82,31 @@ export class TrendingStore extends ComponentStore<SongState> {
     )
   );
   readonly getArtistsEffect = this.effect((event$) =>
-  event$.pipe(
-    tap(() => this.updateGetTrendingArtistsStatus(ApiRequestStatus.Requesting)),
-    switchMap(() =>
-      this.artistService.getTrendingArtist().pipe(
-        tapResponse(
-          (artists) => {
-            this.updateArtists(artists);
-            this.updateGetTrendingArtistsStatus(ApiRequestStatus.Success);
-          },
-          (err) => {
-            this.updateGetTrendingArtistsStatus(ApiRequestStatus.Fail);
-          }
+    event$.pipe(
+      tap(() =>
+        this.updateGetTrendingArtistsStatus(ApiRequestStatus.Requesting)
+      ),
+      switchMap(() =>
+        this.artistService.getTrendingArtist().pipe(
+          tapResponse(
+            (artists) => {
+              this.updateArtists(artists);
+              this.updateGetTrendingArtistsStatus(ApiRequestStatus.Success);
+            },
+            (err) => {
+              this.updateGetTrendingArtistsStatus(ApiRequestStatus.Fail);
+            }
+          )
         )
       )
     )
-  )
-);
+  );
   //#endregion
 
   constructor(
     private songService: MusicPlayerSongService,
-    private artistService: MusicPlayerArtistService) {
+    private artistService: MusicPlayerArtistService
+  ) {
     super(initialState);
   }
 }

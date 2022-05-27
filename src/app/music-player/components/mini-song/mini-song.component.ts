@@ -7,26 +7,27 @@ import { AudioPlayerService } from '../../services/audio-player.service';
 @Component({
   selector: 'app-mini-song',
   templateUrl: './mini-song.component.html',
-  styleUrls: ['./mini-song.component.scss']
+  styleUrls: ['./mini-song.component.scss'],
 })
 export class MiniSongComponent implements OnInit, OnDestroy {
   @Input() song: Song;
+  @Input() isRecommend: boolean;
   duration: string;
   componentActive = true;
   state: StreamState;
 
-  constructor(public audioService: AudioPlayerService) { }
+  constructor(public audioService: AudioPlayerService) {}
 
   ngOnInit(): void {
     const audioObj = new Audio();
     audioObj.src = this.song.link.toString();
-    audioObj.addEventListener(
-      'loadedmetadata',
-      () => {
-        this.duration = moment.utc(audioObj.duration * 1000).format('mm:ss');
-      }
-    );
-    this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
+    audioObj.addEventListener('loadedmetadata', () => {
+      this.duration = moment.utc(audioObj.duration * 1000).format('mm:ss');
+    });
+    this.audioService
+      .getState()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((state) => (this.state = state));
   }
 
   ngOnDestroy(): void {
@@ -34,13 +35,18 @@ export class MiniSongComponent implements OnInit, OnDestroy {
   }
 
   togglePlay() {
-    if(this.state.song !== this.song) {
+    if (this.state.song !== this.song) {
       this.audioService.playStream(this.song);
       this.audioService.play();
     } else {
       this.state.playing ? this.audioService.pause() : this.audioService.play();
     }
-
   }
 
+  addToQueue() {
+    if (this.isRecommend) {
+      this.audioService.addToQueue(this.song);
+      this.audioService.removeFromRecommended(this.song);
+    }
+  }
 }

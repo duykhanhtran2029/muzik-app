@@ -10,11 +10,16 @@ import { environment } from 'src/environments/environment';
 })
 export class MusicPlayerSongService {
   API_BASE_URL = environment.apiMusicUrl;
-
+  RECOMMEND_URL = environment.apiRecommendUrl;
   constructor(private http: HttpClient) {}
 
   getAllSongs(): Observable<Song[]> {
     const url = `${this.API_BASE_URL}/api/songs`;
+    return this.http.get<Song[]>(url);
+  }
+
+  getRecommendedSongs(songId: string): Observable<Song[]> {
+    const url = `${this.RECOMMEND_URL}/recommend?name_file=${songId}`;
     return this.http.get<Song[]>(url);
   }
 
@@ -23,7 +28,7 @@ export class MusicPlayerSongService {
     return this.http.get<Song[]>(url);
   }
 
-  getTrendingSong():Observable<Song[]> {
+  getTrendingSong(): Observable<Song[]> {
     const url = `${this.API_BASE_URL}/api/songs/trending`;
     return this.http.get<Song[]>(url);
   }

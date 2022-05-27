@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { takeWhile } from 'rxjs';
 import { Song, StreamState } from 'src/app/interfaces/song.interface';
 import { AudioPlayerService } from '../../services/audio-player.service';
@@ -6,20 +12,21 @@ import { AudioPlayerService } from '../../services/audio-player.service';
 @Component({
   selector: 'app-tracks-control',
   templateUrl: './tracks-control.component.html',
-  styleUrls: ['./tracks-control.component.scss']
+  styleUrls: ['./tracks-control.component.scss'],
 })
 export class TracksControlComponent implements OnInit, OnDestroy {
+  constructor(private audioService: AudioPlayerService) {}
+
   isQueueOpened = false;
   state: StreamState;
   componentActive = true;
 
-  constructor(
-    private audioService: AudioPlayerService
-  ) { }
-
   ngOnInit(): void {
-    this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
-    if(!this.state.duration && this.state.song) {
+    this.audioService
+      .getState()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((state) => (this.state = state));
+    if (!this.state.duration && this.state.song) {
       this.audioService.playStream(this.state.song);
     }
   }
@@ -63,5 +70,4 @@ export class TracksControlComponent implements OnInit, OnDestroy {
   prev() {
     this.audioService.prev();
   }
-
 }
