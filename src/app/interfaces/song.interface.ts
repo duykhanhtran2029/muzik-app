@@ -32,6 +32,7 @@ export interface StreamState {
   muted: boolean;
   song: Song;
   queue: Song[];
+  recommendedSongs: Song[];
   shuffle: boolean;
   repeat: boolean;
 }
