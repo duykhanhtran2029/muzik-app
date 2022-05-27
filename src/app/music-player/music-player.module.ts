@@ -46,6 +46,8 @@ import { ArtistComponent } from './components/artist/artist.component';
 import { StrictSongComponent } from './components/strict-song/strict-song.component';
 import { ManagerSongsComponent } from './components/manager/manager-songs/manager-songs.component';
 import { ManagerArtistsComponent } from './components/manager/manager-artists/manager-artists.component';
+import { PlaylistManagerComponent } from './components/playlist-manager/playlist-manager.component';
+import { PlaylistComponent } from './components/playlist-manager/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import { ManagerArtistsComponent } from './components/manager/manager-artists/ma
     ArtistComponent,
     StrictSongComponent,
     ManagerSongsComponent,
-    ManagerArtistsComponent
+    ManagerArtistsComponent,
+    PlaylistManagerComponent,
+    PlaylistComponent
   ],
   imports: [
     CommonModule,

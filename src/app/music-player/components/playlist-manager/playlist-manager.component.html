@@ -1,0 +1,15 @@
+<div class="title">
+    Playlists
+</div>
+<div class="playlist__container mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-5">
+        <ng-container *ngFor="let item of [].constructor(10); index as i">
+            <app-playlist class = "playlist" [playlistName]="'Playlist Number ' + i"></app-playlist>
+        </ng-container>
+    </div>
+    <div class="mdc-layout-grid__cell--span-5">
+        <ng-container *ngFor="let item of [].constructor(10); index as i">
+            <app-playlist class = "playlist" [playlistName]="'Playlist Number ' + i"></app-playlist>
+        </ng-container>
+    </div>
+</div>
