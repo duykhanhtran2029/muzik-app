@@ -1,14 +1,27 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Subject, Observable, takeUntil, BehaviorSubject, repeat, Subscription } from 'rxjs';
-import { AudioEvent, Song, StreamState } from 'src/app/interfaces/song.interface';
+import {
+  Subject,
+  Observable,
+  takeUntil,
+  BehaviorSubject,
+  repeat,
+  Subscription,
+} from 'rxjs';
+import {
+  AudioEvent,
+  Song,
+  StreamState,
+} from 'src/app/interfaces/song.interface';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AudioPlayerService {
-
-  constructor() {}
+  RECOMMEND_URL = environment.apiRecommendUrl;
+  constructor(private http: HttpClient) {}
   private audioEvents: AudioEvent[] = [
     AudioEvent.ENDED,
     AudioEvent.ERROR,
@@ -19,7 +32,7 @@ export class AudioPlayerService {
     AudioEvent.CANPLAY,
     AudioEvent.LOADEDMETADATA,
     AudioEvent.LOADSTART,
-    AudioEvent.VOLUMECHANGE
+    AudioEvent.VOLUMECHANGE,
   ];
   private initState: StreamState = {
     playing: false,
@@ -31,19 +44,24 @@ export class AudioPlayerService {
     error: false,
     volume: 1,
     muted: false,
-    song: JSON.parse(localStorage.getItem('music-player__currentSong')) ?? undefined,
+    song:
+      JSON.parse(localStorage.getItem('music-player__currentSong')) ??
+      undefined,
     queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
     shuffle: false,
-    repeat: false
+    recommendedSongs: [],
+    repeat: false,
   };
 
   private audioObj: HTMLAudioElement = new Audio();
   private state: StreamState = this.initState;
-  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
+  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(
+    this.state
+  );
   private sub: Subscription;
 
   private streamObservable(url: URL) {
-    return new Observable(observer => {
+    return new Observable((observer) => {
       this.audioObj.src = url.toString();
       this.audioObj.volume = this.state.volume;
       this.audioObj.load();
@@ -63,14 +81,27 @@ export class AudioPlayerService {
     });
   }
 
-  private addEvents(obj: HTMLAudioElement, events: AudioEvent[], handler: (event: Event) => void) {
-    events.forEach(event => {
+  getRecommendedSongs(songId: string): Observable<Song[]> {
+    const url = `${this.RECOMMEND_URL}/recommend?name_file=${songId}`;
+    return this.http.get<Song[]>(url);
+  }
+
+  private addEvents(
+    obj: HTMLAudioElement,
+    events: AudioEvent[],
+    handler: (event: Event) => void
+  ) {
+    events.forEach((event) => {
       obj.addEventListener(event, handler);
     });
   }
 
-  private removeEvents(obj: HTMLAudioElement, events: AudioEvent[], handler: (event: Event) => void) {
-    events.forEach(event => {
+  private removeEvents(
+    obj: HTMLAudioElement,
+    events: AudioEvent[],
+    handler: (event: Event) => void
+  ) {
+    events.forEach((event) => {
       obj.removeEventListener(event, handler);
     });
   }
@@ -90,9 +121,11 @@ export class AudioPlayerService {
         break;
       case 'timeupdate':
         this.state.currentTime = this.audioObj.currentTime;
-        this.state.readableCurrentTime = this.formatTime(this.state.currentTime);
-        if(this.state.currentTime === this.state.duration) {
-          if(this.state.repeat) {
+        this.state.readableCurrentTime = this.formatTime(
+          this.state.currentTime
+        );
+        if (this.state.currentTime === this.state.duration) {
+          if (this.state.repeat) {
             this.audioObj.currentTime = 0;
             this.play();
           } else {
@@ -118,7 +151,9 @@ export class AudioPlayerService {
 
   private genRandom(index: number) {
     var num = Math.floor(Math.random() * (this.state.queue.length - 1 - 0 + 1));
-    return (num === index && this.state.queue.length > 1) ? this.genRandom(index) : num;
+    return num === index && this.state.queue.length > 1
+      ? this.genRandom(index)
+      : num;
   }
 
   public playStream(song: Song) {
@@ -129,6 +164,14 @@ export class AudioPlayerService {
 
   public play() {
     this.audioObj.play();
+    this.getRecommendedSongs(this.state.song.songId).subscribe(
+      (response) => {
+        this.state.recommendedSongs = response;
+      },
+      (error) => {
+        console.error('Request failed with error');
+      }
+    );
   }
 
   public pause() {
@@ -161,18 +204,34 @@ export class AudioPlayerService {
   }
 
   public addToQueue(song: Song) {
-    const index = this.state.queue.findIndex(s => s.songId === song.songId);
-    if(index === -1) {
-      this.state.queue.push(song)
+    const index = this.state.queue.findIndex((s) => s.songId === song.songId);
+    if (index === -1) {
+      this.state.queue.push(song);
     } else {
       this.state.queue.splice(index, 1);
       this.state.queue.unshift(song);
     }
-    localStorage.setItem('music-player__queue', JSON.stringify(this.state.queue));
+    localStorage.setItem(
+      'music-player__queue',
+      JSON.stringify(this.state.queue)
+    );
+  }
+
+  public removeFromRecommended(song: Song) {
+    const index = this.state.recommendedSongs.findIndex(
+      (s) => s.songId === song.songId
+    );
+    if (index > -1) {
+      this.state.recommendedSongs.splice(index, 1);
+    }
+    localStorage.setItem(
+      'music-player__queue',
+      JSON.stringify(this.state.recommendedSongs)
+    );
   }
 
   public isInQueue(song: Song) {
-    return this.state.queue.findIndex(s => s.songId === song.songId) !== -1;
+    return this.state.queue.findIndex((s) => s.songId === song.songId) !== -1;
   }
 
   public isPlaying(song: Song) {
@@ -188,18 +247,42 @@ export class AudioPlayerService {
   }
 
   public next() {
-    let index = this.state.queue.findIndex(s => s.songId === this.state.song.songId);
-    index = this.state.shuffle ? this.genRandom(index) : index === this.state.queue.length - 1 ? 0 : index + 1;
+    let index = this.state.queue.findIndex(
+      (s) => s.songId === this.state.song.songId
+    );
+    index = this.state.shuffle
+      ? this.genRandom(index)
+      : index === this.state.queue.length - 1
+      ? 0
+      : index + 1;
     this.stop();
     this.playStream(this.state.queue[index]);
     this.play();
   }
 
   public prev() {
-    let index = this.state.queue.findIndex(s => s.songId === this.state.song.songId);
-    index = this.state.shuffle ? this.genRandom(index) : index === 0 ? this.state.queue.length - 1 : index - 1;
+    let index = this.state.queue.findIndex(
+      (s) => s.songId === this.state.song.songId
+    );
+    index = this.state.shuffle
+      ? this.genRandom(index)
+      : index === 0
+      ? this.state.queue.length - 1
+      : index - 1;
     this.stop();
     this.playStream(this.state.queue[index]);
     this.play();
+  }
+
+  public updateRecommend() {
+
+    this.getRecommendedSongs(this.state.song.songId).subscribe(
+      (response) => {
+        this.state.recommendedSongs = response;
+      },
+      (error) => {
+        console.error('Request failed with error');
+      }
+    );
   }
 }
