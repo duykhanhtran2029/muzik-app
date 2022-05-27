@@ -7,17 +7,17 @@ import { TrendingStore } from './trending.store';
   selector: 'app-trending',
   templateUrl: './trending.component.html',
   styleUrls: ['./trending.component.scss'],
-  providers: [TrendingStore]
+  providers: [TrendingStore],
 })
 export class TrendingComponent implements OnInit {
-
-  constructor(
-    private componentStore: TrendingStore) { }
+  constructor(private componentStore: TrendingStore) {}
   songs$ = this.componentStore.songs$;
   artists$ = this.componentStore.artists$;
   selectedSong: Song;
   ngOnInit(): void {
-    this.componentStore.songs$.pipe(takeWhile(() => !this.selectedSong)).subscribe(songs => this.selectedSong = songs[0]);
+    this.componentStore.songs$
+      .pipe(takeWhile(() => !this.selectedSong))
+      .subscribe((songs) => (this.selectedSong = songs[0]));
     this.componentStore.getSongsEffect();
     this.componentStore.getArtistsEffect();
   }
