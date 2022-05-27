@@ -1,6 +1,21 @@
-<div class="head" mat-dialog-title>
-    Queue
-</div>
+<div class="head" mat-dialog-title>Queue</div>
 <div id="queue" class="container">
-    <app-mini-song *ngFor="let song of queue" [song]="song"></app-mini-song>
+  <app-mini-song
+    *ngFor="let song of queue"
+    [song]="song"
+    [isRecommend]="false"
+  ></app-mini-song>
+</div>
+<div class="recommended" mat-dialog-title>
+  <div class="recommended-text">Recommended</div>
+  <button (click)="updateRecommend()" class="recommended-btn" mat-icon-button>
+    <mat-icon>autorenew </mat-icon>
+  </button>
+</div>
+<div id="recommend" class="recommended-container">
+  <app-mini-song
+    *ngFor="let song of recommendedSongs"
+    [song]="song"
+    [isRecommend]="true"
+  ></app-mini-song>
 </div>

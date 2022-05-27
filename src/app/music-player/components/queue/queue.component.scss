@@ -1,32 +1,57 @@
 @import "../../../../assets/scss/theme/_variable";
 :host {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: 300px;
-    height: calc(100vh - 88px - 20px);
-    background-color: $dark-primary;
-    z-index: 1001;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  height: calc(100vh - 88px - 20px);
+  background-color: $dark-primary;
+  z-index: 1001;
 }
 
 .head {
-    text-align: start;
-    margin-bottom: 4px !important;
-    color: white;
+  text-align: start;
+  margin-bottom: 4px !important;
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: #2ab758;
+  text-underline-position: under;
+  padding: 12px 20px;
+  height: fit-content;
+  box-shadow: 0 2px 6px -2px black;
+}
+
+.recommended {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  box-shadow: 0 2px 6px -2px black;
+  margin-bottom: 4px !important;
+  padding: 12px 20px;
+  text-align: start;
+  color: white;
+  &-text {
     text-decoration: underline;
-    text-decoration-color: #2AB758;
+    text-decoration-color: #2ab758;
     text-underline-position: under;
-    padding: 12px 20px;
-    height: fit-content;
-    box-shadow: 0 2px 6px -2px black;
+  }
+  &-btn:hover {
+    color: $sub-primary;
+  }
 }
 
 .container {
-    padding: 0px 8px;
-    overflow: scroll;
-    height: calc(100% - 56px - 10px - 4px);
+  padding: 0px 8px;
+  overflow: scroll;
+  height: calc(70% - 56px - 10px - 4px);
+}
+
+.recommended-container {
+  padding: 0px 8px;
+  overflow: scroll;
+  height: 20%;
 }
 
 #queue::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
