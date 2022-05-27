@@ -1,23 +1,32 @@
 <div class="outer-container">
-    <div class="track-info">
-        <div class="album-artwork">
-            <img width="100%" [src]="song.thumbnailS">
-        </div>
-        <div class="track-text">
-            <div class="track-title">{{song.songName}}</div>
-            <div class="track-artist">
-                <span>
-                </span>
-                <span class="linkable">
-                    {{song.artistsName}}
-                </span>
-            </div>
-        </div>
-        <button (click)="togglePlay()" mat-icon-button class="option">
-            <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
-        </button>
-        <div class="time">
-            {{duration ?? '00:00'}}
-        </div>
+  <div class="track-info">
+    <div class="album-artwork">
+      <img width="100%" [src]="song.thumbnailS" />
     </div>
+    <div class="track-text">
+      <div class="track-title">{{ song.songName }}</div>
+      <div class="track-artist">
+        <span> </span>
+        <span class="linkable">
+          {{ song.artistsName }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="track-control">
+    <div class="track-control-queue" *ngIf="!isRecommend">
+      <button (click)="togglePlay()" mat-icon-button class="option">
+        <mat-icon>{{
+          audioService.isPlaying(song)
+            ? "pause_circle_outline"
+            : "play_circle_outlined"
+        }}</mat-icon>
+      </button>
+    </div>
+    <div class="track-control-recommend" *ngIf="isRecommend">
+      <button (click)="addToQueue()" mat-icon-button class="option">
+        <mat-icon>queue</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
