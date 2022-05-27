@@ -275,7 +275,6 @@ export class AudioPlayerService {
   }
 
   public updateRecommend() {
-
     this.getRecommendedSongs(this.state.song.songId).subscribe(
       (response) => {
         this.state.recommendedSongs = response;

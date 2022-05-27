@@ -11,13 +11,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { songReducer } from './store/reducers/songs.reducer';
 import { SongEffects } from './store/effects/songs.effects';
-import { SongService } from './services/songs.service';
 import { ResultComponent } from './components/result/result.component';
-import { SongDetailComponent } from './components/manager/song-detail/song-detail.component';
-import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
-import { UpdateSongComponent } from './components/manager/update-song/update-song.component';
+import { SongDetailComponent } from './components/manager/manager-songs/song-detail/song-detail.component';
+import { ConfirmDeleteComponent } from './components/manager/manager-songs/confirm-delete/confirm-delete.component';
+import { UpdateSongComponent } from './components/manager/manager-songs/update-song/update-song.component';
 import { FormsModule } from '@angular/forms';
-import { AddSongComponent } from './components/manager/add-song/add-song.component';
+import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
 import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
 import { SongItemComponent } from './components/result/song-item/song-item.component';
@@ -43,6 +42,13 @@ import { SearchChipComponent } from './components/search/search-chip/search-chip
 import { CarouselComponent } from './components/news/carousel/carousel.component';
 import { CarouselSlideComponent } from './components/news/carousel/carousel-slide/carousel-slide.component';
 import { TopArtistComponent } from './components/trending/top-artist/top-artist/top-artist.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import { StrictSongComponent } from './components/strict-song/strict-song.component';
+import { ManagerSongsComponent } from './components/manager/manager-songs/manager-songs.component';
+import { ManagerArtistsComponent } from './components/manager/manager-artists/manager-artists.component';
+import { PlaylistManagerComponent } from './components/playlist-manager/playlist-manager.component';
+import { PlaylistComponent } from './components/playlist-manager/playlist/playlist.component';
+
 @NgModule({
   declarations: [
     MasterComponent,
@@ -76,7 +82,13 @@ import { TopArtistComponent } from './components/trending/top-artist/top-artist/
     SearchChipComponent,
     CarouselComponent,
     CarouselSlideComponent,
-    TopArtistComponent
+    TopArtistComponent,
+    ArtistComponent,
+    StrictSongComponent,
+    ManagerSongsComponent,
+    ManagerArtistsComponent,
+    PlaylistManagerComponent,
+    PlaylistComponent
   ],
   imports: [
     CommonModule,

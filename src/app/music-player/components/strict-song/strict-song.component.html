@@ -1,8 +1,6 @@
 <div class="outer-container">
     <div class="track-info" [class.selected]="isSelected">
-        <div class="index" [ngClass]="{'first': index === 1, 'second': index === 2, 'third': index === 3}">
-            {{index}}
-        </div>
+        <img class="thumbnail" [src]="song.thumbnailM"/>
         <div class="track-text">
             <div class="track-title">{{song.songName}}</div>
             <div class="track-artist">
@@ -32,9 +30,8 @@
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="play()">Play</button>
                 <button mat-menu-item (click)="addToQueue()">Add to queue</button>
-                <button mat-menu-item (click)="addToQueue()">Add to playlist</button>
             </mat-menu>
-        </ng-container >
+        </ng-container>
         <ng-template #inQueue>
             <button (click)="togglePlay()" mat-icon-button class="option">
                 <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>

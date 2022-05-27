@@ -7,7 +7,7 @@
         </span>
     </div>
     <ul>
-        <li class="list active">
+        <li class="list" [class.active] = "currentRoute === 'HOME'"  (click)="setRoute('HOME')">
             <a [routerLink]="['home']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">home</mat-icon>
@@ -15,7 +15,7 @@
                 <span class="title">Home</span>
             </a>
         </li>
-        <li class="list">
+        <li class="list" [class.active] = "currentRoute === 'SEARCH'"  (click)="setRoute('SEARCH')">
             <a (click) = "openSearchDialog()">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">search</mat-icon>
@@ -23,7 +23,7 @@
                 <span class="title">Search</span>
             </a>
         </li>
-        <li class="list">
+        <li class="list" [class.active] = "currentRoute === 'PLAYER'"  (click)="setRoute('PLAYER')">
             <a [routerLink]="['player']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">music_video</mat-icon>
@@ -31,8 +31,8 @@
                 <span class="title">Player</span>
             </a>
         </li>
-        <li class="list">
-            <a href="#">
+        <li class="list" [class.active] = "currentRoute === 'PLAYLIST'"  (click)="setRoute('PLAYLIST')">
+            <a [routerLink]="['playlists']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">playlist_play</mat-icon>
                 </span>
@@ -40,12 +40,20 @@
             </a>
         </li>
         <hr/>
-        <li class="list">
-            <a href="#">
+        <li class="list" [class.active] = "currentRoute === 'PROFILE'"  (click)="setRoute('PROFILE')">
+            <a>
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">account_box</mat-icon>
                 </span>
                 <span class="title">Profile</span>
+            </a>
+        </li>
+        <li class="list" [class.active] = "currentRoute === 'MANAGER'"  (click)="setRoute('MANAGER')">
+            <a [routerLink]="['manager']">
+                <span class="icon">
+                    <mat-icon fontSet="material-icons-outlined">manage_accounts</mat-icon>
+                </span>
+                <span class="title">Manager</span>
             </a>
         </li>
     </ul>

@@ -1,0 +1,9 @@
+@import "../../../../../assets/scss/theme/variable";
+
+.app-playlist {
+    background-color: $primary;
+    color: white;
+    mat-panel-title, mat-panel-description{
+        color: white;
+    }
+}

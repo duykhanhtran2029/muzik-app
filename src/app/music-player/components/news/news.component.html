@@ -5,9 +5,9 @@
             <div class="title">{{song.songName}}</div>
             <div class="artist">{{song.artistsName}}</div>
             <div class="function">
-               <button mat-flat-button>
+               <button (click)="togglePlay(song)" mat-flat-button>
                   Play
-                  <mat-icon>play_arrow</mat-icon>
+                  <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
                </button>
             </div>
          </div>

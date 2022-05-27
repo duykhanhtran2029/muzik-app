@@ -8,7 +8,7 @@ import {
   Input,
 } from '@angular/core';
 import { StereoAudioRecorder } from 'recordrtc';
-import { SongService } from '../../services/songs.service';
+import { FingerPrintingService } from '../../services/finger-printing.service';
 import { fingerPrinting } from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
@@ -71,7 +71,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
   constructor(
     private azureStorageService: AzureBlobStorageService,
-    private songsService: SongService,
+    private fingerPrintingService: FingerPrintingService,
     private store: Store<AppState>,
     private cdr: ChangeDetectorRef
   ) {}

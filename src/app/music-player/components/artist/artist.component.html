@@ -1,0 +1,33 @@
+<ng-container *ngIf="artist$ | async as artist">
+    <div class="app-artist">
+        <div class="app-artist__artist">
+            <img [src] = "artist.thumbnailL" />
+            <span class="title">{{artist.artistName}}</span>
+            <div class="app-artist__artist__achievement">
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">music_note</mat-icon>
+                    <span>{{artist.numberOfSongs}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">file_download</mat-icon>
+                    <span>{{artist.downloads}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
+                    <span>{{artist.listens}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
+                    <span>{{artist.likes}}</span>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="songs$ |async as songs">
+            <div class="app-artist__songs">
+                <ng-container *ngFor="let song of songs; let i = index">
+                    <app-strict-song (click) = "selectedSong = song" [isSelected]="selectedSong === song" [index] = "i + 1" [song]="song"></app-strict-song>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>

@@ -5,9 +5,6 @@ import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, Subscription, tap } from 'rxjs';
 import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
-import { SongService } from 'src/app/music-player/services/songs.service';
-import { cleanState, createSong, updateSong, updateSongSuccess } from 'src/app/music-player/store/actions/songs.actions';
-import { getCreateSongStatus, getUpdateSongStatus } from 'src/app/music-player/store/selectors/songs.selector';
 import { Song } from 'src/app/interfaces/song.interface';
 import { AppState } from 'src/app/store/reducers';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
@@ -37,27 +34,26 @@ export class AddSongComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<AddSongComponent>) { }
     
   ngOnDestroy(): void {
-    this.store.dispatch(cleanState());
     this.subcripstion.unsubscribe();
   }
 
   ngOnInit(): void {
     this.storageURL = this.azureStorageService.baseStorageURL();
     this.song.thumbnailS = new URL(`${this.storageURL}/images/placeholder.png`);
-    this.subcripstion = this.store.select(getCreateSongStatus).subscribe(
-      ((status: ApiRequestStatus) => {
-        console.log(status)
-        switch (status) {
-          case ApiRequestStatus.Success:
-            this.dialogRef.close(true);
-            break;
-          case ApiRequestStatus.Fail:
-            this.dialogRef.close(false);
-            break;
-          default:
-            break;
-        }
-      }));
+    // this.subcripstion = this.store.select(getCreateSongStatus).subscribe(
+    //   ((status: ApiRequestStatus) => {
+    //     console.log(status)
+    //     switch (status) {
+    //       case ApiRequestStatus.Success:
+    //         this.dialogRef.close(true);
+    //         break;
+    //       case ApiRequestStatus.Fail:
+    //         this.dialogRef.close(false);
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //   }));
   }
 
   setThumbnail(e: Event) {

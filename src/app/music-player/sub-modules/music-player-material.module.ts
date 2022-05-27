@@ -20,6 +20,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
     declarations: [],
     exports: [
@@ -43,7 +45,9 @@ import { MatChipsModule } from '@angular/material/chips';
         MatListModule,
         MatSliderModule,
         MatGridListModule,
-        MatChipsModule
+        MatChipsModule,
+        MatTabsModule,
+        MatExpansionModule
     ]
 })
 export class MusicPlayerSharedMaterialModule { }
