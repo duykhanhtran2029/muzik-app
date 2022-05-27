@@ -4,5 +4,9 @@ export interface Artist {
     thumbnailS : URL;
     thumbnailM : URL;
     thumbnailL : URL;
+    likes: number,
+    downloads: number,
+    listens: number,
+    numberOfSongs: number,
     isDeleted : boolean;
 }

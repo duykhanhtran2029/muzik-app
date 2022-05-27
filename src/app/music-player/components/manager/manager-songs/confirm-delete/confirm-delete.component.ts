@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { SongService } from 'src/app/music-player/services/songs.service';
-import { deleteSong } from 'src/app/music-player/store/actions/songs.actions';
 import { AppState } from 'src/app/store/reducers';
 
 @Component({
@@ -24,7 +22,6 @@ export class ConfirmDeleteComponent implements OnInit {
   
   close()
   {
-    this.store.dispatch(deleteSong({ songId: this.data}));
     this.dialogRef.close();
   }
 

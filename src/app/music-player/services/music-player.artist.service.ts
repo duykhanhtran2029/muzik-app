@@ -15,7 +15,7 @@ export class MusicPlayerArtistService {
   constructor(private http: HttpClient) {}
 
   getAllArtists(): Observable<Artist[]> {
-    const url = `${this.API_BASE_URL}/api/artist`;
+    const url = `${this.API_BASE_URL}/api/artists`;
     return this.http.get<Artist[]>(url);
   }
 

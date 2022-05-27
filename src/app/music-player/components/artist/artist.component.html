@@ -3,6 +3,24 @@
         <div class="app-artist__artist">
             <img [src] = "artist.thumbnailL" />
             <span class="title">{{artist.artistName}}</span>
+            <div class="app-artist__artist__achievement">
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">music_note</mat-icon>
+                    <span>{{artist.numberOfSongs}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">file_download</mat-icon>
+                    <span>{{artist.downloads}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
+                    <span>{{artist.listens}}</span>
+                </div>
+                <div class="item">
+                    <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
+                    <span>{{artist.likes}}</span>
+                </div>
+            </div>
         </div>
         <ng-container *ngIf="songs$ |async as songs">
             <div class="app-artist__songs">

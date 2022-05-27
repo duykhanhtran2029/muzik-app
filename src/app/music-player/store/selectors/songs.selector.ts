@@ -14,14 +14,3 @@ export const getFingerPrintingResult = createSelector(
     SongFeatureSelector,
     state => state.fingerPrintingResult
 );
-
-export const getUpdateSongStatus = createSelector(
-    SongFeatureSelector,
-    state => state.updateSongStatus 
-);
-
-
-export const getCreateSongStatus = createSelector(
-    SongFeatureSelector,
-    state => state.createSongStatus
-);

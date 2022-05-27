@@ -4,8 +4,7 @@ import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription, tap } from 'rxjs';
 import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
-import { cleanState, updateSong } from 'src/app/music-player/store/actions/songs.actions';
-import { getUpdateSongStatus } from 'src/app/music-player/store/selectors/songs.selector';
+import { cleanState } from 'src/app/music-player/store/actions/songs.actions';
 import { Song } from 'src/app/interfaces/song.interface';
 import { AppState } from 'src/app/store/reducers';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
@@ -50,20 +49,20 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
     this.song = { ...this.data};
     this.imgSrc = this.song.thumbnailS.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
-    this.subcripstion = this.store.select(getUpdateSongStatus).subscribe(
-      ((status: ApiRequestStatus) => {
-        console.log(status)
-        switch (status) {
-          case ApiRequestStatus.Success:
-            this.dialogRef.close(true);
-            break;
-          case ApiRequestStatus.Fail:
-            this.dialogRef.close(false);
-            break;
-          default:
-            break;
-        }
-    }));
+    // this.subcripstion = this.store.select(getUpdateSongStatus).subscribe(
+    //   ((status: ApiRequestStatus) => {
+    //     console.log(status)
+    //     switch (status) {
+    //       case ApiRequestStatus.Success:
+    //         this.dialogRef.close(true);
+    //         break;
+    //       case ApiRequestStatus.Fail:
+    //         this.dialogRef.close(false);
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    // }));
   }
   setFilename(files: any) {
     if (files.length === 0)
@@ -84,7 +83,7 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
       this.song.thumbnailS = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}`);
       this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, fileName, () => { });
     }
-    this.store.dispatch(updateSong({ song: this.song}));
+    // this.store.dispatch(updateSong({ song: this.song}));
   }
   cancel()
   {
