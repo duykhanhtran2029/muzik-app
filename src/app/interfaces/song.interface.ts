@@ -1,23 +1,23 @@
-import { Artist } from "./artist.interface";
-
+import { Artist } from './artist.interface';
+import { Lyric } from './lyric.interface';
 export interface Song {
-  songId: string,
-  songName: string,
-  thumbnailS: URL,
-  thumbnailM: URL,
-  thumbnailL: URL,
-  link: URL,
-  linkBeat: URL,
-  linkLyric: URL,
-  duration: number,
-  releaseDate: Date,
-  likes: number,
-  downloads: number,
-  listens: number,
-  isDeleted: boolean,
-  isRecognizable: boolean,
-  artist: Artist[],
-  artistsName: string
+  songId: string;
+  songName: string;
+  thumbnailS: URL;
+  thumbnailM: URL;
+  thumbnailL: URL;
+  link: URL;
+  linkBeat: URL;
+  linkLyric: URL;
+  duration: number;
+  releaseDate: Date;
+  likes: number;
+  downloads: number;
+  listens: number;
+  isDeleted: boolean;
+  isRecognizable: boolean;
+  artist: Artist[];
+  artistsName: string;
 }
 
 export interface StreamState {
@@ -35,6 +35,8 @@ export interface StreamState {
   recommendedSongs: Song[];
   shuffle: boolean;
   repeat: boolean;
+  lyric: Lyric[];
+  currentLyric: number;
 }
 
 export enum AudioEvent {
@@ -47,5 +49,5 @@ export enum AudioEvent {
   CANPLAY = 'canplay',
   LOADEDMETADATA = 'loadedmetadata',
   LOADSTART = 'loadstart',
-  VOLUMECHANGE = 'volumechange'
+  VOLUMECHANGE = 'volumechange',
 }
