@@ -1,26 +1,27 @@
 <div class="outer-container">
-    <div class="function">
-        <button mat-flat-button>
-            Karaoke
-        </button>
-        <button mat-flat-button class="selected">
-            Lyric
-        </button>
-    </div>
-    <div class="inner-container">
-        <div class="thumbnail">
-            <img width="100%" src="https://photo-resize-zmp3.zadn.vn/w640_r1x1_jpeg/cover/1/1/8/0/1180ce679c0402b1f800530881d73e2e.jpg"/>
-            <div class="track-text">
-                <div class="title">
-                    Song title
-                </div>
-                <div class="artist">
-                    Artist name
-                </div>
-            </div>
+  <div class="function">
+    <button mat-flat-button>Karaoke</button>
+    <button mat-flat-button class="selected">Lyric</button>
+  </div>
+  <div class="content-wrapper">
+    <div class="content-wrapper-inner">
+      <div class="thumbnail-wrapper">
+        <div class="thumbnail-wrapper-inner">
+          <img width="100%" [src]="song.thumbnailL" />
         </div>
-        <div class="lyric">
-            {{lyric}}
-        </div>
+      </div>
+      <div class="lyric-wrapper">
+        <ul class="lyric-wrapper-inner">
+          <li
+            *ngFor="let lyr of lyric; let i = index"
+            class="item"
+            [attr.data-index]="i"
+            [ngClass]="{ current: i === currentLyric }"
+          >
+            {{ lyr.lyricSentence }}
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>

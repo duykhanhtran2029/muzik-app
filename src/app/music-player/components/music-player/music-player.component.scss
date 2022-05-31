@@ -1,48 +1,73 @@
 .outer-container {
-    height: calc(100vh - 88px - 56px);
-    width: calc(100% - 300px - 16px);
-    margin: 24px 0px;
-    .function {
-        button {
-            margin: 0px 24px;
-            width: 200px;
-            border-radius: 10px;
-            background-color: #DADADA;
-            &.selected {
-                background-color: #0094B6;
-                color: white;
-            }
-        }
+  height: calc(100vh - 88px - 56px);
+  .function {
+    width: 100%;
+    button {
+      border-radius: 10px;
+      margin: 0px 24px;
+      background-color: #dadada;
+      width: 200px;
+      &.selected {
+        background-color: #0094b6;
+        color: white;
+      }
     }
-    .inner-container {
-        height: calc(100% - 56px);
+  }
+  .content-wrapper {
+    display: inline-flex;
+    margin: auto;
+    height: calc(100% - 56px);
+    &-inner {
+      display: flex;
+      .thumbnail-wrapper {
         display: flex;
-        .thumbnail {
-            width: 50%;
-            img {
-                margin-top: 20%;
-                max-width: 400px;
-                border-radius: 15px;
-            }
-            .track-text {
-                font-size: 36px;
-                .title {
-                    font-weight: 600;
-                    margin: 24px;
-                }
-            }
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 50px;
+        &-inner {
+          max-width: 80%;
+          width: 500px;
+          img {
+            height: auto;
+            border-radius: 15px;
+            width: 100%;
+          }
         }
-        .lyric {
-            overflow-x: hidden;
-            overflow-y: auto;
-            width: 50%;
-            margin-top: 24px;
-            white-space: pre-wrap;
-            font-size: 28px;
-            line-height: 40px;
-            &::-webkit-scrollbar {
-                display: none;
+      }
+      .lyric-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        &-inner {
+          overflow-x: hidden;
+          overflow-y: auto;
+          max-height: 380px;
+          white-space: pre-wrap;
+          font-size: 42px;
+          text-align: left;
+          .item {
+            opacity: 0.25;
+            padding: 20px 0;
+            font-weight: 700;
+            line-height: 1.2;
+            &:hover{
+              opacity: 1;
             }
+          }
+          .current {
+            opacity: 1;
+          }
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
         }
+        ul {
+          margin-block-end: 0;
+          margin-block-start: 0;
+          list-style: none;
+        }
+      }
     }
+  }
 }
