@@ -13,6 +13,7 @@ import {
   Song,
   StreamState,
 } from 'src/app/interfaces/song.interface';
+import { Lyric } from 'src/app/interfaces/lyric.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -51,6 +52,8 @@ export class AudioPlayerService {
     shuffle: false,
     recommendedSongs: [],
     repeat: false,
+    lyric: [],
+    currentLyric: -1,
   };
 
   private audioObj: HTMLAudioElement = new Audio();
@@ -81,7 +84,7 @@ export class AudioPlayerService {
     });
   }
 
-  getRecommendedSongs(songId: string): Observable<Song[]> {
+  private getRecommendedSongs(songId: string): Observable<Song[]> {
     const url = `${this.RECOMMEND_URL}/recommend?name_file=${songId}`;
     return this.http.get<Song[]>(url);
   }
@@ -121,6 +124,7 @@ export class AudioPlayerService {
         break;
       case 'timeupdate':
         this.state.currentTime = this.audioObj.currentTime;
+        this.updateCurrentLyric(this.audioObj.currentTime * 1000);
         this.state.readableCurrentTime = this.formatTime(
           this.state.currentTime
         );
@@ -160,8 +164,59 @@ export class AudioPlayerService {
     localStorage.setItem('music-player__currentSong', JSON.stringify(song));
     this.state.song = song;
     this.sub = this.streamObservable(song.link).subscribe();
+    this.state.lyric = [];
+    this.state.currentLyric = -1;
   }
 
+  public loadLyric() {
+    const url = this.state.song.linkLyric.toString();
+    this.http.get(url, { responseType: 'text' }).subscribe(
+      (response) => {
+        const arr = response.toString().replace(/\r\n/g, '\n').split('\n');
+        arr.forEach((str) => {
+          const post1 = str.indexOf('[');
+          const post2 = str.indexOf(']');
+
+          const time = str.substring(post1 + 1, post2);
+          const remaningLine = str.substring(post2 + 1);
+          if (/\d/.test(time[0])) {
+            const t = this.convertToLong(time);
+            const lyr: Lyric = {
+              lyricSentence: remaningLine,
+              time: t,
+            };
+            this.state.lyric.push(lyr);
+          }
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  private updateCurrentLyric(timer: number) {
+    if (this.state.lyric.length !== 0) {
+      if (this.state.currentLyric >= 0) {
+        for (
+          let index = this.state.currentLyric + 1;
+          index < this.state.lyric.length;
+          index++
+        ) {
+          const t = this.state.lyric[index].time - 100.0;
+          if (timer > t) {
+            this.state.currentLyric = index;
+            break;
+          }
+        }
+      } else {
+        for (let index = 0; index < this.state.lyric.length; index++) {
+          if (timer > this.state.lyric[index].time - 100.0) {
+            this.state.currentLyric = index;
+          }
+        }
+      }
+    }
+  }
   public play() {
     this.audioObj.play();
     this.getRecommendedSongs(this.state.song.songId).subscribe(
@@ -197,6 +252,17 @@ export class AudioPlayerService {
   public formatTime(time: number, format: string = 'mm:ss') {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
+  }
+
+  private convertToLong(str: string) {
+    const strArr: string[] = str.split(':');
+    const sTime: string[] = strArr[1].split('.');
+
+    const min: number = +strArr[0];
+    const sec: number = +sTime[0];
+    const mil: number = +sTime[1];
+
+    return min * 60 * 1000 + sec * 1000 + mil * 10;
   }
 
   public getState(): Observable<StreamState> {
