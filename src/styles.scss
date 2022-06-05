@@ -58,6 +58,12 @@ body {
   box-shadow: none !important;
 }
 
+.no-padding-dialog>mat-dialog-container {
+  background: $primary;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
 .queue--container {
   .mat-dialog-container {
     padding: 0px;

@@ -1,6 +1,6 @@
 <img *ngIf="loading" src = "../../../../../assets/images/loader.gif" />
 <div *ngIf="!loading" class="container">
-    <img [src]="song.thumbnailS" />
+    <img [src]="song.thumbnail" />
     <button mat-flat-button color="primary" (click)="fileInput.click()">
         <mat-icon>cloud_upload</mat-icon>
         Upload Thumbnail
@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
-        <!-- <input matInput type="text" [(ngModel)]="song.artist" required> -->
+        <input matInput type="text" [(ngModel)]="song.artistsName" required>
     </mat-form-field>
     <mat-form-field *ngIf="audio.name" appearance="outline">
         <mat-label>File Name</mat-label>

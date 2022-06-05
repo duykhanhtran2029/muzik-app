@@ -1,0 +1,13 @@
+<div class="artist-detail">
+    <div class="artist-detail__info">
+        <img [src]="data.thumbnail" />
+        <h2 class="name">{{data.artistName}}</h2>
+    </div>
+    <ng-container *ngIf="songs$ |async as songs">
+        <div class="artist-detail__songs">
+            <ng-container *ngFor="let song of songs; let i = index">
+                <app-strict-song [index] = "i + 1" [song]="song"></app-strict-song>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

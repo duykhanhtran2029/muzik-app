@@ -39,7 +39,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storageURL = this.azureStorageService.baseStorageURL();
-    this.song.thumbnailS = new URL(`${this.storageURL}/images/placeholder.png`);
+    this.song.thumbnail = new URL(`${this.storageURL}/images/placeholder.png`);
     // this.subcripstion = this.store.select(getCreateSongStatus).subscribe(
     //   ((status: ApiRequestStatus) => {
     //     console.log(status)
@@ -65,7 +65,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
       this.thumbnail = files[0];
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = _event => this.song.thumbnailS = new URL(reader.result.toString());
+      reader.onload = _event => this.song.thumbnail = new URL(reader.result.toString());
     } 
   }
 

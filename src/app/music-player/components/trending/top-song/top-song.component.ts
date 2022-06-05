@@ -1,8 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { takeWhile } from 'rxjs';
+import { Observable, takeWhile } from 'rxjs';
 import { Song, StreamState } from 'src/app/interfaces/song.interface';
 import { AudioPlayerService } from 'src/app/music-player/services/audio-player.service';
+import { UtilService } from 'src/app/music-player/services/utils.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-top-song',
@@ -16,7 +19,12 @@ export class TopSongComponent implements OnInit, OnDestroy {
   duration: string;
   componentActive = true;
   state: StreamState;
-  constructor(public audioService: AudioPlayerService) { }
+  songsContainer = environment.azureStorage.songsContainer;
+  songsSAS = environment.azureStorage.songsSAS;
+  constructor(
+    public audioService: AudioPlayerService,
+    private downloadService: UtilService
+  ) { }
 
   ngOnInit(): void {
     const audioObj = new Audio();
@@ -48,4 +56,18 @@ export class TopSongComponent implements OnInit, OnDestroy {
       this.state.playing ? this.audioService.pause() : this.audioService.play();
     }
   }
+  download() {
+    this.downloadService
+      .download(this.song.link.toString())
+      .subscribe(blob => {
+        const a = document.createElement('a')
+        const objectUrl = URL.createObjectURL(blob)
+        a.href = objectUrl
+        a.download = this.song.songName;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+        a.remove();
+      })
+  }
 }
+

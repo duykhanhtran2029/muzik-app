@@ -3,9 +3,7 @@ import { Lyric } from './lyric.interface';
 export interface Song {
   songId: string;
   songName: string;
-  thumbnailS: URL;
-  thumbnailM: URL;
-  thumbnailL: URL;
+  thumbnail: URL;
   link: URL;
   linkBeat: URL;
   linkLyric: URL;

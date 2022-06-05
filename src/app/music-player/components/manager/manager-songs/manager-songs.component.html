@@ -27,7 +27,7 @@
                     <th mat-header-cell *matHeaderCellDef>
                         Thumbnail
                     </th>
-                    <td mat-cell *matCellDef="let song"><img [src]="song.thumbnailM" /></td>
+                    <td mat-cell *matCellDef="let song"><img [src]="song.thumbnail" /></td>
                 </ng-container>
 
                 <!-- Title Column -->
@@ -75,14 +75,17 @@
                     <th mat-header-cell *matHeaderCellDef>
                     </th>
                     <td mat-cell *matCellDef="let song">
-                        <button mat-icon-button color="primary" (click)="openDetail(song)">
+                        <button mat-icon-button onclick="this.blur()" color="primary" (click)="openDetail(song)">
                             <mat-icon>description</mat-icon>
                         </button>
-                        <button mat-icon-button color="primary" (click)="openUpdate(song)">
+                        <button mat-icon-button onclick="this.blur()" color="primary" (click)="openUpdate(song)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button color="warn" (click)="openDelete(song.id)">
+                        <button mat-icon-button onclick="this.blur()" color="warn" (click)="openDelete(song)">
                             <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button [color]="song.isRecognizable ? 'accent' : 'primary'">
+                            <mat-icon>fingerprint</mat-icon>
                         </button>
                     </td>
                 </ng-container>

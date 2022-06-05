@@ -1,6 +1,6 @@
 <ng-container *ngIf="songs$ | async as songs">
    <app-carousel [interval]="3000">
-      <app-carousel-slide *ngFor="let song of songs; let i = index" #matCarouselSlide [image]="song.thumbnailL">
+      <app-carousel-slide *ngFor="let song of songs; let i = index" #matCarouselSlide [image]="song.thumbnail">
          <div class="info">
             <div class="title">{{song.songName}}</div>
             <div class="artist">{{song.artistsName}}</div>

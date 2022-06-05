@@ -1,0 +1,19 @@
+.artist-detail {
+    border-radius: 8px;
+    display: flex;
+    @at-root #{&}__info {
+        color: white;
+        text-align: center;
+        img {
+            border-radius: 8px;
+            margin-bottom: 24px;
+            width: 240px;
+            height: 240px;
+        }
+    }
+    @at-root #{&}__songs {
+        height: 318px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}

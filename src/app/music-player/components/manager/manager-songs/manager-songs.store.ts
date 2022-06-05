@@ -94,7 +94,43 @@ export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
       )
     )
   );
-  
+
+  readonly deleteSongEffect = this.effect((songId$: Observable<string>) =>
+    songId$.pipe(
+      tap(() => this.updateDeleteSongsStatus(ApiRequestStatus.Requesting)),
+      switchMap((songId) =>
+        this.songService.deleteSong(songId).pipe(
+          tapResponse(
+            () => {
+              this.updateDeleteSongsStatus(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateDeleteSongsStatus(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  readonly updateSongEffect = this.effect((song$: Observable<Song>) =>
+    song$.pipe(
+      tap(() => this.updateUpdateSongsStatus(ApiRequestStatus.Requesting)),
+      switchMap((song) =>
+        this.songService.updateSong(song).pipe(
+          tapResponse(
+            () => {
+              this.updateUpdateSongsStatus(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateUpdateSongsStatus(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
   //#endregion
 
   constructor(

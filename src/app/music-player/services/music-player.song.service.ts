@@ -33,7 +33,7 @@ export class MusicPlayerSongService {
     return this.http.get<Song[]>(url);
   }
 
-  getSong(songId: number): Observable<Song> {
+  getSong(songId: string): Observable<Song> {
     return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
@@ -48,8 +48,8 @@ export class MusicPlayerSongService {
     );
   }
 
-  deleteSong(songId: number): Observable<Song> {
-    return this.http.delete<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
+  deleteSong(songId: string): Observable<string> {
+    return this.http.delete<string>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {

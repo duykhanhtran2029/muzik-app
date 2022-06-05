@@ -1,7 +1,7 @@
 <ng-container *ngIf="artist$ | async as artist">
     <div class="app-artist">
         <div class="app-artist__artist">
-            <img [src] = "artist.thumbnailL" />
+            <img [src] = "artist.thumbnail" />
             <span class="title">{{artist.artistName}}</span>
             <div class="app-artist__artist__achievement">
                 <div class="item">

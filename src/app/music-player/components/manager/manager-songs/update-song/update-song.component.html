@@ -13,8 +13,20 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
-        <!-- <input matInput type="text" [(ngModel)]="song.artist"> -->
+        <input matInput type="text" [(ngModel)]="song.artistsName">
     </mat-form-field>
+    <button mat-flat-button color="primary" (click)="audioInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Audio
+    </button>
+    <input hidden #audioInput type="file" accept=".mp3, .wav |audio/*"
+        (change)="setAudio($event)" />
+    <button mat-flat-button color="primary" (click)="audioInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Beat
+    </button>
+    <input hidden #audioInput type="file" accept=".mp3, .wav |audio/*"
+            (change)="setAudio($event)" />
     <div class="controls">
         <button mat-flat-button (click)="cancel()">
             Cancel

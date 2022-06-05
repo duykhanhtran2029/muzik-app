@@ -13,20 +13,27 @@
                 </span>
             </div>
         </div>
+
         <div class="item">
-            <mat-icon fontSet="material-icons-outlined">file_download</mat-icon>
+            <button mat-icon-button onclick="this.blur()" (click)="download()">
+                <mat-icon fontSet="material-icons-outlined">file_download</mat-icon>
+            </button>
             <span>{{song.downloads}}</span>
         </div>
         <div class="item">
-            <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
+            <button mat-icon-button onclick="this.blur()">
+                <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
+            </button>
             <span>{{song.listens}}</span>
         </div>
         <div class="item">
-            <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
+            <button mat-icon-button onclick="this.blur()">
+                <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
+            </button>
             <span>{{song.likes}}</span>
         </div>
         <ng-container *ngIf="!audioService.isInQueue(song); else inQueue">
-            <button mat-icon-button class="option" [matMenuTriggerFor]="menu">
+            <button mat-icon-button onclick="this.blur()" class="option" [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -34,9 +41,9 @@
                 <button mat-menu-item (click)="addToQueue()">Add to queue</button>
                 <button mat-menu-item (click)="addToQueue()">Add to playlist</button>
             </mat-menu>
-        </ng-container >
+        </ng-container>
         <ng-template #inQueue>
-            <button (click)="togglePlay()" mat-icon-button class="option">
+            <button (click)="togglePlay()" mat-icon-button onclick="this.blur()" class="option">
                 <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
             </button>
         </ng-template>

@@ -1,5 +1,5 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
+import { BlobDeleteOptions, BlobServiceClient, ContainerClient } from '@azure/storage-blob';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -58,13 +58,16 @@ export class AzureBlobStorageService {
     }
 
     private deleteBlob(name: string, client: ContainerClient, handler: () => void) {
-        client.deleteBlob(name).then(() => {
+        const blobClient = client.getBlobClient(name);
+        const options: BlobDeleteOptions = {
+            deleteSnapshots: 'include'
+        }
+        blobClient.deleteIfExists(options).then(() => {
             handler()
         })
     }
 
     private containerClient(container: string, sas: string): ContainerClient {
-        return new BlobServiceClient(`https://${this.storageAccount}.blob.core.windows.net?${sas}`)
-            .getContainerClient(container);
+        return new BlobServiceClient(`https://${this.storageAccount}.blob.core.windows.net?${sas}`).getContainerClient(container);
     }
 }

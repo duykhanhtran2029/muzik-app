@@ -2,7 +2,7 @@ export const mockSongs = [
   {
     songId: 'ZW6A87CF',
     songName: 'Dấu Mưa (Quả Tim Máu OST)',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/covers/4/8/4864e650e84562ba9fc77d879bd164c2_1392048614.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/covers/4/8/4864e650e84562ba9fc77d879bd164c2_1392048614.jpg',
@@ -23,7 +23,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ96C8Z',
         artistName: 'Trung Quân IDol',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/d/f/2/c/df2ceeef8368aa852121df712509e129.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/d/f/2/c/df2ceeef8368aa852121df712509e129.jpg',
@@ -37,7 +37,7 @@ export const mockSongs = [
   {
     songId: 'ZWAEI76C',
     songName: 'Lost (Official Video)',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/1/0/d/7/10d7146626e66c5587af62a4ee848cf3.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/1/0/d/7/10d7146626e66c5587af62a4ee848cf3.jpg',
@@ -58,7 +58,7 @@ export const mockSongs = [
       {
         artistId: 'IW6W80D0',
         artistName: 'End Of The World',
-        thumbnailS: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
+        thumbnail: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         thumbnailM: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         thumbnailL: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         isDeleted: false,
@@ -67,7 +67,7 @@ export const mockSongs = [
       {
         artistId: 'IWZA0E8A',
         artistName: 'Clean Bandit',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/a/2/a212b2d0257a08cf0b939c06aa8040f0_1464322860.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/a/2/a212b2d0257a08cf0b939c06aa8040f0_1464322860.jpg',
@@ -81,7 +81,7 @@ export const mockSongs = [
   {
     songId: 'ZWZA9OZ0',
     songName: 'Vì Sao',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/covers/8/6/8613a14b4d0d152ba9dd445c801b1ea5_1293165362.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/covers/8/6/8613a14b4d0d152ba9dd445c801b1ea5_1293165362.jpg',
@@ -102,7 +102,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ96ZII',
         artistName: 'Hoàng Rapper',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/5/4/54be26f6eb0f9294dace271575c79d60_1511597126.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/5/4/54be26f6eb0f9294dace271575c79d60_1511597126.jpg',
@@ -114,7 +114,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ9ZI7I',
         artistName: 'Khởi My',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/b/0/d/5/b0d5b35c1087edceb58d47235ede00cf.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/b/0/d/5/b0d5b35c1087edceb58d47235ede00cf.jpg',
@@ -128,7 +128,7 @@ export const mockSongs = [
   {
     songId: 'ZW669UDA',
     songName: 'La La La',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/3/5/1/0/35103079a8debf91a047f5c7407aa7ed.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/3/5/1/0/35103079a8debf91a047f5c7407aa7ed.jpg',
@@ -149,7 +149,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ98I89',
         artistName: 'Naughty Boy',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/c/9/c9d043ee8565340f7e36cfaa74544fb9_1400056880.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/c/9/c9d043ee8565340f7e36cfaa74544fb9_1400056880.jpg',
@@ -161,7 +161,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ9D67E',
         artistName: 'Sam Smith',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/a/b/c/b/abcb3bc7443edeb93a2f1b0fba2bc410.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/a/b/c/b/abcb3bc7443edeb93a2f1b0fba2bc410.jpg',
@@ -175,7 +175,7 @@ export const mockSongs = [
   {
     songId: 'ZW9CZDUC',
     songName: 'Nhắm Mắt Thấy Mùa Hè (Nhắm Mắt Thấy Mùa Hè OST)',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/0/f/c/4/0fc402c35a86cbcb1054e4897958f75b.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/0/f/c/4/0fc402c35a86cbcb1054e4897958f75b.jpg',
@@ -196,7 +196,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ99AEA',
         artistName: 'Nguyên Hà',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/6/8/2/9/6829c0ba90f02831713573b2fa1bb0df.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/6/8/2/9/6829c0ba90f02831713573b2fa1bb0df.jpg',
@@ -210,7 +210,7 @@ export const mockSongs = [
   {
     songId: 'ZW78BW9D',
     songName: 'Ánh Nắng Của Anh (Chờ Em Đến Ngày Mai OST)',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/avatars/d/7/d7f34aa6b1112e4b605f6c6e7eccd162_1509437674.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/avatars/d/7/d7f34aa6b1112e4b605f6c6e7eccd162_1509437674.jpg',
@@ -231,7 +231,7 @@ export const mockSongs = [
       {
         artistId: 'IWZA66AO',
         artistName: 'Đức Phúc',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/3/3/4/d/334de5da0a293c92b15f1946a1071017.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/3/3/4/d/334de5da0a293c92b15f1946a1071017.jpg',
@@ -245,7 +245,7 @@ export const mockSongs = [
   {
     songId: 'ZUFOUZBF',
     songName: 'Peru',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/c/4/7/5/c47503e0f9ba91c473f536734310e3b1.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/c/4/7/5/c47503e0f9ba91c473f536734310e3b1.jpg',
@@ -266,7 +266,7 @@ export const mockSongs = [
       {
         artistId: 'IW67FD06',
         artistName: 'Fireboy DML',
-        thumbnailS: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
+        thumbnail: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         thumbnailM: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         thumbnailL: 'https://photo-zmp3.zadn.vn/artist_default_2.png',
         isDeleted: false,
@@ -275,7 +275,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ97D8A',
         artistName: 'Ed Sheeran',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/4/4/44c22d69a695677cb1a0aec5e20d9237_1516949077.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/4/4/44c22d69a695677cb1a0aec5e20d9237_1516949077.jpg',
@@ -289,7 +289,7 @@ export const mockSongs = [
   {
     songId: 'ZOAO9I7B',
     songName: '34+35',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/f/d/b/a/fdba9338ce6eae2d087a7a641b4ed29f.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/f/d/b/a/fdba9338ce6eae2d087a7a641b4ed29f.jpg',
@@ -310,7 +310,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ98ABB',
         artistName: 'Ariana Grande',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/7/e/0/4/7e04e3a66d79ca0a0e45118c33711030.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/7/e/0/4/7e04e3a66d79ca0a0e45118c33711030.jpg',
@@ -324,7 +324,7 @@ export const mockSongs = [
   {
     songId: 'ZWB0UW9U',
     songName: 'Là Anh Yêu Em Đó (Đại Ca Đi Học OST)',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/cover/8/8/8/c/888cdb1797b593aaf9fae888d5d393a0.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/8/8/8/c/888cdb1797b593aaf9fae888d5d393a0.jpg',
@@ -345,7 +345,7 @@ export const mockSongs = [
       {
         artistId: 'IW6UIIFU',
         artistName: 'Đạt Max',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/3/5/8/4/3584f649c180877eb5a4b6cc03e29d3e.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/3/5/8/4/3584f649c180877eb5a4b6cc03e29d3e.jpg',
@@ -359,7 +359,7 @@ export const mockSongs = [
   {
     songId: 'ZW8WOFI7',
     songName: 'Sống Xa Anh Chẳng Dễ Dàng',
-    thumbnailS:
+    thumbnail:
       'https://photo-resize-zmp3.zadn.vn/w128_r1x1_jpeg/covers/e/4/e4ad98e7656f451b0c9eba0aa03c7ddb_1509525165.jpg',
     thumbnailM:
       'https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/covers/e/4/e4ad98e7656f451b0c9eba0aa03c7ddb_1509525165.jpg',
@@ -380,7 +380,7 @@ export const mockSongs = [
       {
         artistId: 'IWZ99B00',
         artistName: 'Bảo Anh',
-        thumbnailS:
+        thumbnail:
           'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/e/9/e/c/e9ecc606b51e67135c57ffb101925376.jpg',
         thumbnailM:
           'https://photo-resize-zmp3.zadn.vn/w360_r1x1_jpeg/avatars/e/9/e/c/e9ecc606b51e67135c57ffb101925376.jpg',

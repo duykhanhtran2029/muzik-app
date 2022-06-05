@@ -6,16 +6,17 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, tap } from 'rxjs';
+import { Observable, takeWhile, tap } from 'rxjs';
 import { Song } from 'src/app/interfaces/song.interface';
 import { getAllSongs } from 'src/app/music-player/store/selectors/songs.selector';
 import { AppState } from 'src/app/store/reducers';
 import { ManagerSongsStore } from './manager-songs.store';
 import { AddSongComponent } from './add-song/add-song.component';
-import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { UpdateSongComponent } from './update-song/update-song.component';
 import * as SongAction from '../../../store/actions/songs.actions';
+import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
   updateDialogRef: MatDialogRef<UpdateSongComponent>;
   addDialogRef: MatDialogRef<AddSongComponent>;
   componentActive = true;
+  deleteSongStatus$: Observable<ApiRequestStatus>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,8 +52,9 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
     private _liveAnnouncer: LiveAnnouncer,
     private store: Store<AppState>,
     private dialog: MatDialog,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private componentStore: ManagerSongsStore
+  ) { }
 
   ngOnInit(): void {
     this.store.dispatch(SongAction.getSongs());
@@ -61,11 +64,12 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.setupFilter();
-      })
+      }),
+      takeWhile(() => this.componentActive)
     );
   }
   ngOnDestroy(): void {
-      this.componentActive = false;
+    this.componentActive = false;
   }
 
   /** Announce the change in sort state for assistive technology. */
@@ -79,7 +83,7 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
 
   setupFilter() {
     this.dataSource.filterPredicate = (s: Song, filter: string) => {
-      const searchPattern = (s.songName + ' ' + s.artistsName + ' ' + s.songId).toLocaleLowerCase() ;
+      const searchPattern = (s.songName + ' ' + s.artistsName + ' ' + s.songId).toLocaleLowerCase();
       return searchPattern.includes(filter);
     };
   }
@@ -97,12 +101,15 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
     });
   }
 
-  openDelete(id: number) {
-    this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent, {
-      data: id,
-    });
+  openDelete(song: Song) {
+    this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent, { data: {song: song} });
     this.deleteDialogRef.afterClosed().subscribe((deleted) => {
-      if (deleted) this.toastr.success('Success', 'Song Deleted');
+      if (deleted) {
+        this.dataSource.data = this.dataSource.data.filter(s => s !== song);
+        this.toastr.success('Success', 'Song Deleted');
+      } else {
+        this.toastr.error('Failed', 'Song Deleted Failed');
+      }
     });
   }
 
@@ -112,9 +119,20 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
       disableClose: true,
     });
     this.updateDialogRef.afterClosed().subscribe((updated) => {
-      if (updated) this.toastr.success('Success', 'Song Updated');
+      switch (updated) {
+        case true:
+          this.dataSource.data = this.dataSource.data.filter(s => s !== song);
+          this.toastr.success('Success', 'Song Updated');
+          break;
+        case false:
+          this.toastr.error('Failed', 'Song Updated Failed');
+          break;
+        default:
+          break;
+      }
     });
   }
+
   openAdd() {
     (this.addDialogRef = this.dialog.open(AddSongComponent)),
       { disableClose: true };

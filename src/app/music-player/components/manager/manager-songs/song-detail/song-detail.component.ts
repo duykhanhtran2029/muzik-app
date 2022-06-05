@@ -7,14 +7,9 @@ import { Song } from 'src/app/interfaces/song.interface';
   templateUrl: './song-detail.component.html',
   styleUrls: ['./song-detail.component.scss']
 })
-export class SongDetailComponent implements OnInit {
+export class SongDetailComponent{
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Song,
-    private dialogRef: MatDialogRef<SongDetailComponent>) { }
-
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+    @Inject(MAT_DIALOG_DATA) public data: Song) { }
 
 }

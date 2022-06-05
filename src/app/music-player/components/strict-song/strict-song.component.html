@@ -1,6 +1,6 @@
 <div class="outer-container">
     <div class="track-info" [class.selected]="isSelected">
-        <img class="thumbnail" [src]="song.thumbnailM"/>
+        <img class="thumbnail" [src]="song.thumbnail"/>
         <div class="track-text">
             <div class="track-title">{{song.songName}}</div>
             <div class="track-artist">
@@ -24,7 +24,7 @@
             <span>{{song.likes}}</span>
         </div>
         <ng-container *ngIf="!audioService.isInQueue(song); else inQueue">
-            <button mat-icon-button class="option" [matMenuTriggerFor]="menu">
+            <button mat-icon-button onclick="this.blur()" class="option" [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -33,7 +33,7 @@
             </mat-menu>
         </ng-container>
         <ng-template #inQueue>
-            <button (click)="togglePlay()" mat-icon-button class="option">
+            <button (click)="togglePlay()" mat-icon-button onclick="this.blur()" class="option">
                 <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
             </button>
         </ng-template>
