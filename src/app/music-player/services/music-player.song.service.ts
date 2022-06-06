@@ -18,8 +18,13 @@ export class MusicPlayerSongService {
     return this.http.get<Song[]>(url);
   }
 
-  getRecommendedSongs(songId: string): Observable<Song[]> {
-    const url = `${this.RECOMMEND_URL}/recommend?name_file=${songId}`;
+  getRecommendedGenreSong(userId){
+    const url = `${this.RECOMMEND_URL}/genreRecommend?userId=${userId}`;
+    return this.http.get(url);
+  }
+
+  getRecommendedSongs(userId): Observable<Song[]> {
+    const url = `${this.RECOMMEND_URL}/userRecommend?userId=${userId}`;
     return this.http.get<Song[]>(url);
   }
 
