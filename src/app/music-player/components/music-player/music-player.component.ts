@@ -22,6 +22,7 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
   playing: boolean;
 
   ngOnInit(): void {
+    this.audioService.loadLyric();
     this.audioService
       .getState()
       .pipe(takeWhile(() => this.componentActive))
