@@ -14,7 +14,7 @@ export interface Song {
   listens: number;
   isDeleted: boolean;
   isRecognizable: boolean;
-  artist: Artist[];
+  artists: Artist[];
   artistsName: string;
 }
 

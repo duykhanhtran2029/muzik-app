@@ -1,32 +1,80 @@
 <img *ngIf="loading" src="../../../../../assets/images/loader.gif" />
 <div *ngIf="!loading" class="container">
+    <!-- Title -->
     <img [src]="imgSrc" />
     <button mat-flat-button color="primary" (click)="fileInput.click()">
         <mat-icon>cloud_upload</mat-icon>
         Upload Thumbnail
     </button>
     <input hidden #fileInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
-        (change)="setFilename(fileInput.files)" />
+        (change)="setFile($event, 'Thumbnail')" />
+
     <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput type="text" [(ngModel)]="song.songName">
     </mat-form-field>
+
     <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
-        <input matInput type="text" [(ngModel)]="song.artistsName">
+        <mat-select #select [formControl]="formControl"  placeholder="Artist" multiple [(ngModel)]="selectedArtists">
+            <mat-option>
+                <ngx-mat-select-search 
+                [formControl]="formFilterControl"
+                placeholderLabel="Find artist..."
+                noEntriesFoundLabel="'No matching artist found'">
+            </ngx-mat-select-search>
+              </mat-option>
+            <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">{{artist.artistName}}</mat-option>
+        </mat-select>
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="audioInput.click()">
-        <mat-icon>cloud_upload</mat-icon>
-        Upload Audio
-    </button>
-    <input hidden #audioInput type="file" accept=".mp3, .wav |audio/*"
-        (change)="setAudio($event)" />
-    <button mat-flat-button color="primary" (click)="audioInput.click()">
-        <mat-icon>cloud_upload</mat-icon>
-        Upload Beat
-    </button>
-    <input hidden #audioInput type="file" accept=".mp3, .wav |audio/*"
-            (change)="setAudio($event)" />
+    <!-- Audio -->
+    <div class="upload">
+        <button mat-flat-button color="primary" (click)="audioInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Audio
+        </button>
+        <span>
+            {{audio.name ?? song?.link.toString().split('/').pop()}}
+        </span>
+    </div>
+    <input hidden #audioInput type="file" accept=".mp3 |audio/*"
+        (change)="setFile($event, 'Audio')" />
+    <!-- Beat -->
+    <div class="upload">
+        <button mat-flat-button color="primary" (click)="beatInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Beat
+        </button>
+        <span>
+            {{beat.name ?? song.linkBeat?.toString().split('/').pop()}}
+        </span>
+    </div>
+    <input hidden #beatInput type="file" accept=".m4a |audio/*"
+            (change)="setFile($event, 'Beat')" />
+    <!-- Lyric -->
+    <div class="upload">
+        <button mat-flat-button color="primary" (click)="lyricInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Lyric .lrc
+        </button>
+        <span>
+            {{lyric.name ?? song.linkLyric?.toString().split('/').pop()}}
+        </span>
+    </div>
+    <input hidden #lyricInput type="file" accept=".lrc"
+            (change)="setFile($event, 'Lyric')" />
+    <!-- Karaoke -->
+    <div class="upload">
+        <button mat-flat-button color="primary" (click)="karaokeInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Lyric .txt
+        </button>
+        <span>
+            {{karaoke.name ?? song.linkLyric?.toString().split('/').pop().replace('.lrc', 'txt')}}
+        </span>
+    </div>
+    <input hidden #karaokeInput type="file" accept=".txt"
+            (change)="setFile($event, 'Karaoke')" />
     <div class="controls">
         <button mat-flat-button (click)="cancel()">
             Cancel

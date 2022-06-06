@@ -15,7 +15,7 @@ import { ResultComponent } from './components/result/result.component';
 import { SongDetailComponent } from './components/manager/manager-songs/song-detail/song-detail.component';
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './components/manager/manager-songs/update-song/update-song.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
 import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
@@ -51,6 +51,7 @@ import { PlaylistComponent } from './components/playlist-manager/playlist/playli
 import { ArtistDetailComponent } from './components/manager/manager-artists/artist-detail/artist-detail.component';
 import { UpdateArtistComponent } from './components/manager/manager-artists/update-artist/update-artist.component';
 import { AddArtistComponent } from './components/manager/manager-artists/add-artist/add-artist.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,9 @@ import { AddArtistComponent } from './components/manager/manager-artists/add-art
     CommonModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     ScrollingModule,
+    NgxMatSelectSearchModule,
     DragDropModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,

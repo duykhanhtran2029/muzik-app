@@ -99,7 +99,7 @@ export class ManagerArtistsComponent implements OnInit, OnDestroy  {
       if (deleted) {
         this.dataSource.data = this.dataSource.data.filter(s => s !== artist);
         this.toastr.success('Success', 'Artist Deleted');
-      } else {
+      } else if(deleted ===false) {
         this.toastr.error('Failed', 'Artist Deleted Failed');
       }
     });

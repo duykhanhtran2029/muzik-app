@@ -107,7 +107,7 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
       if (deleted) {
         this.dataSource.data = this.dataSource.data.filter(s => s !== song);
         this.toastr.success('Success', 'Song Deleted');
-      } else {
+      } else if(deleted ===false) {
         this.toastr.error('Failed', 'Song Deleted Failed');
       }
     });
@@ -117,17 +117,21 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
     this.updateDialogRef = this.dialog.open(UpdateSongComponent, {
       data: song,
       disableClose: true,
+      width: '348px'
     });
     this.updateDialogRef.afterClosed().subscribe((updated) => {
       switch (updated) {
-        case true:
-          this.dataSource.data = this.dataSource.data.filter(s => s !== song);
-          this.toastr.success('Success', 'Song Updated');
+        case undefined:
           break;
         case false:
           this.toastr.error('Failed', 'Song Updated Failed');
           break;
         default:
+          this.toastr.success('Success', 'Song Updated');
+          const index = this.dataSource.data.findIndex(s => s.songId === song.songId);
+          const tmpData = [...this.dataSource.data];
+          tmpData.splice(index, 1, updated.song);
+          this.dataSource.data = tmpData;
           break;
       }
     });
@@ -135,9 +139,24 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
 
   openAdd() {
     (this.addDialogRef = this.dialog.open(AddSongComponent)),
-      { disableClose: true };
+      { 
+        disableClose: true,
+        width: '348px'
+      };
     this.addDialogRef.afterClosed().subscribe((created) => {
-      if (created) this.toastr.success('Success', 'Song Created');
+      switch (created) {
+        case undefined:
+          break;
+        case false:
+          this.toastr.error('Failed', 'Song Created Failed');
+          break;
+        default:
+          this.toastr.success('Success', 'Song Created');
+          const tmpData = [...this.dataSource.data];
+          tmpData.unshift({...created.song, likes: 0, downloads: 0, listens: 0});
+          this.dataSource.data = tmpData;
+          break;
+      }
     });
   }
 }

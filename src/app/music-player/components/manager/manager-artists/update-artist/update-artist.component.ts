@@ -75,8 +75,9 @@ export class UpdateArtistComponent implements OnInit {
     if (this.thumbnail.name) {
       const thumbnailName = `A-${this.artist.artistId}-${new Date().getTime()}.png`;
       this.azureStorageService.delete(this.imagesContainer, this.imagesSAS, this.artist.thumbnail.toString().split('/').pop(), () => { });
-      this.artist.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${thumbnailName}`);
-      this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, thumbnailName, () => { });
+      this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, thumbnailName, () => {
+        this.artist.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${thumbnailName}`);
+      });
     }
     this.componentStore.updateArtistEffect(this.artist);
   }

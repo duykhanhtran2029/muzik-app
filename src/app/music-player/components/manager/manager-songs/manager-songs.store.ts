@@ -131,6 +131,24 @@ export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
     )
   );
 
+  readonly createSongEffect = this.effect((song$: Observable<Song>) =>
+  song$.pipe(
+    tap(() => this.updateCreateSongsStatus(ApiRequestStatus.Requesting)),
+    switchMap((song) =>
+      this.songService.createSong(song).pipe(
+        tapResponse(
+          () => {
+            this.updateCreateSongsStatus(ApiRequestStatus.Success);
+          },
+          () => {
+            this.updateCreateSongsStatus(ApiRequestStatus.Fail);
+          }
+        )
+      )
+    )
+  )
+);
+
   //#endregion
 
   constructor(
