@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, HostListener, ViewChild, AfterViewInit } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { Song } from 'src/app/interfaces/song.interface';
 
 @Component({
   selector: 'app-medi-song',
@@ -8,6 +9,7 @@ import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 })
 export class MediSongComponent implements AfterViewInit, OnInit {
   @Input() iconSrc: string;
+  @Input() song : Song;
   @ViewChild('title') title: ElementRef;
   @ViewChild('name') name: ElementRef;
   image: SafeStyle;
