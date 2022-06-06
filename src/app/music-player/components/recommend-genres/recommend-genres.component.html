@@ -1,21 +1,19 @@
 <div class="inner-container">
-    <mat-chip-list aria-label="Fish selection">
-        <mat-chip>Genre 1</mat-chip>
-        <mat-chip>Genre 2</mat-chip>
-        <mat-chip>Genre 3</mat-chip>
-        <mat-chip selected>Genre 4 selected</mat-chip>
-        <mat-chip>Genre 5</mat-chip>
-        <mat-chip>Genre 6</mat-chip>
-        <mat-chip>Genre 7 with long name</mat-chip>
-        <mat-chip>Genre 8</mat-chip>
-        <mat-chip>Genre 9 medium</mat-chip>
-        <mat-chip>Genre 10</mat-chip>
-        <mat-chip>Genre 11</mat-chip>
-        <mat-chip>Genre 12</mat-chip>
-    </mat-chip-list>
-    <div class="mdc-layout-grid__inner songs-container">
-        <app-rounded-song
-            class="mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-mobile"
-            *ngFor="let song of songs" [imgSrc]="song.image"></app-rounded-song>
-    </div>
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip
+      *ngFor="let genre of genres; let i = index"
+      [attr.data-index]="i"
+      (click)="select(i)"
+      [selected]="i === selectedIndex"
+      >{{ genre.genreName }}</mat-chip
+    >
+  </mat-chip-list>
+  <div class="mdc-layout-grid__inner songs-container">
+    <app-rounded-song
+      class="mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-mobile"
+      *ngFor="let song of selectedSongs"
+      [imgSrc]="song.thumbnailL.toString()"
+      [song]="song"
+    ></app-rounded-song>
+  </div>
 </div>
