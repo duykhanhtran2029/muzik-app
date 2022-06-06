@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Song } from 'src/app/interfaces/song.interface';
 
 @Component({
   selector: 'app-rounded-song',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RoundedSongComponent implements OnInit {
   @Input() imgSrc: string;
+  @Input() song: Song;
   constructor() { }
 
   ngOnInit(): void {
