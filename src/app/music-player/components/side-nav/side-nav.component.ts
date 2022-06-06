@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SearchComponent } from '../search/search.component';
-import { AudioPlayerService } from '../../services/audio-player.service';
 
 export type ROUTE =
   | 'SEARCH'
@@ -18,10 +17,7 @@ export type ROUTE =
   styleUrls: ['./side-nav.component.scss'],
 })
 export class SideNavComponent implements OnInit {
-  constructor(
-    private dialog: MatDialog,
-    public audioService: AudioPlayerService
-  ) {}
+  constructor(private dialog: MatDialog) {}
   currentRoute: ROUTE = 'HOME';
 
   ngOnInit(): void {}
@@ -36,8 +32,5 @@ export class SideNavComponent implements OnInit {
 
   setRoute(route: ROUTE) {
     this.currentRoute = route;
-    if (route === 'PLAYER') {
-      this.audioService.loadLyric();
-    }
   }
 }
