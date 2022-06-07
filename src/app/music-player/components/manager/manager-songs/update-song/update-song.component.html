@@ -16,7 +16,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
-        <mat-select #select [formControl]="formControl"  placeholder="Artist" multiple [(ngModel)]="selectedArtists">
+        <mat-select #select [formControl]="formControl"  placeholder="Artist" multiple>
             <mat-option>
                 <ngx-mat-select-search 
                 [formControl]="formFilterControl"

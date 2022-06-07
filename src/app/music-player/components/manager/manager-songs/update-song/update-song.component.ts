@@ -28,7 +28,6 @@ export class UpdateSongComponent implements OnInit, OnDestroy, AfterViewInit {
   artists: Artist[];
   formControl = new UntypedFormControl();
   formFilterControl = new UntypedFormControl();
-  selectedArtists: Artist[];
 
   storageURL = '';
   thumbnail = <File>{};
@@ -63,7 +62,7 @@ export class UpdateSongComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.song = cloneDeep(this.data);
-    this.selectedArtists = cloneDeep(this.song.artists);
+    this.formControl.setValue(cloneDeep(this.song.artists));
     this.imgSrc = this.song.thumbnail.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
     this.componentStore.updateSongStatus$.pipe(takeWhile(() => this.componentActive)).subscribe(
@@ -126,8 +125,8 @@ export class UpdateSongComponent implements OnInit, OnDestroy, AfterViewInit {
       this.azureStorageService.upload(this.lyricsContainer, this.lyricsSAS, this.lyric, fileName + '.txt', () => { });
       this.song.linkLyric = new URL(`${this.storageURL}/${this.lyricsContainer}/${fileName}.lrc`);
     }
-    this.song.artists = this.selectedArtists;
-    this.song.artistsName = this.selectedArtists.map(a => a.artistName).join(', ');
+    this.song.artists = this.formControl.value;
+    this.song.artistsName = this.formControl.value.map(a => a.artistName).join(', ');
     this.componentStore.updateSongEffect(this.song);
   }
 
