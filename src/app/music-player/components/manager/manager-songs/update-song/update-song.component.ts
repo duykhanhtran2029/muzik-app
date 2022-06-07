@@ -9,7 +9,7 @@ import { ManagerSongsStore } from '../manager-songs.store';
 import { cloneDeep } from 'lodash';
 import { Artist } from 'src/app/interfaces/artist.interface';
 import { ManagerArtistsStore } from '../../manager-artists/manager-artists.store';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 
 export type fileType = 'Thumbnail' | 'Audio' | 'Beat' | 'Lyric' | 'Karaoke';
@@ -26,8 +26,8 @@ export class UpdateSongComponent implements OnInit, OnDestroy, AfterViewInit {
   formData: FormData;
   imgSrc: string;
   artists: Artist[];
-  formControl = new FormControl();
-  formFilterControl = new FormControl();
+  formControl = new UntypedFormControl();
+  formFilterControl = new UntypedFormControl();
   selectedArtists: Artist[];
 
   storageURL = '';
