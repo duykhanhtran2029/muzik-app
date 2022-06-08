@@ -1,5 +1,11 @@
-<img class="hoverable--rotate" [src]="imgSrc" alt="Avatar">
+<div class="thumbnail-container">
+  <img class="hoverable--rotate" [src]="imgSrc" alt="Avatar" />
+  <div class="thumbnail-background"></div>
+  <button mat-icon-button class="thumbnail-utils">
+    <mat-icon class="thumbnail-icon"> pause_circle_outline </mat-icon>
+  </button>
+</div>
 <div class="info">
-    <div class="title">Red Snapper: Performance Review</div>
-    <div class="artist">Allan Biker</div>
+  <div class="title">{{ song.songName }}</div>
+  <div class="artist">{{ song.artistsName }}</div>
 </div>

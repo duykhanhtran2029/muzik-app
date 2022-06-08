@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { SearchComponent } from '../search/search.component';
 import { AudioPlayerService } from '../../services/audio-player.service';
 import { NavigationStart, Router } from '@angular/router';
@@ -14,15 +14,17 @@ export class SideNavComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public audioService: AudioPlayerService,
     private router: Router
-  ) { }
+  ) {}
   componentActive = true;
   currentRoute = window.location.href;
   ngOnInit(): void {
-    this.router.events.pipe(takeWhile(() => this.componentActive)).subscribe((route) => {
-      if (route instanceof NavigationStart) {
-        this.currentRoute = route.url;
-      }
-    })
+    this.router.events
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((route) => {
+        if (route instanceof NavigationStart) {
+          this.currentRoute = route.url;
+        }
+      });
   }
   ngOnDestroy(): void {
     this.componentActive = false;
