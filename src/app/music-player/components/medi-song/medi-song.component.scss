@@ -1,81 +1,106 @@
 @mixin hover-effect {
-    transform: scale(1.025);
-    .medi-song__name {
-        transform: translateY(calc(134px - 16px - var(--name-height)));
-        transition: transform 0.4s;
+  transform: scale(1.025);
+  .medi-song__name {
+    transform: translateY(calc(134px - 16px - var(--name-height)));
+    transition: transform 0.4s;
 
-        .medi-song__name__content {
-            opacity: 1;
-        }
+    .medi-song__name__content {
+      opacity: 1;
     }
+  }
+  .medi-song-options {
+    opacity: 1;
+    visibility: visible;
+  }
 
-    &:before {
-        width: 100%;
-        background: transparent linear-gradient(249deg, #00458F00 0%, #00458F 100%) 0% 0% no-repeat padding-box;
-    }
+  &:before {
+    width: 100%;
+    background: transparent linear-gradient(249deg, #00458f00 0%, #00458f 100%)
+      0% 0% no-repeat padding-box;
+  }
 }
 
 .medi-song {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 135px;
-    border-radius: 5px;
-    margin: auto;
-    color: #fff;
-    overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
-    position: relative;
-    transition: transform 0.4s;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 135px;
+  border-radius: 5px;
+  margin: auto;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  position: relative;
+  transition: transform 0.4s;
 
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        z-index: 1;
-        transition: width 0.3s;
-        will-change: width;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: 1;
+    transition: width 0.3s;
+    will-change: width;
+  }
+
+  &-options {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  @at-root #{&}__name {
+    z-index: 1;
+    width: calc(100% - 32px);
+    margin: 0px 16px;
+    height: fit-content;
+    transform: translateY(calc(134px - var(--title-height) - 16px));
+    transition: transform 0.3s, opacity 0.1s 0.3s;
+    will-change: transform, opacity;
+    position: absolute;
+    pointer-events: none;
+
+    @at-root #{&}__title {
+      font-weight: 500;
+      font-size: 20px;
+      margin: 0px 0px 10px 0px;
     }
 
-    @at-root #{&}__name {
-        z-index: 1;
-        width: calc(100% - 32px);
-        margin: 0px 16px;
-        height: fit-content;
-        transform: translateY(calc(134px - var(--title-height) - 16px));
-        transition: transform 0.3s, opacity 0.1s 0.3s;
-        will-change: transform, opacity;
-        position: absolute;
-        pointer-events: none;
-
-        @at-root #{&}__title {
-            font-weight: 500;
-            font-size: 20px;
-            margin: 0px 0px 10px 0px;
-        }
-
-        @at-root #{&}__content {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 400;
-            opacity: 0;
-        }
+    @at-root #{&}__content {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0;
     }
+  }
 
-    &:active {
-        @include hover-effect();
+  &:active {
+    @include hover-effect();
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @include hover-effect();
     }
+  }
+}
 
-    @media (hover: hover) {
-        &:hover {
-            @include hover-effect();
-        }
+::ng-deep .mat-menu-panel {
+  background-color: #4186f6;
+  .mat-menu-content:not(:empty) {
+    padding: 0px !important;
+    button.mat-menu-item {
+      color: white;
+      line-height: 36px;
+      height: 36px;
     }
-
+  }
 }
