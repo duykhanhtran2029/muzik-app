@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, Sanitizer, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, ReplaySubject, take, takeWhile } from 'rxjs';
 import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
@@ -12,6 +12,7 @@ import { ManagerArtistsStore } from '../../manager-artists/manager-artists.store
 import { UntypedFormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { UtilService } from 'src/app/music-player/services/utils.service';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 export type fileType = 'Thumbnail' | 'Audio' | 'Beat' | 'Lyric' | 'Karaoke';
 
@@ -49,14 +50,15 @@ export class AddSongComponent implements OnInit, OnDestroy, AfterViewInit {
   lyricsSAS = environment.azureStorage.lyricsSAS;
   componentActive = true;
   filteredArtists: ReplaySubject<Artist[]> = new ReplaySubject<Artist[]>(1);
-
+  image: SafeStyle;
   @ViewChild('select') select: MatSelect;
   constructor(
     private azureStorageService: AzureBlobStorageService,
     private componentStore: ManagerSongsStore,
     private artistStore: ManagerArtistsStore,
     private utilService: UtilService,
-    private dialogRef: MatDialogRef<AddSongComponent>) { }
+    private dialogRef: MatDialogRef<AddSongComponent>,
+    private sanitizer: DomSanitizer) { }
 
   ngOnDestroy(): void {
     this.componentActive = false;
@@ -64,6 +66,14 @@ export class AddSongComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.song.songId = this.utilService.newID();
+    this.azureStorageService.download(
+      'blobs', 
+      'sp=r&st=2022-06-08T03:47:04Z&se=2025-06-08T11:47:04Z&spr=https&sv=2020-08-04&sr=c&sig=5Gv5NW5pidv0JjltwPcXD0unpzpS5Q2%2BjWmcMa%2F5BXE%3D',
+      'e2f3da512dcd104613f3b4151ce67438.jpg', (blob: Blob) => {
+      var url = URL.createObjectURL(blob);
+      console.log(blob);
+      console.log(url);
+    });
     this.song.thumbnail = new URL('https://shazam.blob.core.windows.net/images/placeholder.png');
     this.imgSrc = this.song.thumbnail.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();

@@ -1,0 +1,137 @@
+.outer-container {
+    height: 64px;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s, filter 1s ease-in-out;
+    padding: 0px 16px;
+    margin: 5px 0px;
+  
+    .track-info {
+      display: flex;
+      align-items: center;
+      align-content: space-between;
+      width: calc(100% - 32px);
+      height: 64px;
+      text-align: left;
+      border-radius: 5px;
+  
+      &.selected, &:hover {
+        box-shadow: 0 0 5px -3px #000;
+        background-color: #c2daff;
+        color: #000;
+  
+        .track-artist {
+          color: #2e2d2d;
+        }
+      }
+  
+      .index {
+        margin: auto 24px auto 12px;
+        font-size: 16px;
+        text-align: center;
+        width: 64px;
+        min-width: 64px;
+        height: 64px;
+        line-height: 64px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 36px;
+  
+        &.first {
+          color: white;
+          font-weight: 500;
+          background-image: url("../../../../../assets/images/number-background-1.svg");
+        }
+  
+        &.second {
+          color: white;
+          font-weight: 500;
+          background-image: url("../../../../../assets/images/number-background-2.svg");
+        }
+  
+        &.third {
+          color: white;
+          font-weight: 500;
+          background-image: url("../../../../../assets/images/number-background-3.svg");
+        }
+      }
+
+      .score {
+        width: 80px;
+        min-width: 80px;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .thumbnail {
+        margin: 0px 24px 0px 12px;
+        width: 56px;
+        min-width: 56px;
+        height: 56px;
+        border-radius: 5px;
+        background-repeat: no-repeat; 
+        background-size: cover;
+    }
+  
+      .track-text {
+        width: 35%;
+        min-width: 35%;
+        cursor: default;
+        overflow: hidden;
+  
+        .track-title {
+          font-size: 16px;
+          line-height: 20px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+  
+        .track-artist {
+          margin-top: 4px;
+          font-size: 14px;
+          line-height: 16px;
+          color: #b3b3b3;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+  
+      .item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0px 16px;
+        width: 64px;
+        min-width: 64px;
+        max-width: 64px;
+        span {
+          line-height: 40px;
+          margin-top: 3px;
+        }
+      }
+  
+      .option {
+        margin: 10px;
+      }
+  
+      .time {
+        margin-right: 30px;
+      }
+    }
+  }
+  
+  ::ng-deep .mat-menu-panel {
+    background-color: #4186f6;
+    .mat-menu-content:not(:empty) {
+      padding: 0px !important;
+      button.mat-menu-item {
+        color: white;
+        line-height: 36px;
+        height: 36px;
+      }
+    }
+  }

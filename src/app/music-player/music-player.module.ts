@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { MusicPlayerRoutingModule } from './sub-modules/music-player.routing';
 import { MusicPlayerSharedMaterialModule } from './sub-modules/music-player-material.module';
 import { ManagerComponent } from './components/manager/manager.component';
-import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { songReducer } from './store/reducers/songs.reducer';
@@ -17,10 +16,7 @@ import { ConfirmDeleteComponent } from './components/manager/confirm-delete/conf
 import { UpdateSongComponent } from './components/manager/manager-songs/update-song/update-song.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
-import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
-import { SongItemComponent } from './components/result/song-item/song-item.component';
-import { PlayingBarComponent } from './components/result/playing-bar/playing-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
@@ -52,22 +48,19 @@ import { ArtistDetailComponent } from './components/manager/manager-artists/arti
 import { UpdateArtistComponent } from './components/manager/manager-artists/update-artist/update-artist.component';
 import { AddArtistComponent } from './components/manager/manager-artists/add-artist/add-artist.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ResultSongComponent } from './components/result/result-song/result-song.component';
 
 @NgModule({
   declarations: [
     MasterComponent,
     RecorderComponent,
     ManagerComponent,
-    LayoutControllerComponent,
     ResultComponent,
     SongDetailComponent,
     ConfirmDeleteComponent,
     UpdateSongComponent,
     AddSongComponent,
-    PlayerComponent,
     VisualizationComponent,
-    SongItemComponent,
-    PlayingBarComponent,
     LoginComponent,
     SideNavComponent,
     TracksControlComponent,
@@ -95,7 +88,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     PlaylistComponent,
     ArtistDetailComponent,
     UpdateArtistComponent,
-    AddArtistComponent
+    AddArtistComponent,
+    ResultSongComponent
   ],
   imports: [
     CommonModule,

@@ -7,14 +7,14 @@ import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./medi-song.component.scss']
 })
 export class MediSongComponent implements AfterViewInit, OnInit {
-  @Input() iconSrc: string;
+  @Input() imgSrc: string;
   @ViewChild('title') title: ElementRef;
   @ViewChild('name') name: ElementRef;
   image: SafeStyle;
 
   constructor(public sanitizer: DomSanitizer) { }
   ngOnInit(): void {
-    this.image = this.sanitizer.bypassSecurityTrustStyle(`url("${this.iconSrc}")`);
+    this.image = this.sanitizer.bypassSecurityTrustStyle(`url("${this.imgSrc}")`);
 
   }
 

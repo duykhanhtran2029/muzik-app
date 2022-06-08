@@ -16,20 +16,21 @@ export class SongEffects {
     )
   );
 
-  // fingerPrinting$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(actions.fingerPrinting),
-  //     concatMap((action) =>
-  //       this.songService.fingerPrinting(action.fileName).pipe(
-  //         map((fingerPrintingResult) =>
-  //           actions.fingerPrintingSuccess({ fingerPrintingResult })
-  //         ),
-  //         catchError(async (error) => actions.fingerPrintingFailure({ error })),
-  //         tap(() => this.router.navigateByUrl('app/result'))
-  //       )
-  //     )
-  //   )
-  // );
+  fingerPrinting$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.fingerPrinting),
+      concatMap((action) =>
+        this.songService.fingerPrinting(action.fileName).pipe(
+          map((fingerPrintingResult) => {
+            return actions.fingerPrintingSuccess({ fingerPrintingResult })
+          }
+          ),
+          catchError(async (error) => actions.fingerPrintingFailure({ error })),
+          tap(() => this.router.navigateByUrl('app/result'))
+        )
+      )
+    )
+  );
 
   constructor(
     private songService: MusicPlayerSongService,

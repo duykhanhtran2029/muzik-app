@@ -8,11 +8,12 @@ import { UtilService } from 'src/app/music-player/services/utils.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-top-song',
-  templateUrl: './top-song.component.html',
-  styleUrls: ['./top-song.component.scss']
+  selector: 'app-result-song',
+  templateUrl: './result-song.component.html',
+  styleUrls: ['./result-song.component.scss']
 })
-export class TopSongComponent implements OnInit, OnDestroy {
+export class ResultSongComponent implements OnInit, OnDestroy {
+  @Input() score: number;
   @Input() index: number;
   @Input() song: Song;
   @Input() isSelected = false;
@@ -26,6 +27,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.score = parseFloat((this.score * 100).toFixed(4))  ;
     const audioObj = new Audio();
     audioObj.src = this.song.link.toString();
     audioObj.addEventListener(
@@ -48,7 +50,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
     this.audioService.addToQueue(this.song);
   }
   togglePlay() {
-    if(this.state.song.songId !== this.song.songId) {
+    if (this.state.song.songId !== this.song.songId) {
       this.audioService.playStream(this.song);
       this.audioService.play();
     } else {

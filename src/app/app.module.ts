@@ -33,7 +33,7 @@ export class HammerConfig extends HammerGestureConfig {
     HttpClientModule,
     RouterModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    //!environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       registrationStrategy: 'registerWhenStable:30000'
