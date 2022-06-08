@@ -1,7 +1,7 @@
 <div class="outer-container">
   <div class="track-info">
     <div class="album-artwork">
-      <img width="100%" [src]="song.thumbnailS" />
+      <img width="100%" [src]="song.thumbnail" />
     </div>
     <div class="track-text">
       <div class="track-title">{{ song.songName }}</div>
@@ -15,7 +15,7 @@
   </div>
   <div class="track-control">
     <div class="track-control-queue" *ngIf="!isRecommend">
-      <button (click)="togglePlay()" mat-icon-button class="option">
+      <button (click)="togglePlay()" mat-icon-button onclick="this.blur()" class="option">
         <mat-icon>{{
           audioService.isPlaying(song)
             ? "pause_circle_outline"
@@ -24,7 +24,7 @@
       </button>
     </div>
     <div class="track-control-recommend" *ngIf="isRecommend">
-      <button (click)="addToQueue()" mat-icon-button class="option">
+      <button (click)="addToQueue()" mat-icon-button onclick="this.blur()" class="option">
         <mat-icon>queue</mat-icon>
       </button>
     </div>

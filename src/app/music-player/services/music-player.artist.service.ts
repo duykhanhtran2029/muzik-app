@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Artist } from 'src/app/interfaces/artist.interface';
+import { Artist, RawArtist } from 'src/app/interfaces/artist.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
 import { Song } from 'src/app/interfaces/song.interface';
@@ -32,7 +32,7 @@ export class MusicPlayerArtistService {
     return this.http.get<Artist>(`${this.API_BASE_URL}/api/artists/${artistId}`);
   }
 
-  createArtist(artist: Artist): Observable<Artist> {
+  createArtist(artist: RawArtist): Observable<Artist> {
     return this.http.post<Artist>(`${this.API_BASE_URL}/api/Artists`, artist);
   }
 
@@ -43,8 +43,8 @@ export class MusicPlayerArtistService {
     );
   }
 
-  deleteArtist(artistId: number): Observable<Artist> {
-    return this.http.delete<Artist>(`${this.API_BASE_URL}/api/artists/${artistId}`);
+  deleteArtist(artistId: string): Observable<string> {
+    return this.http.delete<string>(`${this.API_BASE_URL}/api/artists/${artistId}`);
   }
 
 }

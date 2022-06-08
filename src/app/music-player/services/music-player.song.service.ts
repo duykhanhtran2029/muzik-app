@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment';
 export class MusicPlayerSongService {
   API_BASE_URL = environment.apiMusicUrl;
   RECOMMEND_URL = environment.apiRecommendUrl;
-  constructor(private http: HttpClient) {}
+  RECOGNIZE_URL = environment.apiRecognizeUrl;
+  constructor(private http: HttpClient) { }
 
   getAllSongs(): Observable<Song[]> {
     const url = `${this.API_BASE_URL}/api/songs`;
@@ -38,7 +39,7 @@ export class MusicPlayerSongService {
     return this.http.get<Song[]>(url);
   }
 
-  getSong(songId: number): Observable<Song> {
+  getSong(songId: string): Observable<Song> {
     return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
@@ -53,14 +54,15 @@ export class MusicPlayerSongService {
     );
   }
 
-  deleteSong(songId: number): Observable<Song> {
-    return this.http.delete<Song>(`${this.API_BASE_URL}/api/songs/${songId}`);
+  getSongs(songIds: string[]): Observable<Song[]> {
+    return this.http.post<Song[]>(`${this.API_BASE_URL}/api/songs/songs`, songIds);
+  }
+
+  deleteSong(songId: string): Observable<string> {
+    return this.http.delete<string>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
-    return this.http.post<FingerPrintingResult>(
-      `${this.API_BASE_URL}/api/songs/FingerPrinting`,
-      { fileName }
-    );
+    return this.http.post<FingerPrintingResult>(`${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`, { fileName });
   }
 }

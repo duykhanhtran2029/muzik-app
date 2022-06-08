@@ -1,10 +1,10 @@
 <mat-toolbar class="toolbar">
   <div class="spacer"></div>
   <div *ngIf="hasLoggedIn">
-    <button mat-icon-button>
+    <button mat-icon-button onclick="this.blur()">
       <mat-icon>settings</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button mat-icon-button onclick="this.blur()" [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

@@ -1,36 +1,40 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SearchComponent } from '../search/search.component';
-
-export type ROUTE =
-  | 'SEARCH'
-  | 'HOME'
-  | 'PLAYER'
-  | 'ARTIST'
-  | 'MANAGER'
-  | 'PROFILE'
-  | 'PLAYLIST';
-
+import { AudioPlayerService } from '../../services/audio-player.service';
+import { NavigationStart, Router } from '@angular/router';
+import { takeWhile } from 'rxjs';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
-  currentRoute: ROUTE = 'HOME';
-
-  ngOnInit(): void {}
-
+export class SideNavComponent implements OnInit, OnDestroy {
+  constructor(
+    private dialog: MatDialog,
+    public audioService: AudioPlayerService,
+    private router: Router
+  ) {}
+  componentActive = true;
+  currentRoute = window.location.href;
+  ngOnInit(): void {
+    this.router.events
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((route) => {
+        if (route instanceof NavigationStart) {
+          this.currentRoute = route.url;
+        }
+      });
+  }
+  ngOnDestroy(): void {
+    this.componentActive = false;
+  }
   openSearchDialog() {
     this.dialog.open(SearchComponent, {
-      width: '800px',
+      width: '500px',
       height: '800px',
+      panelClass: 'no-padding-dialog',
       //data: { trigger: new ElementRef(event.currentTarget) }
     });
-  }
-
-  setRoute(route: ROUTE) {
-    this.currentRoute = route;
   }
 }

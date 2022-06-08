@@ -48,7 +48,7 @@ export class AudioPlayerService {
     song:
       JSON.parse(localStorage.getItem('music-player__currentSong')) ??
       undefined,
-    queue: JSON.parse(sessionStorage.getItem('music-player__queue')) ?? [],
+    queue: JSON.parse(localStorage.getItem('music-player__queue')) ?? [],
     shuffle: false,
     recommendedSongs: [],
     repeat: false,

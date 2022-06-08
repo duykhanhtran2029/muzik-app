@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { Artist } from 'src/app/interfaces/artist.interface';
+import { Artist, RawArtist } from 'src/app/interfaces/artist.interface';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 import { MusicPlayerArtistService } from '../../../services/music-player.artist.service';
 
@@ -92,7 +92,61 @@ export class ManagerArtistsStore extends ComponentStore<ManagerArtistsState> {
       )
     )
   );
-  
+
+  readonly deleteArtistEffect = this.effect((id$: Observable<string>) =>
+    id$.pipe(
+      tap(() => this.updateDeleteArtistsStatus(ApiRequestStatus.Requesting)),
+      switchMap((id) =>
+        this.artistService.deleteArtist(id).pipe(
+          tapResponse(
+            () => {
+              this.updateDeleteArtistsStatus(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateDeleteArtistsStatus(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  readonly updateArtistEffect = this.effect((artist$: Observable<Artist>) =>
+    artist$.pipe(
+      tap(() => this.updateUpdateArtistsStatus(ApiRequestStatus.Requesting)),
+      switchMap((artist) =>
+        this.artistService.updateArtist(artist).pipe(
+          tapResponse(
+            () => {
+              this.updateUpdateArtistsStatus(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateUpdateArtistsStatus(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  readonly createArtistEffect = this.effect((artist$: Observable<RawArtist>) =>
+  artist$.pipe(
+    tap(() => this.updateCreateArtistsStatus(ApiRequestStatus.Requesting)),
+    switchMap((artist) =>
+      this.artistService.createArtist(artist).pipe(
+        tapResponse(
+          () => {
+            this.updateCreateArtistsStatus(ApiRequestStatus.Success);
+          },
+          () => {
+            this.updateCreateArtistsStatus(ApiRequestStatus.Fail);
+          }
+        )
+      )
+    )
+  )
+);
+
   //#endregion
 
   constructor(

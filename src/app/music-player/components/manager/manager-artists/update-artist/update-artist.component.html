@@ -1,0 +1,22 @@
+<img *ngIf="loading" src="../../../../../assets/images/loader.gif" />
+<div *ngIf="!loading" class="container">
+    <img [src]="imgSrc" width="300px" height="300px" />
+    <button mat-flat-button color="primary" (click)="fileInputL.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Thumbnail
+    </button>
+    <input hidden #fileInputL type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+        (change)="setFilename(fileInputL.files, 'L')" />
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]="artist.artistName">
+    </mat-form-field>
+    <div class="controls">
+        <button mat-flat-button (click)="cancel()">
+            Cancel
+        </button>
+        <button mat-flat-button color="primary" (click)="save()">
+            Save
+        </button>
+    </div>
+</div>

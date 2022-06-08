@@ -27,6 +27,7 @@
             font-size: 16px;
             border: 1px solid $sub-primary;
             color: white;
+
             mat-icon {
                 color: $sub-primary;
             }
@@ -113,10 +114,15 @@
             flex: none;
             width: 20%;
             text-align: left;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            word-wrap: break-word !important;
+            white-space: unset !important;
             padding-right: 15px
+        }
+
+        .mat-column-numberOfSongs {
+            flex: none;
+            width: 10%;
+            text-align: left;
         }
 
         .mat-column-likes {

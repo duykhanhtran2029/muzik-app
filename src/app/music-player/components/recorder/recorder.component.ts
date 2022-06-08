@@ -8,7 +8,6 @@ import {
   Input,
 } from '@angular/core';
 import { StereoAudioRecorder } from 'recordrtc';
-import { FingerPrintingService } from '../../services/finger-printing.service';
 import { fingerPrinting } from '../../store/actions/songs.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
@@ -16,6 +15,7 @@ import * as WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js';
 import { environment } from 'src/environments/environment';
 import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
+import { UtilService } from '../../services/utils.service';
 const RECORD_TIME: number = 10000;
 const VISUALIZED_WIDTH: number = 450;
 const VISUALIZED_HEIGHT: number = 240;
@@ -71,10 +71,10 @@ export class RecorderComponent implements OnInit, AfterViewInit {
 
   constructor(
     private azureStorageService: AzureBlobStorageService,
-    private fingerPrintingService: FingerPrintingService,
+    private utilService: UtilService,
     private store: Store<AppState>,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadVisualization = false;
@@ -488,27 +488,15 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   }
   DispatchToServer() {
     this.save();
-    // const formData = new FormData();
-    // formData.append('audio', this.fileBlob);
   }
 
   save() {
-    const name = this.newUid();
+    const name = this.utilService.newID();
     const fileName = name + '.wav';
-    console.log('Upload to azure: ' + fileName);
-    this.azureStorageService.upload(
-      this.recordsContainer,
-      this.recordsSAS,
-      this.fileBlob,
-      fileName,
-      () => {
+    this.azureStorageService.upload(this.recordsContainer, this.recordsSAS, this.fileBlob, fileName, () => {
         this.store.dispatch(fingerPrinting({ fileName: fileName }));
       }
     );
-  }
-
-  newUid() {
-    return Date.now().toString(36) + Math.random().toString(36);
   }
 
   errorCallback(error) {

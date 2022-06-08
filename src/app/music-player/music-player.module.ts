@@ -6,21 +6,17 @@ import { SharedModule } from '../shared/shared.module';
 import { MusicPlayerRoutingModule } from './sub-modules/music-player.routing';
 import { MusicPlayerSharedMaterialModule } from './sub-modules/music-player-material.module';
 import { ManagerComponent } from './components/manager/manager.component';
-import { LayoutControllerComponent } from './components/layout-controller/layout-controller.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { songReducer } from './store/reducers/songs.reducer';
 import { SongEffects } from './store/effects/songs.effects';
 import { ResultComponent } from './components/result/result.component';
 import { SongDetailComponent } from './components/manager/manager-songs/song-detail/song-detail.component';
-import { ConfirmDeleteComponent } from './components/manager/manager-songs/confirm-delete/confirm-delete.component';
+import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
 import { UpdateSongComponent } from './components/manager/manager-songs/update-song/update-song.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
-import { PlayerComponent } from './components/result/player/player.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
-import { SongItemComponent } from './components/result/song-item/song-item.component';
-import { PlayingBarComponent } from './components/result/playing-bar/playing-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
@@ -48,22 +44,23 @@ import { ManagerSongsComponent } from './components/manager/manager-songs/manage
 import { ManagerArtistsComponent } from './components/manager/manager-artists/manager-artists.component';
 import { PlaylistManagerComponent } from './components/playlist-manager/playlist-manager.component';
 import { PlaylistComponent } from './components/playlist-manager/playlist/playlist.component';
+import { ArtistDetailComponent } from './components/manager/manager-artists/artist-detail/artist-detail.component';
+import { UpdateArtistComponent } from './components/manager/manager-artists/update-artist/update-artist.component';
+import { AddArtistComponent } from './components/manager/manager-artists/add-artist/add-artist.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ResultSongComponent } from './components/result/result-song/result-song.component';
 
 @NgModule({
   declarations: [
     MasterComponent,
     RecorderComponent,
     ManagerComponent,
-    LayoutControllerComponent,
     ResultComponent,
     SongDetailComponent,
     ConfirmDeleteComponent,
     UpdateSongComponent,
     AddSongComponent,
-    PlayerComponent,
     VisualizationComponent,
-    SongItemComponent,
-    PlayingBarComponent,
     LoginComponent,
     SideNavComponent,
     TracksControlComponent,
@@ -88,13 +85,19 @@ import { PlaylistComponent } from './components/playlist-manager/playlist/playli
     ManagerSongsComponent,
     ManagerArtistsComponent,
     PlaylistManagerComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    ArtistDetailComponent,
+    UpdateArtistComponent,
+    AddArtistComponent,
+    ResultSongComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     ScrollingModule,
+    NgxMatSelectSearchModule,
     DragDropModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,

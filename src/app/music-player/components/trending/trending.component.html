@@ -9,7 +9,7 @@
   <mat-divider [vertical]="true"></mat-divider>
   <ng-container *ngIf="songs$ | async as songs">
     <div class="app-trending__songs">
-      <img [src]="selectedSong?.thumbnailL" />
+      <img [src]="selectedSong?.thumbnail" />
       <div class="app-trending__songs__right">
         <ng-container *ngFor="let song of songs; let i = index">
           <app-top-song

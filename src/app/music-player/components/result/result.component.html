@@ -2,43 +2,48 @@
   <div class="container">
     <nav class="navbar-wrap mgb30">
       <div class="navbar-container">
-        <h3 class="title">Kết Quả Tìm Kiếm</h3>
+        <h3 class="title">Audio Recognizer</h3>
         <ul class="navbar-menu">
           <li class="navbar-item is-active">
-            <div class="navbar-link"><a>Kết quả</a></div>
+            <div class="navbar-link"><a>Finger Printing Result</a></div>
           </li>
         </ul>
       </div>
     </nav>
     <div *ngIf="loaded" class="empty-zone"></div>
     <div *ngIf="loaded" class="container-page-search">
-      <div class="container-page-search mgt20">
+      <div class="container-page-search mgt20 mgb30">
         <h3 class="top-title">
-          Thời gian tìm kiếm {{ fingerPrintingResult.time / 1000 }}s
+          Finger Printing Time  &nbsp; {{ fingerPrintingResult?.time / 1000 }}s
         </h3>
       </div>
       <div class="top-item mg30">
         <div class="top-result-box">
-          <app-song-item [matchedSong]="listSong[0]"></app-song-item>
+          <app-result-song
+            [index]="1"
+            [score]="matchedSongs[0].score"
+            [song]="matchedSongs[0].song.playableSong"
+          ></app-result-song>
         </div>
       </div>
     </div>
     <div *ngIf="loaded" class="container mgt30">
-      <h3 class="section-title title is-2">Các bài hát tương tự</h3>
+      <h3 class="section-title title is-2">Others</h3>
       <div>
-        <app-song-item
-          *ngFor="let song of listSong"
-          [matchedSong]="song"
-          (activated)="onActivated($event)"
-          (click)="openDetail(song.song)"
-          [currentActivateID]="currentActiveSong"
-        ></app-song-item>
+        <ng-container *ngFor="let matchedSong of matchedSongs; let i = index">
+          <app-result-song
+            *ngIf="i !== 0"
+            [index]="i + 1"
+            [score]="matchedSong.score"
+            [song]="matchedSong.song.playableSong"
+          ></app-result-song>
+        </ng-container>
       </div>
     </div>
     <div *ngIf="!loaded" class="container no-content mgt30">
       <div class="no-content-box">
         <i class="icon main-icon ic-disc"></i>
-        <span class="no-content-text">Không có kết quả nào được tìm thấy</span>
+        <span class="no-content-text">No song found</span>
       </div>
     </div>
   </div>

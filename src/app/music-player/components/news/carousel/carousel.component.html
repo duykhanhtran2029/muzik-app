@@ -9,11 +9,11 @@
       </li>
     </ul>
     <ng-container *ngIf="!hideArrows">
-      <button class="app-carousel__container__arrow" mat-icon-button type="button" tabindex="-1" [color]="color"
+      <button class="app-carousel__container__arrow" mat-icon-button onclick="this.blur()" type="button" tabindex="-1" [color]="color"
         [disabled]="!loop && getCurrentIndex() === 0" (click)="previous()">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      <button class="app-carousel__container__arrow" mat-icon-button type="button" tabindex="-1" [color]="color"
+      <button class="app-carousel__container__arrow" mat-icon-button onclick="this.blur()" type="button" tabindex="-1" [color]="color"
         [disabled]="!loop && getCurrentIndex() === slidesList.length - 1" (click)="next()">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>

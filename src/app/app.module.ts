@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
-
+import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+@Injectable()
 export class HammerConfig extends HammerGestureConfig {
   override overrides = {
     swipe: { direction: Hammer.DIRECTION_ALL },
@@ -32,14 +33,23 @@ export class HammerConfig extends HammerGestureConfig {
     HttpClientModule,
     RouterModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [], 
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
-    
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+
   ],
-  providers: [{
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: HammerConfig
-  }],
+  providers: [
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig
+    },
+    {
+      provide: SwRegistrationOptions,
+      useFactory: () => ({ enabled: environment.production }),
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
