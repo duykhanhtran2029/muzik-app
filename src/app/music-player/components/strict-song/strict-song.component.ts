@@ -34,6 +34,7 @@ export class StrictSongComponent implements OnInit, OnDestroy {
     this.componentActive = false;
   }
   play() {
+    this.song.listens++;
     this.audioService.playStream(this.song);
     this.audioService.play();
     this.audioService.addToQueue(this.song);
@@ -43,6 +44,7 @@ export class StrictSongComponent implements OnInit, OnDestroy {
   }
   togglePlay() {
     if(this.state.song.songId !== this.song.songId) {
+      this.song.listens++;
       this.audioService.playStream(this.song);
       this.audioService.play();
     } else {

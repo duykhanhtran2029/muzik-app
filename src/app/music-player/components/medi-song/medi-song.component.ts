@@ -53,6 +53,7 @@ export class MediSongComponent implements AfterViewInit, OnInit {
     );
   }
   play() {
+    this.song.listens++;
     this.audioService.playStream(this.song);
     this.audioService.play();
     this.audioService.addToQueue(this.song);

@@ -65,4 +65,13 @@ export class MusicPlayerSongService {
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
     return this.http.post<FingerPrintingResult>(`${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`, { fileName });
   }
+
+    
+  listenedSong(songId: string): Observable<Song> {
+    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/listened`);
+  }
+
+  downloadedSong(songId: string): Observable<Song> {
+    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/downloaded`);
+  }
 }

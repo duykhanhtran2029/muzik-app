@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { Observable, takeWhile } from 'rxjs';
 import { Song, StreamState } from 'src/app/interfaces/song.interface';
 import { AudioPlayerService } from 'src/app/music-player/services/audio-player.service';
+import { MusicPlayerSongService } from 'src/app/music-player/services/music-player.song.service';
 import { UtilService } from 'src/app/music-player/services/utils.service';
 import { environment } from 'src/environments/environment';
 
@@ -22,7 +23,8 @@ export class TopSongComponent implements OnInit, OnDestroy {
 
   constructor(
     public audioService: AudioPlayerService,
-    private downloadService: UtilService
+    private downloadService: UtilService,
+    private songService: MusicPlayerSongService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
     this.componentActive = false;
   }
   play() {
+    this.song.listens++;
     this.audioService.playStream(this.song);
     this.audioService.play();
     this.audioService.addToQueue(this.song);
@@ -49,6 +52,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
   }
   togglePlay() {
     if(this.state.song.songId !== this.song.songId) {
+      this.song.listens++;
       this.audioService.playStream(this.song);
       this.audioService.play();
     } else {
@@ -58,6 +62,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
   download() {
     this.downloadService
       .download(this.song.link.toString())
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe(blob => {
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(blob)
@@ -66,7 +71,9 @@ export class TopSongComponent implements OnInit, OnDestroy {
         a.click();
         URL.revokeObjectURL(objectUrl);
         a.remove();
-      })
+      });
+    this.songService.downloadedSong(this.song.songId).pipe(takeWhile(() => this.componentActive)).subscribe();
+    this.song.downloads++;
   }
 }
 

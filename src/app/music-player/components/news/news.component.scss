@@ -17,13 +17,17 @@
         font-weight: 400;
     }
 
-    .function button {
-        margin-top: 16px;
-        border: 1px solid #0094B6;
-        color: #0094B6;
-
-        mat-icon {
-            margin-left: 10px;
+    .function {
+        button {
+            margin-top: 16px;
+            border: 1px solid #0094B6;
+            color: #0094B6;
+            margin-right: 24px;
+    
+            mat-icon {
+                margin-left: 10px;
+            }
         }
+
     }
 }

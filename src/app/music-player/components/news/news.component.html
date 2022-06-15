@@ -9,6 +9,10 @@
                   Play
                   <mat-icon>{{audioService.isPlaying(song) ? 'pause_circle_outline' : 'play_circle_outlined'}}</mat-icon>
                </button>
+               <button (click)="download(song)" mat-flat-button>
+                  Download
+                  <mat-icon>download</mat-icon>
+               </button>
             </div>
          </div>
       </app-carousel-slide>
