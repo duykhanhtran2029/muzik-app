@@ -6,6 +6,7 @@ h1 {
 }
 
 .search {
+    overflow-x: hidden;
     @at-root #{&}__title {
         display: flex;
         justify-content: space-between;
@@ -27,17 +28,26 @@ h1 {
 
     @at-root #{&}__content {
         color: white;
+        overflow-x: hidden;
+
         @at-root #{&}__container {
             &:not(&:first-child) {
                 margin-top: 36px;
             }
 
-            @at-root #{&}__header {
-                display: flex;
-                justify-content: space-between;
-
-                button {
-                    color: #0094B6;
+            @at-root #{&}__search {
+                @at-root #{&}__header {
+                    display: flex;
+                    justify-content: space-between;
+    
+                    button {
+                        color: #0094B6;
+                    }
+                }
+                @at-root #{&}__chips{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
                 }
             }
 

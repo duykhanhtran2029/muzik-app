@@ -3,9 +3,7 @@
     <app-medi-song
       class="mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone"
       *ngFor="let song of songs"
-      [iconSrc]="song.thumbnail.toString()"
-      [song]="song"
-    >
+      [song]="song">
     </app-medi-song>
   </ng-container>
 </div>

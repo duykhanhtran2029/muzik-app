@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Artist, RawArtist } from 'src/app/interfaces/artist.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
 import { Song } from 'src/app/interfaces/song.interface';
+import { QueryParamsHelper } from './helpers/query-params.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,11 @@ export class MusicPlayerArtistService {
 
   deleteArtist(artistId: string): Observable<string> {
     return this.http.delete<string>(`${this.API_BASE_URL}/api/artists/${artistId}`);
+  }
+
+  searchArtists(searchKey: string): Observable<Artist[]> {
+    const params = new HttpParams().set('searchKey',searchKey.trim().toLowerCase());
+    return this.http.get<Artist[]>(`${this.API_BASE_URL}/api/artists/search`, {params: params});
   }
 
 }

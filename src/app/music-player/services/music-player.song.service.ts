@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/interfaces/song.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
+import { QueryParamsHelper } from './helpers/query-params.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class MusicPlayerSongService {
     return this.http.get<Song[]>(url);
   }
 
-  getRecommendedGenreSong(userId){
+  getRecommendedGenreSong(userId) {
     const url = `${this.RECOMMEND_URL}/genreRecommend?userId=${userId}`;
     return this.http.get(url);
   }
@@ -66,12 +67,17 @@ export class MusicPlayerSongService {
     return this.http.post<FingerPrintingResult>(`${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`, { fileName });
   }
 
-    
+
   listenedSong(songId: string): Observable<Song> {
     return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/listened`);
   }
 
   downloadedSong(songId: string): Observable<Song> {
     return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/downloaded`);
+  }
+
+  searchSongs(searchKey: string): Observable<Song[]> {
+    const params = new HttpParams().set('searchKey',searchKey.trim().toLowerCase());
+    return this.http.get<Song[]>(`${this.API_BASE_URL}/api/songs/search`, {params: params});
   }
 }

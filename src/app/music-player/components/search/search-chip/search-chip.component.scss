@@ -1,5 +1,6 @@
 .search-chip {
     height: 48px;
+    max-width: 688px;
     display: flex;
     background: white;
     color: #000;
@@ -13,6 +14,13 @@
         mat-icon {
             transform: scale(0.75);
         }
+    }
+    
+    span {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
 }

@@ -7,7 +7,6 @@ import { Song } from 'src/app/interfaces/song.interface';
   styleUrls: ['./rounded-song.component.scss']
 })
 export class RoundedSongComponent implements OnInit {
-  @Input() imgSrc: string;
   @Input() song: Song;
   constructor() { }
 

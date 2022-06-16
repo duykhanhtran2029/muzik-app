@@ -49,6 +49,7 @@ import { UpdateArtistComponent } from './components/manager/manager-artists/upda
 import { AddArtistComponent } from './components/manager/manager-artists/add-artist/add-artist.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ResultSongComponent } from './components/result/result-song/result-song.component';
+import { RoundedArtistComponent } from './components/rounded-artist/rounded-artist.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ResultSongComponent } from './components/result/result-song/result-song
     ArtistDetailComponent,
     UpdateArtistComponent,
     AddArtistComponent,
-    ResultSongComponent
+    ResultSongComponent,
+    RoundedArtistComponent
   ],
   imports: [
     CommonModule,

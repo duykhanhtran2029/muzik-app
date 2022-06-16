@@ -1,29 +1,53 @@
-<div mat-dialog-title class="search__title">
-    <mat-form-field class="search__title__box">
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="keyUp($event)">
-    </mat-form-field>
-    <button (click)="redirect()" mat-raise-button color="primary" mat-fab>
-        <mat-icon>mic</mat-icon>
-    </button>
-</div>
-<div mat-dialog-content class="search__content">
-    <div class="search__content__container" *ngIf="searchHistories.length">
-        <div class="search__content__container__header">
-            <h1>Recently searches</h1>
-            <button (click)="searchHistories = []" mat-flat-button>Clear histories</button>
-        </div>
-        <div class="search__content__container__chips">
-            <app-search-chip *ngFor="let text of searchHistories; index as i" [searchText]="text" (remove)="searchHistories.splice(i, 1)"></app-search-chip>
-        </div>
+<div class="search">
+    <div mat-dialog-title class="search__title">
+        <mat-form-field class="search__title__box">
+            <mat-icon matPrefix>search</mat-icon>
+            <input #searchInput matInput [formControl]="searchControl"
+                (keydown.enter)="searchInput.blur();  updateSearchHistories(searchInput.value)">
+        </mat-form-field>
+        <button (click)="redirect()" mat-raise-button color="primary" mat-fab>
+            <mat-icon>mic</mat-icon>
+        </button>
     </div>
-    <div class="search__content__container">
-        <h1>Maybe you like</h1>
-        <div class="search__content__container__for-you">
-            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/8/0/6/7/80677a86fdcee35d96f0047c7addcc7c.jpg'"></app-rounded-song>
-            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/2/4/8/6/2486d1faa0e8cfcca01c39b5814113f2.jpg'"></app-rounded-song>
-            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/8/3/2/3/832349ea644eabd742df5d62a913781a.jpg'"></app-rounded-song>
-            <app-rounded-song [imgSrc] = "'https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/1/1/8/0/1180ce679c0402b1f800530881d73e2e.jpg'"></app-rounded-song>
+    <div mat-dialog-content class="search__content">
+        <div class="search__content__container__search" *ngIf="searchHistories.length">
+            <div class="search__content__container__search__header">
+                <h1>Recently searches</h1>
+                <button (click)="searchHistories = []" mat-flat-button>Clear histories</button>
+            </div>
+            <div class="search__content__container__search__chips">
+                <app-search-chip *ngFor="let text of  searchHistories; index as i" [searchText]="text"
+                    (remove)="searchHistories.splice(i, 1)"></app-search-chip>
+            </div>
         </div>
+        <ng-container *ngIf="songs$ | async as songs">
+            <div class="search__content__container" *ngIf="songs.length > 0">
+                <h1>Songs</h1>
+                <div class="mdc-layout-grid__inner">
+                    <app-medi-song *ngFor="let song of songs"
+                        class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-mobile"
+                        [song]="song">
+                    </app-medi-song>
+                </div>
+            </div>
+        </ng-container>
+    
+        <ng-container *ngIf="artists$ | async as artists">
+            <div class="search__content__container" *ngIf="artists.length > 0">
+                <h1>Artist</h1>
+                <div class="mdc-layout-grid__inner">
+                    <app-rounded-artist *ngFor="let artist of artists"
+                        class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-mobile"
+                        [artist]="artist">
+                    </app-rounded-artist>
+                </div>
+            </div>
+        </ng-container>
+        <div class="search__content__container">
+            <h1>Maybe you like</h1>
+            <div class="search__content__container__for-you">
+            </div>
+        </div>
+    
     </div>
 </div>

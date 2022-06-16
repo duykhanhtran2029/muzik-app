@@ -12,8 +12,6 @@
     <app-rounded-song
       class="mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-mobile"
       *ngFor="let song of selectedSongs"
-      [imgSrc]="song.thumbnail.toString()"
-      [song]="song"
-    ></app-rounded-song>
+      [song]="song"></app-rounded-song>
   </div>
 </div>

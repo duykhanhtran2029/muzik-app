@@ -31,7 +31,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
   openSearchDialog() {
     this.dialog.open(SearchComponent, {
-      width: '500px',
+      width: '800px',
       height: '800px',
       panelClass: 'no-padding-dialog',
       //data: { trigger: new ElementRef(event.currentTarget) }

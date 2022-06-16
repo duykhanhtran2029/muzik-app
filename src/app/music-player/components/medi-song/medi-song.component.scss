@@ -4,7 +4,7 @@
     transform: translateY(calc(134px - 16px - var(--name-height)));
     transition: transform 0.4s;
 
-    .medi-song__name__content {
+    &__content {
       opacity: 1;
     }
   }

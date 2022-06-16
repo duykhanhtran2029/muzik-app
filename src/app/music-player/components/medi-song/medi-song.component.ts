@@ -17,7 +17,6 @@ import { AudioPlayerService } from '../../services/audio-player.service';
   styleUrls: ['./medi-song.component.scss'],
 })
 export class MediSongComponent implements AfterViewInit, OnInit {
-  @Input() iconSrc: string;
   @Input() song: Song;
   @ViewChild('title') title: ElementRef;
   @ViewChild('name') name: ElementRef;
@@ -28,9 +27,7 @@ export class MediSongComponent implements AfterViewInit, OnInit {
     public audioService: AudioPlayerService
   ) {}
   ngOnInit(): void {
-    this.image = this.sanitizer.bypassSecurityTrustStyle(
-      `url("${this.iconSrc}")`
-    );
+    this.image = this.sanitizer.bypassSecurityTrustStyle(`url("${this.song.thumbnail.toString()}")`);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -43,14 +40,8 @@ export class MediSongComponent implements AfterViewInit, OnInit {
   }
 
   changeTitleHeight() {
-    this.name.nativeElement.style.setProperty(
-      '--title-height',
-      `${this.title.nativeElement.offsetHeight}px`
-    );
-    this.name.nativeElement.style.setProperty(
-      '--name-height',
-      `${this.name.nativeElement.offsetHeight}px`
-    );
+    this.name.nativeElement.style.setProperty('--title-height',`${this.title.nativeElement.offsetHeight}px`);
+    this.name.nativeElement.style.setProperty('--name-height',`${this.name.nativeElement.offsetHeight}px`);
   }
   play() {
     this.song.listens++;
