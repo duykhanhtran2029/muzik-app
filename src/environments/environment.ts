@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiRecognizeUrl: 'https://localhost:5001',
   apiMusicUrl: 'https://localhost:5101',
-  apiRecommendUrl: 'https://localhost:8089',
+  apiRecommendUrl: 'https://uit-music-recommendation.azurewebsites.net',
   azureStorage: {
     storageAccount: 'shazam',
     /** Container */
