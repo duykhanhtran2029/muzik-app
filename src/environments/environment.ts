@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   RECOGNIZE_API_URL: 'https://localhost:5001',
   MUSIC_API_URL: 'https://localhost:5101',
-  RECOMMEND_API_URL: 'https://localhost:8089',
+  RECOMMEND_API_URL: 'https://uit-music-recommendation.azurewebsites.net',
   AZURE_STORAGE_CONFIG: {
     STORAGE_ACCOUNT: 'shazam',
     /** Container */
