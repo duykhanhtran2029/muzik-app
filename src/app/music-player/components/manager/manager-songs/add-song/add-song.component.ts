@@ -39,15 +39,15 @@ export class AddSongComponent implements OnInit, OnDestroy, AfterViewInit {
   lyric = <File>{};
   karaoke = <File>{};
 
-  imagesContainer = environment.azureStorage.imagesContainer;
-  songsContainer = environment.azureStorage.songsContainer;
-  beatsContainer = environment.azureStorage.beatsContainer;
-  lyricsContainer = environment.azureStorage.lyricsContainer;
+  IMAGES_CONTAINER = environment.AZURE_STORAGE_CONFIG.IMAGES_CONTAINER;
+  SONGS_CONTAINER = environment.AZURE_STORAGE_CONFIG.SONGS_CONTAINER;
+  BEATS_CONTAINER = environment.AZURE_STORAGE_CONFIG.BEATS_CONTAINER;
+  LYRICS_CONTAINER = environment.AZURE_STORAGE_CONFIG.LYRICS_CONTAINER;
 
-  imagesSAS = environment.azureStorage.imagesSAS;
-  songsSAS = environment.azureStorage.songsSAS;
-  beatsSAS = environment.azureStorage.beatsSAS;
-  lyricsSAS = environment.azureStorage.lyricsSAS;
+  IMAGES_SAS = environment.AZURE_STORAGE_CONFIG.IMAGES_SAS;
+  SONGS_SAS = environment.AZURE_STORAGE_CONFIG.SONGS_SAS;
+  BEATS_SAS = environment.AZURE_STORAGE_CONFIG.BEATS_SAS;
+  LYRICS_SAS = environment.AZURE_STORAGE_CONFIG.LYRICS_SAS;
   componentActive = true;
   filteredArtists: ReplaySubject<Artist[]> = new ReplaySubject<Artist[]>(1);
   image: SafeStyle;
@@ -109,24 +109,24 @@ export class AddSongComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loading = true;
     const fileName = `S-${this.song.songId}-${new Date().getTime()}`;
     if (this.thumbnail.name) {
-      this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, fileName + '.png', () => { });
-      this.song.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${fileName}.png`);
+      this.azureStorageService.upload(this.IMAGES_CONTAINER, this.IMAGES_SAS, this.thumbnail, fileName + '.png', () => { });
+      this.song.thumbnail = new URL(`${this.storageURL}/${this.IMAGES_CONTAINER}/${fileName}.png`);
     }
 
     if (this.audio.name) {
-      this.azureStorageService.upload(this.songsContainer, this.songsSAS, this.audio, fileName + '.mp3', () => { });
-      this.song.link = new URL(`${this.storageURL}/${this.songsContainer}/${fileName}.mp3`);
+      this.azureStorageService.upload(this.SONGS_CONTAINER, this.SONGS_SAS, this.audio, fileName + '.mp3', () => { });
+      this.song.link = new URL(`${this.storageURL}/${this.SONGS_CONTAINER}/${fileName}.mp3`);
     }
 
     if (this.beat.name) {
-      this.azureStorageService.upload(this.beatsContainer, this.beatsSAS, this.beat, fileName + '.m4a', () => { });
-      this.song.linkBeat = new URL(`${this.storageURL}/${this.beatsContainer}/${fileName}.m4a`);
+      this.azureStorageService.upload(this.BEATS_CONTAINER, this.BEATS_SAS, this.beat, fileName + '.m4a', () => { });
+      this.song.linkBeat = new URL(`${this.storageURL}/${this.BEATS_CONTAINER}/${fileName}.m4a`);
     }
 
     if (this.lyric.name && this.karaoke.name) {
-      this.azureStorageService.upload(this.lyricsContainer, this.lyricsSAS, this.lyric, fileName + '.lrc', () => { });
-      this.azureStorageService.upload(this.lyricsContainer, this.lyricsSAS, this.lyric, fileName + '.txt', () => { });
-      this.song.linkLyric = new URL(`${this.storageURL}/${this.lyricsContainer}/${fileName}.lrc`);
+      this.azureStorageService.upload(this.LYRICS_CONTAINER, this.LYRICS_SAS, this.lyric, fileName + '.lrc', () => { });
+      this.azureStorageService.upload(this.LYRICS_CONTAINER, this.LYRICS_SAS, this.lyric, fileName + '.txt', () => { });
+      this.song.linkLyric = new URL(`${this.storageURL}/${this.LYRICS_CONTAINER}/${fileName}.lrc`);
     }
     this.song.artists = this.formControl.value;
     this.song.artistsName = this.formControl.value.map(a => a.artistName).join(', ');

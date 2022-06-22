@@ -4,6 +4,7 @@ import { SearchComponent } from '../search/search.component';
 import { AudioPlayerService } from '../../services/audio-player.service';
 import { NavigationStart, Router } from '@angular/router';
 import { takeWhile } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -13,7 +14,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog,
     public audioService: AudioPlayerService,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
   ) {}
   componentActive = true;
   currentRoute = window.location.href;
@@ -25,6 +27,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
           this.currentRoute = route.url;
         }
       });
+    console.log(this.authService.isAuthenticated$);
   }
   ngOnDestroy(): void {
     this.componentActive = false;
