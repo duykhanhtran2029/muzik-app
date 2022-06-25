@@ -8,6 +8,7 @@ import { MusicPlayerComponent } from '../components/music-player/music-player.co
 import { PlaylistManagerComponent } from '../components/playlist-manager/playlist-manager.component';
 import { RecorderComponent } from '../components/recorder/recorder.component';
 import { ResultComponent } from '../components/result/result.component';
+import { DetailPlaylistComponent } from '../components/detail-playlist/detail-playlist';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
       { path: 'player', component: MusicPlayerComponent },
       { path: 'artist/:id', component: ArtistComponent, pathMatch: 'full' },
       { path: 'playlists', component: PlaylistManagerComponent },
+      {
+        path: 'playlist/:id',
+        component: DetailPlaylistComponent,
+        pathMatch: 'full',
+      },
     ],
   },
 ];
