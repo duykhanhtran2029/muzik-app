@@ -1,11 +1,15 @@
 .title {
-    margin-bottom: 16px;
-    line-height: 40px;
-    font-size: 32px;
-    font-weight: 500;
-    font-family: Rubik, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif,
-        BlinkMacSystemFont, Helvetica Neue;
+  margin-bottom: 16px;
+  line-height: 40px;
+  font-size: 32px;
+  font-weight: 500;
+  font-family: Rubik, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue;
 }
-.playlist {
-    margin: 24px;
+.playlists-container {
+  padding: 0 25px;
+  display: grid;
+  grid-template-columns: repeat(6, 225px);
+  grid-template-rows: repeat(3, 275px);
+  grid-gap: 15px;
 }
