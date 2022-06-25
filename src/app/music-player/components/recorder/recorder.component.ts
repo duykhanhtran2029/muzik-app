@@ -65,8 +65,8 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   };
 
   //Azure
-  recordsContainer = environment.azureStorage.recordsContainer;
-  recordsSAS = environment.azureStorage.recordsSAS;
+  RECORDS_CONTAINER = environment.AZURE_STORAGE_CONFIG.RECORDS_CONTAINER;
+  RECORDS_SAS = environment.AZURE_STORAGE_CONFIG.RECORDS_SAS;
   storageURL = '';
 
   constructor(
@@ -493,7 +493,7 @@ export class RecorderComponent implements OnInit, AfterViewInit {
   save() {
     const name = this.utilService.newID();
     const fileName = name + '.wav';
-    this.azureStorageService.upload(this.recordsContainer, this.recordsSAS, this.fileBlob, fileName, () => {
+    this.azureStorageService.upload(this.RECORDS_CONTAINER, this.RECORDS_SAS, this.fileBlob, fileName, () => {
         this.store.dispatch(fingerPrinting({ fileName: fileName }));
       }
     );

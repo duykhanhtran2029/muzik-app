@@ -14,7 +14,7 @@ const _user: User = {
 
 @Injectable()
 export class UserService {
-  API_BASE_URL = environment.apiMusicUrl;
+  API_BASE_URL = environment.MUSIC_API_URL;
 
   constructor(private http: HttpClient) {}
 

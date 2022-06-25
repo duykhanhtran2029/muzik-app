@@ -23,7 +23,7 @@ import { MusicPlayerSongService } from './music-player.song.service';
   providedIn: 'root',
 })
 export class AudioPlayerService {
-  RECOMMEND_URL = environment.apiRecommendUrl;
+  RECOMMEND_URL = environment.RECOMMEND_API_URL;
   constructor(
     private http: HttpClient,
     private musicService: MusicPlayerSongService

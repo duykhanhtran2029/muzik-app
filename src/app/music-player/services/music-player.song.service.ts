@@ -10,9 +10,9 @@ import { QueryParamsHelper } from './helpers/query-params.helper';
   providedIn: 'root',
 })
 export class MusicPlayerSongService {
-  API_BASE_URL = environment.apiMusicUrl;
-  RECOMMEND_URL = environment.apiRecommendUrl;
-  RECOGNIZE_URL = environment.apiRecognizeUrl;
+  API_BASE_URL = environment.MUSIC_API_URL;
+  RECOMMEND_URL = environment.RECOMMEND_API_URL;
+  RECOGNIZE_URL = environment.RECOGNIZE_API_URL;
   constructor(private http: HttpClient) { }
 
   getAllSongs(): Observable<Song[]> {

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class FingerPrintingService {
-  API_BASE_URL = environment.apiRecognizeUrl;
+  API_BASE_URL = environment.RECOGNIZE_API_URL;
 
   constructor(private http: HttpClient) {}
 

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class AzureBlobStorageService {
 
     // Enter your storage account name
-    storageAccount = environment.azureStorage.storageAccount;
+    STORAGE_ACCOUNT = environment.AZURE_STORAGE_CONFIG.STORAGE_ACCOUNT;
 
     public upload(container: string, sas: string, content: Blob, name: string, handler: () => void) {
         this.uploadBlob(content, name, this.containerClient(container, sas), handler)
@@ -27,7 +27,7 @@ export class AzureBlobStorageService {
     }
 
     public baseStorageURL() {
-        const baseURL = `https://${this.storageAccount}.blob.core.windows.net`;
+        const baseURL = `https://${this.STORAGE_ACCOUNT}.blob.core.windows.net`;
         return baseURL;
     };
 
@@ -68,6 +68,6 @@ export class AzureBlobStorageService {
     }
 
     private containerClient(container: string, sas: string): ContainerClient {
-        return new BlobServiceClient(`https://${this.storageAccount}.blob.core.windows.net?${sas}`).getContainerClient(container);
+        return new BlobServiceClient(`https://${this.STORAGE_ACCOUNT}.blob.core.windows.net?${sas}`).getContainerClient(container);
     }
 }

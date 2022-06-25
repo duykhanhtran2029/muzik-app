@@ -1,13 +1,12 @@
 <div class="navigation">
     <div class="drawer--head">
-        <img  width="32px" height="32px" src="../../../../assets/images/shazam.png"
-            alt="MusicRecognizer" />
+        <img width="32px" height="32px" src="../../../../assets/images/shazam.png" alt="MusicRecognizer" />
         <span>
             Muzik
         </span>
     </div>
     <ul>
-        <li class="list" [class.active] = "currentRoute.includes('home')">
+        <li class="list" [class.active]="currentRoute.includes('home')">
             <a [routerLink]="['home']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">home</mat-icon>
@@ -15,15 +14,15 @@
                 <span class="title">Home</span>
             </a>
         </li>
-        <li class="list" [class.active] = "currentRoute.includes('search')">
-            <a (click) = "openSearchDialog()">
+        <li class="list" [class.active]="currentRoute.includes('search')">
+            <a (click)="openSearchDialog()">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">search</mat-icon>
                 </span>
                 <span class="title">Search</span>
             </a>
         </li>
-        <li class="list" [class.active] = "currentRoute.includes('player')">
+        <li class="list" [class.active]="currentRoute.includes('player')">
             <a [routerLink]="['player']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">music_video</mat-icon>
@@ -31,7 +30,7 @@
                 <span class="title">Player</span>
             </a>
         </li>
-        <li class="list" [class.active] = "currentRoute.includes('playlists')">
+        <li class="list" [class.active]="currentRoute.includes('playlists')">
             <a [routerLink]="['playlists']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">playlist_play</mat-icon>
@@ -39,21 +38,29 @@
                 <span class="title">Playlist</span>
             </a>
         </li>
-        <hr/>
-        <li class="list" [class.active] = "currentRoute.includes('profile')">
-            <a>
-                <span class="icon">
-                    <mat-icon fontSet="material-icons-outlined">account_box</mat-icon>
-                </span>
-                <span class="title">Profile</span>
-            </a>
-        </li>
-        <li class="list" [class.active] = "currentRoute.includes('manager')">
+        <hr />
+        <li class="list" [class.active]="currentRoute.includes('manager')">
             <a [routerLink]="['manager']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">manage_accounts</mat-icon>
                 </span>
                 <span class="title">Manager</span>
+            </a>
+        </li>
+        <li class="list" (click)="authService.logout()">
+            <a>
+                <span class="icon">
+                    <mat-icon fontSet="material-icons-outlined">logout</mat-icon>
+                </span>
+                <span class="title">Logout</span>
+            </a>
+        </li>
+        <li (click)="authService.loginWithRedirect()">
+            <a>
+                <span class="icon">
+                    <mat-icon fontSet="material-icons-outlined">login</mat-icon>
+                </span>
+                <span class="title">Login</span>
             </a>
         </li>
     </ul>

@@ -11,7 +11,7 @@ import { QueryParamsHelper } from './helpers/query-params.helper';
   providedIn: 'root',
 })
 export class MusicPlayerArtistService {
-  API_BASE_URL = environment.apiMusicUrl;
+  API_BASE_URL = environment.MUSIC_API_URL;
 
   constructor(private http: HttpClient) {}
 

@@ -31,8 +31,8 @@ export class AddArtistComponent implements OnInit {
   storageURL = '';
   thumbnail = <File>{};
 
-  imagesContainer = environment.azureStorage.imagesContainer;
-  imagesSAS = environment.azureStorage.imagesSAS;
+  IMAGES_CONTAINER = environment.AZURE_STORAGE_CONFIG.IMAGES_CONTAINER;
+  IMAGES_SAS = environment.AZURE_STORAGE_CONFIG.IMAGES_SAS;
   componentActive = true;
 
   constructor(
@@ -83,8 +83,8 @@ export class AddArtistComponent implements OnInit {
     this.loading = true;
     if (this.thumbnail.name) {
       const thumbnailName = `A-${this.artist.artistId}-${new Date().getTime()}.png`;
-      this.artist.thumbnail = new URL(`${this.storageURL}/${this.imagesContainer}/${thumbnailName}`);
-      this.azureStorageService.upload(this.imagesContainer, this.imagesSAS, this.thumbnail, thumbnailName, () => { });
+      this.artist.thumbnail = new URL(`${this.storageURL}/${this.IMAGES_CONTAINER}/${thumbnailName}`);
+      this.azureStorageService.upload(this.IMAGES_CONTAINER, this.IMAGES_SAS, this.thumbnail, thumbnailName, () => { });
     }
     this.componentStore.createArtistEffect(this.artist);
   }
