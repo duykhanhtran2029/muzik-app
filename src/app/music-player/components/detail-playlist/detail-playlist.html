@@ -1,6 +1,6 @@
 <div class="playlist-desc-container">
-  <div class="playlist-desc-container-inner">
-    <ng-container *ngIf="playlist$ | async as playlist">
+  <ng-container *ngIf="playlist$ | async as playlist">
+    <div class="playlist-desc-container-inner" (click)="openDetail(playlist)">
       <div class="playlist-thumbnail">
         <img [src]="playlist.thumbnail" />
       </div>
@@ -9,8 +9,8 @@
         <h2 class="playlist-name">{{playlist.playlistName}}</h2>
         <p class="playlist-user">{{playlist.sortDescription}}</p>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
 </div>
 <div class="playlist-utils-container">
   <div class="playlist-utils-container-inner">
@@ -18,8 +18,18 @@
       <mat-icon class="playlist-play-icon">play_arrow</mat-icon>
     </button>
     <button mat-icon-button class="playlist-more-btn">
-      <mat-icon class="playlist-more-icon">more_horiz</mat-icon>
+      <mat-icon
+        class="playlist-more-icon"
+        onclick="this.blur()"
+        [matMenuTriggerFor]="menu"
+        >more_horiz</mat-icon
+      >
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Add to queue</button>
+      <button mat-menu-item>Delete</button>
+      <button mat-menu-item>Edit details</button>
+    </mat-menu>
   </div>
 </div>
 <div class="playlist-songs-container">
@@ -27,7 +37,7 @@
     <div class="songs-order">#</div>
     <div class="songs-title">Title</div>
     <div class="songs-duration">
-      <button mat-icon-button>
+      <button mat-icon-button class="option">
         <mat-icon class="playlist-more-icon">av_timer</mat-icon>
       </button>
     </div>

@@ -23,33 +23,35 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
-    declarations: [],
-    exports: [
-        MatToolbarModule,
-        MatIconModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatRippleModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatTableModule,
-        MatFormFieldModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatInputModule,
-        MatSidenavModule,
-        MatListModule,
-        MatSliderModule,
-        MatGridListModule,
-        MatChipsModule,
-        MatTabsModule,
-        MatExpansionModule,
-        MatSelectModule
-    ]
+  declarations: [],
+  exports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatRippleModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSliderModule,
+    MatGridListModule,
+    MatChipsModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+  ],
 })
-export class MusicPlayerSharedMaterialModule { }
+export class MusicPlayerSharedMaterialModule {}

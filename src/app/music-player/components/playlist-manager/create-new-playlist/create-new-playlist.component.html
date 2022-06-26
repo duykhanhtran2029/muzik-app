@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Edit Details</h2>
+<div class="detail-container">
+  <div class="detail-thumbnail">
+    <img [src]="imgSrc" />
+    <div class="background-theme-container">
+      <div class="background-theme-container-inner">
+        <input
+          hidden
+          #fileInput
+          type="file"
+          accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+          (change)="setFile($event)"
+        />
+        <button
+          mat-icon-button
+          class="edit-image-button"
+          (click)="fileInput.click()"
+        >
+          <mat-icon class="edit-image-icon">create</mat-icon>
+        </button>
+        <span>Choose Photo</span>
+      </div>
+    </div>
+  </div>
+  <div class="detail-desc">
+    <mat-form-field appearance="outline" class="detail-title">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Sort Description</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-slide-toggle>Public</mat-slide-toggle>
+    <div class="save-detail">
+      <button class="save-button">Save</button>
+    </div>
+  </div>
+</div>

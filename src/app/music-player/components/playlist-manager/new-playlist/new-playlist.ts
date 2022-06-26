@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-new-playlist',
@@ -7,5 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewPlaylistComponent implements OnInit {
   constructor() {}
+  @Output() createPlaylist = new EventEmitter();
   ngOnInit(): void {}
+
+  openCreate(){
+    this.createPlaylist.emit();
+  }
 }
