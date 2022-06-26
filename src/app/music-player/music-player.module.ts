@@ -46,6 +46,8 @@ import { PlaylistManagerComponent } from './components/playlist-manager/playlist
 import { NewPlaylistComponent } from './components/playlist-manager/new-playlist/new-playlist';
 import { MyPlaylistComponent } from './components/playlist-manager/my-playlist/my-playlist';
 import { DetailPlaylistComponent } from './components/detail-playlist/detail-playlist';
+import { DetailPlaylistInformationComponent } from './components/detail-playlist/detail-information/detail-information.component';
+import { CreateNewPlaylistComponent } from './components/playlist-manager/create-new-playlist/create-new-playlist.component';
 import { PlaylistSongComponent } from './components/detail-playlist/playlist-song/playlist-song';
 import { PlaylistRecommendSongComponent } from './components/detail-playlist/playlist-recommend-song/playlist-recommend-song.component';
 import { ArtistDetailComponent } from './components/manager/manager-artists/artist-detail/artist-detail.component';
@@ -90,6 +92,8 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     ManagerSongsComponent,
     ManagerArtistsComponent,
     PlaylistManagerComponent,
+    DetailPlaylistInformationComponent,
+    CreateNewPlaylistComponent,
     DetailPlaylistComponent,
     MyPlaylistComponent,
     NewPlaylistComponent,

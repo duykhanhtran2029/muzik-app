@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PlaylistStore } from './detail-playlist.store';
 import { Song } from 'src/app/interfaces/song.interface';
-import { PlaylistSong } from 'src/app/interfaces/playlist.interface';
+import { Playlist, PlaylistSong } from 'src/app/interfaces/playlist.interface';
 import { takeWhile } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -16,6 +16,8 @@ import {
   // ...
 } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
 
 @Component({
   selector: 'app-detail-playlist',
@@ -52,7 +54,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class DetailPlaylistComponent implements OnInit {
   constructor(
     private componentStore: PlaylistStore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
   songs$ = this.componentStore.songs$;
   playlist$ = this.componentStore.playlist$;
@@ -60,6 +63,7 @@ export class DetailPlaylistComponent implements OnInit {
   selectedSong: Song;
   playlistId: string;
   selectRecommendSong: Song;
+  detailDialogRef: MatDialogRef<DetailPlaylistInformationComponent>;
 
   ngOnInit(): void {
     this.playlistId = this.route.snapshot.paramMap.get('id');
@@ -81,5 +85,13 @@ export class DetailPlaylistComponent implements OnInit {
 
     this.componentStore.addSongToPlaylistEffect(playlistSong);
     this.selectRecommendSong = undefined;
+  }
+  openDetail(playlist: Playlist) {
+    this.detailDialogRef = this.dialog.open(
+      DetailPlaylistInformationComponent,
+      {
+        data: playlist,
+      }
+    );
   }
 }
