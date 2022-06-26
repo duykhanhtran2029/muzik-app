@@ -11,8 +11,8 @@ import { QueryParamsHelper } from './helpers/query-params.helper';
   providedIn: 'root',
 })
 export class MusicPlayerPlaylistService {
-  API_BASE_URL = environment.apiMusicUrl;
-  RECOMMEND_URL = environment.apiRecommendUrl;
+  API_BASE_URL = environment.MUSIC_API_URL;
+  RECOMMEND_URL = environment.RECOMMEND_API_URL;
 
   constructor(private http: HttpClient) {}
 
@@ -39,15 +39,15 @@ export class MusicPlayerPlaylistService {
     );
   }
 
-  getPlaylistsByUserId(userId: number): Observable<Playlist[]> {
+  getPlaylistsByUserId(userId: string): Observable<Playlist[]> {
     return this.http.get<Playlist[]>(
       `${this.API_BASE_URL}/api/Playlists/userID/${userId}`
     );
   }
 
-  addSongToPlaylist(playlistSong: PlaylistSong): Observable<PlaylistSong> {
-    return this.http.post<PlaylistSong>(
-      `${this.API_BASE_URL}/api/PlaylistSong`,
+  addSongToPlaylist(playlistSong: PlaylistSong): Observable<Song[]> {
+    return this.http.post<Song[]>(
+      `${this.API_BASE_URL}/api/PlaylistSongs`,
       playlistSong
     );
   }

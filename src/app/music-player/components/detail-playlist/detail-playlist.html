@@ -55,6 +55,7 @@
         [isSelected]="selectRecommendSong === song"
         [index]="i + 1"
         [song]="song"
+        (addSong)="addSongToPlaylist($event)"
       ></app-playlist-recommend-song>
     </ng-container>
   </ng-container>

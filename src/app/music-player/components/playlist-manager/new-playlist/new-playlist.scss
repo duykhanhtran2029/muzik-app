@@ -4,9 +4,9 @@
   align-items: center;
   height: 100%;
   border-radius: 5px;
-  background: linear-gradient(149.46deg, #450af5, #8e8ee5 99.16%);
   cursor: pointer;
   transition: all linear 0.1s;
+  border: 1px solid #fff;
 
   &-inner {
     display: flex;

@@ -2,7 +2,7 @@ export interface Playlist{
   playlistId: string;
   playlistName: string;
   thumbnail: URL;
-	userID: number;
+	userID: string;
 	sortDescription: string;
   isDeleted: boolean;
   isPrivate: boolean;
