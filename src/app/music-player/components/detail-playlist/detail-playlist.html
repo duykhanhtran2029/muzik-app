@@ -32,16 +32,17 @@
       </button>
     </div>
   </div>
-  <ng-container *ngIf="songs$ | async as songs">
-    <ng-container *ngFor="let song of songs; let i = index">
+  <div @list *ngIf="songs$ | async as songs">
+    <div cdkDropList @items *ngFor="let song of songs; let i = index">
       <app-playlist-song
         (click)="selectedSong = song; selectRecommendSong = undefined"
         [isSelected]="selectedSong === song"
         [index]="i + 1"
         [song]="song"
+        cdkDrag
       ></app-playlist-song>
-    </ng-container>
-  </ng-container>
+    </div>
+  </div>
   <div class="playlist-recommend-container">
     <div class="recommend-head">
       <h2 class="recommend-title">Recommended</h2>
@@ -49,7 +50,7 @@
     </div>
   </div>
   <ng-container *ngIf="recommendSongs$ | async as recommendSongs">
-    <ng-container *ngFor="let song of recommendSongs; let i = index">
+    <div @items *ngFor="let song of recommendSongs; let i = index">
       <app-playlist-recommend-song
         (click)="selectRecommendSong = song; selectedSong = undefined"
         [isSelected]="selectRecommendSong === song"
@@ -57,7 +58,7 @@
         [song]="song"
         (addSong)="addSongToPlaylist($event)"
       ></app-playlist-recommend-song>
-    </ng-container>
+    </div>
   </ng-container>
   <div class="refresh-recommend">
     <h2>Refresh</h2>
