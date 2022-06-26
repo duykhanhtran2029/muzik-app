@@ -17,6 +17,7 @@ export class PlaylistSongComponent implements OnInit, OnDestroy {
   @Input() index: number;
   @Input() song: Song;
   @Input() isSelected = false;
+  
   duration: string;
   componentActive = true;
   state: StreamState;

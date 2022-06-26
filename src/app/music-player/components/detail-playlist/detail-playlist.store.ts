@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { mergeMap, Observable, switchMap, tap } from 'rxjs';
-import { Playlist } from 'src/app/interfaces/playlist.interface';
+import { map, mergeMap, Observable, switchMap, tap } from 'rxjs';
+import { Playlist, PlaylistSong } from 'src/app/interfaces/playlist.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 import { MusicPlayerPlaylistService } from '../../services/music-player.playlist.service';
@@ -13,6 +13,7 @@ export interface SongState {
   getPlaylistSongsStatus: ApiRequestStatus;
   playlist: Playlist;
   getPlaylistStatus: ApiRequestStatus;
+  addSongToPlaylistStatus: ApiRequestStatus;
   recommendSongs: Song[];
   getPlaylistRecommendSongsStatus: ApiRequestStatus;
 }
@@ -21,6 +22,7 @@ export const initialState: SongState = {
   getPlaylistSongsStatus: undefined,
   playlist: undefined,
   getPlaylistStatus: undefined,
+  addSongToPlaylistStatus: undefined,
   recommendSongs: [],
   getPlaylistRecommendSongsStatus: undefined,
 };
@@ -37,6 +39,9 @@ export class PlaylistStore extends ComponentStore<SongState> {
   );
   readonly getPlaylistStatus$: Observable<ApiRequestStatus> = this.select(
     (state) => state.getPlaylistStatus
+  );
+  readonly addSongToPlaylistStatus$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.addSongToPlaylistStatus
   );
 
   readonly recommendSongs$: Observable<Song[]> = this.select(
@@ -71,12 +76,29 @@ export class PlaylistStore extends ComponentStore<SongState> {
     })
   );
 
+  readonly updateAddSongToPlaylistStatus = this.updater(
+    (state, addSongToPlaylistStatus: ApiRequestStatus) => ({
+      ...state,
+      addSongToPlaylistStatus,
+    })
+  );
+
   readonly updateRecommendSongs = this.updater(
     (state, recommendSongs: Song[]) => ({
       ...state,
       recommendSongs,
     })
   );
+
+  readonly deletFromRecommendSongs = this.updater((state, songId: string) => {
+    const recSongs: Song[] = state.recommendSongs.filter(
+      (song) => song.songId != songId
+    );
+    return {
+      ...state,
+      recommendSongs: recSongs,
+    };
+  });
 
   readonly updateGetPlaylistRecommendSongsStatus = this.updater(
     (state, getPlaylistRecommendSongsStatus: ApiRequestStatus) => ({
@@ -113,7 +135,6 @@ export class PlaylistStore extends ComponentStore<SongState> {
         this.playlistService.getPlaylist(playlistId).pipe(
           tapResponse(
             (playlist) => {
-              console.log(playlist);
               this.updatePlaylist(playlist);
               this.updateGetPlaylistStatus(ApiRequestStatus.Success);
             },
@@ -124,6 +145,29 @@ export class PlaylistStore extends ComponentStore<SongState> {
         )
       )
     )
+  );
+
+  readonly addSongToPlaylistEffect = this.effect(
+    (playlistSong$: Observable<PlaylistSong>) =>
+      playlistSong$.pipe(
+        tap(() =>
+          this.updateAddSongToPlaylistStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((song) =>
+          this.playlistService.addSongToPlaylist(song).pipe(
+            tapResponse(
+              (songs) => {
+                this.deletFromRecommendSongs(song.songId);
+                this.updateSongs(songs);
+                this.updateAddSongToPlaylistStatus(ApiRequestStatus.Success);
+              },
+              (err) => {
+                this.updateAddSongToPlaylistStatus(ApiRequestStatus.Fail);
+              }
+            )
+          )
+        )
+      )
   );
 
   readonly getRecommendSongsEffect = this.effect(
@@ -138,7 +182,6 @@ export class PlaylistStore extends ComponentStore<SongState> {
           this.playlistService.getPlaylistRecommendSongs(playlistId).pipe(
             tapResponse(
               (songs) => {
-                console.log(songs);
                 this.updateRecommendSongs(songs);
                 this.updateGetPlaylistRecommendSongsStatus(
                   ApiRequestStatus.Success

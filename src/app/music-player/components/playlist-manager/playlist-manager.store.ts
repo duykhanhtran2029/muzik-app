@@ -27,7 +27,7 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
 
   readonly updatePlaylists = this.updater((state, playlists: Playlist[]) => ({
     ...state,
-		playlists
+    playlists,
   }));
 
   readonly updateGetTrendingPlaylistsStatus = this.updater(
@@ -42,11 +42,14 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
   //#region ***Effects***
   readonly getPlaylistsEffect = this.effect((event$) =>
     event$.pipe(
-      tap(() => this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Requesting)),
+      tap(() =>
+        this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Requesting)
+      ),
       switchMap(() =>
-        this.playlistService.getPlaylistsByUserId(2).pipe(
+        this.playlistService.getPlaylistsByUserId("google-oauth2|114795482044392002727").pipe(
           tapResponse(
             (playlists) => {
+              console.log(playlists);
               this.updatePlaylists(playlists);
               this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Success);
             },
@@ -60,9 +63,7 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
   );
   //#endregion
 
-  constructor(
-		private playlistService: MusicPlayerPlaylistService
-  ) {
+  constructor(private playlistService: MusicPlayerPlaylistService) {
     super(initialState);
   }
 }
