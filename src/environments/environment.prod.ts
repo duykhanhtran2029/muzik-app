@@ -12,15 +12,21 @@ export const environment = {
     BEATS_CONTAINER: 'beats',
     LYRICS_CONTAINER: 'lyrics',
     /** SAS */
-    IMAGES_SAS: 'sp=racwdli&st=2022-06-05T13:44:09Z&se=2025-06-05T21:44:09Z&sv=2020-08-04&sr=c&sig=uDzdHjP5ggKh%2Funxi7U%2B1FREhQ%2FpoM6mBKp2dMGTFAo%3D',
-    SONGS_SAS: 'sp=racwdli&st=2022-06-06T18:55:44Z&se=2025-06-07T02:55:44Z&spr=https&sv=2020-08-04&sr=c&sig=k4OAsmqD%2Bx8L9mLB9po9Rq2nggPGjndvgDnvs7%2F%2Bc%2F4%3D',
-    RECORDS_SAS: 'sp=racwdli&st=2022-06-07T17:02:21Z&se=2025-06-08T01:02:21Z&sv=2020-08-04&sr=c&sig=0vADbuRg8JP2LT14%2FRXTbG3K%2Bt6lRCB9w%2BbqEFXArlg%3D',
-    LYRICS_SAS: 'sp=racwdli&st=2022-06-06T13:54:59Z&se=2025-06-06T21:54:59Z&spr=https&sv=2020-08-04&sr=c&sig=lZpu5CkjZA3MUY4dJlZnHrS%2FuPXvRzzMZxKO9%2B3BHok%3D',
-    BEATS_SAS: 'sp=racwdli&st=2022-06-06T13:55:22Z&se=2025-06-06T21:55:22Z&spr=https&sv=2020-08-04&sr=c&sig=Jrddr5Vh78UB6rsuxfWdq55vtrhtCHBRKY9n5AC90CM%3D'
+    IMAGES_SAS: 'sp=racwdl&st=2022-06-27T17:42:48Z&se=2023-06-28T01:42:48Z&sv=2021-06-08&sr=c&sig=%2Fmf7kM5KOBxfO4eVnQxhXCpQzbvpSxhyuyEhq9Nsjlc%3D',
+    SONGS_SAS: 'sp=racwdl&st=2022-06-27T17:46:07Z&se=2023-06-28T01:46:07Z&sv=2021-06-08&sr=c&sig=R7apxT%2BgknANSHVngYn00CWqhSjjGQD3rT7%2BpeV9tTU%3D',
+    RECORDS_SAS: 'sp=racwdl&st=2022-06-27T17:45:14Z&se=2023-06-28T01:45:14Z&sv=2021-06-08&sr=c&sig=otY8l0Ve4bWOXzoezUGg0wvyJ%2FDyRpkAMDYudBcynG8%3D',
+    LYRICS_SAS: 'sp=racwdl&st=2022-06-27T17:44:09Z&se=2023-06-28T01:44:09Z&sv=2021-06-08&sr=c&sig=kxnZrVhl7vdSluNt7OtslaEVxQqNvnKyYCdnaiyta00%3D',
+    BEATS_SAS: 'sp=racwdl&st=2022-06-27T17:41:32Z&se=2023-06-28T01:41:32Z&sv=2021-06-08&sr=c&sig=%2FH6MY4fAIqpvFQlN4mQeFGsPPp328MU27D1mapwb4Kk%3D'
   },
   AUTH0_CONFIG: {
     CLIENT_ID: 's7t6cdqpEvgHDlbQNfsdh2td42tBHEdC',
-    DOMAIN: 'dev-music-player.eu.auth0.com',
-    REDIRECT_URI: window.location.origin
+    API_CLIENT_ID: 'cR0sryN6DvLrHWI7OBR3S8IsQzw0fqfv',
+    API_CLIENT_SECRET: 'WWXdk1O5jSeCj1R67pQLAAsxlgcL0_hQhB0eTAwLOVhPap6MbZNnYlJ8RWnIphOg',
+    DOMAIN: 'https://dev-music-player.eu.auth0.com',
+    REDIRECT_URI: window.location.origin,
+    RESPONSE_TYPE: 'code',
+		SCOPE: 'read:users read:roles read:role_members',
+    AUDIENCE: 'https://dev-music-player.eu.auth0.com/api/v2/',
+    ADMIN_ROLE_ID: 'rol_ikwrDz52CduoaWg8'
   }
 };
