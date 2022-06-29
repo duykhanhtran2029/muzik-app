@@ -17,7 +17,6 @@ import { UpdateSongComponent } from './components/manager/manager-songs/update-s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
-import { LoginComponent } from './components/login/login.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
 import { QueueComponent } from './components/queue/queue.component';
@@ -62,7 +61,6 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     UpdateSongComponent,
     AddSongComponent,
     VisualizationComponent,
-    LoginComponent,
     SideNavComponent,
     TracksControlComponent,
     QueueComponent,

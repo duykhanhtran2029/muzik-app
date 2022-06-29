@@ -5,19 +5,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class Auth0Service {
+export class AuthHelperService {
 
   constructor(private http: HttpClient) { }
-
-  private _isAdmin = false;
-
-  get isAdmin(): boolean {
-    return this._isAdmin;
-  }
-
-  setRole(roleId: string) {
-    this._isAdmin = roleId === environment.AUTH0_CONFIG.ADMIN_ROLE_ID;
-  }
 
   getAPIAccessToken() {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -31,6 +21,8 @@ export class Auth0Service {
   }
 
   getUserRoles(token: string, userId: string) {
+    if(userId === null)
+      return null;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

@@ -8,6 +8,7 @@ import { MusicPlayerComponent } from '../components/music-player/music-player.co
 import { PlaylistManagerComponent } from '../components/playlist-manager/playlist-manager.component';
 import { RecorderComponent } from '../components/recorder/recorder.component';
 import { ResultComponent } from '../components/result/result.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'recognizer', component: RecorderComponent },
       { path: 'result', component: ResultComponent },
-      { path: 'manager', component: ManagerComponent },
+      { path: 'manager', component: ManagerComponent, canActivate: [AuthGuard] },
       { path: 'player', component: MusicPlayerComponent },
       { path: 'artist/:id', component: ArtistComponent, pathMatch: 'full' },
       { path: 'playlists', component: PlaylistManagerComponent },

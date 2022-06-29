@@ -39,7 +39,7 @@
             </a>
         </li>
         <hr />
-        <li class="list" [class.active]="currentRoute.includes('manager')">
+        <li class="list" *ngIf="isAdmin" [class.active]="currentRoute.includes('manager')">
             <a [routerLink]="['manager']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">manage_accounts</mat-icon>
@@ -47,7 +47,7 @@
                 <span class="title">Manager</span>
             </a>
         </li>
-        <li class="list" (click)="authService.logout()">
+        <li class="list" *ngIf="isAuthenticated" (click)="onLogout()">
             <a>
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">logout</mat-icon>
@@ -55,7 +55,7 @@
                 <span class="title">Logout</span>
             </a>
         </li>
-        <li (click)="authService.loginWithRedirect()">
+        <li class="list" *ngIf="!isAuthenticated" (click)="onLogin()">
             <a>
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">login</mat-icon>

@@ -14,3 +14,8 @@ export const getFingerPrintingResult = createSelector(
     SongFeatureSelector,
     state => state.fingerPrintingResult
 );
+
+export const getIsAdmin = createSelector(
+    SongFeatureSelector,
+    state => state.isAdmin
+);

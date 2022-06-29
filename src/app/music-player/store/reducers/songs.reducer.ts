@@ -10,6 +10,7 @@ export interface SongsState extends EntityState<Song> {
   fingerPrintingResult: FingerPrintingResult;
   getSongsStatus: ApiRequestStatus;
   fingerPrintingStatus: ApiRequestStatus;
+  isAdmin: boolean;
 }
 
 export const initialState = <SongsState>{};
@@ -50,10 +51,8 @@ export const songReducer = createReducer(
     fingerPrintingStatus: ApiRequestStatus.Fail,
   })),
 
-
-  on(actions.cleanState, (state) => ({
+  on(actions.setIsAdmin, (state, action) => ({
     ...state,
-    getSongsStatus: undefined,
-    fingerPrintingStatus: undefined,
-  }))
+    isAdmin: action.isAdmin
+  })),
 );

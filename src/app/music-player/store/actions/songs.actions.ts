@@ -30,4 +30,7 @@ export const fingerPrintingFailure = createAction(
   props<{ error: string }>()
 );
 
-export const cleanState = createAction('[Audio Recognizer API] Clean state');
+export const setIsAdmin = createAction(
+  '[Auth0] Set IsAdmin',
+  props<{ isAdmin: boolean }>()
+);
