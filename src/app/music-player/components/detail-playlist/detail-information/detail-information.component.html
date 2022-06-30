@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Edit Details</h2>
-<div class="detail-container">
+<img *ngIf="loading" src="../../../../../assets/images/loader.gif" />
+<div *ngIf="!loading" class="detail-container">
   <div class="detail-thumbnail">
     <img [src]="imgSrc" />
     <div class="background-theme-container">
@@ -25,19 +26,19 @@
   <div class="detail-desc">
     <mat-form-field appearance="outline" class="detail-title">
       <mat-label>Title</mat-label>
-      <input matInput type="text" [(ngModel)]="playlistName" />
+      <input matInput type="text" [(ngModel)]="playlist.playlistName" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Sort Description</mat-label>
       <textarea
         matInput
         placeholder="Ex. It makes me feel..."
-        [(ngModel)]="sortDescription"
+        [(ngModel)]="playlist.sortDescription"
       ></textarea>
     </mat-form-field>
-    <mat-slide-toggle [checked]="!isPrivate">Public</mat-slide-toggle>
+    <mat-slide-toggle (change)="setValue($event)">Public</mat-slide-toggle>
     <div class="save-detail">
-      <button class="save-button">Save</button>
+      <button class="save-button" (click)="save()">Save</button>
     </div>
   </div>
 </div>

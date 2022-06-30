@@ -8,10 +8,12 @@ import { MusicPlayerPlaylistService } from '../../services/music-player.playlist
 export interface PlaylistState {
   playlists: Playlist[];
   getTrendingPlaylistsStatus: ApiRequestStatus;
+  createPlaylistsStatus: ApiRequestStatus;
 }
 export const initialState: PlaylistState = {
   playlists: [],
   getTrendingPlaylistsStatus: undefined,
+  createPlaylistsStatus: undefined,
 };
 @Injectable()
 export class PlaylistsStore extends ComponentStore<PlaylistState> {
@@ -19,8 +21,13 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
   readonly playlists$: Observable<Playlist[]> = this.select(
     (state) => state.playlists
   );
+
   readonly getTrendingPlaylistsStatus$: Observable<ApiRequestStatus> =
     this.select((state) => state.getTrendingPlaylistsStatus);
+
+  readonly createPlaylistStatus$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.createPlaylistsStatus
+  );
   //#endregion
 
   //#region ***Updaters (Reducers in @ngrx/store term)***
@@ -37,6 +44,12 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
     })
   );
 
+  readonly updateCreatePlaylistsStatus = this.updater(
+    (state, createPlaylistsStatus: ApiRequestStatus) => ({
+      ...state,
+      createPlaylistsStatus,
+    })
+  );
   //#endregion
 
   //#region ***Effects***
@@ -46,20 +59,42 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
         this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Requesting)
       ),
       switchMap(() =>
-        this.playlistService.getPlaylistsByUserId("google-oauth2|114795482044392002727").pipe(
-          tapResponse(
-            (playlists) => {
-              console.log(playlists);
-              this.updatePlaylists(playlists);
-              this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Success);
-            },
-            (err) => {
-              this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Fail);
-            }
+        this.playlistService
+          .getPlaylistsByUserId('google-oauth2|114795482044392002727')
+          .pipe(
+            tapResponse(
+              (playlists) => {
+                this.updatePlaylists(playlists);
+                this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Success);
+              },
+              (err) => {
+                this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Fail);
+              }
+            )
+          )
+      )
+    )
+  );
+
+  readonly createPlaylistsEffect = this.effect(
+    (playlist$: Observable<Playlist>) =>
+      playlist$.pipe(
+        tap(() =>
+          this.updateCreatePlaylistsStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((playlist) =>
+          this.playlistService.createPlaylist(playlist).pipe(
+            tapResponse(
+              () => {
+                this.updateCreatePlaylistsStatus(ApiRequestStatus.Success);
+              },
+              (err) => {
+                this.updateCreatePlaylistsStatus(ApiRequestStatus.Fail);
+              }
+            )
           )
         )
       )
-    )
   );
   //#endregion
 

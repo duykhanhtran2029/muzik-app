@@ -16,8 +16,13 @@ import {
   // ...
 } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MatDialog,
+  MatDialogConfig,
+} from '@angular/material/dialog';
 import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail-playlist',
@@ -55,7 +60,8 @@ export class DetailPlaylistComponent implements OnInit {
   constructor(
     private componentStore: PlaylistStore,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {}
   songs$ = this.componentStore.songs$;
   playlist$ = this.componentStore.playlist$;
@@ -90,8 +96,25 @@ export class DetailPlaylistComponent implements OnInit {
     this.detailDialogRef = this.dialog.open(
       DetailPlaylistInformationComponent,
       {
-        data: playlist,
+        data: {
+          playlist: playlist,
+          store: this.componentStore,
+        },
       }
     );
+
+    this.detailDialogRef.afterClosed().subscribe((created) => {
+      switch (created) {
+        case undefined:
+          break;
+        case false:
+          this.toastr.error('Failed', 'Playlist Created Failed');
+          break;
+        default:
+          this.toastr.success('Success', 'Playlist Created');
+          this.componentStore.getPlaylistEffect(this.playlistId);
+          break;
+      }
+    });
   }
 }
