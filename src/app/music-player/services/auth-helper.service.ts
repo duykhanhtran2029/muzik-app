@@ -21,8 +21,6 @@ export class AuthHelperService {
   }
 
   getUserRoles(token: string, userId: string) {
-    if(userId === null)
-      return null;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

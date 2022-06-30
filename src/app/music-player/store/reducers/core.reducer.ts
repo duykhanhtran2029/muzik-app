@@ -51,10 +51,5 @@ export const coreReducer = createReducer(
   on(actions.setUserId, (state, action) => ({
     ...state,
     userId: action.userId
-  })),
-
-  on(actions.setIsAuthenticated, (state, action) => ({
-    ...state,
-    isAuthenticated: action.isAuthenticated
-  })),
+  }))
 );

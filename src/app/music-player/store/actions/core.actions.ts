@@ -38,8 +38,3 @@ export const setUserId = createAction(
   '[Auth0] Set UserId',
   props<{ userId: string }>()
 );
-
-export const setIsAuthenticated = createAction(
-  '[Auth0] Set IsAuthenticated',
-  props<{ isAuthenticated: boolean }>()
-);
