@@ -52,7 +52,17 @@ export class MusicPlayerPlaylistService {
     );
   }
 
-  createPlaylist(artist: RawArtist): Observable<Artist> {
-    return this.http.post<Artist>(`${this.API_BASE_URL}/api/Artists`, artist);
+  createPlaylist(playlist: Playlist): Observable<Playlist> {
+    return this.http.post<Playlist>(
+      `${this.API_BASE_URL}/api/Playlists`,
+      playlist
+    );
+  }
+
+  updatePlaylist(playlist: Playlist): Observable<Playlist> {
+    return this.http.put<Playlist>(
+      `${this.API_BASE_URL}/api/Playlists/${playlist.playlistId}`,
+      playlist
+    );
   }
 }

@@ -16,6 +16,7 @@ export interface SongState {
   addSongToPlaylistStatus: ApiRequestStatus;
   recommendSongs: Song[];
   getPlaylistRecommendSongsStatus: ApiRequestStatus;
+  updatePlaylistStatus: ApiRequestStatus;
 }
 export const initialState: SongState = {
   songs: [],
@@ -25,6 +26,7 @@ export const initialState: SongState = {
   addSongToPlaylistStatus: undefined,
   recommendSongs: [],
   getPlaylistRecommendSongsStatus: undefined,
+  updatePlaylistStatus: undefined,
 };
 @Injectable()
 export class PlaylistStore extends ComponentStore<SongState> {
@@ -49,6 +51,10 @@ export class PlaylistStore extends ComponentStore<SongState> {
   );
   readonly getPlaylistRecommendSongsStatus$: Observable<ApiRequestStatus> =
     this.select((state) => state.getPlaylistRecommendSongsStatus);
+
+  readonly getUpdatePlaylistStatus$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.updatePlaylistStatus
+  );
   //#endregion
 
   //#region ***Updaters (Reducers in @ngrx/store term)***
@@ -106,6 +112,15 @@ export class PlaylistStore extends ComponentStore<SongState> {
       getPlaylistRecommendSongsStatus,
     })
   );
+
+   readonly updateUpdatePlaylistStatus = this.updater(
+    (state, updatePlaylistStatus: ApiRequestStatus) => ({
+      ...state,
+      updatePlaylistStatus,
+    })
+  );
+
+  
   //#endregion
 
   //#region ***Effects***
@@ -191,6 +206,27 @@ export class PlaylistStore extends ComponentStore<SongState> {
                 this.updateGetPlaylistRecommendSongsStatus(
                   ApiRequestStatus.Fail
                 );
+              }
+            )
+          )
+        )
+      )
+  );
+
+  readonly updatePlaylistEffect = this.effect(
+    (playlist$: Observable<Playlist>) =>
+      playlist$.pipe(
+        tap(() =>
+          this.updateUpdatePlaylistStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((playlist) =>
+          this.playlistService.updatePlaylist(playlist).pipe(
+            tapResponse(
+              () => {
+                this.updateUpdatePlaylistStatus(ApiRequestStatus.Success);
+              },
+              (err) => {
+                this.updateUpdatePlaylistStatus(ApiRequestStatus.Fail);
               }
             )
           )

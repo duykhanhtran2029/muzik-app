@@ -1,6 +1,6 @@
 <div class="title">Playlists</div>
 <div class="playlists-container">
-  <app-new-playlist (createPlaylist)="createNewPlaylist()"></app-new-playlist>
+  <app-new-playlist (createPlaylist)="openNewPlaylist()"></app-new-playlist>
   <ng-container *ngIf="playlists$ | async as playlists">
     <ng-container *ngFor="let playlist of playlists">
       <app-playlist [playlist]="playlist"></app-playlist>
