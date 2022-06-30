@@ -5,7 +5,7 @@ import {
   FingerPrintingResult, MatchedSong,
 } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { AppState } from 'src/app/store/reducers';
-import { getFingerPrintingResult } from '../../store/selectors/songs.selector';
+import { getFingerPrintingResult } from '../../store/selectors/core.selector';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SongDetailComponent } from '../manager/manager-songs/song-detail/song-detail.component';
 import { ResultStore } from './result.store';

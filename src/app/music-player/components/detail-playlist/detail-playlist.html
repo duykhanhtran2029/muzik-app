@@ -1,0 +1,76 @@
+<div class="playlist-desc-container">
+  <ng-container *ngIf="playlist$ | async as playlist">
+    <div class="playlist-desc-container-inner" (click)="openDetail(playlist)">
+      <div class="playlist-thumbnail">
+        <img [src]="playlist.thumbnail" />
+      </div>
+      <div class="playlist-info">
+        <h3 class="playlist-title">Playlist</h3>
+        <h2 class="playlist-name">{{playlist.playlistName}}</h2>
+        <p class="playlist-user">{{playlist.sortDescription}}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="playlist-utils-container">
+  <div class="playlist-utils-container-inner">
+    <button mat-mini-fab class="playlist-play-btn">
+      <mat-icon class="playlist-play-icon">play_arrow</mat-icon>
+    </button>
+    <button mat-icon-button class="playlist-more-btn">
+      <mat-icon
+        class="playlist-more-icon"
+        onclick="this.blur()"
+        [matMenuTriggerFor]="menu"
+        >more_horiz</mat-icon
+      >
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Add to queue</button>
+      <button mat-menu-item>Delete</button>
+      <button mat-menu-item>Edit details</button>
+    </mat-menu>
+  </div>
+</div>
+<div class="playlist-songs-container">
+  <div class="songs-head">
+    <div class="songs-order">#</div>
+    <div class="songs-title">Title</div>
+    <div class="songs-duration">
+      <button mat-icon-button class="option">
+        <mat-icon class="playlist-more-icon">av_timer</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div @list *ngIf="songs$ | async as songs">
+    <div cdkDropList @items *ngFor="let song of songs; let i = index">
+      <app-playlist-song
+        (click)="selectedSong = song; selectRecommendSong = undefined"
+        [isSelected]="selectedSong === song"
+        [index]="i + 1"
+        [song]="song"
+        cdkDrag
+      ></app-playlist-song>
+    </div>
+  </div>
+  <div class="playlist-recommend-container">
+    <div class="recommend-head">
+      <h2 class="recommend-title">Recommended</h2>
+      <div class="recommend-desc">Based on what's in this playlist</div>
+    </div>
+  </div>
+  <ng-container *ngIf="recommendSongs$ | async as recommendSongs">
+    <div @items *ngFor="let song of recommendSongs; let i = index">
+      <app-playlist-recommend-song
+        (click)="selectRecommendSong = song; selectedSong = undefined"
+        [isSelected]="selectRecommendSong === song"
+        [index]="i + 1"
+        [song]="song"
+        (addSong)="addSongToPlaylist($event)"
+      ></app-playlist-recommend-song>
+    </div>
+  </ng-container>
+  <div class="refresh-recommend">
+    <h2>Refresh</h2>
+  </div>
+</div>

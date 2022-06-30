@@ -8,14 +8,14 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, takeWhile, tap } from 'rxjs';
 import { Song } from 'src/app/interfaces/song.interface';
-import { getAllSongs } from 'src/app/music-player/store/selectors/songs.selector';
+import { getAllSongs } from 'src/app/music-player/store/selectors/core.selector';
 import { AppState } from 'src/app/store/reducers';
 import { ManagerSongsStore } from './manager-songs.store';
 import { AddSongComponent } from './add-song/add-song.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { UpdateSongComponent } from './update-song/update-song.component';
-import * as SongAction from '../../../store/actions/songs.actions';
+import * as SongAction from '../../../store/actions/core.actions';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 
 

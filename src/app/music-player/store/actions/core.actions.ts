@@ -1,4 +1,3 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
@@ -33,4 +32,14 @@ export const fingerPrintingFailure = createAction(
 export const setIsAdmin = createAction(
   '[Auth0] Set IsAdmin',
   props<{ isAdmin: boolean }>()
+);
+
+export const setUserId = createAction(
+  '[Auth0] Set UserId',
+  props<{ userId: string }>()
+);
+
+export const setIsAuthenticated = createAction(
+  '[Auth0] Set IsAuthenticated',
+  props<{ isAuthenticated: boolean }>()
 );

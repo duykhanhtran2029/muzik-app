@@ -1,0 +1,14 @@
+<div class="playlist-container" (click)="openPlaylist(playlist.playlistId)">
+  <div class="playlist-container-inner">
+    <div class="playlist-thumbnail">
+      <img [src]="playlist.thumbnail" alt="shazam" />
+    </div>
+    <div class="playlist-desc">
+      <h3 class="playlist-title">{{playlist.playlistName}}</h3>
+      <p class="playlist-author">By Tri</p>
+    </div>
+    <button mat-mini-fab color="primary" class="playlist-button">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </div>
+</div>

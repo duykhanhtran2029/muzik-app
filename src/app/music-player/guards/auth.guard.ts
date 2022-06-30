@@ -4,7 +4,7 @@ import { AppState } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
-import { getIsAdmin } from '../store/selectors/songs.selector';
+import { getIsAdmin } from '../store/selectors/core.selector';
 
 
 @Injectable({

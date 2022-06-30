@@ -5,7 +5,6 @@ const routes: Routes = [
   { path: '', redirectTo: 'app', pathMatch: 'full' },
   {
       path: 'app',
-      //canActivate: [AuthGuard],
       loadChildren: () => import('./music-player/music-player.module').then(m => m.MusicPlayerModule)
   },
   //{ path: 'error', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },

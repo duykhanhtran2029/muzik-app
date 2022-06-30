@@ -1,5 +1,10 @@
 import { Injectable, NgModule } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HammerModule,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +17,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
-import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import {
+  ServiceWorkerModule,
+  SwRegistrationOptions,
+} from '@angular/service-worker';
 import { AuthModule } from '@auth0/auth0-angular';
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
@@ -22,9 +30,7 @@ export class HammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,7 +43,7 @@ export class HammerConfig extends HammerGestureConfig {
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     ServiceWorkerModule.register('ngsw-worker.js', {
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
     AuthModule.forRoot({
       domain: environment.AUTH0_CONFIG.DOMAIN,
@@ -60,13 +66,13 @@ export class HammerConfig extends HammerGestureConfig {
   providers: [
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: HammerConfig
+      useClass: HammerConfig,
     },
     {
       provide: SwRegistrationOptions,
       useFactory: () => ({ enabled: environment.production }),
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

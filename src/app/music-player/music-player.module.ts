@@ -8,8 +8,8 @@ import { MusicPlayerSharedMaterialModule } from './sub-modules/music-player-mate
 import { ManagerComponent } from './components/manager/manager.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { songReducer } from './store/reducers/songs.reducer';
-import { SongEffects } from './store/effects/songs.effects';
+import { coreReducer } from './store/reducers/core.reducer';
+import { CoreEffects } from './store/effects/core.effects';
 import { ResultComponent } from './components/result/result.component';
 import { SongDetailComponent } from './components/manager/manager-songs/song-detail/song-detail.component';
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
@@ -42,7 +42,13 @@ import { StrictSongComponent } from './components/strict-song/strict-song.compon
 import { ManagerSongsComponent } from './components/manager/manager-songs/manager-songs.component';
 import { ManagerArtistsComponent } from './components/manager/manager-artists/manager-artists.component';
 import { PlaylistManagerComponent } from './components/playlist-manager/playlist-manager.component';
-import { PlaylistComponent } from './components/playlist-manager/playlist/playlist.component';
+import { NewPlaylistComponent } from './components/playlist-manager/new-playlist/new-playlist';
+import { MyPlaylistComponent } from './components/playlist-manager/my-playlist/my-playlist';
+import { DetailPlaylistComponent } from './components/detail-playlist/detail-playlist';
+import { DetailPlaylistInformationComponent } from './components/detail-playlist/detail-information/detail-information.component';
+import { CreateNewPlaylistComponent } from './components/playlist-manager/create-new-playlist/create-new-playlist.component';
+import { PlaylistSongComponent } from './components/detail-playlist/playlist-song/playlist-song';
+import { PlaylistRecommendSongComponent } from './components/detail-playlist/playlist-recommend-song/playlist-recommend-song.component';
 import { ArtistDetailComponent } from './components/manager/manager-artists/artist-detail/artist-detail.component';
 import { UpdateArtistComponent } from './components/manager/manager-artists/update-artist/update-artist.component';
 import { AddArtistComponent } from './components/manager/manager-artists/add-artist/add-artist.component';
@@ -84,12 +90,18 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     ManagerSongsComponent,
     ManagerArtistsComponent,
     PlaylistManagerComponent,
-    PlaylistComponent,
+    DetailPlaylistInformationComponent,
+    CreateNewPlaylistComponent,
+    DetailPlaylistComponent,
+    MyPlaylistComponent,
+    NewPlaylistComponent,
+    PlaylistSongComponent,
+    PlaylistRecommendSongComponent,
     ArtistDetailComponent,
     UpdateArtistComponent,
     AddArtistComponent,
     ResultSongComponent,
-    RoundedArtistComponent
+    RoundedArtistComponent,
   ],
   imports: [
     CommonModule,
@@ -101,8 +113,8 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     DragDropModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,
-    StoreModule.forFeature('songs', songReducer),
-    EffectsModule.forFeature([SongEffects])
-  ]
+    StoreModule.forFeature('core', coreReducer),
+    EffectsModule.forFeature([CoreEffects]),
+  ],
 })
-export class MusicPlayerModule { }
+export class MusicPlayerModule {}
