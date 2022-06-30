@@ -1,5 +1,5 @@
 <main>
-  <app-side-nav></app-side-nav>
+  <app-side-nav [isAdmin]="isAdmin" [isAuthenticated] = "isAuthenticated"></app-side-nav>
   <div class="mdc-layout-grid content">
     <router-outlet></router-outlet>
   </div>

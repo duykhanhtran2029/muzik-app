@@ -1,20 +1,13 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
-import * as actions from '../actions/songs.actions';
+import * as actions from '../actions/core.actions';
+import { CoreState } from '../state/core.state';
 
-export interface SongsState extends EntityState<Song> {
-  songs: Song[];
-  fingerPrintingResult: FingerPrintingResult;
-  getSongsStatus: ApiRequestStatus;
-  fingerPrintingStatus: ApiRequestStatus;
-}
+export const initialState = <CoreState>{};
 
-export const initialState = <SongsState>{};
-
-export const songReducer = createReducer(
+export const coreReducer = createReducer(
   initialState,
   on(actions.getSongs, (state, action) => ({
     ...state,
@@ -50,10 +43,13 @@ export const songReducer = createReducer(
     fingerPrintingStatus: ApiRequestStatus.Fail,
   })),
 
-
-  on(actions.cleanState, (state) => ({
+  on(actions.setIsAdmin, (state, action) => ({
     ...state,
-    getSongsStatus: undefined,
-    fingerPrintingStatus: undefined,
+    isAdmin: action.isAdmin
+  })),
+
+  on(actions.setUserId, (state, action) => ({
+    ...state,
+    userId: action.userId
   }))
 );

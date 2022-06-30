@@ -49,7 +49,19 @@ export class HammerConfig extends HammerGestureConfig {
       domain: environment.AUTH0_CONFIG.DOMAIN,
       clientId: environment.AUTH0_CONFIG.CLIENT_ID,
       redirectUri: environment.AUTH0_CONFIG.REDIRECT_URI,
-    }),
+      scope: environment.AUTH0_CONFIG.SCOPE,
+      httpInterceptor: {
+        allowedList: [
+          {
+            uri: `${ environment.AUTH0_CONFIG.AUDIENCE}/*`,
+            tokenOptions: {
+              audience:  environment.AUTH0_CONFIG.AUDIENCE,
+              scope: 'read:current_user'
+            }
+          }
+        ]
+      }
+    })
   ],
   providers: [
     {

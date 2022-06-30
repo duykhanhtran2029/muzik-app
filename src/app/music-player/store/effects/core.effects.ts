@@ -2,11 +2,11 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as actions from '../actions/songs.actions';
+import * as actions from '../actions/core.actions';
 import { MusicPlayerSongService } from '../../services/music-player.song.service';
 
 @Injectable()
-export class SongEffects {
+export class CoreEffects {
   getSongs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.getSongs),

@@ -76,6 +76,10 @@ export class MusicPlayerSongService {
     return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/downloaded`);
   }
 
+  recognizenSong(songId: string): Observable<Song> {
+    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/recognizen`);
+  }
+
   searchSongs(searchKey: string): Observable<Song[]> {
     const params = new HttpParams().set('searchKey',searchKey.trim().toLowerCase());
     return this.http.get<Song[]>(`${this.API_BASE_URL}/api/songs/search`, {params: params});

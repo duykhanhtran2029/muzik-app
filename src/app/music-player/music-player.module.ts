@@ -8,8 +8,8 @@ import { MusicPlayerSharedMaterialModule } from './sub-modules/music-player-mate
 import { ManagerComponent } from './components/manager/manager.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { songReducer } from './store/reducers/songs.reducer';
-import { SongEffects } from './store/effects/songs.effects';
+import { coreReducer } from './store/reducers/core.reducer';
+import { CoreEffects } from './store/effects/core.effects';
 import { ResultComponent } from './components/result/result.component';
 import { SongDetailComponent } from './components/manager/manager-songs/song-detail/song-detail.component';
 import { ConfirmDeleteComponent } from './components/manager/confirm-delete/confirm-delete.component';
@@ -17,7 +17,6 @@ import { UpdateSongComponent } from './components/manager/manager-songs/update-s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSongComponent } from './components/manager/manager-songs/add-song/add-song.component';
 import { VisualizationComponent } from './components/recorder/visualization/visualization.component';
-import { LoginComponent } from './components/login/login.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TracksControlComponent } from './components/tracks-control/tracks-control.component';
 import { QueueComponent } from './components/queue/queue.component';
@@ -68,7 +67,6 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     UpdateSongComponent,
     AddSongComponent,
     VisualizationComponent,
-    LoginComponent,
     SideNavComponent,
     TracksControlComponent,
     QueueComponent,
@@ -115,8 +113,8 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     DragDropModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,
-    StoreModule.forFeature('songs', songReducer),
-    EffectsModule.forFeature([SongEffects]),
+    StoreModule.forFeature('core', coreReducer),
+    EffectsModule.forFeature([CoreEffects]),
   ],
 })
 export class MusicPlayerModule {}
