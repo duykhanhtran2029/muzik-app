@@ -19,6 +19,7 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
+import { AudioPlayerService } from '../../services/audio-player.service';
 
 @Component({
   selector: 'app-detail-playlist',
@@ -58,7 +59,8 @@ export class DetailPlaylistComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private _router: Router
+    private _router: Router,
+    public audioService: AudioPlayerService
   ) {}
   songs$ = this.componentStore.songs$;
   playlist$ = this.componentStore.playlist$;
@@ -172,5 +174,13 @@ export class DetailPlaylistComponent implements OnInit {
           break;
       }
     });
+  }
+
+  streamSongs() {
+    this.songs$.subscribe((songs) => this.audioService.playSongs(songs));
+  }
+
+  addToQueue() {
+    this.songs$.subscribe((songs) => this.audioService.addSongsToQueue(songs));
   }
 }
