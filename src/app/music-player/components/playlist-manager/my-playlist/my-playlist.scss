@@ -48,23 +48,22 @@
         overflow: hidden;
       }
     }
+  }
+  .playlist-button {
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+    transform: translate(-5%, -15%);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+  }
 
+  &:hover {
     .playlist-button {
-      position: absolute;
-      bottom: 15%;
-      right: 5%;
-      transform: translate(-5%, -15%);
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease-out;
-    }
-
-    &:hover {
-      .playlist-button {
-        visibility: visible;
-        opacity: 1;
-        transform: translate(0, -25px);
-      }
+      visibility: visible;
+      opacity: 1;
+      transform: translate(0, -25px);
     }
   }
 
