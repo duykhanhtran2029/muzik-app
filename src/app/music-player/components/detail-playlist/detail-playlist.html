@@ -49,6 +49,7 @@
         [isSelected]="selectedSong === song"
         [index]="i + 1"
         [song]="song"
+        (deleteSong)="deleteSongFromPlaylist($event)"
         cdkDrag
       ></app-playlist-song>
     </div>
