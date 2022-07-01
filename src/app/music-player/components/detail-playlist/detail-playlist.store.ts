@@ -17,6 +17,8 @@ export interface SongState {
   recommendSongs: Song[];
   getPlaylistRecommendSongsStatus: ApiRequestStatus;
   updatePlaylistStatus: ApiRequestStatus;
+  deleteSongFromPlaylist: ApiRequestStatus;
+  deletePlaylistStatus: ApiRequestStatus;
 }
 export const initialState: SongState = {
   songs: [],
@@ -27,6 +29,8 @@ export const initialState: SongState = {
   recommendSongs: [],
   getPlaylistRecommendSongsStatus: undefined,
   updatePlaylistStatus: undefined,
+  deleteSongFromPlaylist: undefined,
+  deletePlaylistStatus: undefined,
 };
 @Injectable()
 export class PlaylistStore extends ComponentStore<SongState> {
@@ -54,6 +58,13 @@ export class PlaylistStore extends ComponentStore<SongState> {
 
   readonly getUpdatePlaylistStatus$: Observable<ApiRequestStatus> = this.select(
     (state) => state.updatePlaylistStatus
+  );
+
+  readonly getDeleteSongFromPlaylistStatus$: Observable<ApiRequestStatus> =
+    this.select((state) => state.deleteSongFromPlaylist);
+
+  readonly getDeletePlaylistStatus$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.deletePlaylistStatus
   );
   //#endregion
 
@@ -113,14 +124,26 @@ export class PlaylistStore extends ComponentStore<SongState> {
     })
   );
 
-   readonly updateUpdatePlaylistStatus = this.updater(
+  readonly updateUpdatePlaylistStatus = this.updater(
     (state, updatePlaylistStatus: ApiRequestStatus) => ({
       ...state,
       updatePlaylistStatus,
     })
   );
 
-  
+  readonly updateDeleteSongFromPlaylistStatus = this.updater(
+    (state, deleteSongFromPlaylist: ApiRequestStatus) => ({
+      ...state,
+      deleteSongFromPlaylist,
+    })
+  );
+
+  readonly updateDeletePlaylistStatus = this.updater(
+    (state, deletePlaylistStatus: ApiRequestStatus) => ({
+      ...state,
+      deletePlaylistStatus,
+    })
+  );
   //#endregion
 
   //#region ***Effects***
@@ -216,9 +239,7 @@ export class PlaylistStore extends ComponentStore<SongState> {
   readonly updatePlaylistEffect = this.effect(
     (playlist$: Observable<Playlist>) =>
       playlist$.pipe(
-        tap(() =>
-          this.updateUpdatePlaylistStatus(ApiRequestStatus.Requesting)
-        ),
+        tap(() => this.updateUpdatePlaylistStatus(ApiRequestStatus.Requesting)),
         switchMap((playlist) =>
           this.playlistService.updatePlaylist(playlist).pipe(
             tapResponse(
@@ -233,6 +254,54 @@ export class PlaylistStore extends ComponentStore<SongState> {
         )
       )
   );
+
+  readonly deleteSongFromPlaylistEffect = this.effect(
+    (playlistSong$: Observable<PlaylistSong>) =>
+      playlistSong$.pipe(
+        tap(() =>
+          this.updateDeleteSongFromPlaylistStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((song) =>
+          this.playlistService.deleteSongFromPlaylist(song).pipe(
+            tapResponse(
+              (songs) => {
+                this.updateSongs(songs);
+                this.updateDeleteSongFromPlaylistStatus(
+                  ApiRequestStatus.Success
+                );
+              },
+              (err) => {
+                this.updateDeleteSongFromPlaylistStatus(ApiRequestStatus.Fail);
+              }
+            )
+          )
+        )
+      )
+  );
+
+  readonly deletePlaylistEffect = this.effect(
+    (playlistId$: Observable<string>) =>
+    playlistId$.pipe(
+        tap(() =>
+          this.updateDeletePlaylistStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((playlistId) =>
+          this.playlistService.deletePlaylist(playlistId).pipe(
+            tapResponse(
+              () => {
+                this.updateDeletePlaylistStatus(
+                  ApiRequestStatus.Success
+                );
+              },
+              (err) => {
+                this.updateDeletePlaylistStatus(ApiRequestStatus.Fail);
+              }
+            )
+          )
+        )
+      )
+  );
+
   //#endregion
 
   constructor(

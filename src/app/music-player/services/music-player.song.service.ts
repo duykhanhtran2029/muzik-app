@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/interfaces/song.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
@@ -13,7 +18,7 @@ export class MusicPlayerSongService {
   API_BASE_URL = environment.MUSIC_API_URL;
   RECOMMEND_URL = environment.RECOMMEND_API_URL;
   RECOGNIZE_URL = environment.RECOGNIZE_API_URL;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllSongs(): Observable<Song[]> {
     const url = `${this.API_BASE_URL}/api/songs`;
@@ -56,7 +61,16 @@ export class MusicPlayerSongService {
   }
 
   getSongs(songIds: string[]): Observable<Song[]> {
-    return this.http.post<Song[]>(`${this.API_BASE_URL}/api/songs/songs`, songIds);
+    return this.http.post<Song[]>(
+      `${this.API_BASE_URL}/api/songs/songs`,
+      songIds
+    );
+  }
+
+  getSongFromPlaylist(playlistId: string): Observable<Song[]> {
+    return this.http.get<Song[]>(
+      `${this.API_BASE_URL}/api/PlaylistSongs/${playlistId}`
+    );
   }
 
   deleteSong(songId: string): Observable<string> {
@@ -64,24 +78,37 @@ export class MusicPlayerSongService {
   }
 
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
-    return this.http.post<FingerPrintingResult>(`${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`, { fileName });
+    return this.http.post<FingerPrintingResult>(
+      `${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`,
+      { fileName }
+    );
   }
 
-
   listenedSong(songId: string): Observable<Song> {
-    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/listened`);
+    return this.http.get<Song>(
+      `${this.API_BASE_URL}/api/songs/${songId}/listened`
+    );
   }
 
   downloadedSong(songId: string): Observable<Song> {
-    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/downloaded`);
+    return this.http.get<Song>(
+      `${this.API_BASE_URL}/api/songs/${songId}/downloaded`
+    );
   }
 
   recognizenSong(songId: string): Observable<Song> {
-    return this.http.get<Song>(`${this.API_BASE_URL}/api/songs/${songId}/recognizen`);
+    return this.http.get<Song>(
+      `${this.API_BASE_URL}/api/songs/${songId}/recognizen`
+    );
   }
 
   searchSongs(searchKey: string): Observable<Song[]> {
-    const params = new HttpParams().set('searchKey',searchKey.trim().toLowerCase());
-    return this.http.get<Song[]>(`${this.API_BASE_URL}/api/songs/search`, {params: params});
+    const params = new HttpParams().set(
+      'searchKey',
+      searchKey.trim().toLowerCase()
+    );
+    return this.http.get<Song[]>(`${this.API_BASE_URL}/api/songs/search`, {
+      params: params,
+    });
   }
 }

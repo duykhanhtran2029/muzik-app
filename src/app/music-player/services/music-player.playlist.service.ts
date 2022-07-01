@@ -65,4 +65,17 @@ export class MusicPlayerPlaylistService {
       playlist
     );
   }
+
+  deleteSongFromPlaylist(playlist: PlaylistSong): Observable<Song[]> {
+    return this.http.put<Song[]>(
+      `${this.API_BASE_URL}/api/PlaylistSongs`,
+      playlist
+    );
+  }
+
+  deletePlaylist(playlistId: string): Observable<string> {
+    return this.http.delete<string>(
+      `${this.API_BASE_URL}/api/Playlists/${playlistId}`
+    );
+  }
 }

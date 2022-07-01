@@ -27,7 +27,7 @@ export class AudioPlayerService {
   constructor(
     private http: HttpClient,
     private musicService: MusicPlayerSongService
-    ) {}
+  ) {}
   private audioEvents: AudioEvent[] = [
     AudioEvent.ENDED,
     AudioEvent.ERROR,
@@ -50,7 +50,9 @@ export class AudioPlayerService {
     error: false,
     volume: 1,
     muted: false,
-    song: JSON.parse(localStorage.getItem('music-player__currentSong')) ?? undefined,
+    song:
+      JSON.parse(localStorage.getItem('music-player__currentSong')) ??
+      undefined,
     queue: JSON.parse(localStorage.getItem('music-player__queue')) ?? [],
     shuffle: false,
     recommendedSongs: [],
@@ -61,12 +63,14 @@ export class AudioPlayerService {
 
   private audioObj: HTMLAudioElement = new Audio();
   private state: StreamState = this.initState;
-  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
+  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(
+    this.state
+  );
   private serviceActive = true;
 
   private streamObservable(url: URL) {
     return new Observable((observer) => {
-      this.audioObj.preload  = 'auto';
+      this.audioObj.preload = 'auto';
       this.audioObj.src = url.toString();
       this.audioObj.volume = this.state.volume;
       this.audioObj.load();
@@ -157,23 +161,32 @@ export class AudioPlayerService {
 
   private genRandom(index: number) {
     var num = Math.floor(Math.random() * (this.state.queue.length - 1 - 0 + 1));
-    return num === index && this.state.queue.length > 1 ? this.genRandom(index) : num;
+    return num === index && this.state.queue.length > 1
+      ? this.genRandom(index)
+      : num;
   }
 
   public playStream(song: Song) {
     this.serviceActive = true;
     localStorage.setItem('music-player__currentSong', JSON.stringify(song));
     this.state.song = song;
-    this.streamObservable(song.link).pipe(takeWhile(() => this.serviceActive)).subscribe();
+    this.streamObservable(song.link)
+      .pipe(takeWhile(() => this.serviceActive))
+      .subscribe();
     this.state.lyric = [];
     this.state.currentLyric = -1;
-    this.musicService.listenedSong(song.songId).pipe(takeWhile(() => this.serviceActive)).subscribe();;
+    this.musicService
+      .listenedSong(song.songId)
+      .pipe(takeWhile(() => this.serviceActive))
+      .subscribe();
   }
 
   public loadLyric() {
     const url = this.state.song.linkLyric.toString();
-    this.http.get(url, { responseType: 'text' }).pipe(takeWhile(() => this.serviceActive)).subscribe(
-      (response) => {
+    this.http
+      .get(url, { responseType: 'text' })
+      .pipe(takeWhile(() => this.serviceActive))
+      .subscribe((response) => {
         const arr = response.toString().replace(/\r\n/g, '\n').split('\n');
         arr.forEach((str) => {
           const post1 = str.indexOf('[');
@@ -190,8 +203,7 @@ export class AudioPlayerService {
             this.state.lyric.push(lyr);
           }
         });
-      }
-    );
+      });
   }
 
   private updateCurrentLyric(timer: number) {
@@ -220,9 +232,9 @@ export class AudioPlayerService {
 
   public play() {
     this.audioObj.play();
-    this.getRecommendedSongs(this.state.song.songId).pipe(takeWhile(() => this.serviceActive)).subscribe(
-      (response) => this.state.recommendedSongs = response
-    );
+    this.getRecommendedSongs(this.state.song.songId)
+      .pipe(takeWhile(() => this.serviceActive))
+      .subscribe((response) => (this.state.recommendedSongs = response));
   }
 
   public pause() {
@@ -273,15 +285,49 @@ export class AudioPlayerService {
       this.state.queue.splice(index, 1);
       this.state.queue.unshift(song);
     }
-    localStorage.setItem('music-player__queue',JSON.stringify(this.state.queue));
+    localStorage.setItem(
+      'music-player__queue',
+      JSON.stringify(this.state.queue)
+    );
+  }
+
+  public addSongsToQueue(songs: Song[]) {
+    songs.forEach((song) => {
+      const index = this.state.queue.findIndex((s) => s.songId === song.songId);
+      if (index === -1) {
+        this.state.queue.push(song);
+      } else {
+        this.state.queue.splice(index, 1);
+        this.state.queue.unshift(song);
+      }
+    });
+    console.log(this.state.queue);
+    localStorage.setItem(
+      'music-player__queue',
+      JSON.stringify(this.state.queue)
+    );
+  }
+
+  public playSongs(songs: Song[]) {
+    this.state.queue = [];
+
+    this.playStream(songs[0]);
+    this.play();
+
+    this.addSongsToQueue(songs);
   }
 
   public removeFromRecommended(song: Song) {
-    const index = this.state.recommendedSongs.findIndex((s) => s.songId === song.songId);
+    const index = this.state.recommendedSongs.findIndex(
+      (s) => s.songId === song.songId
+    );
     if (index > -1) {
       this.state.recommendedSongs.splice(index, 1);
     }
-    localStorage.setItem('music-player__queue', JSON.stringify(this.state.recommendedSongs));
+    localStorage.setItem(
+      'music-player__queue',
+      JSON.stringify(this.state.recommendedSongs)
+    );
   }
 
   public isInQueue(song: Song) {
@@ -301,24 +347,36 @@ export class AudioPlayerService {
   }
 
   public next() {
-    let index = this.state.queue.findIndex((s) => s.songId === this.state.song.songId);
-    index = this.state.shuffle ? this.genRandom(index) : index === this.state.queue.length - 1 ? 0 : index + 1;
+    let index = this.state.queue.findIndex(
+      (s) => s.songId === this.state.song.songId
+    );
+    index = this.state.shuffle
+      ? this.genRandom(index)
+      : index === this.state.queue.length - 1
+      ? 0
+      : index + 1;
     this.stop();
     this.playStream(this.state.queue[index]);
     this.play();
   }
 
   public prev() {
-    let index = this.state.queue.findIndex((s) => s.songId === this.state.song.songId);
-    index = this.state.shuffle? this.genRandom(index): index === 0 ? this.state.queue.length - 1 : index - 1;
+    let index = this.state.queue.findIndex(
+      (s) => s.songId === this.state.song.songId
+    );
+    index = this.state.shuffle
+      ? this.genRandom(index)
+      : index === 0
+      ? this.state.queue.length - 1
+      : index - 1;
     this.stop();
     this.playStream(this.state.queue[index]);
     this.play();
   }
 
   public updateRecommend() {
-    this.getRecommendedSongs(this.state.song.songId).pipe(takeWhile(() => this.serviceActive)).subscribe(
-      (response) => this.state.recommendedSongs = response
-    );
+    this.getRecommendedSongs(this.state.song.songId)
+      .pipe(takeWhile(() => this.serviceActive))
+      .subscribe((response) => (this.state.recommendedSongs = response));
   }
 }

@@ -4,9 +4,9 @@ import { Song } from 'src/app/interfaces/song.interface';
 import { Playlist, PlaylistSong } from 'src/app/interfaces/playlist.interface';
 import { takeWhile } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   trigger,
-  state,
   style,
   animate,
   transition,
@@ -15,14 +15,11 @@ import {
   animateChild,
   // ...
 } from '@angular/animations';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {
-  MatDialogRef,
-  MatDialog,
-  MatDialogConfig,
-} from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
 import { ToastrService } from 'ngx-toastr';
+import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
+import { AudioPlayerService } from '../../services/audio-player.service';
 
 @Component({
   selector: 'app-detail-playlist',
@@ -61,7 +58,9 @@ export class DetailPlaylistComponent implements OnInit {
     private componentStore: PlaylistStore,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _router: Router,
+    public audioService: AudioPlayerService
   ) {}
   songs$ = this.componentStore.songs$;
   playlist$ = this.componentStore.playlist$;
@@ -81,6 +80,55 @@ export class DetailPlaylistComponent implements OnInit {
     this.componentStore.getSongsEffect(this.playlistId);
     this.componentStore.getPlaylistEffect(this.playlistId);
     this.componentStore.getRecommendSongsEffect(this.playlistId);
+
+    this.componentStore.addSongToPlaylistStatus$.subscribe(
+      (addSongToPlaylistStatus) => {
+        switch (addSongToPlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Add Song Succesfully');
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Add Song Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
+    this.componentStore.getDeleteSongFromPlaylistStatus$.subscribe(
+      (deleteSongFromPlaylistStatus) => {
+        switch (deleteSongFromPlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Remove Song Succesfully');
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Remove Song Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
+
+    this.componentStore.getDeletePlaylistStatus$.subscribe(
+      (deletePlaylistStatus) => {
+        switch (deletePlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Delete Playlist Succesfully');
+            this._router.navigate(['/app/playlists']);
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Delete Playlist Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
+  }
+
+  deletePlaylist(): void {
+    this.componentStore.deletePlaylistEffect(this.playlistId);
   }
 
   addSongToPlaylist(songId: string): void {
@@ -91,6 +139,16 @@ export class DetailPlaylistComponent implements OnInit {
 
     this.componentStore.addSongToPlaylistEffect(playlistSong);
     this.selectRecommendSong = undefined;
+  }
+
+  deleteSongFromPlaylist(songId: string): void {
+    const playlistSong: PlaylistSong = {
+      playlistId: this.playlistId,
+      songId: songId,
+    };
+
+    this.componentStore.deleteSongFromPlaylistEffect(playlistSong);
+    this.selectedSong = undefined;
   }
   openDetail(playlist: Playlist) {
     this.detailDialogRef = this.dialog.open(
@@ -116,5 +174,13 @@ export class DetailPlaylistComponent implements OnInit {
           break;
       }
     });
+  }
+
+  streamSongs() {
+    this.songs$.subscribe((songs) => this.audioService.playSongs(songs));
+  }
+
+  addToQueue() {
+    this.songs$.subscribe((songs) => this.audioService.addSongsToQueue(songs));
   }
 }

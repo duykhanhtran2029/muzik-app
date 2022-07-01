@@ -1,6 +1,10 @@
 <div class="playlist-desc-container">
   <ng-container *ngIf="playlist$ | async as playlist">
-    <div class="playlist-desc-container-inner" (click)="openDetail(playlist)">
+    <div
+      #detail
+      class="playlist-desc-container-inner"
+      (click)="openDetail(playlist)"
+    >
       <div class="playlist-thumbnail">
         <img [src]="playlist.thumbnail" />
       </div>
@@ -14,7 +18,7 @@
 </div>
 <div class="playlist-utils-container">
   <div class="playlist-utils-container-inner">
-    <button mat-mini-fab class="playlist-play-btn">
+    <button mat-mini-fab class="playlist-play-btn" (click)="streamSongs()">
       <mat-icon class="playlist-play-icon">play_arrow</mat-icon>
     </button>
     <button mat-icon-button class="playlist-more-btn">
@@ -26,9 +30,8 @@
       >
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Add to queue</button>
-      <button mat-menu-item>Delete</button>
-      <button mat-menu-item>Edit details</button>
+      <button mat-menu-item (click)="addToQueue()">Add to queue</button>
+      <button mat-menu-item (click)="deletePlaylist()">Delete</button>
     </mat-menu>
   </div>
 </div>
@@ -49,6 +52,7 @@
         [isSelected]="selectedSong === song"
         [index]="i + 1"
         [song]="song"
+        (deleteSong)="deleteSongFromPlaylist($event)"
         cdkDrag
       ></app-playlist-song>
     </div>

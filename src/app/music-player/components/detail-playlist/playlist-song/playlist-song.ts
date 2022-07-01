@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import * as moment from 'moment';
 import { Observable, takeWhile } from 'rxjs';
 import { Song, StreamState } from 'src/app/interfaces/song.interface';
@@ -11,13 +18,14 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-playlist-song',
   templateUrl: './playlist-song.html',
-  styleUrls: ['./playlist-song.scss']
+  styleUrls: ['./playlist-song.scss'],
 })
 export class PlaylistSongComponent implements OnInit, OnDestroy {
   @Input() index: number;
   @Input() song: Song;
   @Input() isSelected = false;
-  
+  @Output() deleteSong = new EventEmitter<string>();
+
   duration: string;
   componentActive = true;
   state: StreamState;
@@ -26,18 +34,18 @@ export class PlaylistSongComponent implements OnInit, OnDestroy {
     public audioService: AudioPlayerService,
     private downloadService: UtilService,
     private songService: MusicPlayerSongService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const audioObj = new Audio();
     audioObj.src = this.song.link.toString();
-    audioObj.addEventListener(
-      'loadedmetadata',
-      () => {
-        this.duration = moment.utc(audioObj.duration * 1000).format('mm:ss');
-      }
-    );
-    this.audioService.getState().pipe(takeWhile(() => this.componentActive)).subscribe(state => this.state = state);
+    audioObj.addEventListener('loadedmetadata', () => {
+      this.duration = moment.utc(audioObj.duration * 1000).format('mm:ss');
+    });
+    this.audioService
+      .getState()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((state) => (this.state = state));
   }
   ngOnDestroy(): void {
     this.componentActive = false;
@@ -52,7 +60,7 @@ export class PlaylistSongComponent implements OnInit, OnDestroy {
     this.audioService.addToQueue(this.song);
   }
   togglePlay() {
-    if(this.state.song.songId !== this.song.songId) {
+    if (this.state.song.songId !== this.song.songId) {
       this.song.listens++;
       this.audioService.playStream(this.song);
       this.audioService.play();
@@ -64,17 +72,23 @@ export class PlaylistSongComponent implements OnInit, OnDestroy {
     this.downloadService
       .download(this.song.link.toString())
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(blob => {
-        const a = document.createElement('a')
-        const objectUrl = URL.createObjectURL(blob)
-        a.href = objectUrl
+      .subscribe((blob) => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
         a.download = this.song.songName;
         a.click();
         URL.revokeObjectURL(objectUrl);
         a.remove();
       });
-    this.songService.downloadedSong(this.song.songId).pipe(takeWhile(() => this.componentActive)).subscribe();
+    this.songService
+      .downloadedSong(this.song.songId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe();
     this.song.downloads++;
   }
-}
 
+  deleteSongFromPlaylist() {
+    this.deleteSong.emit(this.song.songId);
+  }
+}
