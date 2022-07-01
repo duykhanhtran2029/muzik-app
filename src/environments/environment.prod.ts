@@ -2,9 +2,9 @@ export const environment = {
   production: true,
   RECOGNIZE_API_URL: 'https://localhost:5001',
   MUSIC_API_URL: 'https://localhost:5101',
-  RECOMMEND_API_URL: 'https://localhost:8089',
+  RECOMMEND_API_URL: 'https://uit-music-recommendation.azurewebsites.net',
   AZURE_STORAGE_CONFIG: {
-    STORAGE_ACCOUNT: 'shazam',
+    STORAGE_ACCOUNT: 'muzik',
     /** Container */
     IMAGES_CONTAINER: 'images',
     SONGS_CONTAINER: 'songs',
@@ -12,11 +12,11 @@ export const environment = {
     BEATS_CONTAINER: 'beats',
     LYRICS_CONTAINER: 'lyrics',
     /** SAS */
-    IMAGES_SAS: 'sp=racwdl&st=2022-06-27T17:42:48Z&se=2023-06-28T01:42:48Z&sv=2021-06-08&sr=c&sig=%2Fmf7kM5KOBxfO4eVnQxhXCpQzbvpSxhyuyEhq9Nsjlc%3D',
-    SONGS_SAS: 'sp=racwdl&st=2022-06-27T17:46:07Z&se=2023-06-28T01:46:07Z&sv=2021-06-08&sr=c&sig=R7apxT%2BgknANSHVngYn00CWqhSjjGQD3rT7%2BpeV9tTU%3D',
-    RECORDS_SAS: 'sp=racwdl&st=2022-06-27T17:45:14Z&se=2023-06-28T01:45:14Z&sv=2021-06-08&sr=c&sig=otY8l0Ve4bWOXzoezUGg0wvyJ%2FDyRpkAMDYudBcynG8%3D',
-    LYRICS_SAS: 'sp=racwdl&st=2022-06-27T17:44:09Z&se=2023-06-28T01:44:09Z&sv=2021-06-08&sr=c&sig=kxnZrVhl7vdSluNt7OtslaEVxQqNvnKyYCdnaiyta00%3D',
-    BEATS_SAS: 'sp=racwdl&st=2022-06-27T17:41:32Z&se=2023-06-28T01:41:32Z&sv=2021-06-08&sr=c&sig=%2FH6MY4fAIqpvFQlN4mQeFGsPPp328MU27D1mapwb4Kk%3D'
+    BEATS_SAS: 'sv=2021-06-08&se=2023-07-01T14%3A36%3A48Z&sr=c&sp=racwdxltfi&sig=nf6qahCmw46%2FHDfTvkuBNONCHQb8mtBbWFdm%2Fx9XkFo%3D',
+    IMAGES_SAS: 'sv=2021-06-08&se=2023-07-01T14%3A36%3A48Z&sr=c&sp=racwdxltfi&sig=VzhJjDpMVqHwAaig%2BQvImQ7ZL4%2BK06%2BTRBYN0c4co%2B4%3D',
+    LYRICS_SAS: 'sv=2021-06-08&se=2023-07-01T14%3A36%3A48Z&sr=c&sp=racwdxltfi&sig=fN78yG49372qUvIN4d11j5%2BUXxD5TwWzLkLK4z5NHhs%3D',
+    RECORDS_SAS: 'sv=2021-06-08&se=2023-07-01T14%3A36%3A48Z&sr=c&sp=racwdxltfi&sig=5UvoJnTTi%2B%2FDl2KWNWmsg71%2BIxXm8u1LDX3grdAVIMg%3D',
+    SONGS_SAS: 'sv=2021-06-08&se=2023-07-01T14%3A36%3A48Z&sr=c&sp=racwdxltfi&sig=czjlXASMMqrbnDzRTASyxGm7c5nckmOzSIDe4fuy9lE%3D',
   },
   AUTH0_CONFIG: {
     CLIENT_ID: 's7t6cdqpEvgHDlbQNfsdh2td42tBHEdC',
