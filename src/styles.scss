@@ -116,3 +116,29 @@ body {
     }
   }
 }
+
+.error {
+  background: url('./assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  width: calc(var(--app-vw-unit, 1vw) * 100);
+  height: calc(var(--app-vh-unit, 1vh) * 100);
+
+  @at-root #{&}__content {
+      position: relative;
+      top: 40vh;
+      text-align: center;
+
+      @at-root #{&}__title {
+          margin: 0 !important;
+          font-size: 72px !important;
+      }
+
+      @at-root #{&}__message {
+          margin-top: 32px !important;
+      }
+
+      button {
+          margin-top: 32px !important;
+      }
+  }
+}

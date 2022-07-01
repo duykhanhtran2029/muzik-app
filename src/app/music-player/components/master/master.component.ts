@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, mergeMap, takeWhile, skipWhile, tap, concatMap } from 'rxjs';
+import { combineLatestWith, mergeMap, takeWhile, skipWhile, tap, concatMap, forkJoin } from 'rxjs';
 import { AppState } from 'src/app/store/reducers';
 import { environment } from 'src/environments/environment';
 import { AuthHelperService } from '../../services/auth-helper.service';

@@ -9,5 +9,4 @@ export interface CoreState {
     fingerPrintingStatus: ApiRequestStatus;
     isAdmin: boolean;
     userId: string;
-    isAuthenticated: boolean;
 }

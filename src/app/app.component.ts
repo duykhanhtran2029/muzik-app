@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ReplicaShazam-FE';
+  title = 'Muzik';
   isLoaded = false;
   ngOnInit() {
     setTimeout(() => {

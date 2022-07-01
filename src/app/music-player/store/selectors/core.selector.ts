@@ -24,8 +24,3 @@ export const getUserId = createSelector(
     SongFeatureSelector,
     state => state.userId
 );
-
-export const getIsAuthenticated = createSelector(
-    SongFeatureSelector,
-    state => state.isAuthenticated
-);

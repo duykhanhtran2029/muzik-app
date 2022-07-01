@@ -7,8 +7,8 @@ const routes: Routes = [
       path: 'app',
       loadChildren: () => import('./music-player/music-player.module').then(m => m.MusicPlayerModule)
   },
-  //{ path: 'error', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
-  //{ path: '**', redirectTo: '/error/404-notfound', pathMatch: 'full' }
+  { path: 'error', loadChildren: () => import('./error-page/error.module').then(m => m.ErrorModule) },
+  { path: '**', redirectTo: '/error/404', pathMatch: 'full' }
 ];
 
 @NgModule({
