@@ -23,6 +23,7 @@ import {
 } from '@angular/material/dialog';
 import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
 import { ToastrService } from 'ngx-toastr';
+import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 
 @Component({
   selector: 'app-detail-playlist',
@@ -81,6 +82,35 @@ export class DetailPlaylistComponent implements OnInit {
     this.componentStore.getSongsEffect(this.playlistId);
     this.componentStore.getPlaylistEffect(this.playlistId);
     this.componentStore.getRecommendSongsEffect(this.playlistId);
+
+    this.componentStore.addSongToPlaylistStatus$.subscribe(
+      (addSongToPlaylistStatus) => {
+        switch (addSongToPlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Add Song Succesfully');
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Add Song Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
+    this.componentStore.getDeleteSongFromPlaylistStatus$.subscribe(
+      (deleteSongFromPlaylistStatus) => {
+        switch (deleteSongFromPlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Remove Song Succesfully');
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Remove Song Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
   }
 
   addSongToPlaylist(songId: string): void {
@@ -91,6 +121,16 @@ export class DetailPlaylistComponent implements OnInit {
 
     this.componentStore.addSongToPlaylistEffect(playlistSong);
     this.selectRecommendSong = undefined;
+  }
+
+  deleteSongFromPlaylist(songId: string): void {
+    const playlistSong: PlaylistSong = {
+      playlistId: this.playlistId,
+      songId: songId,
+    };
+
+    this.componentStore.deleteSongFromPlaylistEffect(playlistSong);
+    this.selectedSong = undefined;
   }
   openDetail(playlist: Playlist) {
     this.detailDialogRef = this.dialog.open(

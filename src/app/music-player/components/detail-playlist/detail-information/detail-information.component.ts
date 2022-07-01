@@ -74,18 +74,18 @@ export class DetailPlaylistInformationComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     const fileName = `S-${this.playlist.playlistId}-${new Date().getTime()}`;
-    // if (this.thumbnail.name) {
-    //   this.azureStorageService.upload(
-    //     this.IMAGES_CONTAINER,
-    //     this.IMAGES_SAS,
-    //     this.thumbnail,
-    //     fileName + '.png',
-    //     () => {}
-    //   );
-    //   this.playlist.thumbnail = new URL(
-    //     `${this.storageURL}/${this.IMAGES_CONTAINER}/${fileName}.png`
-    //   );
-    // }
+    if (this.thumbnail.name) {
+      this.azureStorageService.upload(
+        this.IMAGES_CONTAINER,
+        this.IMAGES_SAS,
+        this.thumbnail,
+        fileName + '.png',
+        () => {}
+      );
+      this.playlist.thumbnail = new URL(
+        `${this.storageURL}/${this.IMAGES_CONTAINER}/${fileName}.png`
+      );
+    }
     this.data.store.updatePlaylistEffect(this.playlist);
   }
 }
