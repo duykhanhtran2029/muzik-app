@@ -4,9 +4,9 @@ import { Song } from 'src/app/interfaces/song.interface';
 import { Playlist, PlaylistSong } from 'src/app/interfaces/playlist.interface';
 import { takeWhile } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   trigger,
-  state,
   style,
   animate,
   transition,
@@ -15,12 +15,7 @@ import {
   animateChild,
   // ...
 } from '@angular/animations';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {
-  MatDialogRef,
-  MatDialog,
-  MatDialogConfig,
-} from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DetailPlaylistInformationComponent } from './detail-information/detail-information.component';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
@@ -62,7 +57,8 @@ export class DetailPlaylistComponent implements OnInit {
     private componentStore: PlaylistStore,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _router: Router
   ) {}
   songs$ = this.componentStore.songs$;
   playlist$ = this.componentStore.playlist$;
@@ -111,6 +107,26 @@ export class DetailPlaylistComponent implements OnInit {
         }
       }
     );
+
+    this.componentStore.getDeletePlaylistStatus$.subscribe(
+      (deletePlaylistStatus) => {
+        switch (deletePlaylistStatus) {
+          case ApiRequestStatus.Success:
+            this.toastr.success('Success', 'Delete Playlist Succesfully');
+            this._router.navigate(['/app/playlists']);
+            break;
+          case ApiRequestStatus.Fail:
+            this.toastr.error('Failed', 'Delete Playlist Failed');
+            break;
+          case ApiRequestStatus.Requesting:
+            break;
+        }
+      }
+    );
+  }
+
+  deletePlaylist(): void {
+    this.componentStore.deletePlaylistEffect(this.playlistId);
   }
 
   addSongToPlaylist(songId: string): void {

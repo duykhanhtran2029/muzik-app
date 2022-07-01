@@ -18,6 +18,7 @@ export interface SongState {
   getPlaylistRecommendSongsStatus: ApiRequestStatus;
   updatePlaylistStatus: ApiRequestStatus;
   deleteSongFromPlaylist: ApiRequestStatus;
+  deletePlaylistStatus: ApiRequestStatus;
 }
 export const initialState: SongState = {
   songs: [],
@@ -29,6 +30,7 @@ export const initialState: SongState = {
   getPlaylistRecommendSongsStatus: undefined,
   updatePlaylistStatus: undefined,
   deleteSongFromPlaylist: undefined,
+  deletePlaylistStatus: undefined,
 };
 @Injectable()
 export class PlaylistStore extends ComponentStore<SongState> {
@@ -60,6 +62,10 @@ export class PlaylistStore extends ComponentStore<SongState> {
 
   readonly getDeleteSongFromPlaylistStatus$: Observable<ApiRequestStatus> =
     this.select((state) => state.deleteSongFromPlaylist);
+
+  readonly getDeletePlaylistStatus$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.deletePlaylistStatus
+  );
   //#endregion
 
   //#region ***Updaters (Reducers in @ngrx/store term)***
@@ -132,6 +138,12 @@ export class PlaylistStore extends ComponentStore<SongState> {
     })
   );
 
+  readonly updateDeletePlaylistStatus = this.updater(
+    (state, deletePlaylistStatus: ApiRequestStatus) => ({
+      ...state,
+      deletePlaylistStatus,
+    })
+  );
   //#endregion
 
   //#region ***Effects***
@@ -266,6 +278,30 @@ export class PlaylistStore extends ComponentStore<SongState> {
         )
       )
   );
+
+  readonly deletePlaylistEffect = this.effect(
+    (playlistId$: Observable<string>) =>
+    playlistId$.pipe(
+        tap(() =>
+          this.updateDeletePlaylistStatus(ApiRequestStatus.Requesting)
+        ),
+        switchMap((playlistId) =>
+          this.playlistService.deletePlaylist(playlistId).pipe(
+            tapResponse(
+              () => {
+                this.updateDeletePlaylistStatus(
+                  ApiRequestStatus.Success
+                );
+              },
+              (err) => {
+                this.updateDeletePlaylistStatus(ApiRequestStatus.Fail);
+              }
+            )
+          )
+        )
+      )
+  );
+
   //#endregion
 
   constructor(

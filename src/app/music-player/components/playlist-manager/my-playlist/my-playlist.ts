@@ -13,7 +13,6 @@ export class MyPlaylistComponent implements OnInit {
   ngOnInit(): void {}
 
   openPlaylist(playlistId: string) {
-    console.log('Open');
     this._router.navigate(['/app/playlist', playlistId]);
   }
 }

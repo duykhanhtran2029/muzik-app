@@ -72,4 +72,10 @@ export class MusicPlayerPlaylistService {
       playlist
     );
   }
+
+  deletePlaylist(playlistId: string): Observable<string> {
+    return this.http.delete<string>(
+      `${this.API_BASE_URL}/api/Playlists/${playlistId}`
+    );
+  }
 }

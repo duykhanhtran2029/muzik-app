@@ -1,6 +1,10 @@
 <div class="playlist-desc-container">
   <ng-container *ngIf="playlist$ | async as playlist">
-    <div class="playlist-desc-container-inner" (click)="openDetail(playlist)">
+    <div
+      #detail
+      class="playlist-desc-container-inner"
+      (click)="openDetail(playlist)"
+    >
       <div class="playlist-thumbnail">
         <img [src]="playlist.thumbnail" />
       </div>
@@ -27,8 +31,7 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Add to queue</button>
-      <button mat-menu-item>Delete</button>
-      <button mat-menu-item>Edit details</button>
+      <button mat-menu-item (click)="deletePlaylist()">Delete</button>
     </mat-menu>
   </div>
 </div>
