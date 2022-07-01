@@ -10,6 +10,7 @@ import { MusicPlayerSongService } from '../../services/music-player.song.service
 
 export interface SearchState {
   songs: Song[];
+  recommendSongs: Song[];
   artists: Artist[];
   searchSongsStatus: ApiRequestStatus;
   searchArtistsStatus: ApiRequestStatus;
@@ -17,6 +18,7 @@ export interface SearchState {
 export const initialState: SearchState = {
   songs: [],
   artists: [],
+  recommendSongs: [],
   searchSongsStatus: undefined,
   searchArtistsStatus: undefined,
 };
@@ -24,6 +26,8 @@ export const initialState: SearchState = {
 export class SearchStore extends ComponentStore<SearchState> {
   //#region ***Selectors***
   readonly songs$: Observable<Song[]> = this.select((state) => state.songs);
+  readonly recommendSongs$: Observable<Song[]> = this.select((state) => state.recommendSongs);
+
   readonly getSearchSongsStatus$: Observable<ApiRequestStatus> = this.select(
     (state) => state.searchSongsStatus
   );
@@ -37,6 +41,11 @@ export class SearchStore extends ComponentStore<SearchState> {
   readonly updateSongs = this.updater((state, songs: Song[]) => ({
     ...state,
     songs,
+  }));
+
+  readonly updateRecommendSongs = this.updater((state, recommendSongs: Song[]) => ({
+    ...state,
+    recommendSongs,
   }));
 
   readonly updateSearchSongsStatus = this.updater(
@@ -61,7 +70,7 @@ export class SearchStore extends ComponentStore<SearchState> {
 
   //#region ***Effects***
   readonly searchSongsEffect = this.effect((searchKey$: Observable<string>) =>
-  searchKey$.pipe(
+    searchKey$.pipe(
       tap(() => this.updateSearchSongsStatus(ApiRequestStatus.Requesting)),
       switchMap((searchKey: string) =>
         this.songService.searchSongs(searchKey).pipe(
@@ -80,7 +89,7 @@ export class SearchStore extends ComponentStore<SearchState> {
   );
 
   readonly searchArtistsEffect = this.effect((searchKey$: Observable<string>) =>
-  searchKey$.pipe(
+    searchKey$.pipe(
       tap(() => this.updateSearchArtistsStatus(ApiRequestStatus.Requesting)),
       switchMap((searchKey: string) =>
         this.artistService.searchArtists(searchKey).pipe(
@@ -91,6 +100,22 @@ export class SearchStore extends ComponentStore<SearchState> {
             },
             (err) => {
               this.updateSearchArtistsStatus(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  readonly getRecommendSongsEffect = this.effect((userId$: Observable<string>) =>
+  userId$.pipe(
+      switchMap((userId: string) =>
+        this.songService.getRecommendedSongs(2).pipe(
+          tapResponse(
+            (songs) => {
+              this.updateRecommendSongs(songs);
+            },
+            (err) => {
             }
           )
         )

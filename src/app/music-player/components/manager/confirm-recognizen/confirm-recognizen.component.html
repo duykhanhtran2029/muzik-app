@@ -1,0 +1,7 @@
+<ng-container *ngIf="!isRequesting">
+    <div>Do you want to make this song {{data.isRecognizable ? 'unrecognizable' : 'recognizable'}} ?</div>
+    <button mat-flat-button [color]="data.isRecognizable ? 'warning' : 'primary'" (click)="confirm()">
+        Confirm
+    </button>
+</ng-container>
+<img *ngIf="isRequesting" src="../../../../../assets/images/loader.gif" />

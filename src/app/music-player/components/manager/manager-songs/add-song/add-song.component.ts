@@ -74,7 +74,7 @@ export class AddSongComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log(blob);
       console.log(url);
     });
-    this.song.thumbnail = new URL('https://shazam.blob.core.windows.net/images/placeholder.png');
+    this.song.thumbnail = new URL('https://muzik.blob.core.windows.net/images/shazam.png');
     this.imgSrc = this.song.thumbnail.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
     this.componentStore.createSongStatus$.pipe(takeWhile(() => this.componentActive)).subscribe(

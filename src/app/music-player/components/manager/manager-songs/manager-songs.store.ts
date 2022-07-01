@@ -1,11 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, switchMap, tap } from 'rxjs';
-import { Artist } from 'src/app/interfaces/artist.interface';
 import { Song } from 'src/app/interfaces/song.interface';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
-import { MusicPlayerArtistService } from '../../../services/music-player.artist.service';
 import { MusicPlayerSongService } from '../../../services/music-player.song.service';
 
 export interface ManagerSongsState {
@@ -14,6 +12,9 @@ export interface ManagerSongsState {
   updateSongStatus: ApiRequestStatus;
   deleteSongStatus: ApiRequestStatus;
   createSongStatus: ApiRequestStatus;
+  toggleSongRecognizableStatus1: ApiRequestStatus;
+  toggleSongRecognizableStatus2: ApiRequestStatus;
+
 }
 export const initialState: ManagerSongsState = {
   songs: [],
@@ -21,6 +22,8 @@ export const initialState: ManagerSongsState = {
   updateSongStatus: undefined,
   deleteSongStatus: undefined,
   createSongStatus: undefined,
+  toggleSongRecognizableStatus1: undefined,
+  toggleSongRecognizableStatus2: undefined
 };
 @Injectable()
 export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
@@ -37,6 +40,12 @@ export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
   );
   readonly createSongStatus$: Observable<ApiRequestStatus> = this.select(
     (state) => state.createSongStatus
+  );
+  readonly toggleSongRecognizableStatus1$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.toggleSongRecognizableStatus1
+  );
+  readonly toggleSongRecognizableStatus2$: Observable<ApiRequestStatus> = this.select(
+    (state) => state.toggleSongRecognizableStatus2
   );
   //#endregion
 
@@ -71,6 +80,20 @@ export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
     (state, createSongStatus: ApiRequestStatus) => ({
       ...state,
       createSongStatus,
+    })
+  );
+
+  readonly updateToggleSongRecognizableStatus1 = this.updater(
+    (state, toggleSongRecognizableStatus1: ApiRequestStatus) => ({
+      ...state,
+      toggleSongRecognizableStatus1,
+    })
+  );
+
+  readonly updateToggleSongRecognizableStatus2 = this.updater(
+    (state, toggleSongRecognizableStatus2: ApiRequestStatus) => ({
+      ...state,
+      toggleSongRecognizableStatus2,
     })
   );
   //#endregion
@@ -132,28 +155,66 @@ export class ManagerSongsStore extends ComponentStore<ManagerSongsState> {
   );
 
   readonly createSongEffect = this.effect((song$: Observable<Song>) =>
-  song$.pipe(
-    tap(() => this.updateCreateSongsStatus(ApiRequestStatus.Requesting)),
-    switchMap((song) =>
-      this.songService.createSong(song).pipe(
-        tapResponse(
-          () => {
-            this.updateCreateSongsStatus(ApiRequestStatus.Success);
-          },
-          () => {
-            this.updateCreateSongsStatus(ApiRequestStatus.Fail);
-          }
+    song$.pipe(
+      tap(() => this.updateCreateSongsStatus(ApiRequestStatus.Requesting)),
+      switchMap((song) =>
+        this.songService.createSong(song).pipe(
+          tapResponse(
+            () => {
+              this.updateCreateSongsStatus(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateCreateSongsStatus(ApiRequestStatus.Fail);
+            }
+          )
         )
       )
     )
-  )
-);
+  );
+            // 1: music 2: fingerPrinting
+  readonly toggleSongRecognizableEffect1 = this.effect((choose$: Observable<{ songId: string, isRecognizable: boolean }>) =>
+  choose$.pipe(
+      tap(() => this.updateToggleSongRecognizableStatus1(ApiRequestStatus.Requesting)),
+      switchMap((choose) =>
+        this.songService.toggleSongRecognizable1(choose.songId, choose.isRecognizable).pipe(
+          tapResponse(
+            () => {
+              this.updateToggleSongRecognizableStatus1(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateToggleSongRecognizableStatus1(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  readonly toggleSongRecognizableEffect2 = this.effect((choose$: Observable<{ songId: string, isRecognizable: boolean }>) =>
+  choose$.pipe(
+      tap(() => {
+        this.updateToggleSongRecognizableStatus2(ApiRequestStatus.Requesting);
+      }),
+      switchMap((choose) =>
+        this.songService.toggleSongRecognizable2(choose.songId, choose.isRecognizable).pipe(
+          tapResponse(
+            () => {
+              this.updateToggleSongRecognizableStatus2(ApiRequestStatus.Success);
+            },
+            () => {
+              this.updateToggleSongRecognizableStatus2(ApiRequestStatus.Fail);
+            }
+          )
+        )
+      )
+    )
+  );
 
   //#endregion
 
   constructor(
-    private songService: MusicPlayerSongService,
-    private artistService: MusicPlayerArtistService) {
+    private songService: MusicPlayerSongService
+    ) {
     super(initialState);
   }
 }

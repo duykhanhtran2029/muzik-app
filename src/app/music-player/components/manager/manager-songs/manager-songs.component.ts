@@ -17,6 +17,7 @@ import { SongDetailComponent } from './song-detail/song-detail.component';
 import { UpdateSongComponent } from './update-song/update-song.component';
 import * as SongAction from '../../../store/actions/core.actions';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
+import { ConfirmRecognizenComponent } from '../confirm-recognizen/confirm-recognizen.component';
 
 
 @Component({
@@ -42,6 +43,8 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
   deleteDialogRef: MatDialogRef<ConfirmDeleteComponent>;
   updateDialogRef: MatDialogRef<UpdateSongComponent>;
   addDialogRef: MatDialogRef<AddSongComponent>;
+  refDialogRef: MatDialogRef<ConfirmRecognizenComponent>;
+
   componentActive = true;
   deleteSongStatus$: Observable<ApiRequestStatus>;
 
@@ -102,12 +105,12 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
   }
 
   openDelete(song: Song) {
-    this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent, { data: {song: song} });
+    this.deleteDialogRef = this.dialog.open(ConfirmDeleteComponent, { data: { song: song } });
     this.deleteDialogRef.afterClosed().subscribe((deleted) => {
       if (deleted) {
         this.dataSource.data = this.dataSource.data.filter(s => s !== song);
         this.toastr.success('Success', 'Song Deleted');
-      } else if(deleted ===false) {
+      } else if (deleted === false) {
         this.toastr.error('Failed', 'Song Deleted Failed');
       }
     });
@@ -139,10 +142,10 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
 
   openAdd() {
     (this.addDialogRef = this.dialog.open(AddSongComponent)),
-      { 
-        disableClose: true,
-        width: '348px'
-      };
+    {
+      disableClose: true,
+      width: '348px'
+    };
     this.addDialogRef.afterClosed().subscribe((created) => {
       switch (created) {
         case undefined:
@@ -153,10 +156,26 @@ export class ManagerSongsComponent implements OnInit, OnDestroy {
         default:
           this.toastr.success('Success', 'Song Created');
           const tmpData = [...this.dataSource.data];
-          tmpData.unshift({...created.song, likes: 0, downloads: 0, listens: 0});
+          tmpData.unshift({ ...created.song, likes: 0, downloads: 0, listens: 0 });
           this.dataSource.data = tmpData;
           break;
       }
+    });
+  }
+
+  openReg(song: Song) {
+    this.refDialogRef = this.dialog.open(ConfirmRecognizenComponent, { data: song });
+    this.refDialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.toastr.success('Success', 'Song Processed');
+      } else if (result === false) {
+        this.toastr.error('Failed', 'Song Processed Failed');
+      }
+      const index = this.dataSource.data.findIndex(s => s.songId === song.songId);
+      const tmpData = [...this.dataSource.data];
+      song = {...song, isRecognizable: !song.isRecognizable};
+      tmpData.splice(index, 1, song);
+      this.dataSource.data = tmpData;
     });
   }
 }

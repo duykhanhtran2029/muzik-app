@@ -22,7 +22,7 @@ export class AddArtistComponent implements OnInit {
   artist: RawArtist ={
     artistId: this.idService.newID(true),
     artistName: '',
-    thumbnail: new URL('https://shazam.blob.core.windows.net/images/artist_default.png'),
+    thumbnail: new URL('https://muzik.blob.core.windows.net/images/artist_default.png'),
     isDeleted: false
   };
   formData: FormData;

@@ -55,6 +55,7 @@ import { AddArtistComponent } from './components/manager/manager-artists/add-art
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ResultSongComponent } from './components/result/result-song/result-song.component';
 import { RoundedArtistComponent } from './components/rounded-artist/rounded-artist.component';
+import { ConfirmRecognizenComponent } from './components/manager/confirm-recognizen/confirm-recognizen.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { RoundedArtistComponent } from './components/rounded-artist/rounded-arti
     AddArtistComponent,
     ResultSongComponent,
     RoundedArtistComponent,
+    ConfirmRecognizenComponent,
   ],
   imports: [
     CommonModule,

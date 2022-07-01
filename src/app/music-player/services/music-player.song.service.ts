@@ -18,20 +18,10 @@ export class MusicPlayerSongService {
   API_BASE_URL = environment.MUSIC_API_URL;
   RECOMMEND_URL = environment.RECOMMEND_API_URL;
   RECOGNIZE_URL = environment.RECOGNIZE_API_URL;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllSongs(): Observable<Song[]> {
     const url = `${this.API_BASE_URL}/api/songs`;
-    return this.http.get<Song[]>(url);
-  }
-
-  getRecommendedGenreSong(userId) {
-    const url = `${this.RECOMMEND_URL}/genreRecommend?userId=${userId}`;
-    return this.http.get(url);
-  }
-
-  getRecommendedSongs(userId): Observable<Song[]> {
-    const url = `${this.RECOMMEND_URL}/userRecommend?userId=${userId}`;
     return this.http.get<Song[]>(url);
   }
 
@@ -77,13 +67,6 @@ export class MusicPlayerSongService {
     return this.http.delete<string>(`${this.API_BASE_URL}/api/songs/${songId}`);
   }
 
-  fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
-    return this.http.post<FingerPrintingResult>(
-      `${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`,
-      { fileName }
-    );
-  }
-
   listenedSong(songId: string): Observable<Song> {
     return this.http.get<Song>(
       `${this.API_BASE_URL}/api/songs/${songId}/listened`
@@ -96,19 +79,45 @@ export class MusicPlayerSongService {
     );
   }
 
-  recognizenSong(songId: string): Observable<Song> {
+  toggleSongRecognizable1(songId: string, isRecognizable: boolean): Observable<Song> {
+    const params = new HttpParams().set('isRecognizable', isRecognizable);
     return this.http.get<Song>(
-      `${this.API_BASE_URL}/api/songs/${songId}/recognizen`
-    );
+      `${this.API_BASE_URL}/api/songs/${songId}/recognizen`, {
+      params: params,
+    });
   }
 
   searchSongs(searchKey: string): Observable<Song[]> {
-    const params = new HttpParams().set(
-      'searchKey',
-      searchKey.trim().toLowerCase()
-    );
+    const params = new HttpParams().set('searchKey', searchKey.trim().toLowerCase());
     return this.http.get<Song[]>(`${this.API_BASE_URL}/api/songs/search`, {
       params: params,
     });
   }
+
+  //#region Finger Printing
+  fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
+    return this.http.post<FingerPrintingResult>(
+      `${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`,
+      { fileName }
+    );
+  }
+
+  toggleSongRecognizable2(songName: string, isRecognizable: boolean): Observable<any> {
+    return isRecognizable 
+          ? this.http.get(`${this.RECOGNIZE_URL}/api/fingerPrintings/${songName}`) 
+          : this.http.delete(`${this.RECOGNIZE_URL}/api/fingerPrintings/${songName}`);
+  }
+  //#endregion
+
+  //#region recommend 
+  getRecommendedGenreSong(userId) {
+    const url = `${this.RECOMMEND_URL}/genreRecommend?userId=${userId}`;
+    return this.http.get(url);
+  }
+
+  getRecommendedSongs(userId): Observable<Song[]> {
+    const url = `${this.RECOMMEND_URL}/userRecommend?userId=${userId}`;
+    return this.http.get<Song[]>(url);
+  }
+  //#endregion
 }

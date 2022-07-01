@@ -23,7 +23,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();
   songs$ = this.componentStore.songs$;
   artists$ = this.componentStore.artists$;
+  recommendSongs$ = this.componentStore.recommendSongs$;
+
   ngOnInit(): void {
+    this.componentStore.getRecommendSongsEffect("2");
+
     this.searchHistories = JSON.parse(localStorage.getItem('music-player__searchHistory'));
     this.searchControl.valueChanges.pipe(
       takeWhile(() => this.componentActive),

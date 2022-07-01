@@ -43,7 +43,7 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.playlist.playlistId = this.utilService.playlistID();
     this.playlist.thumbnail = new URL(
-      'https://shazam.blob.core.windows.net/images/placeholder.png'
+      'https://muzik.blob.core.windows.net/images/shazam.png'
     );
     this.imgSrc = this.playlist.thumbnail.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
