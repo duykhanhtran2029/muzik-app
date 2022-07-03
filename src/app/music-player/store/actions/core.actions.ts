@@ -38,3 +38,19 @@ export const setUserId = createAction(
   '[Auth0] Set UserId',
   props<{ userId: string }>()
 );
+
+export const setIsAuthenticated = createAction(
+  '[Auth0] Set IsAuthenticated',
+  props<{ isAuthenticated: boolean }>()
+);
+
+export const setToken = createAction(
+  '[Auth0] Set Token',
+  props<{ token: string }>()
+);
+
+export const logIn = createAction(
+'[Auth0] Login',
+  props<{ payload: string }>()
+);
+export const logOut = createAction('[Auth0] Logout');

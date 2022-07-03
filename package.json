@@ -22,7 +22,7 @@
     "@angular/router": "^14.0.0",
     "@angular/service-worker": "^14.0.0",
     "@auth0/auth0-angular": "^1.10.0",
-    "@azure/storage-blob": "^12.8.0",
+    "@azure/storage-blob": "^12.10.0",
     "@material/layout-grid": "^14.0.0",
     "@ngrx/component-store": "^13.2.0",
     "@ngrx/effects": "^13.2.0",

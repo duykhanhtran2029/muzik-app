@@ -21,7 +21,6 @@ import {
   ServiceWorkerModule,
   SwRegistrationOptions,
 } from '@angular/service-worker';
-import { AuthModule } from '@auth0/auth0-angular';
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
   override overrides = {
@@ -44,23 +43,6 @@ export class HammerConfig extends HammerGestureConfig {
     EffectsModule.forRoot([]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       registrationStrategy: 'registerWhenStable:30000',
-    }),
-    AuthModule.forRoot({
-      domain: environment.AUTH0_CONFIG.DOMAIN,
-      clientId: environment.AUTH0_CONFIG.CLIENT_ID,
-      redirectUri: environment.AUTH0_CONFIG.REDIRECT_URI,
-      scope: environment.AUTH0_CONFIG.SCOPE,
-      httpInterceptor: {
-        allowedList: [
-          {
-            uri: `${ environment.AUTH0_CONFIG.AUDIENCE}/*`,
-            tokenOptions: {
-              audience:  environment.AUTH0_CONFIG.AUDIENCE,
-              scope: 'read:current_user'
-            }
-          }
-        ]
-      }
     })
   ],
   providers: [

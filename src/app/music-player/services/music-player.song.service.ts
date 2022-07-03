@@ -97,7 +97,7 @@ export class MusicPlayerSongService {
   //#region Finger Printing
   fingerPrinting(fileName: string): Observable<FingerPrintingResult> {
     return this.http.post<FingerPrintingResult>(
-      `${this.RECOGNIZE_URL}/api/fingerPrintings/fingerPrinting`,
+      `${this.RECOGNIZE_URL}/api/fingerPrintings`,
       { fileName }
     );
   }

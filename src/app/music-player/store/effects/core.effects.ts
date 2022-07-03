@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as actions from '../actions/core.actions';
 import { MusicPlayerSongService } from '../../services/music-player.song.service';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable()
 export class CoreEffects {
@@ -32,9 +33,31 @@ export class CoreEffects {
     )
   );
 
+  login$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(actions.logIn),
+      tap((action) => {
+        const url = action.payload || '/';
+        this.authService.login(url);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  logout$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(actions.logOut),
+      tap(() => {
+        this.authService.logout();
+      })
+    ),
+    { dispatch: false }
+  );
+
   constructor(
     private songService: MusicPlayerSongService,
     private actions$: Actions,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) { }
 }
