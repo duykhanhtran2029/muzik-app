@@ -6,7 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Song } from 'src/app/interfaces/song.interface';
+import { History, Song } from 'src/app/interfaces/song.interface';
 import { FingerPrintingResult } from 'src/app/interfaces/fingerPrintingResult.interface';
 import { environment } from 'src/environments/environment';
 import { QueryParamsHelper } from './helpers/query-params.helper';
@@ -71,6 +71,14 @@ export class MusicPlayerSongService {
     return this.http.get<Song>(
       `${this.API_BASE_URL}/api/songs/${songId}/listened`
     );
+  }
+
+  updateHistory(history: History): Observable<History>{
+    return this.http.put<History>(
+      `${this.API_BASE_URL}/api/Histories`,
+      history
+    );
+
   }
 
   downloadedSong(songId: string): Observable<Song> {

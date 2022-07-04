@@ -13,11 +13,15 @@ import {
   AudioEvent,
   Song,
   StreamState,
+  History,
 } from 'src/app/interfaces/song.interface';
 import { Lyric } from 'src/app/interfaces/lyric.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { MusicPlayerSongService } from './music-player.song.service';
+import { AppState } from '@auth0/auth0-angular';
+import { Store } from '@ngrx/store';
+import { getUserId } from '../store/selectors/core.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +30,15 @@ export class AudioPlayerService {
   RECOMMEND_URL = environment.RECOMMEND_API_URL;
   constructor(
     private http: HttpClient,
-    private musicService: MusicPlayerSongService
-  ) {}
+    private musicService: MusicPlayerSongService,
+    private store: Store<AppState>
+  ) {
+    this.store.select(getUserId).subscribe((res) => {
+      if (res != undefined) {
+        this.userID = res;
+      }
+    });
+  }
   private audioEvents: AudioEvent[] = [
     AudioEvent.ENDED,
     AudioEvent.ERROR,
@@ -67,6 +78,7 @@ export class AudioPlayerService {
     this.state
   );
   private serviceActive = true;
+  private userID: string = undefined;
 
   private streamObservable(url: URL) {
     return new Observable((observer) => {
@@ -173,8 +185,22 @@ export class AudioPlayerService {
     this.streamObservable(song.link)
       .pipe(takeWhile(() => this.serviceActive))
       .subscribe();
+
     this.state.lyric = [];
     this.state.currentLyric = -1;
+
+    if (this.userID) {
+      const history: History = {
+        songId: this.state.song.songId,
+        userId: this.userID,
+        count: 0,
+      };
+      console.log(history);
+      this.musicService
+        .updateHistory(history)
+        .subscribe((res) => console.log(res));
+    }
+
     this.musicService
       .listenedSong(song.songId)
       .pipe(takeWhile(() => this.serviceActive))
