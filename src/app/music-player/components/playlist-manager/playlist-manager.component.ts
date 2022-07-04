@@ -4,6 +4,9 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { CreateNewPlaylistComponent } from './create-new-playlist/create-new-playlist.component';
 import { Playlist } from 'src/app/interfaces/playlist.interface';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { AppState } from '@auth0/auth0-angular';
+import { getUserId } from '../../store/selectors/core.selector';
 @Component({
   selector: 'app-playlist-manager',
   templateUrl: './playlist-manager.component.html',
@@ -14,14 +17,21 @@ export class PlaylistManagerComponent implements OnInit {
   constructor(
     private playlistStore: PlaylistsStore,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store<AppState>
   ) {}
 
   playlists$ = this.playlistStore.playlists$;
+  userID: string = undefined;
   newPlaylistDialogRef: MatDialogRef<CreateNewPlaylistComponent>;
 
   ngOnInit(): void {
-    this.playlistStore.getPlaylistsEffect();
+    this.store.select(getUserId).subscribe((res) => {
+      if (res != undefined) {
+        this.playlistStore.getPlaylistsEffect(res);
+        this.userID = res;
+      }
+    });
   }
 
   openNewPlaylist() {
@@ -37,7 +47,9 @@ export class PlaylistManagerComponent implements OnInit {
           break;
         default:
           this.toastr.success('Success', 'Playlist Created');
-          this.playlistStore.getPlaylistsEffect();
+          if (this.userID) {
+            this.playlistStore.getPlaylistsEffect(this.userID);
+          }
           break;
       }
     });

@@ -110,7 +110,7 @@ export class SearchStore extends ComponentStore<SearchState> {
   readonly getRecommendSongsEffect = this.effect((userId$: Observable<string>) =>
   userId$.pipe(
       switchMap((userId: string) =>
-        this.songService.getRecommendedSongs(2).pipe(
+        this.songService.getRecommendedSongs(userId).pipe(
           tapResponse(
             (songs) => {
               this.updateRecommendSongs(songs);

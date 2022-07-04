@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { tapResponse } from '@ngrx/component-store';
+import { Component, Input, OnInit } from '@angular/core';
 import { Song } from 'src/app/interfaces/song.interface';
 import { MusicPlayerSongService } from '../../services/music-player.song.service';
 
@@ -14,12 +13,15 @@ export class RecommendGenresComponent implements OnInit {
   selectedSongs: Song[];
   selectedIndex: number = 0;
   genres: any = [];
+  @Input() userId: string;
 
   ngOnInit(): void {
-    this.songService.getRecommendedGenreSong(2).subscribe((res) => {
-      this.selectedSongs = res[0].songs;
-      this.genres = res;
-    });
+    if (this.userId != undefined) {
+      this.songService.getRecommendedGenreSong(this.userId).subscribe((res) => {
+        this.selectedSongs = res[0].songs;
+        this.genres = res;
+      });
+    }
   }
   select(i): void {
     this.selectedIndex = i;

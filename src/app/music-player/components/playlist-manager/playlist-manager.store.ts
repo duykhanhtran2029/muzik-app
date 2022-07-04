@@ -53,25 +53,23 @@ export class PlaylistsStore extends ComponentStore<PlaylistState> {
   //#endregion
 
   //#region ***Effects***
-  readonly getPlaylistsEffect = this.effect((event$) =>
-    event$.pipe(
+  readonly getPlaylistsEffect = this.effect((userID$: Observable<string>) =>
+    userID$.pipe(
       tap(() =>
         this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Requesting)
       ),
-      switchMap(() =>
-        this.playlistService
-          .getPlaylistsByUserId('google-oauth2|114795482044392002727')
-          .pipe(
-            tapResponse(
-              (playlists) => {
-                this.updatePlaylists(playlists);
-                this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Success);
-              },
-              (err) => {
-                this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Fail);
-              }
-            )
+      switchMap((userID) =>
+        this.playlistService.getPlaylistsByUserId(userID).pipe(
+          tapResponse(
+            (playlists) => {
+              this.updatePlaylists(playlists);
+              this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Success);
+            },
+            (err) => {
+              this.updateGetTrendingPlaylistsStatus(ApiRequestStatus.Fail);
+            }
           )
+        )
       )
     )
   );

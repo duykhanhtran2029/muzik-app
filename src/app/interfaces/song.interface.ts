@@ -49,3 +49,9 @@ export enum AudioEvent {
   LOADSTART = 'loadstart',
   VOLUMECHANGE = 'volumechange',
 }
+
+export interface History {
+  songId: string;
+  userId: string;
+  count: number;
+}

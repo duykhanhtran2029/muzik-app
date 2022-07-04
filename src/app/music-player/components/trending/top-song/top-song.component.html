@@ -50,7 +50,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="play()">Play</button>
         <button mat-menu-item (click)="addToQueue()">Add to queue</button>
-        <button mat-menu-item [matMenuTriggerFor]="playlist">
+        <button mat-menu-item [matMenuTriggerFor]="playlist" *ngIf="playlists">
           Add to playlist
         </button>
       </mat-menu>
