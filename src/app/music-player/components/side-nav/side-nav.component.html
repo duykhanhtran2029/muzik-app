@@ -30,7 +30,7 @@
                 <span class="title">Player</span>
             </a>
         </li>
-        <li class="list" [class.active]="currentRoute.includes('playlists')">
+        <li class="list" *ngIf="isAuthenticated" [class.active]="currentRoute.includes('playlists')">
             <a [routerLink]="['playlists']">
                 <span class="icon">
                     <mat-icon fontSet="material-icons-outlined">playlist_play</mat-icon>
