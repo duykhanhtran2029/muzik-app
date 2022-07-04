@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs';
 import { Playlist } from 'src/app/interfaces/playlist.interface';
 import { Song } from 'src/app/interfaces/song.interface';
+import { AppState } from 'src/app/store/reducers';
 import { MusicPlayerPlaylistService } from '../../services/music-player.playlist.service';
+import { getUserId } from '../../store/selectors/core.selector';
 import { TrendingStore } from './trending.store';
 
 @Component({
@@ -14,11 +17,12 @@ import { TrendingStore } from './trending.store';
 export class TrendingComponent implements OnInit {
   constructor(
     private componentStore: TrendingStore,
-    private playlistServicve: MusicPlayerPlaylistService
+    private playlistServicve: MusicPlayerPlaylistService,
+    private store: Store<AppState>
   ) {}
   songs$ = this.componentStore.songs$;
   artists$ = this.componentStore.artists$;
-  userPlaylists: Playlist[];
+  userPlaylists: Playlist[] = undefined;
   selectedSong: Song;
   ngOnInit(): void {
     this.componentStore.songs$
@@ -26,10 +30,12 @@ export class TrendingComponent implements OnInit {
       .subscribe((songs) => (this.selectedSong = songs[0]));
     this.componentStore.getSongsEffect();
     this.componentStore.getArtistsEffect();
-    this.playlistServicve
-      .getPlaylistsByUserId('google-oauth2|114795482044392002727')
-      .subscribe((res) => {
-        this.userPlaylists = res;
-      });
+    this.store.select(getUserId).subscribe((res) => {
+      if (res != undefined) {
+        this.playlistServicve.getPlaylistsByUserId(res).subscribe((res) => {
+          this.userPlaylists = res;
+        });
+      }
+    });
   }
 }
