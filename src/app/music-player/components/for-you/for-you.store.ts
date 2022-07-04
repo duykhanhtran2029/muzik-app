@@ -40,13 +40,13 @@ export class ForYouStore extends ComponentStore<SongState> {
   //#endregion
 
   //#region ***Effects***
-  readonly getSongsEffect = this.effect((event$) =>
-    event$.pipe(
+  readonly getSongsEffect = this.effect((userID$: Observable<string>) =>
+    userID$.pipe(
       tap(() =>
         this.updateGetRecommendedSongsStatus(ApiRequestStatus.Requesting)
       ),
-      switchMap(() =>
-        this.songService.getRecommendedSongs(2).pipe(
+      switchMap((userID) =>
+        this.songService.getRecommendedSongs(userID).pipe(
           tapResponse(
             (songs) => {
               this.updateSongs(songs);
