@@ -78,4 +78,12 @@ export class MusicPlayerPlaylistService {
       `${this.API_BASE_URL}/api/Playlists/${playlistId}`
     );
   }
+
+  getGenre(genreId: string):  Observable<Playlist[]> {
+    return this.http.get<Playlist[]>(
+      `${this.API_BASE_URL}/api/Playlists/genres/${genreId}`
+    );
+  }
+
+  
 }

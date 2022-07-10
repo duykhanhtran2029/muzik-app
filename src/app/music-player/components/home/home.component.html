@@ -16,6 +16,34 @@
       <app-trending></app-trending>
     </mat-card-content>
   </mat-card>
+  <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+    <mat-card-header>
+      <mat-card-title>Recently Played</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="recentlyPlaylist$ | async as playlists">
+        <app-recently-playlists
+          [playlists]="playlists"
+        ></app-recently-playlists>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="openDetailGenre(1)">See All</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+    <mat-card-header>
+      <mat-card-title>Muzik's Choices</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="playlist2$ | async as playlists">
+        <app-list-playlist [playlists]="playlists"></app-list-playlist>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="openDetailGenre(2)">See All</button>
+    </mat-card-actions>
+  </mat-card>
   <mat-card
     *ngIf="userId"
     class="mdc-layout-grid__cell--span-12 item mat-elevation-z5"
@@ -28,6 +56,20 @@
     </mat-card-header>
     <app-for-you [userId]="userId"></app-for-you>
   </mat-card>
+
+  <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+    <mat-card-header>
+      <mat-card-title>Hit of Artists</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="playlist3$ | async as playlists3">
+        <app-list-playlist [playlists]="playlists3"></app-list-playlist>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="openDetailGenre(3)">See All</button>
+    </mat-card-actions>
+  </mat-card>
   <mat-card
     *ngIf="userId"
     class="mdc-layout-grid__cell--span-12 item mat-elevation-z5"
@@ -39,5 +81,18 @@
       >
     </mat-card-header>
     <app-recommend-genres [userId]="userId"></app-recommend-genres>
+  </mat-card>
+  <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+    <mat-card-header>
+      <mat-card-title>Top 100</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="playlist4$ | async as playlists4">
+        <app-list-playlist [playlists]="playlists4"></app-list-playlist>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="openDetailGenre(4)">See All</button>
+    </mat-card-actions>
   </mat-card>
 </div>

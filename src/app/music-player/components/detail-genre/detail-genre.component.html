@@ -1,0 +1,14 @@
+<div class="detail-genre-wrapper">
+  <div class="detail-genre-wrapper-inner">
+    <h1>{{ genreTitle }}</h1>
+    <div class="mdc-layout-grid__inner songs-container">
+      <ng-container *ngIf="playlists$ | async as playlists">
+        <app-playlist
+          class="mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone"
+          *ngFor="let playlist of playlists"
+          [playlist]="playlist"
+        ></app-playlist>
+      </ng-container>
+    </div>
+  </div>
+</div>
