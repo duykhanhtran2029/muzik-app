@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/ReplicaShazam-FE'),
+      dir: require('path').join(__dirname, './coverage/MUZIK-APP'),
       subdir: '.',
       reporters: [
         { type: 'html' },
