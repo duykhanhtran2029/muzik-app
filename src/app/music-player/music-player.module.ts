@@ -56,6 +56,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ResultSongComponent } from './components/result/result-song/result-song.component';
 import { RoundedArtistComponent } from './components/rounded-artist/rounded-artist.component';
 import { ConfirmRecognizenComponent } from './components/manager/confirm-recognizen/confirm-recognizen.component';
+import { RecentlyPlaylistsComponent } from './components/recently-playlists/recently-playlists.component';
+import { DetailGenreComponent } from './components/detail-genre/detail-genre.component';
+import { ListPlaylistComponent } from './components/list-playlist/list-playlist.component';
 
 @NgModule({
   declarations: [
@@ -94,10 +97,13 @@ import { ConfirmRecognizenComponent } from './components/manager/confirm-recogni
     DetailPlaylistInformationComponent,
     CreateNewPlaylistComponent,
     DetailPlaylistComponent,
+    RecentlyPlaylistsComponent,
+    DetailGenreComponent,
     MyPlaylistComponent,
     NewPlaylistComponent,
     PlaylistSongComponent,
     PlaylistRecommendSongComponent,
+    ListPlaylistComponent,
     ArtistDetailComponent,
     UpdateArtistComponent,
     AddArtistComponent,
