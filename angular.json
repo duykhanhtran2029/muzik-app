@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ReplicaShazam-FE": {
+    "MUZIK-APP": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ReplicaShazam-FE",
+            "outputPath": "dist/MUZIK-APP",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ReplicaShazam-FE:build:production"
+              "browserTarget": "MUZIK-APP:build:production"
             },
             "development": {
-              "browserTarget": "ReplicaShazam-FE:build:development"
+              "browserTarget": "MUZIK-APP:build:development"
             }
           },
           "options": {
@@ -93,7 +93,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ReplicaShazam-FE:build"
+            "browserTarget": "MUZIK-APP:build"
           }
         },
         "test": {

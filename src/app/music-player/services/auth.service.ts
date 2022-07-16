@@ -35,7 +35,6 @@ export class AuthService {
         // On initial load, check authentication state with authorization server
         // Set up local auth streams if user is already authenticated
         this.onInitService();
-        this.localAuthSetup();
         this.handleAuthCallback();
     }
 
@@ -140,28 +139,6 @@ export class AuthService {
           'Authorization': `Bearer ${token}`
         });
         return this.http.get(encodeURI(`${environment.AUTH0_CONFIG.DOMAIN}/api/v2/users/${userId}/roles`), { headers: headers });
-    }
-
-    private localAuthSetup() {
-        // This should only be called on app initialization
-        // Set up local authentication streams
-        const checkAuth$ = this.isAuthenticated$.pipe(
-            concatMap((loggedIn: boolean) => {
-                if (loggedIn) {
-                    // If authenticated, get user and set in app
-                    // NOTE: you could pass options here if needed
-                    return combineLatest([
-                        this.getUser$,
-                        this.getToken$,
-                        this.isAuthenticated$,
-                        this.isAdmin$
-                    ]);
-                }
-                // If not authenticated, return stream that emits 'false'
-                return of(loggedIn);
-            })
-        );
-        checkAuth$.subscribe();
     }
 
     private handleAuthCallback() {
