@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Song } from 'src/app/interfaces/song.interface';
 import { Playlist, PlaylistSong } from 'src/app/interfaces/playlist.interface';
 import { QueryParamsHelper } from './helpers/query-params.helper';
+import { Tag, TrainedModel } from 'src/app/interfaces/model.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -79,11 +80,19 @@ export class MusicPlayerPlaylistService {
     );
   }
 
-  getGenre(genreId: string):  Observable<Playlist[]> {
+  getGenre(genreId: string): Observable<Playlist[]> {
     return this.http.get<Playlist[]>(
       `${this.API_BASE_URL}/api/Playlists/genres/${genreId}`
     );
   }
 
-  
+  getModelInformation(modelId: string): Observable<TrainedModel> {
+    const url = `${this.RECOMMEND_URL}/models?modelId=${modelId}`;
+    return this.http.get<TrainedModel>(url);
+  }
+
+  getTagInformation(): Observable<Tag[]> {
+    const url = `${this.RECOMMEND_URL}/tags`;
+    return this.http.get<Tag[]>(url);
+  }
 }

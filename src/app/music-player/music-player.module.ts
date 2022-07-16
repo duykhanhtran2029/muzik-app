@@ -41,6 +41,7 @@ import { ArtistComponent } from './components/artist/artist.component';
 import { StrictSongComponent } from './components/strict-song/strict-song.component';
 import { ManagerSongsComponent } from './components/manager/manager-songs/manager-songs.component';
 import { ManagerArtistsComponent } from './components/manager/manager-artists/manager-artists.component';
+import { ManagerModelsComponent } from './components/manager/manager-models/manager-models.component';
 import { PlaylistManagerComponent } from './components/playlist-manager/playlist-manager.component';
 import { NewPlaylistComponent } from './components/playlist-manager/new-playlist/new-playlist';
 import { MyPlaylistComponent } from './components/playlist-manager/my-playlist/my-playlist';
@@ -59,6 +60,7 @@ import { ConfirmRecognizenComponent } from './components/manager/confirm-recogni
 import { RecentlyPlaylistsComponent } from './components/recently-playlists/recently-playlists.component';
 import { DetailGenreComponent } from './components/detail-genre/detail-genre.component';
 import { ListPlaylistComponent } from './components/list-playlist/list-playlist.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,7 @@ import { ListPlaylistComponent } from './components/list-playlist/list-playlist.
     StrictSongComponent,
     ManagerSongsComponent,
     ManagerArtistsComponent,
+    ManagerModelsComponent,
     PlaylistManagerComponent,
     DetailPlaylistInformationComponent,
     CreateNewPlaylistComponent,
@@ -119,6 +122,7 @@ import { ListPlaylistComponent } from './components/list-playlist/list-playlist.
     ScrollingModule,
     NgxMatSelectSearchModule,
     DragDropModule,
+    NgChartsModule,
     MusicPlayerRoutingModule,
     MusicPlayerSharedMaterialModule,
     StoreModule.forFeature('core', coreReducer),
