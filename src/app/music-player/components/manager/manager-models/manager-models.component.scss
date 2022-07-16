@@ -1,0 +1,41 @@
+@import "../../../../../assets/scss/theme/_variable";
+
+.title {
+  margin-bottom: 16px;
+  line-height: 40px;
+  font-size: 32px;
+  font-weight: 500;
+  font-family: Rubik, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue;
+}
+
+.model-manager-wrapper {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 30px 50px;
+  &-inner {
+    display: flex;
+
+    .model-manager-desc-wrapper {
+      z-index: 99999;
+      color: #000;
+      border-right: #888 solid 3px;
+      padding-right: 30px;
+      &-inner {
+        display: grid;
+        grid-template-columns: repeat(2, 200px);
+
+        .model-manager-select {
+          grid-column: 1/span 2;
+        }
+      }
+    }
+
+    .model-manager-chart {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

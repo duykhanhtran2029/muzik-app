@@ -1,0 +1,57 @@
+<div class="title">Models Manager</div>
+<div class="model-manager-wrapper">
+  <div class="model-manager-wrapper-inner">
+    <div class="model-manager-desc-wrapper">
+      <h1>Thử Nghiệm Mô Hình</h1>
+
+      <div class="model-manager-desc-wrapper-inner">
+        <ng-container *ngIf="model$ | async as model">
+          <div class="model-manager-select">
+            <mat-form-field appearance="fill" name="models">
+              <mat-label>Chọn Mô Hình</mat-label>
+              <mat-select [(ngModel)]="selectedValue">
+                <mat-option
+                  *ngFor="let model of models"
+                  [value]="model.value"
+                  [disabled]="model.disabled"
+                >
+                  {{ model.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <h3>Type:</h3>
+          <h3>{{ model.type }}</h3>
+          <h3>Number of Trained File:</h3>
+          <h3>{{ model.numberOfTrainedFile }}</h3>
+          <h3>Type of Feature:</h3>
+          <h3>{{ model.typeofFeature }}</h3>
+          <h3>Accurancy:</h3>
+          <h3>{{ model.accurancy }}</h3>
+          <h3>Loss:</h3>
+          <h3>{{ model.loss }}</h3>
+          <h3>Precision:</h3>
+          <h3>{{ model.precision }}</h3>
+          <h3>F1Score:</h3>
+          <h3>{{ model.f1Score }}</h3>
+          <h3>Recall:</h3>
+          <h3>{{ model.recall }}</h3>
+        </ng-container>
+      </div>
+    </div>
+    <div class="model-manager-chart">
+      <canvas
+        baseChart
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+        width="1000"
+        height="800"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>
