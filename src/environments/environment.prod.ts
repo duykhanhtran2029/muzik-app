@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  RECOGNIZE_API_URL: 'https://localhost:5001',
+  RECOGNIZE_API_URL: 'http://fingerprinting.hopto.org:5001',
   MUSIC_API_URL: 'https://music-player-api.azurewebsites.net',
   RECOMMEND_API_URL: 'https://uit-music-recommendation.azurewebsites.net',
   AZURE_STORAGE_CONFIG: {

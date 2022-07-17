@@ -55,3 +55,9 @@
 #queue::-webkit-scrollbar {
   display: none;
 }
+
+.current-song {
+  ::ng-deep .outer-container{
+    background-color: $sub-primary;
+  }
+}
