@@ -8,10 +8,13 @@ import {
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SafeStyle } from '@angular/platform-browser';
+import { AppState } from '@auth0/auth0-angular';
+import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs';
 import { Playlist } from 'src/app/interfaces/playlist.interface';
 import { AzureBlobStorageService } from 'src/app/music-player/services/azure-storage.service';
 import { UtilService } from 'src/app/music-player/services/utils.service';
+import { getUserId } from 'src/app/music-player/store/selectors/core.selector';
 import { ApiRequestStatus } from 'src/app/utils/api-request-status.enum';
 import { environment } from 'src/environments/environment';
 import { PlaylistsStore } from '../playlist-manager.store';
@@ -26,7 +29,8 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
     private azureStorageService: AzureBlobStorageService,
     private utilService: UtilService,
     @Inject(MAT_DIALOG_DATA) public data: PlaylistsStore,
-    private dialogRef: MatDialogRef<CreateNewPlaylistComponent>
+    private dialogRef: MatDialogRef<CreateNewPlaylistComponent>,
+    private store: Store<AppState>
   ) {}
   imgSrc: string;
   thumbnail = <File>{};
@@ -35,6 +39,7 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
   canCreate = false;
   storageURL = '';
   componentActive = true;
+  userID: string;
 
   IMAGES_CONTAINER = environment.AZURE_STORAGE_CONFIG.IMAGES_CONTAINER;
 
@@ -48,6 +53,7 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
     this.imgSrc = this.playlist.thumbnail.toString();
     this.storageURL = this.azureStorageService.baseStorageURL();
     this.data.createPlaylistStatus$
+
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((createSongStatus) => {
         switch (createSongStatus) {
@@ -61,6 +67,12 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
             break;
         }
       });
+
+    this.store.select(getUserId).subscribe((res) => {
+      if (res != undefined) {
+        this.userID = res;
+      }
+    });
   }
   ngOnDestroy(): void {
     this.componentActive = false;
@@ -81,7 +93,7 @@ export class CreateNewPlaylistComponent implements OnInit, OnDestroy {
         `${this.storageURL}/${this.IMAGES_CONTAINER}/${fileName}.png`
       );
     }
-    this.playlist.userID = 'google-oauth2|114795482044392002727';
+    this.playlist.userID = this.userID;
     this.data.createPlaylistsEffect(this.playlist);
   }
 
