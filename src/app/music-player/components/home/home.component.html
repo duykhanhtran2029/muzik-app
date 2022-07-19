@@ -1,36 +1,30 @@
 <div class="mdc-layout-grid__inner">
   <div
-    class="mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone news--container"
-  >
+    class="mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone news--container">
     <app-news></app-news>
   </div>
   <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
     <mat-card-header>
       <mat-card-title>Trending</mat-card-title>
-      <mat-card-subtitle
-        >Top trending songs and artists based on most listens, likes,
-        downloads</mat-card-subtitle
-      >
+      <mat-card-subtitle>Top trending songs and artists based on most listens and downloads</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <app-trending></app-trending>
     </mat-card-content>
   </mat-card>
-  <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
-    <mat-card-header>
-      <mat-card-title>Recently Played</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <ng-container *ngIf="recentlyPlaylist$ | async as playlists">
-        <app-recently-playlists
-          [playlists]="playlists"
-        ></app-recently-playlists>
-      </ng-container>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-button (click)="openDetailGenre(1)">See All</button>
-    </mat-card-actions>
-  </mat-card>
+  <ng-container *ngIf="recentlyPlaylist$ | async as playlists">
+    <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5" *ngIf="playlists?.length > 0">
+      <mat-card-header>
+        <mat-card-title>Recently Played</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-recently-playlists [playlists]="playlists"></app-recently-playlists>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="openDetailGenre(1)">See All</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
   <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
     <mat-card-header>
       <mat-card-title>Muzik's Choices</mat-card-title>
@@ -44,17 +38,12 @@
       <button mat-button (click)="openDetailGenre(2)">See All</button>
     </mat-card-actions>
   </mat-card>
-  <mat-card
-    *ngIf="userId"
-    class="mdc-layout-grid__cell--span-12 item mat-elevation-z5"
-  >
+  <mat-card *ngIf="userId !== undefined" class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
     <mat-card-header>
       <mat-card-title>Only for you</mat-card-title>
-      <mat-card-subtitle
-        >Top songs that will fit your favorite</mat-card-subtitle
-      >
+      <mat-card-subtitle>Top songs that will fit your favorite</mat-card-subtitle>
     </mat-card-header>
-    <app-for-you [userId]="userId"></app-for-you>
+    <app-for-you></app-for-you>
   </mat-card>
 
   <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
@@ -70,18 +59,16 @@
       <button mat-button (click)="openDetailGenre(3)">See All</button>
     </mat-card-actions>
   </mat-card>
-  <mat-card
-    *ngIf="userId"
-    class="mdc-layout-grid__cell--span-12 item mat-elevation-z5"
-  >
-    <mat-card-header>
-      <mat-card-title>Recommend genres</mat-card-title>
-      <mat-card-subtitle
-        >Top genres and songs that you may like</mat-card-subtitle
-      >
-    </mat-card-header>
-    <app-recommend-genres [userId]="userId"></app-recommend-genres>
-  </mat-card>
+  <ng-container *ngIf="userId !== undefined">
+    <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
+      <mat-card-header>
+        <mat-card-title>Recommend genres</mat-card-title>
+        <mat-card-subtitle>Top genres and songs that you may like</mat-card-subtitle>
+      </mat-card-header>
+      <app-recommend-genres [userId]="userId"></app-recommend-genres>
+    </mat-card>
+  </ng-container>
+  
   <mat-card class="mdc-layout-grid__cell--span-12 item mat-elevation-z5">
     <mat-card-header>
       <mat-card-title>Top 100</mat-card-title>

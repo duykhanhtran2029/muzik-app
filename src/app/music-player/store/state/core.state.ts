@@ -6,6 +6,8 @@ export interface CoreState {
     songs: Song[];
     fingerPrintingResult: FingerPrintingResult;
     getSongsStatus: ApiRequestStatus;
+    recommendSongs: Song[];
+    getRecommendSongsStatus: ApiRequestStatus;
     fingerPrintingStatus: ApiRequestStatus;
     isAdmin: boolean;
     userId: string;

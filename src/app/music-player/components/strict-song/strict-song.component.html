@@ -19,10 +19,10 @@
             <mat-icon fontSet="material-icons-outlined">headphones</mat-icon>
             <span>{{song.listens}}</span>
         </div>
-        <div class="item">
+        <!-- <div class="item">
             <mat-icon fontSet="material-icons-outlined">thumb_up</mat-icon>
             <span>{{song.likes}}</span>
-        </div>
+        </div> -->
         <ng-container *ngIf="!audioService.isInQueue(song); else inQueue">
             <button mat-icon-button onclick="this.blur()" class="option" [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>

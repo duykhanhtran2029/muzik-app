@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
-import { combineLatestWith, concatMap, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { concatMap, filter, take, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/reducers';
-import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 import { logIn } from '../store/actions/core.actions';
 

@@ -26,6 +26,23 @@ export const coreReducer = createReducer(
     getSongStatus: ApiRequestStatus.Fail,
   })),
 
+  on(actions.getRecommendSongs, (state, action) => ({
+    ...state,
+    getRecommendSongStatus: ApiRequestStatus.Requesting,
+  })),
+
+  on(actions.getRecommendSongsSuccess, (state, action) => ({
+    ...state,
+    recommendSongs: action.recommendSongs,
+    getRecommendSongStatus: ApiRequestStatus.Success,
+  })),
+
+  on(actions.getRecommendSongsFailure, (state, action) => ({
+    ...state,
+    error: action.error,
+    getRecommendSongStatus: ApiRequestStatus.Fail,
+  })),
+
   on(actions.fingerPrinting, (state, action) => ({
     ...state,
     fingerPrintingStatus: ApiRequestStatus.Requesting,
