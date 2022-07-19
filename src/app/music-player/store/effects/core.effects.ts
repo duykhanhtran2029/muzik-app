@@ -17,6 +17,15 @@ export class CoreEffects {
     )
   );
 
+  getRecommendSongs$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(actions.getRecommendSongs),
+    concatMap((action) => this.songService.getRecommendedSongs(action.userId)),
+    map((songs) => actions.getRecommendSongsSuccess({ recommendSongs: songs })),
+    catchError(async (error) => actions.getRecommendSongsFailure({ error }))
+  )
+);
+
   fingerPrinting$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.fingerPrinting),

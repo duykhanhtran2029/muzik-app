@@ -14,6 +14,21 @@ export const getSongsFailure = createAction(
   props<{ error: string }>()
 );
 
+export const getRecommendSongs = createAction(
+  '[Music Recommend API] Get songs',
+  props<{ userId: string }>()
+  );
+
+export const getRecommendSongsSuccess = createAction(
+  '[Music Recommend API] Get songs success',
+  props<{ recommendSongs: Song[] }>()
+);
+
+export const getRecommendSongsFailure = createAction(
+  '[Music Recommend API] Get songs failure',
+  props<{ error: string }>()
+);
+
 export const fingerPrinting = createAction(
   '[Audio Recognizer API] Fingerprinting',
   props<{ fileName: string }>()

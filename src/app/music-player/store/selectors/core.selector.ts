@@ -10,6 +10,11 @@ export const getAllSongs = createSelector(
     state => state.songs
 );
 
+export const getAllRecommendSongs = createSelector(
+    CoreFeatureSelector,
+    state => state.recommendSongs
+);
+
 export const getFingerPrintingResult = createSelector(
     CoreFeatureSelector,
     state => state.fingerPrintingResult
