@@ -1,10 +1,11 @@
 <div class="head" mat-dialog-title>Queue</div>
-<div id="queue" class="container">
+<div id="queue" class="container" *ngIf="state$ | async as state">
   <app-mini-song
+    [class.current-song] = "state.song.songId === song.songId"
     *ngFor="let song of queue"
     [song]="song"
-    [isRecommend]="false"
-  ></app-mini-song>
+    [isRecommend]="false">
+  </app-mini-song>
 </div>
 <div class="recommended" mat-dialog-title>
   <div class="recommended-text">Recommended</div>

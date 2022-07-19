@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AppState } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { Playlist } from 'src/app/interfaces/playlist.interface';
-import { getUserId } from '../../store/selectors/core.selector';
+import { getRecommendSongs } from '../../store/actions/core.actions';
+import { getAllRecommendSongs, getUserId } from '../../store/selectors/core.selector';
 import { HomeStore } from './home.component.store';
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomeComponent {
       if (res != undefined) {
         this.userId = res;
         this.homeStore.getPlaylistsEffect(res);
+        this.store.dispatch(getRecommendSongs({userId: res}));
       }
     });
     this.homeStore.getPlaylists2Effect();

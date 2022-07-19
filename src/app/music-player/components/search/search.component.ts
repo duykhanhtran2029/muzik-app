@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AppState } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged, takeWhile } from 'rxjs';
-import { getUserId } from '../../store/selectors/core.selector';
+import { getAllRecommendSongs } from '../../store/selectors/core.selector';
 import { SearchStore } from './search.store';
 
 @Component({
@@ -26,15 +26,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();
   songs$ = this.componentStore.songs$;
   artists$ = this.componentStore.artists$;
-  recommendSongs$ = this.componentStore.recommendSongs$;
+  recommendSongs$ = this.store.select(getAllRecommendSongs);
 
   ngOnInit(): void {
-    this.store.select(getUserId).subscribe((res) => {
-      if (res != undefined) {
-        this.componentStore.getRecommendSongsEffect(res);
-      }
-    });
-
     this.searchHistories = JSON.parse(
       localStorage.getItem('music-player__searchHistory')
     );

@@ -55,7 +55,7 @@ export class TopSongComponent implements OnInit, OnDestroy {
     this.audioService.addToQueue(this.song);
   }
   togglePlay() {
-    if (this.state.song.songId !== this.song.songId) {
+    if (this.state.song?.songId !== this.song.songId) {
       this.song.listens++;
       this.audioService.playStream(this.song);
       this.audioService.play();

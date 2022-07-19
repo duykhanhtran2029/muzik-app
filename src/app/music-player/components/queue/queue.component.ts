@@ -7,13 +7,12 @@ import { AudioPlayerService } from '../../services/audio-player.service';
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.scss'],
 })
-export class QueueComponent implements OnInit {
+export class QueueComponent {
   constructor(private audioService: AudioPlayerService) {}
 
   @Input() queue: Song[];
   @Input() recommendedSongs: Song[];
-
-  ngOnInit(): void {}
+  state$ = this.audioService.getState();
 
   updateRecommend() {
     this.audioService.updateRecommend();

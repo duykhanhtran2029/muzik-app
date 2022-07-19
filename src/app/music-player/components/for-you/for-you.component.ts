@@ -1,22 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ForYouStore } from './for-you.store';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { getAllRecommendSongs } from '../../store/selectors/core.selector';
 
 @Component({
   selector: 'app-for-you',
   templateUrl: './for-you.component.html',
-  styleUrls: ['./for-you.component.scss'],
-  providers: [ForYouStore],
+  styleUrls: ['./for-you.component.scss']
 })
-export class ForYouComponent implements OnInit {
+export class ForYouComponent {
   constructor(
-    private componentStore: ForYouStore,
+    private store: Store<AppState>
   ) {}
-
-  @Input() userId: string;
-  songs$ = this.componentStore.songs$;
-  ngOnInit(): void {
-    if (this.userId != undefined) {
-      this.componentStore.getSongsEffect(this.userId);
-    }
-  }
+  songs$ = this.store.select(getAllRecommendSongs);
 }
